@@ -2,7 +2,8 @@ import React from 'react';
 import { Language } from '../types';
 import { ABOUT_DATA, UI_TRANSLATIONS, CONTACT_DATA } from '../data/portfolioData';
 import { ShieldCheck, MapPin, Award, CheckCircle2, Send, FileText } from 'lucide-react';
-import portraitImg from '../assets/images/vitaliy_portrait_1787830489312.jpg';
+import portraitWebp from '../assets/images/vitaliy_portrait_1787830489312.webp';
+import portraitJpg from '../assets/images/vitaliy_portrait_1787830489312.jpg';
 
 interface AboutSectionProps {
   currentLang: Language;
@@ -39,12 +40,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
           <div className="lg:col-span-5 flex flex-col gap-6">
             <div className="relative bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-3 backdrop-blur-xl shadow-xl">
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[var(--bg-surface-2)]">
-                <img
-                  src={portraitImg}
-                  alt={currentLang === 'uk' ? 'Віталій Долінський' : 'Dolynskyi Vitalii'}
-                  className="w-full h-full object-cover object-top"
-                  referrerPolicy="no-referrer"
-                />
+                <picture className="w-full h-full block">
+                  <source srcSet={portraitWebp} type="image/webp" />
+                  <img
+                    src={portraitJpg}
+                    alt={currentLang === 'uk' ? 'Віталій Долінський' : 'Dolynskyi Vitalii'}
+                    className="w-full h-full object-cover object-top"
+                    referrerPolicy="no-referrer"
+                  />
+                </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-4 left-4 right-4 bg-black/75 backdrop-blur-md p-4 rounded-xl border border-white/20">
                   <div className="text-xs text-[var(--accent-blue)] font-mono font-bold uppercase tracking-wider">

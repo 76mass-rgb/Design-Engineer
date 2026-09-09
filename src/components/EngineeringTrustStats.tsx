@@ -138,7 +138,7 @@ export const EngineeringTrustStats: React.FC<EngineeringTrustStatsProps> = ({ cu
         </div>
 
         {/* Enterprise Client Trust Bar */}
-        <div className="mt-10 p-6 sm:p-8 bg-[var(--bg-surface-2)] border border-[var(--border-color)] rounded-2xl shadow-sm">
+        <div className="mt-10 p-6 sm:p-8 bg-[var(--bg-surface-2)] border border-[var(--border-color)] rounded-2xl shadow-sm transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5 pb-4 border-b border-[var(--border-color)]">
             <div className="flex items-center gap-2.5">
               <ShieldCheck className="w-5 h-5 text-[var(--accent-blue)]" />

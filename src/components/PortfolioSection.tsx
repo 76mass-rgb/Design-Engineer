@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { ProjectItem, ProjectCategory, Language } from '../types';
 import { PROJECTS_DATA, UI_TRANSLATIONS } from '../data/portfolioData';
-import { ProjectModal } from './ProjectModal';
 import { ChevronLeft, ChevronRight, Eye, Layers, FileText, Camera, ShieldCheck } from 'lucide-react';
+
+const ProjectModal = lazy(() =>
+  import('./ProjectModal').then((m) => ({ default: m.ProjectModal }))
+);
 
 interface PortfolioSectionProps {
   currentLang: Language;
@@ -90,15 +93,23 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 self-start lg:self-auto">
-              <div className="text-sm sm:text-base font-gost-mono text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-5 py-2.5 rounded-full font-bold shadow-sm flex items-center gap-2">
-                <ShieldCheck className="w-4.5 h-4.5 text-emerald-500" />
-                <span>100% Operational Track Record</span>
-              </div>
-
-              <div className="text-sm sm:text-base font-gost-mono text-[var(--text-secondary)] flex items-center gap-2 bg-[var(--bg-surface-2)] border border-[var(--border-color)] px-5 py-2.5 rounded-full w-fit font-bold shadow-sm">
-                <Layers className="w-4.5 h-4.5 text-[var(--accent-blue)]" />
-                <span>{filteredProjects.length} / {PROJECTS_DATA.length} {currentLang === 'uk' ? 'проєктів' : currentLang === 'sk' ? 'projektov' : 'projects'}</span>
+            <div className="flex items-center self-start lg:self-center mt-2 lg:mt-0">
+              <div 
+                className="text-sm sm:text-base font-gost-mono text-emerald-100 bg-emerald-900/95 border border-emerald-400/60 px-5 py-2.5 rounded-full font-bold shadow-md backdrop-blur-md flex items-center gap-2.5 transition-all duration-300 hover:scale-105 cursor-pointer"
+                title={
+                  currentLang === 'uk'
+                    ? '100% спроєктованих об\'єктів успішно змонтовано та введено в постійну експлуатацію'
+                    : currentLang === 'sk'
+                    ? '100% navrhnutých strojov a zariadení v trvalej prevádzke bez havárií'
+                    : '100% engineered machines & plants operating reliably with zero failures'
+                }
+              >
+                <ShieldCheck className="w-5 h-5 text-emerald-300 flex-shrink-0" />
+                <span>
+                  {currentLang === 'uk' && '100% Безаварійна експлуатація'}
+                  {currentLang === 'sk' && '100% Prevádzková spoľahlivosť'}
+                  {currentLang === 'en' && '100% Operational Track Record'}
+                </span>
               </div>
             </div>
           </div>
@@ -127,8 +138,8 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
           ))}
         </div>
 
-        {/* Portfolio Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+        {/* Portfolio Bento Grid - 2 cards per row stretching full width without right margin gaps */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-10 2xl:gap-12">
           {filteredProjects.map((project) => {
             const currentSlide = activeSlides[project.id] || 0;
             const totalSlides = project.images.length;
@@ -137,18 +148,11 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
             const drawingsCount = project.drawings?.length || 0;
             const photosCount = project.photos?.length || 0;
 
-            // Calculate grid span for desktop bento layout
-            let colSpanClass = 'lg:col-span-4';
-            if (project.gridSpan === 7) colSpanClass = 'lg:col-span-7';
-            else if (project.gridSpan === 6) colSpanClass = 'lg:col-span-6';
-            else if (project.gridSpan === 5) colSpanClass = 'lg:col-span-5';
-            else if (project.gridSpan === 4) colSpanClass = 'lg:col-span-4';
-
             return (
               <div
                 key={project.id}
                 onClick={() => handleProjectClick(project)}
-                className={`bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-3xl transition-all duration-300 group cursor-pointer flex flex-col justify-between overflow-hidden backdrop-blur-xl shadow-md hover:shadow-2xl hover:scale-[1.03] hover:-translate-y-2 ${colSpanClass}`}
+                className="w-full bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-3xl transition-all duration-300 group cursor-pointer flex flex-col justify-between overflow-hidden backdrop-blur-xl shadow-md hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-2"
               >
                 {/* Slideshow Container */}
                 <div className="relative aspect-[16/10] bg-[#0c1017] overflow-hidden">
@@ -161,30 +165,30 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                   />
 
                   {/* Top Year Pill Badge */}
-                  <div className="absolute top-3.5 left-3.5 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 font-mono text-sm font-extrabold text-white shadow-md">
+                  <div className="absolute top-4 left-4 bg-black/85 backdrop-blur-md px-4.5 py-2 rounded-full border border-white/20 font-mono text-sm sm:text-base font-black text-white shadow-lg">
                     {project.year}
                   </div>
 
                   {/* Top Right Media Counts */}
-                  <div className="absolute top-3.5 right-3.5 flex items-center gap-1.5">
+                  <div className="absolute top-4 right-4 flex items-center gap-2">
                     {drawingsCount > 0 && (
-                      <span className="bg-blue-900/80 backdrop-blur-md border border-blue-400/40 px-2.5 py-1 rounded-full text-xs font-mono font-bold text-blue-200 flex items-center gap-1 shadow-md">
-                        <FileText className="w-3 h-3" />
+                      <span className="bg-blue-900/85 backdrop-blur-md border border-blue-400/50 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-mono font-bold text-blue-200 flex items-center gap-1.5 shadow-lg">
+                        <FileText className="w-4 h-4" />
                         <span>{drawingsCount} DWG</span>
                       </span>
                     )}
                     {photosCount > 0 && (
-                      <span className="bg-emerald-900/80 backdrop-blur-md border border-emerald-400/40 px-2.5 py-1 rounded-full text-xs font-mono font-bold text-emerald-200 flex items-center gap-1 shadow-md">
-                        <Camera className="w-3 h-3" />
+                      <span className="bg-emerald-900/85 backdrop-blur-md border border-emerald-400/50 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-mono font-bold text-emerald-200 flex items-center gap-1.5 shadow-lg">
+                        <Camera className="w-4 h-4" />
                         <span>{photosCount} FOTO</span>
                       </span>
                     )}
                   </div>
 
                   {/* Hover Inspect Overlay */}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                    <span className="text-sm uppercase tracking-widest text-white bg-[var(--accent-blue)] px-6 py-3 rounded-full font-extrabold flex items-center gap-2 shadow-2xl transform scale-95 group-hover:scale-100 transition-transform">
-                      <Eye className="w-4 h-4" />
+                  <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                    <span className="text-sm sm:text-base uppercase tracking-wider text-white bg-[var(--accent-blue)] px-7 py-3.5 rounded-full font-black flex items-center gap-2.5 shadow-2xl transform scale-95 group-hover:scale-100 transition-transform">
+                      <Eye className="w-5 h-5" />
                       {currentLang === 'uk' ? 'Переглянути креслення та деталі' : currentLang === 'sk' ? 'Zobraziť výkresy a detaily' : 'View Blueprints & Case Study'}
                     </span>
                   </div>
@@ -192,7 +196,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                   {/* Slideshow Controls (Only if multiple images) */}
                   {totalSlides > 1 && (
                     <div
-                      className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-black/80 backdrop-blur-md border border-white/20 px-3.5 py-1.5 rounded-full z-10 shadow-md"
+                      className="absolute bottom-4 right-4 flex items-center gap-2 bg-black/85 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full z-10 shadow-lg"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <button
@@ -200,9 +204,9 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                         className="text-white hover:text-[#818cf8] p-1 transition-colors cursor-pointer"
                         aria-label="Previous image"
                       >
-                        <ChevronLeft className="w-4 h-4" />
+                        <ChevronLeft className="w-5 h-5" />
                       </button>
-                      <span className="font-mono text-xs text-white px-2 font-bold">
+                      <span className="font-mono text-sm text-white px-2 font-black">
                         {currentSlide + 1}/{totalSlides}
                       </span>
                       <button
@@ -210,34 +214,34 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                         className="text-white hover:text-[#818cf8] p-1 transition-colors cursor-pointer"
                         aria-label="Next image"
                       >
-                        <ChevronRight className="w-4 h-4" />
+                        <ChevronRight className="w-5 h-5" />
                       </button>
                     </div>
                   )}
                 </div>
 
-                {/* Project Metadata Card Body */}
-                <div className="p-6 sm:p-8 flex flex-col justify-between flex-1">
+                {/* Project Metadata Card Body - Proportionally Enlarged */}
+                <div className="p-7 sm:p-9 xl:p-10 flex flex-col justify-between flex-1">
                   <div>
-                    <div className="text-xs text-[var(--accent-blue)] font-gost-mono font-extrabold uppercase tracking-[0.2em] mb-2.5">
+                    <div className="text-xs sm:text-sm text-[var(--accent-blue)] font-gost-mono font-extrabold uppercase tracking-[0.22em] mb-3">
                       {project.category[currentLang]}
                     </div>
-                    <h3 className="font-gost text-xl sm:text-2xl font-black text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors leading-snug">
+                    <h3 className="font-gost text-2xl sm:text-3xl xl:text-4xl font-black text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors leading-snug">
                       {project.title[currentLang]}
                     </h3>
                     {project.description && (
-                      <p className="text-sm text-[var(--text-secondary)] mt-2 line-clamp-2 leading-relaxed">
+                      <p className="text-base sm:text-lg text-[var(--text-secondary)] mt-3 line-clamp-3 leading-relaxed font-normal">
                         {project.description[currentLang]}
                       </p>
                     )}
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-[var(--border-color)] flex items-center justify-between">
-                    <span className="font-gost-mono text-xs uppercase tracking-wider text-[var(--text-secondary)] bg-[var(--bg-surface-2)] border border-[var(--border-color)] px-3.5 py-1.5 rounded-full font-bold">
+                  <div className="mt-7 pt-5 border-t border-[var(--border-color)] flex items-center justify-between">
+                    <span className="font-gost-mono text-xs sm:text-sm uppercase tracking-wider text-[var(--text-secondary)] bg-[var(--bg-surface-2)] border border-[var(--border-color)] px-4 py-2 rounded-full font-bold">
                       {drawingsCount} {currentLang === 'uk' ? 'креслень' : currentLang === 'sk' ? 'výkresov' : 'drawings'} • {photosCount} {currentLang === 'uk' ? 'фото' : currentLang === 'sk' ? 'fotiek' : 'photos'}
                     </span>
 
-                    <span className="w-9 h-9 rounded-full bg-[var(--bg-surface-2)] border border-[var(--border-color)] group-hover:bg-[var(--accent-blue)] group-hover:text-white flex items-center justify-center text-sm font-bold text-[var(--text-primary)] transition-all group-hover:scale-110 shadow-sm">
+                    <span className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[var(--bg-surface-2)] border border-[var(--border-color)] group-hover:bg-[var(--accent-blue)] group-hover:text-white flex items-center justify-center text-base sm:text-lg font-bold text-[var(--text-primary)] transition-all group-hover:scale-110 shadow-sm">
                       →
                     </span>
                   </div>
@@ -250,12 +254,16 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
       </div>
 
       {/* Full Resolution Project Details Modal */}
-      <ProjectModal
-        project={modalProject}
-        currentLang={currentLang}
-        onClose={handleCloseModal}
-        onOpenBlueprintZoom={onOpenBlueprintZoom}
-      />
+      {modalProject && (
+        <Suspense fallback={null}>
+          <ProjectModal
+            project={modalProject}
+            currentLang={currentLang}
+            onClose={handleCloseModal}
+            onOpenBlueprintZoom={onOpenBlueprintZoom}
+          />
+        </Suspense>
+      )}
     </section>
   );
 };

@@ -117,7 +117,7 @@ export const EducationSection: React.FC<EducationSectionProps> = ({ currentLang 
 
         {/* Dual Degree Engineering Strength & Driver License Summary */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 p-6 sm:p-8 bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl backdrop-blur-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-sm">
+          <div className="lg:col-span-2 p-6 sm:p-8 bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl backdrop-blur-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-sm transition-all duration-300 ease-out hover:scale-[1.025] hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 rounded-2xl bg-[var(--badge-bg)] text-[var(--accent-blue)] border border-[var(--border-color)] flex items-center justify-center flex-shrink-0 shadow-sm">
                 <Award className="w-7 h-7" />
@@ -140,7 +140,7 @@ export const EducationSection: React.FC<EducationSectionProps> = ({ currentLang 
             </span>
           </div>
 
-          <div className="p-6 sm:p-8 bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl backdrop-blur-xl flex items-center gap-4 shadow-sm">
+          <div className="p-6 sm:p-8 bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl backdrop-blur-xl flex items-center gap-4 shadow-sm transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
             <div className="w-14 h-14 rounded-2xl bg-[var(--badge-bg)] text-[var(--accent-blue)] border border-[var(--border-color)] flex items-center justify-center flex-shrink-0 shadow-sm">
               <Car className="w-7 h-7" />
             </div>

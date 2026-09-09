@@ -77,7 +77,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ currentLang }) => 
         <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-6 sm:p-8 backdrop-blur-xl shadow-sm">
           
           {/* Engineering statement quote */}
-          <div className="mb-6 p-5 sm:p-6 rounded-2xl bg-[var(--bg-surface-2)] border border-[var(--border-color)]">
+          <div className="mb-6 p-5 sm:p-6 rounded-2xl bg-[var(--bg-surface-2)] border border-[var(--border-color)] transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-xl hover:border-[var(--accent-blue)] cursor-pointer">
             <p className="italic text-base sm:text-lg text-[var(--text-primary)] font-bold leading-relaxed">
               {ENGINEERING_TOOLS_DATA.statement[currentLang]}
             </p>

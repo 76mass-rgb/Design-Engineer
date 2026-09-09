@@ -11,12 +11,17 @@ import { AboutSection } from './components/AboutSection';
 import { EducationSection } from './components/EducationSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { ResumeModal } from './components/ResumeModal';
-import { BlueprintViewerModal } from './components/BlueprintViewerModal';
+
+const ResumeModal = React.lazy(() =>
+  import('./components/ResumeModal').then((m) => ({ default: m.ResumeModal }))
+);
+const BlueprintViewerModal = React.lazy(() =>
+  import('./components/BlueprintViewerModal').then((m) => ({ default: m.BlueprintViewerModal }))
+);
 
 export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>('uk');
-  const [currentTheme, setCurrentTheme] = useState<ThemeMode>('dark');
+  const [currentTheme, setCurrentTheme] = useState<ThemeMode>('blueprint');
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
@@ -151,20 +156,26 @@ export default function App() {
       <Footer currentLang={currentLang} />
 
       {/* Multi-language PDF Resume / CV Modal */}
-      <ResumeModal
-        isOpen={isResumeOpen}
-        onClose={() => setIsResumeOpen(false)}
-        defaultLang={currentLang}
-      />
+      <React.Suspense fallback={null}>
+        {isResumeOpen && (
+          <ResumeModal
+            isOpen={isResumeOpen}
+            onClose={() => setIsResumeOpen(false)}
+            defaultLang={currentLang}
+          />
+        )}
 
-      {/* High-Resolution Deep-Zoom Blueprint Viewer */}
-      <BlueprintViewerModal
-        isOpen={blueprintModal.isOpen}
-        onClose={handleCloseBlueprintZoom}
-        imageUrl={blueprintModal.imageUrl}
-        title={blueprintModal.title}
-        currentLang={currentLang}
-      />
+        {/* High-Resolution Deep-Zoom Blueprint Viewer */}
+        {blueprintModal.isOpen && (
+          <BlueprintViewerModal
+            isOpen={blueprintModal.isOpen}
+            onClose={handleCloseBlueprintZoom}
+            imageUrl={blueprintModal.imageUrl}
+            title={blueprintModal.title}
+            currentLang={currentLang}
+          />
+        )}
+      </React.Suspense>
     </div>
   );
 }

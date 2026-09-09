@@ -64,11 +64,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl animate-fadeIn"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 lg:p-6 bg-black/90 backdrop-blur-xl animate-fadeIn"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-6xl max-h-[92vh] bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-2xl rounded-3xl overflow-hidden flex flex-col z-10"
+        className="relative w-full max-w-[96vw] 2xl:max-w-[1720px] h-[94vh] max-h-[94vh] bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-2xl rounded-3xl overflow-hidden flex flex-col z-10"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
@@ -95,7 +95,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         <div className="flex-1 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 gap-0">
           
           {/* Left Column: Visual / Media Viewer with Tabs */}
-          <div className="lg:col-span-7 bg-[#060608] relative flex flex-col justify-between min-h-[360px] sm:min-h-[460px] p-4 group">
+          <div className="lg:col-span-7 xl:col-span-8 bg-[#060608] relative flex flex-col justify-between min-h-[420px] sm:min-h-[520px] p-4 group">
             
             {/* Media Category Toggle Tabs */}
             <div className="flex items-center justify-between gap-2 mb-3 z-10">
@@ -162,14 +162,33 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             </div>
 
             {/* Main Active Image Container */}
-            <div className="relative flex-1 flex items-center justify-center overflow-hidden min-h-[280px]">
+            <div className="relative flex-1 flex items-center justify-center overflow-hidden min-h-[300px]">
+              {/* Full Page Button Badge on Image */}
+              {onOpenBlueprintZoom && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onOpenBlueprintZoom(currentImage, project.title[currentLang]);
+                  }}
+                  className="absolute top-3 right-3 z-20 px-3.5 py-1.5 bg-blue-600/90 hover:bg-blue-500 text-white border border-blue-400/50 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 backdrop-blur-md transition-all shadow-lg hover:scale-105 cursor-pointer"
+                  title={currentLang === 'uk' ? 'Змасштабувати на всю сторінку' : currentLang === 'sk' ? 'Na celú stranu' : 'Scale to Full Page'}
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  <span>{currentLang === 'uk' ? 'На всю сторінку' : currentLang === 'sk' ? 'Na celú stranu' : 'Full Page'}</span>
+                </button>
+              )}
+
               <img
                 src={currentImage}
                 alt={project.title[currentLang]}
-                className={`max-h-[50vh] lg:max-h-[58vh] w-auto max-w-full object-contain transition-transform duration-300 rounded-xl ${
-                  isZoomed ? 'scale-150 cursor-zoom-out' : 'cursor-zoom-in'
-                }`}
-                onClick={() => setIsZoomed(!isZoomed)}
+                className="max-h-[64vh] lg:max-h-[76vh] w-auto max-w-full object-contain transition-transform duration-300 rounded-xl cursor-zoom-in hover:brightness-105"
+                onClick={() => {
+                  if (onOpenBlueprintZoom) {
+                    onOpenBlueprintZoom(currentImage, project.title[currentLang]);
+                  } else {
+                    setIsZoomed(!isZoomed);
+                  }
+                }}
                 referrerPolicy="no-referrer"
               />
 
@@ -178,14 +197,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <>
                   <button
                     onClick={handlePrev}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/75 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md flex items-center justify-center transition-all cursor-pointer shadow-lg"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/75 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md flex items-center justify-center transition-all cursor-pointer shadow-lg z-10"
                     aria-label="Previous image"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button
                     onClick={handleNext}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/75 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md flex items-center justify-center transition-all cursor-pointer shadow-lg"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/75 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md flex items-center justify-center transition-all cursor-pointer shadow-lg z-10"
                     aria-label="Next image"
                   >
                     <ChevronRight className="w-5 h-5" />
@@ -207,15 +226,21 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                       e.stopPropagation();
                       onOpenBlueprintZoom(currentImage, project.title[currentLang]);
                     }}
-                    className="flex items-center gap-1.5 text-blue-400 hover:text-white transition-colors cursor-pointer font-bold text-xs sm:text-sm"
-                    title="Deep Zoom Drawing / Photo"
+                    className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white px-3.5 py-1.5 rounded-full transition-all cursor-pointer font-bold text-xs sm:text-sm shadow-md hover:scale-105"
+                    title={currentLang === 'uk' ? 'Змасштабувати на всю сторінку' : currentLang === 'sk' ? 'Na celú stranu' : 'Full Page'}
                   >
                     <Maximize2 className="w-4 h-4" />
-                    <span>Deep-Zoom HD</span>
+                    <span>{currentLang === 'uk' ? 'На всю сторінку' : currentLang === 'sk' ? 'Na celú stranu' : 'Full Page'}</span>
                   </button>
                 )}
                 <button
-                  onClick={() => setIsZoomed(!isZoomed)}
+                  onClick={() => {
+                    if (onOpenBlueprintZoom) {
+                      onOpenBlueprintZoom(currentImage, project.title[currentLang]);
+                    } else {
+                      setIsZoomed(!isZoomed);
+                    }
+                  }}
                   className="flex items-center gap-1.5 hover:text-[#818cf8] transition-colors cursor-pointer font-bold text-xs sm:text-sm"
                 >
                   <ZoomIn className="w-4 h-4" />
@@ -256,7 +281,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           </div>
 
           {/* Right Column: Comprehensive Engineering Case Study */}
-          <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-[var(--bg-surface)] overflow-y-auto max-h-[85vh]">
+          <div className="lg:col-span-5 xl:col-span-4 p-6 sm:p-8 flex flex-col justify-between bg-[var(--bg-surface)] overflow-y-auto max-h-[85vh]">
             <div>
               <div className="flex items-center justify-between gap-2 mb-2">
                 <div className="text-sm font-gost-mono text-[var(--accent-blue)] uppercase tracking-[0.2em] font-extrabold">

@@ -83,7 +83,7 @@ export const HowIWorkSection: React.FC<HowIWorkSectionProps> = ({ currentLang })
         </div>
 
         {/* CTA banner after workflow */}
-        <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-8 sm:p-12 backdrop-blur-xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-8 sm:p-12 backdrop-blur-xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 transition-all duration-300 ease-out hover:scale-[1.025] hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
           <div className="max-w-xl">
             <h3 className="font-gost text-2xl sm:text-3xl md:text-4xl font-black uppercase text-[var(--text-primary)] mb-2">
               {currentLang === 'uk' && 'Маєте інженерну задачу або проект обладнання?'}

@@ -106,7 +106,96 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
   };
 
   const handlePrint = () => {
-    window.print();
+    if (!cvPrintRef.current) {
+      window.print();
+      return;
+    }
+
+    try {
+      // Create an isolated hidden iframe for printing to guarantee clean B&W preview without UI clutter
+      const printFrame = document.createElement('iframe');
+      printFrame.setAttribute('style', 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0;pointer-events:none;');
+      document.body.appendChild(printFrame);
+
+      const frameDoc = printFrame.contentWindow?.document;
+      if (!frameDoc) {
+        window.print();
+        return;
+      }
+
+      const cvClone = cvPrintRef.current.cloneNode(true) as HTMLElement;
+
+      frameDoc.open();
+      frameDoc.write(`
+        <!DOCTYPE html>
+        <html lang="${selectedLang}">
+          <head>
+            <meta charset="utf-8" />
+            <title>${cv.name} - CV (${selectedLang.toUpperCase()})</title>
+            <style>
+              @page {
+                size: A4 portrait;
+                margin: 12mm 15mm;
+              }
+              * {
+                box-sizing: border-box;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+              }
+              body {
+                margin: 0;
+                padding: 0;
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                font-size: 13px;
+                line-height: 1.45;
+              }
+              #printable-cv-document {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                box-shadow: none !important;
+                background: #ffffff !important;
+                color: #000000 !important;
+              }
+              .avoid-break {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+              }
+              svg {
+                stroke: currentColor !important;
+              }
+            </style>
+          </head>
+          <body>
+            ${cvClone.outerHTML}
+          </body>
+        </html>
+      `);
+      frameDoc.close();
+
+      setTimeout(() => {
+        try {
+          printFrame.contentWindow?.focus();
+          printFrame.contentWindow?.print();
+        } catch (err) {
+          console.warn('Iframe print fallback to window.print', err);
+          window.print();
+        } finally {
+          setTimeout(() => {
+            if (document.body.contains(printFrame)) {
+              document.body.removeChild(printFrame);
+            }
+          }, 2000);
+        }
+      }, 300);
+    } catch (e) {
+      console.error('Print execution error:', e);
+      window.print();
+    }
   };
 
   const handleCopyText = () => {
@@ -192,15 +281,15 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/80 backdrop-blur-md overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/80 backdrop-blur-md overflow-y-auto resume-modal-overlay"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-5xl max-h-[94vh] bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-2xl rounded-3xl overflow-hidden flex flex-col z-10 my-auto"
+        className="relative w-full max-w-5xl max-h-[94vh] bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-2xl rounded-3xl overflow-hidden flex flex-col z-10 my-auto resume-modal-window"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4 bg-[var(--bg-surface-2)] border-b border-[var(--border-color)]">
+        <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4 bg-[var(--bg-surface-2)] border-b border-[var(--border-color)] no-print">
           <div>
             <div className="flex items-center gap-2">
               <FileText className="w-5 h-5 text-[var(--accent-blue)]" />
@@ -244,10 +333,10 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
         </div>
 
         {/* Action Controls Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-3.5 bg-[var(--bg-surface)] border-b border-[var(--border-color)] text-sm font-gost-mono font-bold">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-3.5 bg-[var(--bg-surface)] border-b border-[var(--border-color)] text-sm font-gost-mono font-bold no-print">
           <div className="flex items-center gap-2 text-[var(--text-secondary)] font-semibold">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Format: ISO A4 Print / High-DPI PDF Ready</span>
+            <span>Format: ISO A4 Print / High-DPI PDF Ready (B&amp;W Clean)</span>
           </div>
 
           <div className="flex items-center gap-3 flex-wrap">
@@ -287,75 +376,77 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
           </div>
         </div>
 
-        {/* Scrollable Document Preview Canvas (Styled cleanly in white A4 document theme for crisp output) */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-slate-900/50 flex justify-center">
+        {/* Scrollable Document Preview Canvas (Styled cleanly in pure black-and-white A4 document layout) */}
+        <div className="flex-1 overflow-y-auto p-2 sm:p-6 bg-[var(--bg-canvas)] flex justify-center resume-modal-body">
           <div
             ref={cvPrintRef}
             id="printable-cv-document"
-            className="w-full max-w-[820px] bg-white text-slate-900 p-8 sm:p-12 shadow-2xl rounded-sm border border-slate-300 font-sans"
+            className="w-full max-w-[820px] bg-white text-black p-8 sm:p-12 shadow-2xl rounded-none border border-black font-sans"
             style={{
               fontFamily: "'Liberation Sans', Arial, Helvetica, sans-serif",
-              color: '#0f172a',
+              color: '#000000',
+              backgroundColor: '#ffffff'
             }}
           >
             {/* CV Header: Engineering Blueprint Stamp Layout */}
-            <div className="border-b-2 border-slate-900 pb-6 mb-6">
+            <div className="border-b-2 border-black pb-5 mb-5">
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                 <div>
-                  <div className="text-sm font-mono font-extrabold tracking-widest text-blue-700 uppercase mb-1">
+                  <div className="text-xs font-mono font-bold tracking-widest text-black uppercase mb-1">
                     CURRICULUM VITAE // INDUSTRIAL DESIGN ENGINEER
                   </div>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-950 uppercase leading-none font-gost">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-black uppercase leading-none font-gost">
                     {cv.name}
                   </h1>
-                  <p className="text-base sm:text-lg font-bold text-blue-800 mt-2 font-gost-mono leading-snug">
+                  <p className="text-base sm:text-lg font-bold text-black mt-2 font-gost-mono leading-snug">
                     {cv.title}
                   </p>
                 </div>
 
-                <div className="bg-slate-100 p-4 rounded-lg border border-slate-300 text-sm font-mono space-y-1.5 sm:text-right">
-                  <div className="flex sm:justify-end items-center gap-1.5 font-bold text-slate-900">
-                    <Phone className="w-4 h-4 text-blue-700" />
+                <div className="bg-white p-3.5 border border-black text-sm font-mono space-y-1.5 sm:text-right">
+                  <div className="flex sm:justify-end items-center gap-1.5 font-bold text-black">
+                    <Phone className="w-4 h-4 text-black" />
                     <span>{cv.phone}</span>
                   </div>
-                  <div className="flex sm:justify-end items-center gap-1.5 font-semibold text-slate-800">
-                    <Mail className="w-4 h-4 text-blue-700" />
+                  <div className="flex sm:justify-end items-center gap-1.5 font-semibold text-black">
+                    <Mail className="w-4 h-4 text-black" />
                     <span>{cv.email}</span>
                   </div>
-                  <div className="flex sm:justify-end items-center gap-1.5 text-slate-700 font-medium">
-                    <MapPin className="w-4 h-4 text-blue-700" />
+                  <div className="flex sm:justify-end items-center gap-1.5 text-black font-medium">
+                    <MapPin className="w-4 h-4 text-black" />
                     <span>Čadca, Slovakia</span>
                   </div>
-                  <div className="text-xs text-slate-700 font-semibold pt-1 border-t border-slate-200 flex items-center justify-between sm:justify-end gap-2">
+                  <div className="text-xs text-black font-semibold pt-1 border-t border-black flex items-center justify-between sm:justify-end gap-2">
                     <span>{cv.experienceYears}+ Yrs Experience</span>
                     <span>•</span>
-                    <span className="font-bold text-blue-800">{cv.completedProjects} Built &amp; Operational</span>
+                    <span className="font-bold text-black">{cv.completedProjects} Built &amp; Operational</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Executive Summary */}
-            <div className="mb-6">
-              <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-slate-900 bg-slate-100 px-3 py-1.5 border-l-4 border-blue-700 mb-2.5">
-                {selectedLang === 'uk' ? 'ПРОФЕСІЙНИЙ ПРОФІЛЬ' : selectedLang === 'sk' ? 'PROFESIONÁLNY PROFIL' : 'PROFESSIONAL PROFILE & SUMMARY'}
+            <div className="mb-5 avoid-break">
+              <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-black border-b-2 border-black pb-1 mb-2.5 flex items-center gap-2">
+                <FileText className="w-4 h-4 text-black" />
+                <span>{selectedLang === 'uk' ? 'ПРОФЕСІЙНИЙ ПРОФІЛЬ' : selectedLang === 'sk' ? 'PROFESIONÁLNY PROFIL' : 'PROFESSIONAL PROFILE & SUMMARY'}</span>
               </h2>
-              <p className="text-base text-slate-800 leading-relaxed text-justify font-normal">
+              <p className="text-sm sm:text-base text-black leading-relaxed text-justify font-normal">
                 {cv.summary}
               </p>
             </div>
 
             {/* Two-Column Matrix: Specializations & Standards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5 avoid-break">
               <div>
-                <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-slate-900 bg-slate-100 px-3 py-1.5 border-l-4 border-blue-700 mb-2.5 flex items-center gap-1.5">
-                  <Layers className="w-4 h-4 text-blue-700" />
+                <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-black border-b-2 border-black pb-1 mb-2.5 flex items-center gap-1.5">
+                  <Layers className="w-4 h-4 text-black" />
                   <span>{selectedLang === 'uk' ? 'КЛЮЧОВА СПЕЦІАЛІЗАЦІЯ' : selectedLang === 'sk' ? 'HLAVNÉ ŠPECIALIZÁCIE' : 'CORE SPECIALIZATIONS'}</span>
                 </h2>
-                <ul className="space-y-1.5 text-sm text-slate-800">
+                <ul className="space-y-1.5 text-sm text-black">
                   {cv.specializations.map((spec, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <span className="text-blue-700 font-bold mt-0.5">•</span>
+                      <span className="text-black font-bold mt-0.5">•</span>
                       <span className="leading-snug">{spec}</span>
                     </li>
                   ))}
@@ -363,14 +454,14 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
               </div>
 
               <div>
-                <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-slate-900 bg-slate-100 px-3 py-1.5 border-l-4 border-blue-700 mb-2.5 flex items-center gap-1.5">
-                  <Award className="w-4 h-4 text-blue-700" />
+                <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-black border-b-2 border-black pb-1 mb-2.5 flex items-center gap-1.5">
+                  <Award className="w-4 h-4 text-black" />
                   <span>{selectedLang === 'uk' ? 'НОРМАТИВНІ СТАНДАРТИ' : selectedLang === 'sk' ? 'NORMY A ŠTANDARDY' : 'CODES & STANDARDS'}</span>
                 </h2>
-                <ul className="space-y-1.5 text-sm text-slate-800">
+                <ul className="space-y-1.5 text-sm text-black">
                   {cv.standards.map((std, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <span className="text-blue-700 font-bold mt-0.5">✓</span>
+                      <span className="text-black font-bold mt-0.5">✓</span>
                       <span className="leading-snug font-medium">{std}</span>
                     </li>
                   ))}
@@ -379,46 +470,46 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
             </div>
 
             {/* Software Competencies Table */}
-            <div className="mb-6">
-              <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-slate-900 bg-slate-100 px-3 py-1.5 border-l-4 border-blue-700 mb-2.5 flex items-center gap-1.5">
-                <Cpu className="w-4 h-4 text-blue-700" />
+            <div className="mb-5 avoid-break">
+              <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-black border-b-2 border-black pb-1 mb-2.5 flex items-center gap-1.5">
+                <Cpu className="w-4 h-4 text-black" />
                 <span>{selectedLang === 'uk' ? 'ІНЖЕНЕРНЕ ПРОГРАМНЕ ЗАБЕЗПЕЧЕННЯ' : selectedLang === 'sk' ? 'INŽINIERSKY SOFTVÉR' : 'ENGINEERING SOFTWARE & CAD SUITE'}</span>
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                 {cv.software.map((sw, idx) => (
-                  <div key={idx} className="p-2.5 bg-slate-50 border border-slate-200 rounded text-sm">
-                    <div className="font-bold text-slate-950">{sw.name}</div>
-                    <div className="text-xs text-blue-700 font-mono font-bold">{sw.level}</div>
-                    <div className="text-xs text-slate-600 truncate">{sw.category}</div>
+                  <div key={idx} className="p-2 bg-white border border-black text-sm">
+                    <div className="font-bold text-black">{sw.name}</div>
+                    <div className="text-xs text-black font-mono font-bold">{sw.level}</div>
+                    <div className="text-xs text-neutral-800 truncate">{sw.category}</div>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Work History */}
-            <div className="mb-6">
-              <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-slate-900 bg-slate-100 px-3 py-1.5 border-l-4 border-blue-700 mb-3 flex items-center gap-1.5">
-                <Briefcase className="w-4 h-4 text-blue-700" />
+            <div className="mb-5">
+              <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-black border-b-2 border-black pb-1 mb-3 flex items-center gap-1.5 avoid-break">
+                <Briefcase className="w-4 h-4 text-black" />
                 <span>{selectedLang === 'uk' ? 'ДОСВІД РОБОТИ ТА ПРОЕКТУВАННЯ' : selectedLang === 'sk' ? 'PRACOVNÉ SKÚSENOSTI' : 'WORK EXPERIENCE & INDUSTRIAL MILESTONES'}</span>
               </h2>
-              <div className="space-y-4">
+              <div className="space-y-3.5">
                 {cv.workExperience.map((exp, idx) => (
-                  <div key={idx} className="border-l-2 border-slate-300 pl-4 relative">
+                  <div key={idx} className="border-l-2 border-black pl-3.5 relative avoid-break">
                     <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-                      <h3 className="text-base font-bold text-slate-950 font-gost">
+                      <h3 className="text-base font-bold text-black font-gost">
                         {exp.role}
                       </h3>
-                      <span className="text-sm font-mono font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded">
+                      <span className="text-xs font-mono font-bold text-black border border-black px-2 py-0.5 bg-white">
                         {exp.period}
                       </span>
                     </div>
-                    <div className="text-sm text-slate-700 font-medium mb-1.5">
+                    <div className="text-sm text-black font-semibold mb-1">
                       {exp.companyOrScope} · <span className="italic">{exp.location}</span>
                     </div>
-                    <ul className="space-y-1.5 text-sm text-slate-800">
+                    <ul className="space-y-1 text-sm text-black">
                       {exp.highlights.map((item, hIdx) => (
                         <li key={hIdx} className="flex items-start gap-1.5">
-                          <span className="text-slate-400 mt-0.5">-</span>
+                          <span className="text-black font-bold mt-0.5">-</span>
                           <span className="leading-snug">{item}</span>
                         </li>
                       ))}
@@ -429,26 +520,26 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
             </div>
 
             {/* Academic Education */}
-            <div className="mb-6">
-              <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-slate-900 bg-slate-100 px-3 py-1.5 border-l-4 border-blue-700 mb-3 flex items-center gap-1.5">
-                <GraduationCap className="w-4 h-4 text-blue-700" />
+            <div className="mb-5 avoid-break">
+              <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-black border-b-2 border-black pb-1 mb-2.5 flex items-center gap-1.5">
+                <GraduationCap className="w-4 h-4 text-black" />
                 <span>{selectedLang === 'uk' ? 'ВИЩА ОСВІТА ТА НАУКОВА ДІЯЛЬНІСТЬ' : selectedLang === 'sk' ? 'VYSOKOŠKOLSKÉ VZDELANIE' : 'HIGHER EDUCATION & ACADEMIC CREDENTIALS'}</span>
               </h2>
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {cv.education.map((edu, idx) => (
-                  <div key={idx} className="bg-slate-50 p-3.5 rounded border border-slate-200">
+                  <div key={idx} className="bg-white p-3 border border-black">
                     <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                      <div className="text-sm font-bold text-slate-950 font-gost">
+                      <div className="text-sm font-bold text-black font-gost">
                         {edu.degree}
                       </div>
-                      <span className="text-sm font-mono font-bold text-blue-700">
+                      <span className="text-xs font-mono font-bold text-black border border-black px-2 py-0.5 bg-white">
                         {edu.year}
                       </span>
                     </div>
-                    <div className="text-sm font-semibold text-slate-800 mt-0.5">
+                    <div className="text-sm font-semibold text-black mt-0.5">
                       {edu.institution}
                     </div>
-                    <div className="text-sm text-slate-600 mt-0.5 italic">
+                    <div className="text-sm text-neutral-800 mt-0.5 italic">
                       {edu.specialty}
                     </div>
                   </div>
@@ -456,36 +547,17 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
               </div>
             </div>
 
-            {/* Key Representative Projects */}
-            <div className="mb-6">
-              <h2 className="text-sm font-bold font-mono tracking-widest uppercase text-slate-900 bg-slate-100 px-3 py-1.5 border-l-4 border-blue-700 mb-3">
-                {selectedLang === 'uk' ? 'ВИБРАНІ РЕАЛІЗОВАНІ ОБ\'ЄКТИ' : selectedLang === 'sk' ? 'VYBRANÉ REALIZOVANÉ PROJEKTY' : 'SELECTED MAJOR ENGINEERING PROJECTS'}
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                {cv.keyProjects.map((proj, idx) => (
-                  <div key={idx} className="p-3 bg-slate-50 border border-slate-200 rounded">
-                    <div className="flex items-center justify-between font-bold text-slate-900 mb-0.5">
-                      <span className="font-gost text-sm font-bold">{proj.name}</span>
-                      <span className="font-mono text-blue-700 text-sm">{proj.year}</span>
-                    </div>
-                    <div className="text-xs font-mono text-blue-800 font-bold mb-1">{proj.type}</div>
-                    <p className="text-xs text-slate-700 leading-snug">{proj.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {/* Languages & Footnote */}
-            <div className="pt-4 border-t border-slate-300 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm">
+            <div className="pt-3 border-t-2 border-black flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-black font-mono avoid-break">
               <div>
-                <span className="font-bold text-slate-900 mr-2 font-mono uppercase">
+                <span className="font-bold text-black mr-2 uppercase">
                   {selectedLang === 'uk' ? 'Мови:' : selectedLang === 'sk' ? 'Jazyky:' : 'Languages:'}
                 </span>
-                <span className="text-slate-700 font-medium">
+                <span className="text-black font-medium">
                   {cv.languages.map(l => `${l.lang} (${l.level})`).join(' · ')}
                 </span>
               </div>
-              <div className="text-slate-500 font-mono text-xs">
+              <div className="text-neutral-800 text-xs">
                 ISO 9001 / ГОСТ 2.304 · Document ID: VD-ENG-CV-{selectedLang.toUpperCase()}
               </div>
             </div>

@@ -117,10 +117,10 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-2 sm:p-4 lg:p-6 animate-fade-in select-none">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-1 sm:p-2 animate-fade-in select-none">
       <div 
         ref={containerRef}
-        className="relative w-full h-full max-w-[96vw] bg-[#0d131f] border border-blue-500/30 rounded-3xl overflow-hidden flex flex-col shadow-2xl"
+        className="relative w-full h-full max-w-[99vw] bg-[#0d131f] border border-blue-500/30 rounded-2xl overflow-hidden flex flex-col shadow-2xl"
       >
         {/* Top Control Bar with CAD Stamp aesthetics */}
         <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 bg-[#080d16] border-b border-blue-500/20 text-white z-20">
@@ -226,14 +226,14 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
               transformOrigin: 'center center',
               transition: isDragging ? 'none' : 'transform 0.15s ease-out'
             }}
-            className="flex items-center justify-center max-w-full max-h-full p-4"
+            className="flex items-center justify-center w-full h-full p-2"
           >
             <img
               ref={imageRef}
               src={imageUrl}
               alt={title}
               referrerPolicy="no-referrer"
-              className="max-h-[82vh] max-w-[90vw] object-contain rounded-lg shadow-2xl border border-blue-500/20 bg-white"
+              className="max-h-[88vh] max-w-[96vw] w-auto h-auto object-contain rounded-lg shadow-2xl border border-blue-500/20 bg-white"
               draggable={false}
             />
           </div>

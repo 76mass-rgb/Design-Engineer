@@ -6,7 +6,7 @@ interface BrandLogoBannerProps {
 
 export const BrandLogoBanner: React.FC<BrandLogoBannerProps> = ({ className = '' }) => {
   return (
-    <div className={`w-full max-w-[760px] ${className}`} id="engineer-brand-identity">
+    <div className={`w-full max-w-[760px] transition-all duration-300 ease-out hover:scale-[1.03] cursor-pointer ${className}`} id="engineer-brand-identity">
       <svg
         viewBox="0 -10 960 156"
         className="w-full h-auto select-none overflow-visible block"

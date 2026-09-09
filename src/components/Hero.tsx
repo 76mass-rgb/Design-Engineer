@@ -2,7 +2,8 @@ import React from 'react';
 import { Language } from '../types';
 import { UI_TRANSLATIONS, CONTACT_DATA } from '../data/portfolioData';
 import { ArrowRight, Sparkles, Layers, Box, CheckCircle2, FileText } from 'lucide-react';
-import portraitImg from '../assets/images/vitaliy_portrait_1787830489312.jpg';
+import portraitWebp from '../assets/images/vitaliy_portrait_1787830489312.webp';
+import portraitJpg from '../assets/images/vitaliy_portrait_1787830489312.jpg';
 import { BrandLogoBanner } from './BrandLogoBanner';
 
 interface HeroProps {
@@ -45,14 +46,44 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
             </p>
 
             {/* Operational Proof quote */}
-            <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-2xl p-5 sm:p-6 backdrop-blur-xl mb-8 max-w-xl shadow-sm flex items-start gap-3.5">
+            <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-2xl p-5 sm:p-6 backdrop-blur-xl mb-6 max-w-xl shadow-sm flex items-start gap-3.5 transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--accent-blue)] hover:bg-[var(--bg-surface)] cursor-pointer">
               <div className="w-3 h-3 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0 animate-pulse" />
               <p className="text-base sm:text-lg text-[var(--text-primary)] leading-relaxed font-bold">
                 {UI_TRANSLATIONS.heroImpact[currentLang]}
               </p>
             </div>
 
-            {/* Standardized CTAs */}
+            {/* Bento Statistics Grid with GOST Numbers (Moved above buttons as requested) */}
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-8 max-w-xl">
+              <div className="rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] p-3.5 sm:p-5 flex flex-col justify-end shadow-sm relative group hover:border-[var(--accent-blue)] hover:bg-[var(--bg-surface)] hover:scale-105 hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 ease-out cursor-pointer">
+                <span className="text-xs sm:text-sm uppercase tracking-wider mb-1 text-[var(--text-secondary)] font-gost-mono font-bold leading-tight">
+                  {UI_TRANSLATIONS.statProjects[currentLang]}
+                </span>
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-[var(--text-primary)] font-gost">
+                  {CONTACT_DATA.completedProjects}
+                </span>
+              </div>
+
+              <div className="rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] p-3.5 sm:p-5 flex flex-col justify-end shadow-sm relative group hover:border-[var(--accent-blue)] hover:bg-[var(--bg-surface)] hover:scale-105 hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 ease-out cursor-pointer">
+                <span className="text-xs sm:text-sm uppercase tracking-wider mb-1 text-[var(--text-secondary)] font-gost-mono font-bold leading-tight">
+                  {UI_TRANSLATIONS.statExp[currentLang]}
+                </span>
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-[var(--text-primary)] font-gost">
+                  {CONTACT_DATA.experienceYears}{currentLang === 'uk' ? 'р' : currentLang === 'sk' ? 'r' : 'y'}
+                </span>
+              </div>
+
+              <div className="rounded-2xl bg-[var(--accent-blue)] p-3.5 sm:p-5 flex flex-col justify-end text-white shadow-md relative group hover:scale-105 hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 ease-out cursor-pointer">
+                <span className="text-xs sm:text-sm uppercase tracking-wider font-black opacity-95 mb-1 font-gost-mono leading-tight">
+                  {UI_TRANSLATIONS.statEdu[currentLang]}
+                </span>
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-black font-gost">
+                  {CONTACT_DATA.degreesCount}
+                </span>
+              </div>
+            </div>
+
+            {/* Standardized CTAs (Moved to the bottom) */}
             <div className="flex flex-wrap gap-4 items-center">
               <a
                 href="#portfolio"
@@ -74,18 +105,21 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
 
           </div>
 
-          {/* Right Hero Column: Artistic Bento Grid & Portrait */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
+          {/* Right Hero Column: Portrait Frame */}
+          <div className="lg:col-span-5 flex flex-col justify-start">
             
             {/* Portrait Frame with Rounded Glass Card & Overlays */}
             <div className="relative bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-3 backdrop-blur-xl shadow-2xl group overflow-hidden">
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[var(--bg-surface-2)]">
-                <img
-                  src={portraitImg}
-                  alt={currentLang === 'uk' ? 'Віталій Долінський' : 'Dolynskyi Vitalii'}
-                  className="w-full h-full object-cover object-top filter grayscale-[8%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
-                  referrerPolicy="no-referrer"
-                />
+                <picture className="w-full h-full block">
+                  <source srcSet={portraitWebp} type="image/webp" />
+                  <img
+                    src={portraitJpg}
+                    alt={currentLang === 'uk' ? 'Віталій Долінський' : 'Dolynskyi Vitalii'}
+                    className="w-full h-full object-cover object-top filter grayscale-[8%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                    referrerPolicy="no-referrer"
+                  />
+                </picture>
 
                 {/* Gradient vignette */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
@@ -112,36 +146,6 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
                     </span>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Bento Statistics Grid with GOST Numbers */}
-            <div className="grid grid-cols-3 gap-3.5">
-              <div className="rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] p-4 sm:p-5 flex flex-col justify-end shadow-sm relative group hover:border-[var(--accent-blue)] transition-all">
-                <span className="text-sm uppercase tracking-wider mb-1 text-[var(--text-secondary)] font-gost-mono font-bold">
-                  {UI_TRANSLATIONS.statProjects[currentLang]}
-                </span>
-                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-[var(--text-primary)] font-gost">
-                  {CONTACT_DATA.completedProjects}
-                </span>
-              </div>
-
-              <div className="rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] p-4 sm:p-5 flex flex-col justify-end shadow-sm">
-                <span className="text-sm uppercase tracking-wider mb-1 text-[var(--text-secondary)] font-gost-mono font-bold">
-                  {UI_TRANSLATIONS.statExp[currentLang]}
-                </span>
-                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-[var(--text-primary)] font-gost">
-                  {CONTACT_DATA.experienceYears}{currentLang === 'uk' ? 'р' : currentLang === 'sk' ? 'r' : 'y'}
-                </span>
-              </div>
-
-              <div className="rounded-2xl bg-[var(--accent-blue)] p-4 sm:p-5 flex flex-col justify-end text-white shadow-md">
-                <span className="text-sm uppercase tracking-wider font-black opacity-95 mb-1 font-gost-mono">
-                  {UI_TRANSLATIONS.statEdu[currentLang]}
-                </span>
-                <span className="text-2xl sm:text-3xl lg:text-4xl font-black font-gost">
-                  {CONTACT_DATA.degreesCount}
-                </span>
               </div>
             </div>
 
