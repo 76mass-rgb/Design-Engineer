@@ -281,28 +281,28 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/80 backdrop-blur-md overflow-y-auto resume-modal-overlay"
+      className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 md:p-6 bg-black/80 backdrop-blur-md overflow-y-auto resume-modal-overlay h-[100dvh] w-full"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-5xl max-h-[94vh] bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-2xl rounded-3xl overflow-hidden flex flex-col z-10 my-auto resume-modal-window"
+        className="relative w-full max-w-5xl h-[100dvh] sm:h-auto sm:max-h-[94vh] bg-[var(--bg-surface)] border-0 sm:border border-[var(--border-color)] shadow-2xl rounded-none sm:rounded-3xl overflow-hidden flex flex-col z-10 my-0 sm:my-auto resume-modal-window"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4 bg-[var(--bg-surface-2)] border-b border-[var(--border-color)] no-print">
-          <div>
+        <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-[var(--bg-surface-2)] border-b border-[var(--border-color)] no-print">
+          <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
-              <FileText className="w-5 h-5 text-[var(--accent-blue)]" />
-              <h3 className="font-gost text-xl sm:text-2xl font-black uppercase tracking-tight text-[var(--text-primary)]">
+              <FileText className="w-5 h-5 text-[var(--accent-blue)] flex-shrink-0" />
+              <h3 className="font-gost text-lg sm:text-2xl font-black uppercase tracking-tight text-[var(--text-primary)] truncate">
                 {t.title}
               </h3>
             </div>
-            <p className="text-sm text-[var(--text-secondary)] font-gost-mono mt-0.5 hidden sm:block font-medium">
+            <p className="text-xs sm:text-sm text-[var(--text-secondary)] font-gost-mono mt-0.5 hidden sm:block font-medium">
               {t.subtitle}
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             {/* Language Selector in Modal */}
             <div className="flex items-center bg-[var(--bg-surface-3)] p-1 rounded-full border border-[var(--border-color)]">
               <Globe className="w-4 h-4 text-[var(--text-muted)] ml-2.5 mr-1 hidden sm:inline-block" />
@@ -310,7 +310,7 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
                 <button
                   key={lang}
                   onClick={() => setSelectedLang(lang)}
-                  className={`text-sm font-black font-gost-mono px-3.5 py-1.5 rounded-full transition-all uppercase cursor-pointer ${
+                  className={`text-xs sm:text-sm font-black font-gost-mono px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full transition-all uppercase cursor-pointer min-h-[32px] ${
                     selectedLang === lang
                       ? 'bg-[var(--accent-blue)] text-white shadow-sm'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -324,7 +324,7 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="w-10 h-10 rounded-full bg-[var(--bg-surface-3)] hover:bg-[var(--accent-blue)] text-[var(--text-primary)] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[var(--bg-surface-3)] hover:bg-[var(--accent-blue)] text-[var(--text-primary)] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm flex-shrink-0"
               title="Close"
             >
               <X className="w-5 h-5" />
@@ -333,16 +333,16 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
         </div>
 
         {/* Action Controls Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-3.5 bg-[var(--bg-surface)] border-b border-[var(--border-color)] text-sm font-gost-mono font-bold no-print">
-          <div className="flex items-center gap-2 text-[var(--text-secondary)] font-semibold">
+        <div className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3.5 bg-[var(--bg-surface)] border-b border-[var(--border-color)] text-xs sm:text-sm font-gost-mono font-bold no-print">
+          <div className="hidden sm:flex items-center gap-2 text-[var(--text-secondary)] font-semibold">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
             <span>Format: ISO A4 Print / High-DPI PDF Ready (B&amp;W Clean)</span>
           </div>
 
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap w-full sm:w-auto justify-end">
             <button
               onClick={handleCopyText}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] text-[var(--text-primary)] border border-[var(--border-color)] transition-all cursor-pointer font-bold text-sm shadow-sm"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] text-[var(--text-primary)] border border-[var(--border-color)] transition-all cursor-pointer font-bold text-xs sm:text-sm shadow-sm min-h-[40px]"
             >
               {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
               <span>{copied ? t.copied : t.copyBtn}</span>
@@ -350,7 +350,7 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
 
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] text-[var(--text-primary)] border border-[var(--border-color)] transition-all cursor-pointer font-bold text-sm shadow-sm"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] text-[var(--text-primary)] border border-[var(--border-color)] transition-all cursor-pointer font-bold text-xs sm:text-sm shadow-sm min-h-[40px]"
             >
               <Printer className="w-4 h-4" />
               <span>{t.printBtn}</span>
@@ -359,7 +359,7 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
             <button
               onClick={handleDownloadPDF}
               disabled={isGenerating}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white transition-all cursor-pointer font-black text-sm sm:text-base shadow-md hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
+              className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white transition-all cursor-pointer font-black text-xs sm:text-base shadow-md hover:scale-105 disabled:opacity-50 disabled:pointer-events-none min-h-[40px]"
             >
               {isGenerating ? (
                 <>
@@ -381,7 +381,7 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
           <div
             ref={cvPrintRef}
             id="printable-cv-document"
-            className="w-full max-w-[820px] bg-white text-black p-8 sm:p-12 shadow-2xl rounded-none border border-black font-sans"
+            className="w-full max-w-[820px] bg-white text-black p-4 sm:p-8 md:p-12 shadow-2xl rounded-none border border-black font-sans overflow-x-hidden"
             style={{
               fontFamily: "'Liberation Sans', Arial, Helvetica, sans-serif",
               color: '#000000',

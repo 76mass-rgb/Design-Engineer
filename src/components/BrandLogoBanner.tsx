@@ -6,128 +6,93 @@ interface BrandLogoBannerProps {
 
 export const BrandLogoBanner: React.FC<BrandLogoBannerProps> = ({ className = '' }) => {
   return (
-    <div className={`w-full max-w-[760px] transition-all duration-300 ease-out hover:scale-[1.03] cursor-pointer ${className}`} id="engineer-brand-identity">
-      <svg
-        viewBox="0 -10 960 156"
-        className="w-full h-auto select-none overflow-visible block"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-label="INZINIER ⌖ KONSTRUKTER - VITALII DOLYNSKYI"
-        role="img"
-      >
-        {/* ============================================================== */}
-        {/* 1. TOP LINE: "INZINIER"  [CAD CROSSHAIR ⌖]  "KONSTRUKTER"      */}
-        {/* ============================================================== */}
-        
-        {/* Technical drafting text in secondary gray color */}
-        <g
-          fill="var(--text-secondary)"
-          style={{
-            fontFamily: "'PT Mono', 'JetBrains Mono', 'Share Tech Mono', monospace",
-            fontSize: '25px',
-            fontWeight: 700,
-            letterSpacing: '0.26em'
-          }}
+    <div
+      className={`dva-logo w-full select-none transition-transform duration-300 hover:scale-[1.01] cursor-pointer ${className}`}
+      id="engineer-brand-identity"
+    >
+      <div className="dva-wrap w-full">
+        <svg
+          viewBox="0 0 1000 126"
+          className="w-full h-auto block select-none overflow-visible"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="INZINIER - KONSTRUKTER / VITALII DOLYNSKYI"
         >
-          <text x="6" y="27" textLength="432" lengthAdjust="spacing">
-            INZINIER
+          <style>{`
+            .dva-svg-text {
+              font-family: 'PT Sans Narrow', 'ISOCPEUR', sans-serif;
+              font-weight: 700;
+            }
+            .dva-svg-sub {
+              font-size: 26px;
+            }
+            .dva-svg-main {
+              font-size: 72px;
+            }
+            .dva-svg-base {
+              fill: #3d4550;
+            }
+            html[data-theme="dark"] .dva-svg-base {
+              fill: #e2e8f0;
+            }
+            .dva-svg-accent {
+              fill: #d9531e;
+            }
+            .dva-svg-shadow {
+              fill: #d9531e;
+            }
+            .dva-svg-accent-shadow {
+              fill: #3d4550;
+            }
+            html[data-theme="dark"] .dva-svg-accent-shadow {
+              fill: #0f172a;
+            }
+          `}</style>
+
+          {/* 1. TOP LINE: INZINIER - KONSTRUKTER (stretched to 100% full width) */}
+          <text
+            x="2"
+            y="25"
+            textLength="996"
+            lengthAdjust="spacing"
+            className="dva-svg-text dva-svg-sub dva-svg-shadow"
+          >
+            INZINIER - KONSTRUKTER
           </text>
-          <text x="520" y="27" textLength="432" lengthAdjust="spacing">
-            KONSTRUKTER
+          <text
+            x="0"
+            y="23"
+            textLength="1000"
+            lengthAdjust="spacing"
+            className="dva-svg-text dva-svg-sub dva-svg-base"
+          >
+            INZINIER - KONSTRUKTER
           </text>
-        </g>
 
-        {/* CAD Technical Target / Datum Crosshair Symbol ⌖ */}
-        <g
-          stroke="var(--text-secondary)"
-          strokeWidth="1.3"
-          strokeLinecap="square"
-          fill="none"
-        >
-          {/* Vertical alignment axis line extending above letters and down to near the orange bar */}
-          <line x1="479" y1="-5" x2="479" y2="40" />
-          {/* Horizontal cross-line */}
-          <line x1="452" y1="20" x2="506" y2="20" />
-          {/* Central target square */}
-          <rect x="472.5" y="13.5" width="13" height="13" strokeWidth="1.3" />
-        </g>
+          {/* 2. MIDDLE DIVIDER: Stretched to 100% full width */}
+          <rect x="0" y="36" width="1000" height="4.5" fill="#d9531e" rx="1.5" />
 
-        {/* ============================================================== */}
-        {/* 2. MIDDLE DIVIDER: Cadmium / Terracotta Orange-Red Bar        */}
-        {/* ============================================================== */}
-        <rect
-          x="6"
-          y="44"
-          width="946"
-          height="6.5"
-          rx="2"
-          fill="#c83a12"
-        />
-
-        {/* ============================================================== */}
-        {/* 3. BOTTOM LINE: "V I T A L I I   D O L Y N S K Y I"            */}
-        {/* ============================================================== */}
-
-        {/* VITALII: Precision Technical Gray matching site tone & thickness matching D */}
-        <text
-          x="6"
-          y="124"
-          textLength="394"
-          lengthAdjust="spacing"
-          fill="var(--text-secondary, #475569)"
-          stroke="var(--text-secondary, #475569)"
-          strokeWidth="1.6"
-          strokeLinejoin="round"
-          paintOrder="stroke fill"
-          style={{
-            fontFamily: "'Exo 2', 'Plus Jakarta Sans', sans-serif",
-            fontSize: '78px',
-            fontWeight: 800,
-            letterSpacing: '0.04em'
-          }}
-        >
-          VITALII
-        </text>
-
-        {/* Monogram Stencil D: Solid Cadmium / Terracotta Orange-Red (#c83a12) with precision stencil slits */}
-        <g id="stencil-letter-d">
-          {/* Vertical stem */}
-          <path
-            d="M 433 68.5 L 433 117.5"
-            stroke="#c83a12"
-            strokeWidth="11"
-            strokeLinecap="round"
-          />
-          {/* Curved bowl with top & bottom open stencil slits */}
-          <path
-            d="M 449 63.5 C 473 63.5, 481 76.5, 481 93 C 481 109.5, 473 122.5, 449 122.5"
-            stroke="#c83a12"
-            strokeWidth="11"
-            strokeLinecap="round"
-            fill="none"
-          />
-        </g>
-
-        {/* OLYNSKYI: Precision Technical Gray matching site tone & thickness matching D */}
-        <text
-          x="508"
-          y="124"
-          textLength="444"
-          lengthAdjust="spacing"
-          fill="var(--text-secondary, #475569)"
-          stroke="var(--text-secondary, #475569)"
-          strokeWidth="1.6"
-          strokeLinejoin="round"
-          paintOrder="stroke fill"
-          style={{
-            fontFamily: "'Exo 2', 'Plus Jakarta Sans', sans-serif",
-            fontSize: '78px',
-            fontWeight: 800,
-            letterSpacing: '0.04em'
-          }}
-        >
-          OLYNSKYI
-        </text>
-      </svg>
+          {/* 3. BOTTOM LINE: VITALII DOLYNSKYI (stretched to 100% full width) */}
+          <text
+            x="3"
+            y="113"
+            textLength="994"
+            lengthAdjust="spacing"
+            className="dva-svg-text dva-svg-main dva-svg-shadow"
+          >
+            VITALII <tspan className="dva-svg-accent-shadow">D</tspan>OLYNSKYI
+          </text>
+          <text
+            x="0"
+            y="110"
+            textLength="1000"
+            lengthAdjust="spacing"
+            className="dva-svg-text dva-svg-main dva-svg-base"
+          >
+            VITALII <tspan className="dva-svg-accent">D</tspan>OLYNSKYI
+          </text>
+        </svg>
+      </div>
     </div>
   );
 };

@@ -12,33 +12,33 @@ interface AboutSectionProps {
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenResume }) => {
   return (
-    <section id="about" className="py-24 md:py-32 relative border-t border-[var(--border-color)] bg-[var(--bg-primary)]">
-      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 relative z-10">
+    <section id="about" className="py-16 sm:py-24 md:py-32 relative border-t border-[var(--border-color)] bg-[var(--bg-primary)]">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-16">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16">
           <div>
-            <div className="text-xs font-bold uppercase tracking-[0.25em] text-[var(--accent-blue)] mb-2 font-gost-mono">
+            <div className="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[var(--accent-blue)] mb-2 font-gost-mono">
               05 // {currentLang === 'uk' ? 'ПРОФЕСІЙНИЙ ДОСВІД' : currentLang === 'sk' ? 'PROFESIONÁLNY PROFIL' : 'PROFESSIONAL BACKGROUND'}
             </div>
-            <h2 className="font-gost text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[var(--text-primary)]">
+            <h2 className="font-gost text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[var(--text-primary)]">
               {currentLang === 'uk' && 'Про інженера'}
               {currentLang === 'sk' && 'O inžinierovi'}
               {currentLang === 'en' && 'About the Engineer'}
             </h2>
           </div>
-          <p className="text-sm sm:text-base text-[var(--text-secondary)] max-w-md font-medium">
+          <p className="text-sm sm:text-base text-[var(--text-secondary)] max-w-md font-medium leading-relaxed">
             {currentLang === 'uk' && 'Практичний машинобудівний інженер з 27+ роками досвіду проектування.'}
             {currentLang === 'sk' && 'Praktický strojný inžinier s viac ako 27 rokmi skúseností s konštruovaním.'}
             {currentLang === 'en' && 'Practical mechanical design engineer with over 27 years of industrial track record.'}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-12 sm:mb-16">
           
-          {/* Left Column: Portrait & Quick Stats */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
-            <div className="relative bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-3 backdrop-blur-xl shadow-xl">
+          {/* Left Column: Portrait */}
+          <div className="lg:col-span-5 flex flex-col gap-5 sm:gap-6 max-w-md mx-auto lg:max-w-none w-full">
+            <div className="relative bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-2.5 sm:p-3 backdrop-blur-xl shadow-xl">
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[var(--bg-surface-2)]">
                 <picture className="w-full h-full block">
                   <source srcSet={portraitWebp} type="image/webp" />
@@ -47,68 +47,69 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
                     alt={currentLang === 'uk' ? 'Віталій Долінський' : 'Dolynskyi Vitalii'}
                     className="w-full h-full object-cover object-top"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                   />
                 </picture>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-4 left-4 right-4 bg-black/75 backdrop-blur-md p-4 rounded-xl border border-white/20">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 bg-black/75 backdrop-blur-md p-3.5 sm:p-4 rounded-xl border border-white/20">
                   <div className="text-xs text-[var(--accent-blue)] font-mono font-bold uppercase tracking-wider">
                     {currentLang === 'uk' ? 'Локація & Охоплення' : currentLang === 'sk' ? 'Lokalita & Pôsobenie' : 'Location & Mobility'}
                   </div>
-                  <div className="text-sm text-white font-semibold flex items-center gap-1.5 mt-1">
-                    <MapPin className="w-4 h-4 text-emerald-400" />
+                  <div className="text-xs sm:text-sm text-white font-semibold flex items-center gap-1.5 mt-1">
+                    <MapPin className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                     <span>Čadca, Žilinský kraj, Slovakia / EU</span>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* 3 Core Engineering Pillars */}
-            <div className="space-y-3">
+          {/* Right Column: Bio, Statement, 3 Pillars & Action Buttons */}
+          <div className="lg:col-span-7 flex flex-col justify-between h-full">
+            
+            {/* Engineer's Creed / Quote Card */}
+            <div className="p-5 sm:p-8 rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-xl shadow-sm mb-6 sm:mb-8">
+              <p className="font-gost text-base sm:text-xl font-bold text-[var(--text-primary)] leading-relaxed italic">
+                {ABOUT_DATA.quote[currentLang]}
+              </p>
+            </div>
+
+            {/* Narrative Paragraphs */}
+            <div className="space-y-3.5 sm:space-y-4 mb-6 sm:mb-8">
+              {ABOUT_DATA.paragraphs.map((p, idx) => (
+                <p key={idx} className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed font-normal">
+                  {p[currentLang]}
+                </p>
+              ))}
+            </div>
+
+            {/* 3 Core Engineering Pillars (moved from left under photo to right as requested) */}
+            <div className="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8">
               {ABOUT_DATA.pillars.map((pillar, pIdx) => (
                 <div
                   key={pIdx}
-                  className="p-4 rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] flex items-start gap-3 backdrop-blur-xl"
+                  className="p-3.5 sm:p-4 rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] flex items-start gap-3 backdrop-blur-xl hover:border-[var(--accent-blue)] transition-colors shadow-sm"
                 >
                   <div className="w-8 h-8 rounded-xl bg-[var(--badge-bg)] border border-[var(--border-color)] flex items-center justify-center text-[var(--accent-blue)] flex-shrink-0 mt-0.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                   </div>
                   <div>
-                    <h4 className="font-gost text-sm font-bold text-[var(--text-primary)]">
+                    <h4 className="font-gost text-sm sm:text-base font-bold text-[var(--text-primary)] leading-snug">
                       {pillar.title[currentLang]}
                     </h4>
-                    <p className="text-xs text-[var(--text-secondary)] mt-0.5 font-normal">
+                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] mt-0.5 font-normal leading-relaxed">
                       {pillar.desc[currentLang]}
                     </p>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Right Column: Bio, Statement & Qualifications */}
-          <div className="lg:col-span-7 flex flex-col justify-between h-full">
-            
-            {/* Engineer's Creed / Quote Card */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-xl shadow-sm mb-8">
-              <p className="font-gost text-lg sm:text-xl font-bold text-[var(--text-primary)] leading-relaxed italic">
-                {ABOUT_DATA.quote[currentLang]}
-              </p>
-            </div>
-
-            {/* Narrative Paragraphs */}
-            <div className="space-y-4 mb-8">
-              {ABOUT_DATA.paragraphs.map((p, idx) => (
-                <p key={idx} className="text-base text-[var(--text-secondary)] leading-relaxed font-normal">
-                  {p[currentLang]}
-                </p>
-              ))}
-            </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap gap-4 pt-6 border-t border-[var(--border-color)]">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-[var(--border-color)]">
               <a
                 href="#contact"
-                className="group cursor-pointer bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white px-7 py-3.5 rounded-full font-extrabold text-sm uppercase tracking-wider transition-all hover:scale-105 inline-flex items-center gap-2 shadow-lg"
+                className="group cursor-pointer bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white px-7 py-3.5 sm:py-4 rounded-full font-extrabold text-sm sm:text-base uppercase tracking-wider transition-all hover:scale-105 inline-flex items-center justify-center gap-2 shadow-lg min-h-[46px]"
               >
                 <Send className="w-4 h-4" />
                 <span>{UI_TRANSLATIONS.btnConsultation[currentLang]}</span>
@@ -116,7 +117,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
 
               <button
                 onClick={onOpenResume}
-                className="group cursor-pointer bg-[var(--badge-bg)] hover:bg-[var(--bg-surface-3)] border border-[var(--border-color)] px-6 py-3.5 rounded-full font-bold text-sm uppercase tracking-wider transition-all text-[var(--text-primary)] inline-flex items-center gap-2 shadow-sm"
+                className="group cursor-pointer bg-[var(--badge-bg)] hover:bg-[var(--bg-surface-3)] border border-[var(--border-color)] px-6 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base uppercase tracking-wider transition-all text-[var(--text-primary)] inline-flex items-center justify-center gap-2 shadow-sm min-h-[46px]"
               >
                 <FileText className="w-4 h-4 text-[var(--accent-blue)]" />
                 <span>{UI_TRANSLATIONS.btnDownloadCV[currentLang]}</span>

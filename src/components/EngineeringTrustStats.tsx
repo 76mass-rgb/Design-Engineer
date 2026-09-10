@@ -29,9 +29,9 @@ export const EngineeringTrustStats: React.FC<EngineeringTrustStatsProps> = ({ cu
     {
       icon: Database,
       num: {
-        uk: '42 000 м³',
-        sk: '42 000 m³',
-        en: '42,000 m³'
+        uk: '50 000+ м³',
+        sk: '50 000+ m³',
+        en: '50,000+ m³'
       },
       label: {
         uk: 'Максимальний парк РВС',
@@ -47,9 +47,9 @@ export const EngineeringTrustStats: React.FC<EngineeringTrustStatsProps> = ({ cu
     {
       icon: Ruler,
       num: {
-        uk: 'DN15 – DN530',
-        sk: 'DN15 – DN530',
-        en: 'DN15 – DN530'
+        uk: 'DN15 – DN1500',
+        sk: 'DN15 – DN1500',
+        en: 'DN15 – DN1500'
       },
       label: {
         uk: 'Діаметри трубопроводів',
@@ -106,30 +106,30 @@ export const EngineeringTrustStats: React.FC<EngineeringTrustStatsProps> = ({ cu
   ];
 
   return (
-    <section className="py-16 bg-[var(--bg-primary)] border-t border-[var(--border-color)]">
-      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
+    <section className="py-12 sm:py-16 bg-[var(--bg-primary)] border-t border-[var(--border-color)]">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
         
         {/* Metric Grid Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
             return (
               <div 
                 key={idx}
-                className="p-6 bg-[var(--bg-surface)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl transition-all duration-300 ease-out hover:scale-[1.05] hover:-translate-y-2 hover:shadow-2xl hover:z-20 relative shadow-sm flex flex-col justify-between cursor-pointer"
+                className="p-5 sm:p-6 bg-[var(--bg-surface)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl transition-all duration-300 ease-out hover:scale-[1.03] sm:hover:scale-[1.05] hover:-translate-y-1.5 sm:hover:-translate-y-2 hover:shadow-2xl hover:z-20 relative shadow-sm flex flex-col justify-between cursor-pointer"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-xl bg-[var(--badge-bg)] text-[var(--accent-blue)] flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-[var(--badge-bg)] text-[var(--accent-blue)] flex items-center justify-center mb-3 sm:mb-4">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <div className="font-gost font-black text-3xl sm:text-4xl text-[var(--text-primary)] tracking-tight">
+                  <div className="font-gost font-black text-2xl sm:text-3xl lg:text-4xl text-[var(--text-primary)] tracking-tight">
                     {stat.num[currentLang]}
                   </div>
-                  <div className="font-gost font-extrabold text-base sm:text-lg text-[var(--accent-blue)] mt-1.5">
+                  <div className="font-gost font-extrabold text-base sm:text-lg text-[var(--accent-blue)] mt-1.5 leading-snug">
                     {stat.label[currentLang]}
                   </div>
                 </div>
-                <div className="text-sm sm:text-base text-[var(--text-secondary)] mt-3.5 pt-3 border-t border-[var(--border-color)] font-normal leading-relaxed">
+                <div className="text-sm sm:text-base text-[var(--text-secondary)] mt-3 sm:mt-3.5 pt-3 border-t border-[var(--border-color)] font-normal leading-relaxed">
                   {stat.desc[currentLang]}
                 </div>
               </div>
@@ -138,26 +138,26 @@ export const EngineeringTrustStats: React.FC<EngineeringTrustStatsProps> = ({ cu
         </div>
 
         {/* Enterprise Client Trust Bar */}
-        <div className="mt-10 p-6 sm:p-8 bg-[var(--bg-surface-2)] border border-[var(--border-color)] rounded-2xl shadow-sm transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5 pb-4 border-b border-[var(--border-color)]">
+        <div className="mt-8 sm:mt-10 p-5 sm:p-8 bg-[var(--bg-surface-2)] border border-[var(--border-color)] rounded-2xl shadow-sm transition-all duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.02] hover:-translate-y-1 sm:hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 mb-5 pb-4 border-b border-[var(--border-color)]">
             <div className="flex items-center gap-2.5">
-              <ShieldCheck className="w-5 h-5 text-[var(--accent-blue)]" />
-              <span className="font-gost font-black text-base sm:text-lg text-[var(--text-primary)] uppercase tracking-wider">
+              <ShieldCheck className="w-5 h-5 text-[var(--accent-blue)] flex-shrink-0" />
+              <span className="font-gost font-black text-sm sm:text-base lg:text-lg text-[var(--text-primary)] uppercase tracking-wider leading-snug">
                 {currentLang === 'uk' ? 'Підтверджений виробничий досвід на ключових підприємствах' : currentLang === 'sk' ? 'Overená inžinierska prax na významných podnikoch' : 'Proven Track Record Across Key Industrial Enterprises'}
               </span>
             </div>
-            <div className="font-gost-mono text-sm text-[var(--accent-blue)] font-extrabold">
+            <div className="font-gost-mono text-xs sm:text-sm text-[var(--accent-blue)] font-extrabold whitespace-nowrap">
               ISO 9001 · EN 13480 · ASME B31.3 · API 650
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
             {clientFacilities.map((client, idx) => (
-              <div key={idx} className="p-4 bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:z-20 relative cursor-pointer">
-                <div className="font-gost font-bold text-sm sm:text-base text-[var(--text-primary)] truncate">
+              <div key={idx} className="p-3.5 sm:p-4 bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:z-20 relative cursor-pointer">
+                <div className="font-gost font-bold text-sm sm:text-base text-[var(--text-primary)] break-words leading-snug">
                   {client.name[currentLang]}
                 </div>
-                <div className="text-xs sm:text-sm text-[var(--text-secondary)] mt-1 truncate font-medium">
+                <div className="text-xs sm:text-sm text-[var(--text-secondary)] mt-1 break-words font-medium leading-tight">
                   {client.type[currentLang]}
                 </div>
               </div>
