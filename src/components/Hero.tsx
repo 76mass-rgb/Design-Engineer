@@ -21,8 +21,9 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
           <img
             src={portraitJpg}
             alt={currentLang === 'uk' ? 'Віталій Долінський' : 'Dolynskyi Vitalii'}
+            width={600}
+            height={750}
             className="w-full h-full object-cover object-top filter grayscale-[8%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
-            referrerPolicy="no-referrer"
             loading="eager"
           />
         </picture>

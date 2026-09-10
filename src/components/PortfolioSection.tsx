@@ -1,6 +1,7 @@
 import React, { useState, lazy, Suspense } from 'react';
 import { ProjectItem, ProjectCategory, Language } from '../types';
 import { PROJECTS_DATA, UI_TRANSLATIONS } from '../data/portfolioData';
+import { getWebpUrl } from '../utils/imageOptimizer';
 import { Eye, Layers, FileText, Camera, ShieldCheck, ArrowUpRight } from 'lucide-react';
 
 const ProjectModal = lazy(() =>
@@ -239,13 +240,19 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                           : (currentLang === 'uk' ? 'Натисніть для перегляду фото' : currentLang === 'sk' ? 'Kliknite pre zobrazenie fotky' : 'Click to view photo')
                       }
                     >
-                      <img
-                        src={media.url}
-                        alt={`${project.title[currentLang]} - ${media.isDrawing ? 'DWG' : 'Photo'} ${media.index}`}
-                        className="w-full h-full object-cover filter brightness-[0.94] group-hover/item:brightness-100 group-hover/item:scale-[1.02] transition-all duration-500"
-                        loading="lazy"
-                        referrerPolicy="no-referrer"
-                      />
+                      <picture className="w-full h-full block">
+                        {getWebpUrl(media.url) && (
+                          <source srcSet={getWebpUrl(media.url)} type="image/webp" />
+                        )}
+                        <img
+                          src={media.url}
+                          alt={`${project.title[currentLang]} - ${media.isDrawing ? 'DWG' : 'Photo'} ${media.index}`}
+                          width={1200}
+                          height={900}
+                          className="w-full h-full object-cover filter brightness-[0.94] group-hover/item:brightness-100 group-hover/item:scale-[1.02] transition-all duration-500"
+                          loading="lazy"
+                        />
+                      </picture>
 
                       {/* Clean hover overlay with Eye icon */}
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/item:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">

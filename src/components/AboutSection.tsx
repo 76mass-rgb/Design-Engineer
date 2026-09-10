@@ -45,8 +45,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
                   <img
                     src={portraitJpg}
                     alt={currentLang === 'uk' ? 'Віталій Долінський' : 'Dolynskyi Vitalii'}
+                    width={600}
+                    height={750}
                     className="w-full h-full object-cover object-top"
-                    referrerPolicy="no-referrer"
                     loading="lazy"
                   />
                 </picture>

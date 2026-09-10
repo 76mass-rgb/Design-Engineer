@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ProjectItem, Language } from '../types';
 import { UI_TRANSLATIONS } from '../data/portfolioData';
+import { getWebpUrl } from '../utils/imageOptimizer';
 import { X, ChevronLeft, ChevronRight, Maximize2, CheckCircle, ZoomIn, FileText, Camera, Layers, Wrench, ShieldCheck, HelpCircle } from 'lucide-react';
 
 interface ProjectModalProps {
@@ -178,19 +179,25 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 </button>
               )}
 
-              <img
-                src={currentImage}
-                alt={project.title[currentLang]}
-                className="max-h-[64vh] lg:max-h-[76vh] w-auto max-w-full object-contain transition-transform duration-300 rounded-xl cursor-zoom-in hover:brightness-105"
-                onClick={() => {
-                  if (onOpenBlueprintZoom) {
-                    onOpenBlueprintZoom(currentImage, project.title[currentLang]);
-                  } else {
-                    setIsZoomed(!isZoomed);
-                  }
-                }}
-                referrerPolicy="no-referrer"
-              />
+              <picture className="flex items-center justify-center max-w-full max-h-full">
+                {getWebpUrl(currentImage) && (
+                  <source srcSet={getWebpUrl(currentImage)} type="image/webp" />
+                )}
+                <img
+                  src={currentImage}
+                  alt={project.title[currentLang]}
+                  width={1920}
+                  height={1080}
+                  className="max-h-[64vh] lg:max-h-[76vh] w-auto max-w-full object-contain transition-transform duration-300 rounded-xl cursor-zoom-in hover:brightness-105"
+                  onClick={() => {
+                    if (onOpenBlueprintZoom) {
+                      onOpenBlueprintZoom(currentImage, project.title[currentLang]);
+                    } else {
+                      setIsZoomed(!isZoomed);
+                    }
+                  }}
+                />
+              </picture>
 
               {/* Prev / Next navigation arrows */}
               {activeMediaList.length > 1 && (
@@ -264,12 +271,18 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                           : 'opacity-50 hover:opacity-100 border border-white/20'
                       }`}
                     >
-                      <img
-                        src={imgUrl}
-                        alt={`Thumbnail ${idx + 1}`}
-                        className="w-full h-full object-cover"
-                        referrerPolicy="no-referrer"
-                      />
+                      <picture className="w-full h-full block">
+                        {getWebpUrl(imgUrl) && (
+                          <source srcSet={getWebpUrl(imgUrl)} type="image/webp" />
+                        )}
+                        <img
+                          src={imgUrl}
+                          alt={`Thumbnail ${idx + 1}`}
+                          width={64}
+                          height={48}
+                          className="w-full h-full object-cover"
+                        />
+                      </picture>
                       <span className="absolute bottom-0.5 right-0.5 text-[8px] font-mono px-1 rounded bg-black/80 text-white font-bold">
                         {isDw ? 'DWG' : 'FOTO'}
                       </span>

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Language } from '../types';
+import { getWebpUrl } from '../utils/imageOptimizer';
 import { 
   X, 
   ZoomIn, 
@@ -271,14 +272,20 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
             }}
             className="flex items-center justify-center w-full h-full p-2"
           >
-            <img
-              ref={imageRef}
-              src={imageUrl}
-              alt={title}
-              referrerPolicy="no-referrer"
-              className="max-h-[85vh] sm:max-h-[88vh] max-w-[98vw] sm:max-w-[96vw] w-auto h-auto object-contain rounded-lg shadow-2xl border border-blue-500/20 bg-white"
-              draggable={false}
-            />
+            <picture className="flex items-center justify-center max-w-full max-h-full">
+              {getWebpUrl(imageUrl) && (
+                <source srcSet={getWebpUrl(imageUrl)} type="image/webp" />
+              )}
+              <img
+                ref={imageRef}
+                src={imageUrl}
+                alt={title}
+                width={1920}
+                height={1080}
+                className="max-h-[85vh] sm:max-h-[88vh] max-w-[98vw] sm:max-w-[96vw] w-auto h-auto object-contain rounded-lg shadow-2xl border border-blue-500/20 bg-white"
+                draggable={false}
+              />
+            </picture>
           </div>
 
           {/* Navigation Helper overlay */}
