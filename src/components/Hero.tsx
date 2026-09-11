@@ -2,8 +2,8 @@ import React from 'react';
 import { Language } from '../types';
 import { UI_TRANSLATIONS, CONTACT_DATA } from '../data/portfolioData';
 import { ArrowRight, Sparkles, Layers, Box, CheckCircle2, FileText } from 'lucide-react';
-import portraitWebp from '../assets/images/vitaliy_portrait_1787830489312.webp';
-import portraitJpg from '../assets/images/vitaliy_portrait_1787830489312.jpg';
+import portraitWebp from '../assets/images/vitaliy_engineer_petrochem_1799912340001.webp';
+import portraitJpg from '../assets/images/vitaliy_engineer_petrochem_1799912340001.jpg';
 import { BrandLogoBanner } from './BrandLogoBanner';
 
 interface HeroProps {
