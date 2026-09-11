@@ -85,7 +85,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
           <button
             onClick={onClose}
-            className="w-10 h-10 rounded-full bg-[var(--bg-surface-3)] hover:bg-[var(--accent-blue)] text-[var(--text-primary)] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm"
+            className="w-10 h-10 rounded-full bg-[var(--bg-surface-3)] hover:bg-[var(--accent-blue)] text-[var(--text-primary)] hover:text-white flex items-center justify-center transition-colors cursor-pointer shadow-sm"
             title={UI_TRANSLATIONS.closeModal?.[currentLang] || 'Close'}
           >
             <X className="w-5 h-5" />
@@ -103,7 +103,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               <div className="flex items-center gap-1.5 p-1 bg-black/60 backdrop-blur-md rounded-xl border border-white/15">
                 <button
                   onClick={() => handleTabChange('all')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-gost-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-gost-mono font-bold uppercase transition-colors flex items-center gap-1.5 cursor-pointer ${
                     mediaTab === 'all'
                       ? 'bg-[var(--accent-blue)] text-white shadow-md'
                       : 'text-white/70 hover:text-white hover:bg-white/10'
@@ -117,7 +117,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {project.drawings && project.drawings.length > 0 && (
                   <button
                     onClick={() => handleTabChange('drawings')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-gost-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-gost-mono font-bold uppercase transition-colors flex items-center gap-1.5 cursor-pointer ${
                       mediaTab === 'drawings'
                         ? 'bg-[var(--accent-blue)] text-white shadow-md'
                         : 'text-white/70 hover:text-white hover:bg-white/10'
@@ -132,7 +132,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {project.photos && project.photos.length > 0 && (
                   <button
                     onClick={() => handleTabChange('photos')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-gost-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-gost-mono font-bold uppercase transition-colors flex items-center gap-1.5 cursor-pointer ${
                       mediaTab === 'photos'
                         ? 'bg-emerald-600 text-white shadow-md'
                         : 'text-white/70 hover:text-white hover:bg-white/10'
@@ -171,7 +171,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                     e.stopPropagation();
                     onOpenBlueprintZoom(currentImage, project.title[currentLang]);
                   }}
-                  className="absolute top-3 right-3 z-20 px-3.5 py-1.5 bg-blue-600/90 hover:bg-blue-500 text-white border border-blue-400/50 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 backdrop-blur-md transition-all shadow-lg hover:scale-105 cursor-pointer"
+                  className="absolute top-3 right-3 z-20 px-3.5 py-1.5 bg-blue-600/90 hover:bg-blue-500 text-white border border-blue-400/50 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 backdrop-blur-md transition-[transform,background-color] shadow-lg hover:scale-105 cursor-pointer"
                   title={currentLang === 'uk' ? 'Змасштабувати на всю сторінку' : currentLang === 'sk' ? 'Na celú stranu' : 'Scale to Full Page'}
                 >
                   <Maximize2 className="w-3.5 h-3.5" />
@@ -204,14 +204,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <>
                   <button
                     onClick={handlePrev}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/75 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md flex items-center justify-center transition-all cursor-pointer shadow-lg z-10"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/75 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md flex items-center justify-center transition-colors cursor-pointer shadow-lg z-10"
                     aria-label="Previous image"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button
                     onClick={handleNext}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/75 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md flex items-center justify-center transition-all cursor-pointer shadow-lg z-10"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/75 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md flex items-center justify-center transition-colors cursor-pointer shadow-lg z-10"
                     aria-label="Next image"
                   >
                     <ChevronRight className="w-5 h-5" />
@@ -233,7 +233,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                       e.stopPropagation();
                       onOpenBlueprintZoom(currentImage, project.title[currentLang]);
                     }}
-                    className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white px-3.5 py-1.5 rounded-full transition-all cursor-pointer font-bold text-xs sm:text-sm shadow-md hover:scale-105"
+                    className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white px-3.5 py-1.5 rounded-full transition-[transform,background-color] cursor-pointer font-bold text-xs sm:text-sm shadow-md hover:scale-105"
                     title={currentLang === 'uk' ? 'Змасштабувати на всю сторінку' : currentLang === 'sk' ? 'Na celú stranu' : 'Full Page'}
                   >
                     <Maximize2 className="w-4 h-4" />
@@ -265,7 +265,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                     <button
                       key={idx}
                       onClick={() => setActiveImageIndex(idx)}
-                      className={`relative w-16 h-12 flex-shrink-0 rounded-lg overflow-hidden transition-all cursor-pointer ${
+                      className={`relative w-16 h-12 flex-shrink-0 rounded-lg overflow-hidden transition-[transform,opacity] cursor-pointer ${
                         activeImageIndex === idx
                           ? 'ring-2 ring-[var(--accent-blue)] scale-105'
                           : 'opacity-50 hover:opacity-100 border border-white/20'
@@ -390,7 +390,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               <a
                 href="#contact"
                 onClick={onClose}
-                className="w-full py-4 px-6 bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white font-gost font-extrabold text-base uppercase tracking-wider text-center block transition-all rounded-full hover:scale-105 shadow-xl cursor-pointer"
+                className="w-full py-4 px-6 bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white font-gost font-extrabold text-base uppercase tracking-wider text-center block transition-[transform,background-color] rounded-full hover:scale-105 shadow-xl cursor-pointer"
               >
                 {UI_TRANSLATIONS.btnConsultation?.[currentLang] || 'Contact Engineer'}
               </a>

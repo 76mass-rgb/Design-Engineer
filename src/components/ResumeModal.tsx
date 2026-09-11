@@ -310,7 +310,7 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
                 <button
                   key={lang}
                   onClick={() => setSelectedLang(lang)}
-                  className={`text-xs sm:text-sm font-black font-gost-mono px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full transition-all uppercase cursor-pointer min-h-[32px] ${
+                  className={`text-xs sm:text-sm font-black font-gost-mono px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full transition-colors uppercase cursor-pointer min-h-[32px] ${
                     selectedLang === lang
                       ? 'bg-[var(--accent-blue)] text-white shadow-sm'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -324,7 +324,7 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[var(--bg-surface-3)] hover:bg-[var(--accent-blue)] text-[var(--text-primary)] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm flex-shrink-0"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[var(--bg-surface-3)] hover:bg-[var(--accent-blue)] text-[var(--text-primary)] hover:text-white flex items-center justify-center transition-colors cursor-pointer shadow-sm flex-shrink-0"
               title="Close"
             >
               <X className="w-5 h-5" />
@@ -342,7 +342,7 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
           <div className="flex items-center gap-2 sm:gap-3 flex-wrap w-full sm:w-auto justify-end">
             <button
               onClick={handleCopyText}
-              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] text-[var(--text-primary)] border border-[var(--border-color)] transition-all cursor-pointer font-bold text-xs sm:text-sm shadow-sm min-h-[40px]"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] text-[var(--text-primary)] border border-[var(--border-color)] transition-colors cursor-pointer font-bold text-xs sm:text-sm shadow-sm min-h-[40px]"
             >
               {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
               <span>{copied ? t.copied : t.copyBtn}</span>
@@ -350,7 +350,7 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
 
             <button
               onClick={handlePrint}
-              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] text-[var(--text-primary)] border border-[var(--border-color)] transition-all cursor-pointer font-bold text-xs sm:text-sm shadow-sm min-h-[40px]"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] text-[var(--text-primary)] border border-[var(--border-color)] transition-colors cursor-pointer font-bold text-xs sm:text-sm shadow-sm min-h-[40px]"
             >
               <Printer className="w-4 h-4" />
               <span>{t.printBtn}</span>
@@ -359,7 +359,7 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
             <button
               onClick={handleDownloadPDF}
               disabled={isGenerating}
-              className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white transition-all cursor-pointer font-black text-xs sm:text-base shadow-md hover:scale-105 disabled:opacity-50 disabled:pointer-events-none min-h-[40px]"
+              className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white transition-[transform,background-color] cursor-pointer font-black text-xs sm:text-base shadow-md hover:scale-105 disabled:opacity-50 disabled:pointer-events-none min-h-[40px]"
             >
               {isGenerating ? (
                 <>

@@ -76,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-[padding,background-color,border-color,box-shadow] duration-300 ${
         scrolled
           ? 'py-2.5 sm:py-3.5 bg-[var(--bg-primary)]/92 backdrop-blur-xl border-b border-[var(--border-color)] shadow-xl'
           : 'py-3 sm:py-4.5 bg-[var(--bg-primary)]/75 backdrop-blur-md border-b border-[var(--border-color)]'
@@ -92,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             title={`${displayName} — Home`}
             aria-label={`${displayName} — Home`}
           >
-            <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-[var(--badge-bg)] border border-[var(--border-color)] group-hover:border-[var(--accent-blue)] flex items-center justify-center transition-all group-hover:scale-105 shadow-sm shrink-0">
+            <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-[var(--badge-bg)] border border-[var(--border-color)] group-hover:border-[var(--accent-blue)] flex items-center justify-center transition-transform group-hover:scale-105 shadow-sm shrink-0">
               <span className="font-gost-mono text-xs sm:text-base font-black text-[var(--accent-blue)]">DV</span>
             </div>
             <div className="hidden lg:flex flex-col text-left">
@@ -111,7 +111,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={lang}
                 onClick={() => onLanguageChange(lang)}
-                className={`h-full flex items-center justify-center text-[11px] sm:text-xs font-bold tracking-wider px-2 sm:px-2.5 rounded-full transition-all uppercase cursor-pointer ${
+                className={`h-full flex items-center justify-center text-[11px] sm:text-xs font-bold tracking-wider px-2 sm:px-2.5 rounded-full transition-colors uppercase cursor-pointer ${
                   currentLang === lang
                     ? 'bg-[var(--accent-blue)] text-white shadow-md'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -128,7 +128,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={cycleTheme}
             title={`Current theme: ${currentTheme}. Click to switch.`}
             aria-label={`Toggle theme: current is ${currentTheme}`}
-            className="h-9 sm:h-10 flex items-center justify-center px-2.5 sm:px-3 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] border border-[var(--border-color)] text-[var(--text-primary)] transition-all gap-1 sm:gap-1.5 cursor-pointer shadow-sm shrink-0"
+            className="h-9 sm:h-10 flex items-center justify-center px-2.5 sm:px-3 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] border border-[var(--border-color)] text-[var(--text-primary)] transition-colors gap-1 sm:gap-1.5 cursor-pointer shadow-sm shrink-0"
           >
             {currentTheme === 'dark' && <Moon className="w-3.5 h-3.5 text-[var(--accent-blue)]" />}
             {currentTheme === 'light' && <Sun className="w-3.5 h-3.5 text-amber-600" />}
@@ -148,7 +148,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <a
               key={item.id}
               href={item.href}
-              className={`font-gost text-xs 2xl:text-sm font-bold uppercase tracking-wider px-3 py-2 rounded-full transition-all relative whitespace-nowrap ${
+              className={`font-gost text-xs 2xl:text-sm font-bold uppercase tracking-wider px-3 py-2 rounded-full transition-colors relative whitespace-nowrap ${
                 activeSection === item.id
                   ? 'text-[var(--accent-blue)] bg-[var(--bg-surface-2)]'
                   : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)]/60'
@@ -167,7 +167,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Resume / CV PDF Trigger Button (Equal height h-9 sm:h-10) */}
           <button
             onClick={onOpenResume}
-            className="h-9 sm:h-10 flex items-center justify-center gap-1.5 px-3 sm:px-4 bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white text-xs sm:text-sm font-extrabold font-gost-mono uppercase tracking-wider rounded-full transition-all hover:scale-105 shadow-md cursor-pointer touch-target shrink-0"
+            className="h-9 sm:h-10 flex items-center justify-center gap-1.5 px-3 sm:px-4 bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white text-xs sm:text-sm font-extrabold font-gost-mono uppercase tracking-wider rounded-full transition-[transform,background-color] hover:scale-105 shadow-md cursor-pointer touch-target shrink-0"
             title="Generate & Download Engineering CV in PDF"
             aria-label={UI_TRANSLATIONS.navResume[currentLang]}
           >
@@ -179,7 +179,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Direct Call button on Desktop */}
           <a
             href={`tel:${CONTACT_DATA.phoneRaw}`}
-            className="hidden 2xl:flex items-center gap-2 px-3.5 py-2 bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] text-[var(--text-primary)] text-xs font-bold uppercase tracking-wider rounded-full transition-all hover:scale-105 shadow-sm"
+            className="hidden 2xl:flex items-center gap-2 px-3.5 py-2 bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] text-[var(--text-primary)] text-xs font-bold uppercase tracking-wider rounded-full transition-[transform,background-color,border-color] hover:scale-105 shadow-sm"
           >
             <Phone className="w-3.5 h-3.5 text-[var(--accent-blue)]" />
             <span>{CONTACT_DATA.phone}</span>
@@ -232,7 +232,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <button
                       key={lang}
                       onClick={() => onLanguageChange(lang)}
-                      className={`text-xs font-bold font-gost-mono px-3.5 py-2 rounded-lg transition-all uppercase touch-target flex items-center justify-center ${
+                      className={`text-xs font-bold font-gost-mono px-3.5 py-2 rounded-lg transition-colors uppercase touch-target flex items-center justify-center ${
                         currentLang === lang
                           ? 'bg-[var(--accent-blue)] text-white shadow-sm'
                           : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -254,7 +254,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <button
                       key={theme}
                       onClick={() => onThemeChange(theme)}
-                      className={`text-xs font-bold font-gost-mono px-3.5 py-2 rounded-lg transition-all uppercase touch-target flex items-center justify-center ${
+                      className={`text-xs font-bold font-gost-mono px-3.5 py-2 rounded-lg transition-colors uppercase touch-target flex items-center justify-center ${
                         currentTheme === theme
                           ? 'bg-[var(--accent-blue)] text-white shadow-sm'
                           : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -292,7 +292,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 onOpenResume();
               }}
-              className="w-full flex items-center justify-center gap-2.5 py-4 bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white text-base font-black font-gost-mono uppercase tracking-wider rounded-2xl shadow-lg cursor-pointer min-h-[48px] active:scale-[0.99] transition-all"
+              className="w-full flex items-center justify-center gap-2.5 py-4 bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white text-base font-black font-gost-mono uppercase tracking-wider rounded-2xl shadow-lg cursor-pointer min-h-[48px] active:scale-[0.99] transition-[transform,background-color]"
             >
               <FileText className="w-5 h-5" />
               <span>{UI_TRANSLATIONS.navResume[currentLang]} (PDF)</span>

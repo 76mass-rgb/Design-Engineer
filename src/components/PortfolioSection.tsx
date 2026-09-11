@@ -86,7 +86,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
 
             <div className="flex items-center self-start lg:self-center mt-2 lg:mt-0">
               <div 
-                className="text-xs sm:text-sm lg:text-base font-gost-mono text-emerald-100 bg-emerald-900/95 border border-emerald-400/60 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold shadow-md backdrop-blur-md flex items-center gap-2 transition-all duration-300 hover:scale-105 cursor-pointer"
+                className="text-xs sm:text-sm lg:text-base font-gost-mono text-emerald-100 bg-emerald-900/95 border border-emerald-400/60 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold shadow-md backdrop-blur-md flex items-center gap-2 transition-transform duration-300 hover:scale-105 cursor-pointer"
                 title={
                   currentLang === 'uk'
                     ? '100% спроєктованих об\'єктів успішно змонтовано та введено в постійну експлуатацію'
@@ -126,7 +126,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                 role="tab"
                 aria-selected={isSelected}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`font-gost text-xs sm:text-sm font-bold uppercase tracking-wider px-3.5 sm:px-4.5 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-all duration-200 cursor-pointer shrink-0 flex items-center gap-2 touch-target select-none ${
+                className={`font-gost text-xs sm:text-sm font-bold uppercase tracking-wider px-3.5 sm:px-4.5 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-[transform,background-color,border-color,color] duration-200 cursor-pointer shrink-0 flex items-center gap-2 touch-target select-none ${
                   isSelected
                     ? 'bg-[var(--accent-blue)] text-white shadow-md shadow-[var(--accent-blue)]/25 scale-[1.02] border border-[var(--accent-blue)] ring-2 ring-[var(--accent-blue)]/30'
                     : 'bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] text-[var(--text-primary)] hover:border-[var(--accent-blue)] border border-[var(--border-color)] active:scale-95'
@@ -171,7 +171,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
             return (
               <article
                 key={project.id}
-                className="w-full bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl sm:rounded-3xl transition-all duration-300 group flex flex-col justify-between overflow-hidden backdrop-blur-xl shadow-md hover:shadow-2xl hover:-translate-y-1"
+                className="w-full bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl sm:rounded-3xl transition-[transform,border-color] duration-300 group flex flex-col justify-between overflow-hidden backdrop-blur-xl shadow-md hover:-translate-y-1"
               >
                 {/* 1. TOP SECTION: Text info with badges aligned at top */}
                 <div 
@@ -233,7 +233,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                           handleProjectClick(project);
                         }
                       }}
-                      className="relative aspect-[4/3] sm:aspect-[16/10] w-full bg-[#0c1017] rounded-xl sm:rounded-2xl overflow-hidden border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-all cursor-pointer group/item shadow-md"
+                      className="relative aspect-[4/3] sm:aspect-[16/10] w-full bg-[#0c1017] rounded-xl sm:rounded-2xl overflow-hidden border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-colors cursor-pointer group/item shadow-md"
                       title={
                         media.isDrawing
                           ? (currentLang === 'uk' ? 'Натисніть для перегляду креслення' : currentLang === 'sk' ? 'Kliknite pre zobrazenie výkresu' : 'Click to view blueprint')
@@ -249,7 +249,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                           alt={`${project.title[currentLang]} - ${media.isDrawing ? 'DWG' : 'Photo'} ${media.index}`}
                           width={1200}
                           height={900}
-                          className="w-full h-full object-cover filter brightness-[0.94] group-hover/item:brightness-100 group-hover/item:scale-[1.02] transition-all duration-500"
+                          className="w-full h-full object-cover filter brightness-[0.94] group-hover/item:brightness-100 group-hover/item:scale-[1.02] transition-[filter,transform] duration-500"
                           loading="lazy"
                         />
                       </picture>
@@ -274,7 +274,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                 <div className="px-3 sm:px-7 pb-5 sm:pb-7">
                   <button
                     onClick={() => handleProjectClick(project)}
-                    className="w-full py-3 sm:py-3.5 px-4 rounded-xl sm:rounded-2xl bg-[var(--bg-surface-2)] hover:bg-[var(--accent-blue)] text-[var(--text-primary)] hover:text-white border border-[var(--border-color)] hover:border-[var(--accent-blue)] font-gost-mono text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm hover:shadow-md active:scale-[0.99]"
+                    className="w-full py-3 sm:py-3.5 px-4 rounded-xl sm:rounded-2xl bg-[var(--bg-surface-2)] hover:bg-[var(--accent-blue)] text-[var(--text-primary)] hover:text-white border border-[var(--border-color)] hover:border-[var(--accent-blue)] font-gost-mono text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-[transform,background-color,border-color,color] cursor-pointer shadow-sm active:scale-[0.99]"
                   >
                     <Eye className="w-4 h-4" />
                     <span>{currentLang === 'uk' ? 'Відкрити проєкт повністю' : currentLang === 'sk' ? 'Otvoriť celý projekt' : 'Open Full Project'}</span>

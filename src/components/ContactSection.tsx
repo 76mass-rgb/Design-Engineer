@@ -62,7 +62,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, onO
           {/* Right Column: Direct Contact Links & CV Download */}
           <div className="lg:col-span-6 space-y-3.5 sm:space-y-4">
             {/* Phone Link */}
-            <div className="p-4 sm:p-5 lg:p-6 bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl backdrop-blur-xl transition-all duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl hover:z-20 hover:bg-[var(--bg-surface)] relative flex items-center justify-between group shadow-sm cursor-pointer">
+            <div className="p-4 sm:p-5 lg:p-6 bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl backdrop-blur-xl transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl hover:z-20 hover:bg-[var(--bg-surface)] relative flex items-center justify-between group shadow-sm cursor-pointer">
               <a
                 href={`tel:${CONTACT_DATA.phoneRaw}`}
                 className="flex items-center gap-3.5 sm:gap-4 flex-1 min-w-0"
@@ -81,7 +81,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, onO
               </a>
               <button
                 onClick={() => copyToClipboard(CONTACT_DATA.phone, 'phone')}
-                className="w-11 h-11 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--accent-blue)] text-[var(--text-secondary)] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm flex-shrink-0"
+                className="w-11 h-11 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--accent-blue)] text-[var(--text-secondary)] hover:text-white flex items-center justify-center transition-colors cursor-pointer shadow-sm flex-shrink-0"
                 title="Copy Phone Number"
               >
                 {copiedField === 'phone' ? <Check className="w-5 h-5 text-emerald-500" /> : <Copy className="w-5 h-5" />}
@@ -89,7 +89,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, onO
             </div>
 
             {/* Email Link */}
-            <div className="p-4 sm:p-5 lg:p-6 bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl backdrop-blur-xl transition-all duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl hover:z-20 hover:bg-[var(--bg-surface)] relative flex items-center justify-between group shadow-sm cursor-pointer">
+            <div className="p-4 sm:p-5 lg:p-6 bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl backdrop-blur-xl transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl hover:z-20 hover:bg-[var(--bg-surface)] relative flex items-center justify-between group shadow-sm cursor-pointer">
               <a
                 href={`mailto:${CONTACT_DATA.email}`}
                 className="flex items-center gap-3.5 sm:gap-4 flex-1 min-w-0"
@@ -108,7 +108,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, onO
               </a>
               <button
                 onClick={() => copyToClipboard(CONTACT_DATA.email, 'email')}
-                className="w-11 h-11 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--accent-blue)] text-[var(--text-secondary)] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm flex-shrink-0"
+                className="w-11 h-11 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--accent-blue)] text-[var(--text-secondary)] hover:text-white flex items-center justify-center transition-colors cursor-pointer shadow-sm flex-shrink-0"
                 title="Copy Email Address"
               >
                 {copiedField === 'email' ? <Check className="w-5 h-5 text-emerald-500" /> : <Copy className="w-5 h-5" />}
@@ -116,7 +116,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, onO
             </div>
 
             {/* Location badge */}
-            <div className="p-4 sm:p-5 lg:p-6 bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl backdrop-blur-xl transition-all duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl hover:z-20 hover:bg-[var(--bg-surface)] relative flex items-center gap-3.5 sm:gap-4 shadow-sm cursor-pointer">
+            <div className="p-4 sm:p-5 lg:p-6 bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl backdrop-blur-xl transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl hover:z-20 hover:bg-[var(--bg-surface)] relative flex items-center gap-3.5 sm:gap-4 shadow-sm cursor-pointer">
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[var(--badge-bg)] text-[var(--accent-pink)] flex items-center justify-center flex-shrink-0 border border-[var(--border-color)] shadow-sm">
                 <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
@@ -137,7 +137,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, onO
             {onOpenResume && (
               <div 
                 onClick={onOpenResume}
-                className="p-4 sm:p-5 lg:p-6 bg-[var(--badge-bg)] border border-[var(--accent-blue)]/50 hover:border-[var(--accent-blue)] rounded-2xl backdrop-blur-xl flex items-center justify-between gap-3 sm:gap-4 cursor-pointer group transition-all duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl hover:z-20 relative shadow-md"
+                className="p-4 sm:p-5 lg:p-6 bg-[var(--badge-bg)] border border-[var(--accent-blue)]/50 hover:border-[var(--accent-blue)] rounded-2xl backdrop-blur-xl flex items-center justify-between gap-3 sm:gap-4 cursor-pointer group transition-[transform,border-color] duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl hover:z-20 relative shadow-md"
               >
                 <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[var(--accent-blue)] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-transform">

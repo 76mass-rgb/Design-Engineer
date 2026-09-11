@@ -36,7 +36,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang }) => {
         {/* Right: Scroll to top */}
         <button
           onClick={scrollToTop}
-          className="flex items-center gap-2 font-gost-mono text-xs sm:text-sm lg:text-base font-extrabold text-[var(--text-primary)] hover:text-white hover:bg-[var(--accent-blue)] transition-all px-5 sm:px-6 py-2.5 sm:py-3 bg-[var(--bg-surface-3)] border border-[var(--border-color)] rounded-full cursor-pointer shadow-sm min-h-[44px]"
+          className="flex items-center gap-2 font-gost-mono text-xs sm:text-sm lg:text-base font-extrabold text-[var(--text-primary)] hover:text-white hover:bg-[var(--accent-blue)] transition-colors px-5 sm:px-6 py-2.5 sm:py-3 bg-[var(--bg-surface-3)] border border-[var(--border-color)] rounded-full cursor-pointer shadow-sm min-h-[44px]"
         >
           <span>{currentLang === 'uk' ? 'Вгору' : currentLang === 'sk' ? 'Hore' : 'Top'}</span>
           <ArrowUp className="w-4 h-4 sm:w-4.5 sm:h-4.5" />

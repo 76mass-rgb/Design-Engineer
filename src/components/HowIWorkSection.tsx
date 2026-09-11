@@ -36,7 +36,7 @@ export const HowIWorkSection: React.FC<HowIWorkSectionProps> = ({ currentLang })
           {HOW_I_WORK_STEPS.map((step) => (
             <div
               key={step.number}
-              className="p-5 sm:p-7 lg:p-9 rounded-3xl bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] backdrop-blur-xl transition-all duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.025] hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-2xl hover:z-20 hover:bg-[var(--bg-surface)] relative shadow-sm group cursor-pointer"
+              className="p-5 sm:p-7 lg:p-9 rounded-3xl bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] backdrop-blur-xl transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.025] hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-2xl hover:z-20 hover:bg-[var(--bg-surface)] relative shadow-sm group cursor-pointer"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
                 {/* Step badge & Phase */}
@@ -83,7 +83,7 @@ export const HowIWorkSection: React.FC<HowIWorkSectionProps> = ({ currentLang })
         </div>
 
         {/* CTA banner after workflow */}
-        <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-6 sm:p-8 md:p-12 backdrop-blur-xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 transition-all duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.025] hover:-translate-y-1 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
+        <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-6 sm:p-8 md:p-12 backdrop-blur-xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 transition-[transform,border-color] duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.025] hover:-translate-y-1 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
           <div className="max-w-xl">
             <h3 className="font-gost text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black uppercase text-[var(--text-primary)] mb-2 leading-snug">
               {currentLang === 'uk' && 'Маєте інженерну задачу або проект обладнання?'}
@@ -98,7 +98,7 @@ export const HowIWorkSection: React.FC<HowIWorkSectionProps> = ({ currentLang })
           </div>
           <a
             href="#contact"
-            className="w-full md:w-auto group cursor-pointer bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white px-7 sm:px-9 py-3.5 sm:py-4.5 rounded-full font-extrabold text-sm sm:text-base lg:text-lg uppercase tracking-wider transition-all hover:scale-105 inline-flex items-center justify-center gap-2.5 shadow-xl hover:shadow-2xl flex-shrink-0 min-h-[46px]"
+            className="w-full md:w-auto group cursor-pointer bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white px-7 sm:px-9 py-3.5 sm:py-4.5 rounded-full font-extrabold text-sm sm:text-base lg:text-lg uppercase tracking-wider transition-[transform,background-color] hover:scale-105 inline-flex items-center justify-center gap-2.5 shadow-xl hover:shadow-2xl flex-shrink-0 min-h-[46px]"
           >
             <span>{UI_TRANSLATIONS.btnConsultation[currentLang]}</span>
             <Send className="w-5 h-5 transition-transform group-hover:translate-x-1" />

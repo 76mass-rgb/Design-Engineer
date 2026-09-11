@@ -116,7 +116,7 @@ export const EngineeringTrustStats: React.FC<EngineeringTrustStatsProps> = ({ cu
             return (
               <div 
                 key={idx}
-                className="p-5 sm:p-6 bg-[var(--bg-surface)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl transition-all duration-300 ease-out hover:scale-[1.03] sm:hover:scale-[1.05] hover:-translate-y-1.5 sm:hover:-translate-y-2 hover:shadow-2xl hover:z-20 relative shadow-sm flex flex-col justify-between cursor-pointer"
+                className="p-5 sm:p-6 bg-[var(--bg-surface)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl transition-[transform,border-color] duration-300 ease-out hover:scale-[1.03] sm:hover:scale-[1.05] hover:-translate-y-1.5 sm:hover:-translate-y-2 hover:shadow-2xl hover:z-20 relative shadow-sm flex flex-col justify-between cursor-pointer"
               >
                 <div>
                   <div className="w-10 h-10 rounded-xl bg-[var(--badge-bg)] text-[var(--accent-blue)] flex items-center justify-center mb-3 sm:mb-4">
@@ -138,7 +138,7 @@ export const EngineeringTrustStats: React.FC<EngineeringTrustStatsProps> = ({ cu
         </div>
 
         {/* Enterprise Client Trust Bar */}
-        <div className="mt-8 sm:mt-10 p-5 sm:p-8 bg-[var(--bg-surface-2)] border border-[var(--border-color)] rounded-2xl shadow-sm transition-all duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.02] hover:-translate-y-1 sm:hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
+        <div className="mt-8 sm:mt-10 p-5 sm:p-8 bg-[var(--bg-surface-2)] border border-[var(--border-color)] rounded-2xl shadow-sm transition-[transform,border-color] duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.02] hover:-translate-y-1 sm:hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 mb-5 pb-4 border-b border-[var(--border-color)]">
             <div className="flex items-center gap-2.5">
               <ShieldCheck className="w-5 h-5 text-[var(--accent-blue)] flex-shrink-0" />
@@ -153,7 +153,7 @@ export const EngineeringTrustStats: React.FC<EngineeringTrustStatsProps> = ({ cu
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
             {clientFacilities.map((client, idx) => (
-              <div key={idx} className="p-3.5 sm:p-4 bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:z-20 relative cursor-pointer">
+              <div key={idx} className="p-3.5 sm:p-4 bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-xl transition-[transform,border-color] duration-300 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:z-20 relative cursor-pointer">
                 <div className="font-gost font-bold text-sm sm:text-base text-[var(--text-primary)] break-words leading-snug">
                   {client.name[currentLang]}
                 </div>

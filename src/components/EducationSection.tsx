@@ -44,7 +44,7 @@ export const EducationSection: React.FC<EducationSectionProps> = ({ currentLang 
             {EDUCATION_DATA.map((item, index) => (
               <div
                 key={item.id}
-                className="bg-[var(--glass-bg)] hover:bg-[var(--bg-surface)] p-5 sm:p-7 lg:p-8 rounded-3xl border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-all duration-300 ease-out hover:scale-[1.02] sm:hover:scale-[1.04] backdrop-blur-xl group hover:-translate-y-1.5 relative shadow-sm hover:shadow-2xl hover:z-20 flex flex-col justify-between cursor-pointer"
+                className="bg-[var(--glass-bg)] hover:bg-[var(--bg-surface)] p-5 sm:p-7 lg:p-8 rounded-3xl border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.02] sm:hover:scale-[1.04] backdrop-blur-xl group hover:-translate-y-1.5 relative shadow-sm hover:shadow-2xl hover:z-20 flex flex-col justify-between cursor-pointer"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3.5 sm:mb-4">
@@ -86,7 +86,7 @@ export const EducationSection: React.FC<EducationSectionProps> = ({ currentLang 
             {CERTIFICATIONS_DATA.map((cert) => (
               <div
                 key={cert.id}
-                className="bg-[var(--glass-bg)] hover:bg-[var(--bg-surface)] p-5 sm:p-7 lg:p-8 rounded-3xl border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-all duration-300 ease-out hover:scale-[1.02] sm:hover:scale-[1.04] backdrop-blur-xl group hover:-translate-y-1.5 relative shadow-sm hover:shadow-2xl hover:z-20 flex flex-col justify-between cursor-pointer"
+                className="bg-[var(--glass-bg)] hover:bg-[var(--bg-surface)] p-5 sm:p-7 lg:p-8 rounded-3xl border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.02] sm:hover:scale-[1.04] backdrop-blur-xl group hover:-translate-y-1.5 relative shadow-sm hover:shadow-2xl hover:z-20 flex flex-col justify-between cursor-pointer"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3.5">
@@ -117,7 +117,7 @@ export const EducationSection: React.FC<EducationSectionProps> = ({ currentLang 
 
         {/* Dual Degree Engineering Strength & Driver License Summary */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
-          <div className="lg:col-span-2 p-5 sm:p-7 lg:p-8 bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl backdrop-blur-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 sm:gap-6 shadow-sm transition-all duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
+          <div className="lg:col-span-2 p-5 sm:p-7 lg:p-8 bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl backdrop-blur-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 sm:gap-6 shadow-sm transition-[transform,border-color] duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
             <div className="flex items-center gap-3.5 sm:gap-4">
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[var(--badge-bg)] text-[var(--accent-blue)] border border-[var(--border-color)] flex items-center justify-center flex-shrink-0 shadow-sm">
                 <Award className="w-6 h-6 sm:w-7 sm:h-7" />
@@ -140,7 +140,7 @@ export const EducationSection: React.FC<EducationSectionProps> = ({ currentLang 
             </span>
           </div>
 
-          <div className="p-5 sm:p-7 lg:p-8 bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl backdrop-blur-xl flex items-center gap-3.5 sm:gap-4 shadow-sm transition-all duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
+          <div className="p-5 sm:p-7 lg:p-8 bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl backdrop-blur-xl flex items-center gap-3.5 sm:gap-4 shadow-sm transition-[transform,border-color] duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:border-[var(--accent-blue)] cursor-pointer">
             <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[var(--badge-bg)] text-[var(--accent-blue)] border border-[var(--border-color)] flex items-center justify-center flex-shrink-0 shadow-sm">
               <Car className="w-6 h-6 sm:w-7 sm:h-7" />
             </div>

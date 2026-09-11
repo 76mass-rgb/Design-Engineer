@@ -34,7 +34,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ currentLang }) => 
           {SKILLS_DATA.map((skill) => (
             <div
               key={skill.id}
-              className="relative bg-[var(--glass-bg)] p-6 sm:p-8 lg:p-9 rounded-3xl border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-all duration-300 ease-out hover:scale-[1.02] sm:hover:scale-[1.04] hover:-translate-y-1.5 hover:shadow-2xl hover:z-30 hover:bg-[var(--bg-surface)] backdrop-blur-xl group shadow-sm flex flex-col justify-between cursor-pointer"
+              className="relative bg-[var(--glass-bg)] p-6 sm:p-8 lg:p-9 rounded-3xl border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.02] sm:hover:scale-[1.04] hover:-translate-y-1.5 hover:shadow-2xl hover:z-30 hover:bg-[var(--bg-surface)] backdrop-blur-xl group shadow-sm flex flex-col justify-between cursor-pointer"
             >
               <div>
                 {/* Icon & ID */}
@@ -77,7 +77,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ currentLang }) => 
         <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-5 sm:p-8 backdrop-blur-xl shadow-sm">
           
           {/* Engineering statement quote */}
-          <div className="mb-6 p-4 sm:p-6 rounded-2xl bg-[var(--bg-surface-2)] border border-[var(--border-color)] transition-all duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl hover:border-[var(--accent-blue)] cursor-pointer">
+          <div className="mb-6 p-4 sm:p-6 rounded-2xl bg-[var(--bg-surface-2)] border border-[var(--border-color)] transition-[transform,border-color] duration-300 ease-out hover:scale-[1.01] sm:hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl hover:border-[var(--accent-blue)] cursor-pointer">
             <p className="italic text-sm sm:text-base lg:text-lg text-[var(--text-primary)] font-bold leading-relaxed">
               {ENGINEERING_TOOLS_DATA.statement[currentLang]}
             </p>
@@ -113,7 +113,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ currentLang }) => 
               return (
                 <div
                   key={index}
-                  className="relative p-3.5 sm:p-5 bg-[var(--bg-surface-2)] border border-[var(--border-color)] rounded-2xl transition-all duration-300 ease-out hover:scale-[1.05] sm:hover:scale-[1.12] hover:-translate-y-1.5 hover:shadow-xl hover:border-[var(--accent-blue)] hover:bg-[var(--bg-surface)] hover:z-30 cursor-pointer group flex flex-col justify-between"
+                  className="relative p-3.5 sm:p-5 bg-[var(--bg-surface-2)] border border-[var(--border-color)] rounded-2xl transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.05] sm:hover:scale-[1.12] hover:-translate-y-1.5 hover:shadow-xl hover:border-[var(--accent-blue)] hover:bg-[var(--bg-surface)] hover:z-30 cursor-pointer group flex flex-col justify-between"
                 >
                   <div>
                     <div className="font-gost text-sm sm:text-base lg:text-lg font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors leading-snug">

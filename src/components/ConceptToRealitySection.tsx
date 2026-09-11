@@ -40,7 +40,7 @@ export const ConceptToRealitySection: React.FC<ConceptToRealitySectionProps> = (
           {CONCEPT_TO_REALITY_STEPS.map((step) => (
             <div
               key={step.step}
-              className="relative bg-[var(--glass-bg)] p-4 sm:p-6 lg:p-7 rounded-2xl sm:rounded-3xl border border-[var(--border-color)] hover:border-[var(--accent-blue)] backdrop-blur-xl group flex flex-col justify-between shadow-sm transition-all duration-300 ease-out hover:scale-[1.02] sm:hover:scale-[1.04] sm:hover:-translate-y-2 hover:shadow-2xl hover:bg-[var(--bg-surface)] cursor-pointer"
+              className="relative bg-[var(--glass-bg)] p-4 sm:p-6 lg:p-7 rounded-2xl sm:rounded-3xl border border-[var(--border-color)] hover:border-[var(--accent-blue)] backdrop-blur-xl group flex flex-col justify-between shadow-sm transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.02] sm:hover:scale-[1.04] sm:hover:-translate-y-2 hover:shadow-2xl hover:bg-[var(--bg-surface)] cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between mb-3 sm:mb-4">

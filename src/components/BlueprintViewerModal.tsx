@@ -185,7 +185,7 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
               <button
                 onClick={handleZoomOut}
                 disabled={scale <= 0.6}
-                className="w-9 h-9 sm:w-auto sm:h-auto p-1.5 sm:p-2.5 text-slate-300 hover:text-white hover:bg-blue-600/30 rounded-lg transition-all disabled:opacity-30 cursor-pointer flex items-center justify-center"
+                className="w-9 h-9 sm:w-auto sm:h-auto p-1.5 sm:p-2.5 text-slate-300 hover:text-white hover:bg-blue-600/30 rounded-lg transition-colors disabled:opacity-30 cursor-pointer flex items-center justify-center"
                 title="Zoom Out (-)"
               >
                 <ZoomOut className="w-4 h-4" />
@@ -196,7 +196,7 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
               <button
                 onClick={handleZoomIn}
                 disabled={scale >= 4}
-                className="w-9 h-9 sm:w-auto sm:h-auto p-1.5 sm:p-2.5 text-slate-300 hover:text-white hover:bg-blue-600/30 rounded-lg transition-all disabled:opacity-30 cursor-pointer flex items-center justify-center"
+                className="w-9 h-9 sm:w-auto sm:h-auto p-1.5 sm:p-2.5 text-slate-300 hover:text-white hover:bg-blue-600/30 rounded-lg transition-colors disabled:opacity-30 cursor-pointer flex items-center justify-center"
                 title="Zoom In (+)"
               >
                 <ZoomIn className="w-4 h-4" />
@@ -205,7 +205,7 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
 
             <button
               onClick={handleReset}
-              className="p-2 sm:p-2.5 bg-[#141d2e] hover:bg-blue-600/30 border border-blue-500/30 text-slate-300 hover:text-white rounded-xl transition-all cursor-pointer hidden sm:flex items-center gap-1.5 text-sm font-gost-mono font-bold min-h-[40px]"
+              className="p-2 sm:p-2.5 bg-[#141d2e] hover:bg-blue-600/30 border border-blue-500/30 text-slate-300 hover:text-white rounded-xl transition-colors cursor-pointer hidden sm:flex items-center gap-1.5 text-sm font-gost-mono font-bold min-h-[40px]"
               title="Reset Zoom (100%)"
             >
               <RotateCcw className="w-4 h-4" />
@@ -214,7 +214,7 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
 
             <button
               onClick={toggleFullscreen}
-              className="p-2 sm:p-2.5 bg-[#141d2e] hover:bg-blue-600/30 border border-blue-500/30 text-slate-300 hover:text-white rounded-xl transition-all cursor-pointer hidden md:block min-h-[40px]"
+              className="p-2 sm:p-2.5 bg-[#141d2e] hover:bg-blue-600/30 border border-blue-500/30 text-slate-300 hover:text-white rounded-xl transition-colors cursor-pointer hidden md:block min-h-[40px]"
               title="Toggle Fullscreen"
             >
               {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -225,7 +225,7 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               download
-              className="w-9 h-9 sm:w-auto sm:h-auto p-2 sm:p-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 text-xs sm:text-sm font-gost-mono font-black cursor-pointer"
+              className="w-9 h-9 sm:w-auto sm:h-auto p-2 sm:p-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-colors shadow-md flex items-center justify-center gap-1.5 text-xs sm:text-sm font-gost-mono font-black cursor-pointer"
               title="Open full-resolution file"
             >
               <Download className="w-4 h-4" />
@@ -234,7 +234,7 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
 
             <button
               onClick={onClose}
-              className="w-9 h-9 sm:w-auto sm:h-auto p-2 sm:p-2.5 bg-red-500/20 hover:bg-red-500/40 border border-red-500/40 text-red-300 hover:text-white rounded-xl transition-all cursor-pointer flex items-center justify-center"
+              className="w-9 h-9 sm:w-auto sm:h-auto p-2 sm:p-2.5 bg-red-500/20 hover:bg-red-500/40 border border-red-500/40 text-red-300 hover:text-white rounded-xl transition-colors cursor-pointer flex items-center justify-center"
               title="Close (Esc)"
             >
               <X className="w-5 h-5" />

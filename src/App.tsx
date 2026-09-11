@@ -66,6 +66,7 @@ export default function App() {
 
   // Handle language tag on html root
   useEffect(() => {
+    document.documentElement.lang = currentLang;
     document.documentElement.setAttribute('lang', currentLang);
   }, [currentLang]);
 

@@ -110,7 +110,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-[var(--border-color)]">
               <a
                 href="#contact"
-                className="group cursor-pointer bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white px-7 py-3.5 sm:py-4 rounded-full font-extrabold text-sm sm:text-base uppercase tracking-wider transition-all hover:scale-105 inline-flex items-center justify-center gap-2 shadow-lg min-h-[46px]"
+                className="group cursor-pointer bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white px-7 py-3.5 sm:py-4 rounded-full font-extrabold text-sm sm:text-base uppercase tracking-wider transition-[transform,background-color] hover:scale-105 inline-flex items-center justify-center gap-2 shadow-lg min-h-[46px]"
               >
                 <Send className="w-4 h-4" />
                 <span>{UI_TRANSLATIONS.btnConsultation[currentLang]}</span>
@@ -118,7 +118,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
 
               <button
                 onClick={onOpenResume}
-                className="group cursor-pointer bg-[var(--badge-bg)] hover:bg-[var(--bg-surface-3)] border border-[var(--border-color)] px-6 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base uppercase tracking-wider transition-all text-[var(--text-primary)] inline-flex items-center justify-center gap-2 shadow-sm min-h-[46px]"
+                className="group cursor-pointer bg-[var(--badge-bg)] hover:bg-[var(--bg-surface-3)] border border-[var(--border-color)] px-6 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base uppercase tracking-wider transition-colors text-[var(--text-primary)] inline-flex items-center justify-center gap-2 shadow-sm min-h-[46px]"
               >
                 <FileText className="w-4 h-4 text-[var(--accent-blue)]" />
                 <span>{UI_TRANSLATIONS.btnDownloadCV[currentLang]}</span>

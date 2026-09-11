@@ -23,7 +23,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
             alt={currentLang === 'uk' ? 'Віталій Долінський' : 'Dolynskyi Vitalii'}
             width={600}
             height={750}
-            className="w-full h-full object-cover object-top filter grayscale-[8%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+            className="w-full h-full object-cover object-top filter grayscale-[8%] group-hover:grayscale-0 transition-[filter,transform] duration-700 group-hover:scale-105"
             loading="eager"
           />
         </picture>
@@ -64,6 +64,9 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
           {/* Left Column: Mobile Flow follows: Name -> Title -> Description -> Photo -> Stats -> CTAs */}
           <div className="lg:col-span-7 flex flex-col justify-start">
             
+            {/* Real semantic H1 for search engines & accessibility */}
+            <h1 className="sr-only">Vitalii Dolynskyi — Mechanical & Industrial Design Engineer</h1>
+
             {/* 1. Engineer Brand Identity Banner */}
             <div className="w-full mb-3.5 sm:mb-5">
               <BrandLogoBanner />
@@ -90,7 +93,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
             </div>
 
             {/* 5. Operational Proof Quote */}
-            <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-2xl p-4 sm:p-6 backdrop-blur-xl mb-6 max-w-xl shadow-sm flex items-start gap-3.5 transition-all duration-300 ease-out hover:scale-[1.02] sm:hover:scale-[1.03] hover:-translate-y-1 sm:hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--accent-blue)] hover:bg-[var(--bg-surface)] cursor-pointer">
+            <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-2xl p-4 sm:p-6 backdrop-blur-xl mb-6 max-w-xl shadow-sm flex items-start gap-3.5 transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.02] sm:hover:scale-[1.03] hover:-translate-y-1 sm:hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--accent-blue)] hover:bg-[var(--bg-surface)] cursor-pointer">
               <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0 animate-pulse" />
               <p className="text-sm sm:text-base lg:text-lg text-[var(--text-primary)] leading-relaxed font-bold">
                 {UI_TRANSLATIONS.heroImpact[currentLang]}
@@ -99,7 +102,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
 
             {/* 6. Bento Statistics Grid with GOST Numbers */}
             <div className="grid grid-cols-3 gap-2.5 sm:gap-4 mb-7 sm:mb-8 max-w-xl">
-              <div className="rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] p-3 sm:p-4.5 flex flex-col justify-end shadow-sm relative group hover:border-[var(--accent-blue)] hover:bg-[var(--bg-surface)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer">
+              <div className="rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] p-3 sm:p-4.5 flex flex-col justify-end shadow-sm relative group hover:border-[var(--accent-blue)] hover:bg-[var(--bg-surface)] hover:scale-105 hover:-translate-y-1 transition-[transform,background-color,border-color] duration-300 ease-out cursor-pointer">
                 <span className="text-[11px] sm:text-xs md:text-sm uppercase tracking-wider mb-1 text-[var(--text-secondary)] font-gost-mono font-bold leading-tight line-clamp-2">
                   {UI_TRANSLATIONS.statProjects[currentLang]}
                 </span>
@@ -108,7 +111,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
                 </span>
               </div>
 
-              <div className="rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] p-3 sm:p-4.5 flex flex-col justify-end shadow-sm relative group hover:border-[var(--accent-blue)] hover:bg-[var(--bg-surface)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer">
+              <div className="rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] p-3 sm:p-4.5 flex flex-col justify-end shadow-sm relative group hover:border-[var(--accent-blue)] hover:bg-[var(--bg-surface)] hover:scale-105 hover:-translate-y-1 transition-[transform,background-color,border-color] duration-300 ease-out cursor-pointer">
                 <span className="text-[11px] sm:text-xs md:text-sm uppercase tracking-wider mb-1 text-[var(--text-secondary)] font-gost-mono font-bold leading-tight line-clamp-2">
                   {UI_TRANSLATIONS.statExp[currentLang]}
                 </span>
@@ -117,7 +120,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
                 </span>
               </div>
 
-              <div className="rounded-2xl bg-[var(--accent-blue)] p-3 sm:p-4.5 flex flex-col justify-end text-white shadow-md relative group hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer">
+              <div className="rounded-2xl bg-[var(--accent-blue)] p-3 sm:p-4.5 flex flex-col justify-end text-white shadow-md relative group hover:scale-105 hover:-translate-y-1 transition-transform duration-300 ease-out cursor-pointer">
                 <span className="text-[11px] sm:text-xs md:text-sm uppercase tracking-wider font-black opacity-95 mb-1 font-gost-mono leading-tight line-clamp-2">
                   {UI_TRANSLATIONS.statEdu[currentLang]}
                 </span>
@@ -131,7 +134,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center max-w-xl">
               <a
                 href="#portfolio"
-                className="group cursor-pointer bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white px-7 py-3.5 sm:px-8 sm:py-4 rounded-full font-extrabold text-sm sm:text-base lg:text-lg uppercase tracking-wider transition-all hover:scale-105 inline-flex items-center justify-center gap-2.5 shadow-xl hover:shadow-2xl min-h-[46px]"
+                className="group cursor-pointer bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white px-7 py-3.5 sm:px-8 sm:py-4 rounded-full font-extrabold text-sm sm:text-base lg:text-lg uppercase tracking-wider transition-[transform,background-color] hover:scale-105 inline-flex items-center justify-center gap-2.5 shadow-xl hover:shadow-2xl min-h-[46px]"
               >
                 <span>{UI_TRANSLATIONS.btnViewProjects[currentLang]}</span>
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -139,7 +142,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
 
               <button
                 onClick={onOpenResume}
-                className="group cursor-pointer bg-[var(--badge-bg)] hover:bg-[var(--bg-surface-3)] border border-[var(--border-color)] px-6 py-3.5 sm:px-7 sm:py-4 rounded-full font-bold text-sm sm:text-base lg:text-lg uppercase tracking-wider transition-all text-[var(--text-primary)] hover:text-[var(--accent-blue)] inline-flex items-center justify-center gap-2.5 backdrop-blur-sm shadow-sm min-h-[46px]"
+                className="group cursor-pointer bg-[var(--badge-bg)] hover:bg-[var(--bg-surface-3)] border border-[var(--border-color)] px-6 py-3.5 sm:px-7 sm:py-4 rounded-full font-bold text-sm sm:text-base lg:text-lg uppercase tracking-wider transition-colors text-[var(--text-primary)] hover:text-[var(--accent-blue)] inline-flex items-center justify-center gap-2.5 backdrop-blur-sm shadow-sm min-h-[46px]"
                 title="Generate & Download Engineering Resume in PDF (EN / SK / UK)"
               >
                 <FileText className="w-5 h-5 text-[var(--accent-blue)]" />
