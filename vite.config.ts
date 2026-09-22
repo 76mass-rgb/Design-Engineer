@@ -23,6 +23,7 @@ function checkNoExternalImagesPlugin(): Plugin {
 
 export default defineConfig(() => {
   return {
+    base: './',
     plugins: [react(), tailwindcss(), checkNoExternalImagesPlugin()],
     resolve: {
       alias: {
