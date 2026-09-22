@@ -57,13 +57,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, [mobileMenuOpen]);
 
   const navItems = [
-    { id: 'skills', label: currentLang === 'uk' ? 'Компетенції' : currentLang === 'sk' ? 'Zručnosti' : 'Skills', href: '#skills' },
+    { id: 'skills', label: UI_TRANSLATIONS.navSkills[currentLang], href: '#skills' },
     { id: 'process', label: UI_TRANSLATIONS.navProcess[currentLang], href: '#process' },
     { id: 'portfolio', label: UI_TRANSLATIONS.navProjects[currentLang], href: '#portfolio' },
     { id: 'workflow', label: UI_TRANSLATIONS.navHowIWork[currentLang], href: '#workflow' },
     { id: 'about', label: UI_TRANSLATIONS.navAbout[currentLang], href: '#about' },
-    { id: 'education', label: currentLang === 'uk' ? 'Освіта' : currentLang === 'sk' ? 'Vzdelanie' : 'Education', href: '#education' },
-    { id: 'contact', label: currentLang === 'uk' ? 'Контакти' : currentLang === 'sk' ? 'Kontakt' : 'Contact', href: '#contact' },
+    { id: 'education', label: UI_TRANSLATIONS.navEducation[currentLang], href: '#education' },
+    { id: 'contact', label: UI_TRANSLATIONS.navContact[currentLang], href: '#contact' },
   ];
 
   const cycleTheme = () => {
@@ -107,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Language Switcher Pill (Equal height h-9 sm:h-10) */}
           <div className="h-9 sm:h-10 flex items-center bg-[var(--bg-surface-2)] p-0.5 sm:p-1 border border-[var(--border-color)] rounded-full shadow-sm shrink-0">
-            {(['uk', 'sk', 'en'] as Language[]).map((lang) => (
+            {(['en', 'sk', 'uk'] as Language[]).map((lang) => (
               <button
                 key={lang}
                 onClick={() => onLanguageChange(lang)}
@@ -228,7 +228,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   {currentLang === 'uk' ? 'Мова:' : currentLang === 'sk' ? 'Jazyk:' : 'Lang:'}
                 </span>
                 <div className="flex bg-[var(--bg-surface-3)] p-1 rounded-xl border border-[var(--border-color)]">
-                  {(['uk', 'sk', 'en'] as Language[]).map((lang) => (
+                  {(['en', 'sk', 'uk'] as Language[]).map((lang) => (
                     <button
                       key={lang}
                       onClick={() => onLanguageChange(lang)}

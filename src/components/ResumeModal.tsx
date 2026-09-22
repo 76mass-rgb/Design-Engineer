@@ -46,6 +46,29 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
     }
   }, [defaultLang, isOpen]);
 
+  // Handle ESC key to close modal
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  // Lock background scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const cv = CV_TRANSLATIONS[selectedLang];
@@ -285,6 +308,9 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
       onClick={onClose}
     >
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={t.title}
         className="relative w-full max-w-5xl h-[100dvh] sm:h-auto sm:max-h-[94vh] bg-[var(--bg-surface)] border-0 sm:border border-[var(--border-color)] shadow-2xl rounded-none sm:rounded-3xl overflow-hidden flex flex-col z-10 my-0 sm:my-auto resume-modal-window"
         onClick={(e) => e.stopPropagation()}
       >
@@ -306,7 +332,7 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
             {/* Language Selector in Modal */}
             <div className="flex items-center bg-[var(--bg-surface-3)] p-1 rounded-full border border-[var(--border-color)]">
               <Globe className="w-4 h-4 text-[var(--text-muted)] ml-2.5 mr-1 hidden sm:inline-block" />
-              {(['uk', 'sk', 'en'] as Language[]).map((lang) => (
+              {(['en', 'sk', 'uk'] as Language[]).map((lang) => (
                 <button
                   key={lang}
                   onClick={() => setSelectedLang(lang)}

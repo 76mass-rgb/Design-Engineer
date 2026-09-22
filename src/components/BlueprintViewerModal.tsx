@@ -64,6 +64,17 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
+  // Lock background scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isOpen]);
+
   const handleZoomIn = () => {
     setScale(prev => Math.min(prev + 0.35, 4));
   };
@@ -161,6 +172,9 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-0 sm:p-2 animate-fade-in select-none h-[100dvh] w-full">
       <div 
         ref={containerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={title}
         className="relative w-full h-full max-w-[100vw] sm:max-w-[99vw] bg-[#0d131f] border-0 sm:border border-blue-500/30 rounded-none sm:rounded-2xl overflow-hidden flex flex-col shadow-2xl"
       >
         {/* Top Control Bar with CAD Stamp aesthetics */}

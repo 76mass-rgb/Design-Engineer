@@ -20,8 +20,52 @@ const BlueprintViewerModal = React.lazy(() =>
 );
 
 export default function App() {
-  const [currentLang, setCurrentLang] = useState<Language>('uk');
-  const [currentTheme, setCurrentTheme] = useState<ThemeMode>('blueprint');
+  const [currentLang, setCurrentLang] = useState<Language>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('app_lang') as Language | null;
+        if (saved === 'en' || saved === 'sk' || saved === 'uk') {
+          return saved;
+        }
+      } catch {
+        // Ignore localStorage access issues
+      }
+    }
+    return 'en';
+  });
+
+  const handleLanguageChange = (lang: Language) => {
+    setCurrentLang(lang);
+    try {
+      localStorage.setItem('app_lang', lang);
+    } catch {
+      // Ignore localStorage access issues
+    }
+  };
+
+  const [currentTheme, setCurrentTheme] = useState<ThemeMode>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('app_theme') as ThemeMode | null;
+        if (saved === 'dark' || saved === 'light' || saved === 'blueprint') {
+          return saved;
+        }
+      } catch {
+        // Ignore localStorage access issues
+      }
+    }
+    return 'blueprint';
+  });
+
+  const handleThemeChange = (theme: ThemeMode) => {
+    setCurrentTheme(theme);
+    try {
+      localStorage.setItem('app_theme', theme);
+    } catch {
+      // Ignore localStorage access issues
+    }
+  };
+
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
@@ -100,9 +144,9 @@ export default function App() {
       {/* Top Fixed Header */}
       <Navbar
         currentLang={currentLang}
-        onLanguageChange={setCurrentLang}
+        onLanguageChange={handleLanguageChange}
         currentTheme={currentTheme}
-        onThemeChange={setCurrentTheme}
+        onThemeChange={handleThemeChange}
         activeSection={activeSection}
         onOpenResume={() => setIsResumeOpen(true)}
       />

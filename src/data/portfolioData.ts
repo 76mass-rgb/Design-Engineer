@@ -31,6 +31,11 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     sk: 'Odbornosť',
     en: 'Expertise'
   },
+  navSkills: {
+    uk: 'Компетенції',
+    sk: 'Zručnosti',
+    en: 'Skills'
+  },
   navProjects: {
     uk: 'Проєкти',
     sk: 'Projekty',
@@ -182,9 +187,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'AutoCAD · SolidWorks · SketchUp'
   },
   skillsSecNum: {
-    uk: '01 —',
-    sk: '01 —',
-    en: '01 —'
+    uk: '01',
+    sk: '01',
+    en: '01'
   },
   skillsTitle: {
     uk: 'Чим я можу допомогти',
@@ -196,20 +201,35 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     sk: '6 kľúčových oblastí inžinierskej odbornosti: od vývoja nových strojov po úpravu existujúcich zariadení',
     en: '6 core engineering expertise areas: from custom machine development to modification and CAD manufacturing packages'
   },
+  processSecNum: {
+    uk: '02',
+    sk: '02',
+    en: '02'
+  },
   portfolioSecNum: {
-    uk: '02 —',
-    sk: '02 —',
-    en: '02 —'
+    uk: '03',
+    sk: '03',
+    en: '03'
   },
   portfolioTitle: {
     uk: 'Інженерні кейси (Case Studies)',
     sk: 'Inžinierske prípadové štúdie',
     en: 'Engineering Case Studies'
   },
+  workflowSecNum: {
+    uk: '04',
+    sk: '04',
+    en: '04'
+  },
+  aboutSecNum: {
+    uk: '05',
+    sk: '05',
+    en: '05'
+  },
   educationSecNum: {
-    uk: '05 —',
-    sk: '05 —',
-    en: '05 —'
+    uk: '06',
+    sk: '06',
+    en: '06'
   },
   educationTitle: {
     uk: 'Освіта та кваліфікація',
@@ -217,9 +237,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Education & Qualifications'
   },
   contactSecNum: {
-    uk: '06 —',
-    sk: '06 —',
-    en: '06 —'
+    uk: '07',
+    sk: '07',
+    en: '07'
   },
   contactTitle: {
     uk: 'Зв\'язок та технічні запити',

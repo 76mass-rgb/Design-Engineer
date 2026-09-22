@@ -1,88 +1,86 @@
 import { ProjectItem } from '../types';
 
-// Direct, verified static imports of project blueprints, CAD models, and on-site photos
-import img_5091_01_1_jpg from '../assets/images/projects/5091-01-1.jpg-1663x1120.jpg';
-import img_dsc01220_jpg from '../assets/images/projects/dsc01220.jpg-1280x960.jpg';
-import img_5289_3_layout2_1_jpg from '../assets/images/projects/5289-3-layout2-1.jpg-1663x1121.jpg';
-import img_dsc03823_jpg from '../assets/images/projects/dsc03823.jpg-1280x960.jpg';
-import img_4_1_1679x1138_jpg from '../assets/images/projects/4-1.jpg-1679x1138.jpg';
-import img_image___1447_jpg from '../assets/images/projects/image.-.jpg-1679x1447.jpg';
-import img_0_1679x682_jpg from '../assets/images/projects/0.jpg-1679x682.jpg';
-import img_image_1545x984_jpg from '../assets/images/projects/image.jpg-1545x984.jpg';
-import img_image_1679x1167_jpg from '../assets/images/projects/image.jpg-1679x1167.jpg';
-import img_dsc01837_jpg from '../assets/images/projects/dsc01837.jpg-1280x960.jpg';
-import img_image_1679x862_jpg from '../assets/images/projects/image.jpg-1679x862.jpg';
-import img_dsc01026_jpg from '../assets/images/projects/dsc01026.jpg-1280x960.jpg';
-import img_dsc01031_jpg from '../assets/images/projects/dsc01031.jpg-1280x960.jpg';
-import img_1_1280x960_jpg from '../assets/images/projects/1.jpg-1280x960.jpg';
-import img_0_1663x1176_jpg from '../assets/images/projects/0.jpg-1663x1176.jpg';
-import img_img_0111_jpg from '../assets/images/projects/img-0111.jpg-1600x1200.jpg';
-import img_2_1663x1172_jpg from '../assets/images/projects/2.jpg-1663x1172.jpg';
-import img_img_0423_jpg from '../assets/images/projects/img-0423.jpg-1600x1200.jpg';
-import img_01042008132_jpg from '../assets/images/projects/01042008132.jpg-1679x1259.jpg';
-import img_imgp1775_jpg from '../assets/images/projects/imgp1775.jpg-1679x1259.jpg';
-import img_17042008202_jpg from '../assets/images/projects/17042008202.jpg-1679x1259.jpg';
-import img_imgp1777_jpg from '../assets/images/projects/imgp1777.jpg-2304x1728.jpg';
-import img_image_1679x2444_jpg from '../assets/images/projects/image.jpg-1679x2444.jpg';
-import img_img_0495_jpg from '../assets/images/projects/img-0495.jpg-1600x1200.jpg';
-import img_img_0478_jpg from '../assets/images/projects/img-0478.jpg-1600x1200.jpg';
-import img_img_0477_jpg from '../assets/images/projects/img-0477.jpg-1600x1200.jpg';
-import img_image_1679x1221_jpg from '../assets/images/projects/image.jpg-1679x1221.jpg';
-import img_img_2763_jpg from '../assets/images/projects/img-2763.jpg-1600x1200.jpg';
-import img_img_2769_jpg from '../assets/images/projects/img-2769.jpg-1600x1200.jpg';
-import img_img_2770_jpg from '../assets/images/projects/img-2770.jpg-1600x1200.jpg';
-import img_0_2000x1415_jpeg from '../assets/images/projects/0.jpg-2000x1415.jpeg';
-import img_dsc00218_jpeg from '../assets/images/projects/dsc00218.jpg-2048x1536.jpeg';
-import img_dsc00208_jpg from '../assets/images/projects/dsc00208.jpg-2048x1536.jpg';
-import img_dsc00210_jpg from '../assets/images/projects/dsc00210.jpg-2048x1536.jpg';
-import img_60001_1__1159_jpg from '../assets/images/projects/60001-1-.jpg-1663x1159.jpg';
-import img_6000__1163_jpg from '../assets/images/projects/6000-.jpg-1663x1163.jpg';
-import img_6000_2__1167_jpg from '../assets/images/projects/6000-2-.jpg-1663x1167.jpg';
-import img_6000__1247_jpg from '../assets/images/projects/6000-.jpg-1663x1247.jpg';
-import img_6000_2__1_1167_jpg from '../assets/images/projects/6000-2-.jpg-1-1663x1167.jpg';
-import img_6000_1247_jpg from '../assets/images/projects/6000.jpg-1663x1247.jpg';
-import img_1_1256x780_jpeg from '../assets/images/projects/1.jpg-1256x780.jpeg';
-import img_1_816x1088_jpeg from '../assets/images/projects/1.jpg-816x1088.jpeg';
-import img_a1_1256x643_jpg from '../assets/images/projects/a1.jpg-1256x643.jpg';
-import img_zil21_jpg from '../assets/images/projects/zil21.jpg-1256x780.jpg';
-import img_dsc_5420_jpg from '../assets/images/projects/dsc-5420.jpg-1256x834.jpg';
-import img_dsc_5417_jpg from '../assets/images/projects/dsc-5417.jpg-1256x834.jpg';
-import img_4_1256x888_jpg from '../assets/images/projects/4.jpg-1256x888.jpg';
-import img_14_2_1498x968_jpg from '../assets/images/projects/14-2.jpg-1498x968.jpg';
-import img_12_1256x888_jpg from '../assets/images/projects/12.jpg-1256x888.jpg';
-import img_img_06062018_131411_jpg from '../assets/images/projects/img-06062018-131411.jpg-1256x707.jpg';
-import img_img_ed1d24cdc6f_jpg from '../assets/images/projects/img-ed1d24cdc6f65015052329df19a19060-v.jpg-1256x931.jpg';
-import img_img_96831060f90_jpg from '../assets/images/projects/img-96831060f90b362adf4f7adf3f4fb30a-v.jpg-1256x707.jpg';
-import img_img_06062018_131919_jpg from '../assets/images/projects/img-06062018-131919.jpg-4096x2304.jpg';
-import img_1_1256x800_jpeg from '../assets/images/projects/1.jpg-1256x800.jpeg';
-import img_14_1256x812_jpg from '../assets/images/projects/14.jpg-1256x812.jpg';
-import img_image_1256x556_jpg from '../assets/images/projects/image.jpg-1256x556.jpg';
-import img_img_06062018_131321_jpg from '../assets/images/projects/img-06062018-131321.jpg-4096x2304.jpg';
-import img_img_06062018_131306_jpg from '../assets/images/projects/img-06062018-131306.jpg-4096x2304.jpg';
-import img_img_72817680718_jpg from '../assets/images/projects/img-72817680718a87653c5decab638efde4-v.jpg-1280x949.jpg';
-import img_img_f9954329bd1_jpg from '../assets/images/projects/img-f9954329bd178c1bed9d99b27243c895-v.jpg-1280x949.jpg';
-import img_521_1_1256x887_jpg from '../assets/images/projects/521-1.jpg-1256x887.jpg';
-import img_0_1256x888_jpeg from '../assets/images/projects/0.jpg-1256x888.jpeg';
-import img_1_1256x780_jpg from '../assets/images/projects/1.jpg-1256x780.jpg';
-import img_55ew_1256x800_jpg from '../assets/images/projects/55ew.jpg-1256x800.jpg';
-import img_1__1256x884_jpg from '../assets/images/projects/1-.jpg-1256x884.jpg';
-import img_1_1_1256x886_jpg from '../assets/images/projects/1-1.jpg-1256x886.jpg';
-import img_img_20201009_163906_jpg from '../assets/images/projects/img-20201009-163906.jpg-1256x942.jpg';
-import img_img_20201015_114632_jpg from '../assets/images/projects/img-20201015-114632.jpg-1256x942.jpg';
-import img_6micro_motion_jpg from '../assets/images/projects/6micro-motion.jpg-1256x885.jpg';
-import img_1micro_motion_jpg from '../assets/images/projects/1micro-motion.jpg-1256x885.jpg';
-import img_img_20200818_111008_jpg from '../assets/images/projects/img-20200818-111008.jpg-1256x942.jpg';
-import img_img_20200812_161902_jpg from '../assets/images/projects/img-20200812-161902.jpg-1256x942.jpg';
-import img_img_20201015_112816_jpg from '../assets/images/projects/img-20201015-112816.jpg-1256x942.jpg';
-import img_img_20200928_120612_jpg from '../assets/images/projects/img-20200928-120612.jpg-1256x942.jpg';
-import img_image_04_001_png from '../assets/images/projects/image-04-001.png-1679x944.png';
-import img_image_02_png from '../assets/images/projects/image-02.png-1679x944.png';
-import img_17_1_1256x887_jpg from '../assets/images/projects/17-1.jpg-1256x887.jpg';
-import img_17_2_1256x888_jpg from '../assets/images/projects/17-2.jpg-1256x888.jpg';
-import img_8_1256x781_jpeg from '../assets/images/projects/8.jpg-1256x781.jpeg';
-import img_3_10_1256x887_jpeg from '../assets/images/projects/3-10.jpg-1256x887.jpeg';
-import img_3_20_png from '../assets/images/projects/3-20.png-1-1256x887.png';
-import img_img_20210916_135709_jpg from '../assets/images/projects/img-20210916-135709.jpg-1256x942.jpg';
+// Direct, verified static imports of project blueprints, CAD models, and on-site photos (WebP)
+import img_5091_01_1_jpg from '../assets/images/projects/5091-01-1.jpg-1663x1120.webp';
+import img_dsc01220_jpg from '../assets/images/projects/dsc01220.jpg-1280x960.webp';
+import img_5289_3_layout2_1_jpg from '../assets/images/projects/5289-3-layout2-1.jpg-1663x1121.webp';
+import img_dsc03823_jpg from '../assets/images/projects/dsc03823.jpg-1280x960.webp';
+import img_4_1_1679x1138_jpg from '../assets/images/projects/4-1.jpg-1679x1138.webp';
+import img_image___1447_jpg from '../assets/images/projects/image.-.jpg-1679x1447.webp';
+import img_0_1679x682_jpg from '../assets/images/projects/0.jpg-1679x682.webp';
+import img_image_1545x984_jpg from '../assets/images/projects/image.jpg-1545x984.webp';
+import img_image_1679x1167_jpg from '../assets/images/projects/image.jpg-1679x1167.webp';
+import img_dsc01837_jpg from '../assets/images/projects/dsc01837.jpg-1280x960.webp';
+import img_image_1679x862_jpg from '../assets/images/projects/image.jpg-1679x862.webp';
+import img_dsc01026_jpg from '../assets/images/projects/dsc01026.jpg-1280x960.webp';
+import img_dsc01031_jpg from '../assets/images/projects/dsc01031.jpg-1280x960.webp';
+import img_1_1280x960_jpg from '../assets/images/projects/1.jpg-1280x960.webp';
+import img_0_1663x1176_jpg from '../assets/images/projects/0.jpg-1663x1176.webp';
+import img_img_0111_jpg from '../assets/images/projects/img-0111.jpg-1600x1200.webp';
+import img_2_1663x1172_jpg from '../assets/images/projects/2.jpg-1663x1172.webp';
+import img_img_0423_jpg from '../assets/images/projects/img-0423.jpg-1600x1200.webp';
+import img_01042008132_jpg from '../assets/images/projects/01042008132.jpg-1679x1259.webp';
+import img_imgp1775_jpg from '../assets/images/projects/imgp1775.jpg-1679x1259.webp';
+import img_17042008202_jpg from '../assets/images/projects/17042008202.jpg-1679x1259.webp';
+import img_imgp1777_jpg from '../assets/images/projects/imgp1777.jpg-2304x1728.webp';
+import img_image_1679x2444_jpg from '../assets/images/projects/image.jpg-1679x2444.webp';
+import img_img_0495_jpg from '../assets/images/projects/img-0495.jpg-1600x1200.webp';
+import img_img_0478_jpg from '../assets/images/projects/img-0478.jpg-1600x1200.webp';
+import img_img_0477_jpg from '../assets/images/projects/img-0477.jpg-1600x1200.webp';
+import img_image_1679x1221_jpg from '../assets/images/projects/image.jpg-1679x1221.webp';
+import img_img_2763_jpg from '../assets/images/projects/img-2763.jpg-1600x1200.webp';
+import img_img_2769_jpg from '../assets/images/projects/img-2769.jpg-1600x1200.webp';
+import img_img_2770_jpg from '../assets/images/projects/img-2770.jpg-1600x1200.webp';
+import img_0_2000x1415_jpeg from '../assets/images/projects/0.jpg-2000x1415.webp';
+import img_dsc00218_jpeg from '../assets/images/projects/dsc00218.jpg-2048x1536.webp';
+import img_dsc00208_jpg from '../assets/images/projects/dsc00208.jpg-2048x1536.webp';
+import img_dsc00210_jpg from '../assets/images/projects/dsc00210.jpg-2048x1536.webp';
+import img_60001_1__1159_jpg from '../assets/images/projects/60001-1-.jpg-1663x1159.webp';
+import img_6000__1163_jpg from '../assets/images/projects/6000-.jpg-1663x1163.webp';
+import img_6000_2__1167_jpg from '../assets/images/projects/6000-2-.jpg-1663x1167.webp';
+import img_6000__1247_jpg from '../assets/images/projects/6000-.jpg-1663x1247.webp';
+import img_6000_1247_jpg from '../assets/images/projects/6000.jpg-1663x1247.webp';
+import img_1_1256x780_jpeg from '../assets/images/projects/1.jpg-1256x780.jpeg.webp';
+import img_1_816x1088_jpeg from '../assets/images/projects/1.jpg-816x1088.webp';
+import img_a1_1256x643_jpg from '../assets/images/projects/a1.jpg-1256x643.webp';
+import img_zil21_jpg from '../assets/images/projects/zil21.jpg-1256x780.webp';
+import img_dsc_5420_jpg from '../assets/images/projects/dsc-5420.jpg-1256x834.webp';
+import img_dsc_5417_jpg from '../assets/images/projects/dsc-5417.jpg-1256x834.webp';
+import img_4_1256x888_jpg from '../assets/images/projects/4.jpg-1256x888.webp';
+import img_14_2_1498x968_jpg from '../assets/images/projects/14-2.jpg-1498x968.webp';
+import img_12_1256x888_jpg from '../assets/images/projects/12.jpg-1256x888.webp';
+import img_img_06062018_131411_jpg from '../assets/images/projects/img-06062018-131411.jpg-1256x707.webp';
+import img_img_ed1d24cdc6f_jpg from '../assets/images/projects/img-ed1d24cdc6f65015052329df19a19060-v.jpg-1256x931.webp';
+import img_img_96831060f90_jpg from '../assets/images/projects/img-96831060f90b362adf4f7adf3f4fb30a-v.jpg-1256x707.webp';
+import img_img_06062018_131919_jpg from '../assets/images/projects/img-06062018-131919.jpg-4096x2304.webp';
+import img_1_1256x800_jpeg from '../assets/images/projects/1.jpg-1256x800.webp';
+import img_14_1256x812_jpg from '../assets/images/projects/14.jpg-1256x812.webp';
+import img_image_1256x556_jpg from '../assets/images/projects/image.jpg-1256x556.webp';
+import img_img_06062018_131321_jpg from '../assets/images/projects/img-06062018-131321.jpg-4096x2304.webp';
+import img_img_06062018_131306_jpg from '../assets/images/projects/img-06062018-131306.jpg-4096x2304.webp';
+import img_img_72817680718_jpg from '../assets/images/projects/img-72817680718a87653c5decab638efde4-v.jpg-1280x949.webp';
+import img_img_f9954329bd1_jpg from '../assets/images/projects/img-f9954329bd178c1bed9d99b27243c895-v.jpg-1280x949.webp';
+import img_521_1_1256x887_jpg from '../assets/images/projects/521-1.jpg-1256x887.webp';
+import img_0_1256x888_jpeg from '../assets/images/projects/0.jpg-1256x888.webp';
+import img_55ew_1256x800_jpg from '../assets/images/projects/55ew.jpg-1256x800.webp';
+import img_1__1256x884_jpg from '../assets/images/projects/1-.jpg-1256x884.webp';
+import img_1_1_1256x886_jpg from '../assets/images/projects/1-1.jpg-1256x886.webp';
+import img_img_20201009_163906_jpg from '../assets/images/projects/img-20201009-163906.jpg-1256x942.webp';
+import img_img_20201015_114632_jpg from '../assets/images/projects/img-20201015-114632.jpg-1256x942.webp';
+import img_6micro_motion_jpg from '../assets/images/projects/6micro-motion.jpg-1256x885.webp';
+import img_1micro_motion_jpg from '../assets/images/projects/1micro-motion.jpg-1256x885.webp';
+import img_img_20200818_111008_jpg from '../assets/images/projects/img-20200818-111008.jpg-1256x942.webp';
+import img_img_20200812_161902_jpg from '../assets/images/projects/img-20200812-161902.jpg-1256x942.webp';
+import img_img_20201015_112816_jpg from '../assets/images/projects/img-20201015-112816.jpg-1256x942.webp';
+import img_img_20200928_120612_jpg from '../assets/images/projects/img-20200928-120612.jpg-1256x942.webp';
+import img_image_04_001_png from '../assets/images/projects/image-04-001.png-1679x944.webp';
+import img_image_02_png from '../assets/images/projects/image-02.png-1679x944.webp';
+import img_17_1_1256x887_jpg from '../assets/images/projects/17-1.jpg-1256x887.webp';
+import img_17_2_1256x888_jpg from '../assets/images/projects/17-2.jpg-1256x888.webp';
+import img_8_1256x781_jpeg from '../assets/images/projects/8.jpg-1256x781.webp';
+import img_3_10_1256x887_jpeg from '../assets/images/projects/3-10.jpg-1256x887.webp';
+import img_3_20_png from '../assets/images/projects/3-20.png-1-1256x887.webp';
+import img_img_20210916_135709_jpg from '../assets/images/projects/img-20210916-135709.jpg-1256x942.webp';
 
 export const PROJECTS_DATA: ProjectItem[] = [
   // 01. LUKOIL Replacement of the feed pump, 2003
@@ -407,7 +405,6 @@ export const PROJECTS_DATA: ProjectItem[] = [
       img_6000__1163_jpg,
       img_6000_2__1167_jpg,
       img_6000__1247_jpg,
-      img_6000_2__1_1167_jpg,
       img_6000_1247_jpg
     ],
     photos: [],
@@ -416,7 +413,6 @@ export const PROJECTS_DATA: ProjectItem[] = [
       img_6000__1163_jpg,
       img_6000_2__1167_jpg,
       img_6000__1247_jpg,
-      img_6000_2__1_1167_jpg,
       img_6000_1247_jpg
     ]
   },
@@ -581,14 +577,12 @@ export const PROJECTS_DATA: ProjectItem[] = [
     drawings: [
       img_521_1_1256x887_jpg,
       img_0_1256x888_jpeg,
-      img_1_1256x780_jpg,
       img_55ew_1256x800_jpg
     ],
     photos: [],
     images: [
       img_521_1_1256x887_jpg,
       img_0_1256x888_jpeg,
-      img_1_1256x780_jpg,
       img_55ew_1256x800_jpg
     ]
   },

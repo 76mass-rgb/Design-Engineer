@@ -70,7 +70,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
           <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 sm:gap-6 mb-4 sm:mb-5">
             <div>
               <div className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[var(--accent-blue)] mb-2 font-gost-mono">
-                {currentLang === 'uk' ? 'ВИБРАНІ ПРОЄКТИ ТА КРЕСЛЕННЯ' : currentLang === 'sk' ? 'VYBRANÉ PROJEKTY A VÝKRESY' : 'SELECTED WORKS & DRAWINGS'}
+                03 // {currentLang === 'uk' ? 'ВИБРАНІ ПРОЄКТИ ТА КРЕСЛЕННЯ' : currentLang === 'sk' ? 'VYBRANÉ PROJEKTY A VÝKRESY' : 'SELECTED WORKS & DRAWINGS'}
               </div>
               <h2 className="font-gost text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[var(--text-primary)] mb-2">
                 {currentLang === 'uk' && 'Інженерний архів проєктів та креслень'}

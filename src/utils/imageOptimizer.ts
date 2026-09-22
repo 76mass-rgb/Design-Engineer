@@ -21,7 +21,7 @@ for (const [path, webpUrl] of Object.entries(webpGlob)) {
  */
 export function getWebpUrl(src: string): string | undefined {
   if (!src) return undefined;
-  if (src.endsWith('.webp')) return src;
+  if (src.endsWith('.webp') || src.includes('.webp')) return src;
 
   // Extract base filename without hash or extension
   // In dev: /src/assets/images/projects/dsc01220.jpg-1280x960.jpg

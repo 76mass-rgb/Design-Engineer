@@ -20,7 +20,7 @@ export const ConceptToRealitySection: React.FC<ConceptToRealitySectionProps> = (
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-8 sm:mb-12 md:mb-16">
           <div>
             <div className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[var(--accent-blue)] mb-2 font-gost-mono">
-              {currentLang === 'uk' ? 'МЕТОДОЛОГІЯ ТА СТАНДАРТИ ЯКОСТІ' : currentLang === 'sk' ? 'METODOLÓGIA A ŠTANDARDY KVALITY' : 'METHODOLOGY & QUALITY STANDARDS'}
+              02 // {currentLang === 'uk' ? 'МЕТОДОЛОГІЯ ТА СТАНДАРТИ ЯКОСТІ' : currentLang === 'sk' ? 'METODOLÓGIA A ŠTANDARDY KVALITY' : 'METHODOLOGY & QUALITY STANDARDS'}
             </div>
             <h2 className="font-gost text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[var(--text-primary)]">
               {currentLang === 'uk' && 'Від концепту та креслення до пусконалагодження'}

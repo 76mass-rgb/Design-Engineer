@@ -27,6 +27,15 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     setMediaTab('all');
   }, [project]);
 
+  // Lock background scroll when modal is open
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
+
   if (!project) return null;
 
   // Compute active media list based on tab
@@ -42,6 +51,21 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
   const activeMediaList = getActiveMediaList();
   const currentImage = activeMediaList[activeImageIndex] || activeMediaList[0] || project.coverImage;
+
+  // Handle keyboard events: Escape to close, Left/Right arrows to navigate
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'ArrowRight' && activeMediaList.length > 1) {
+        setActiveImageIndex((prev) => (prev + 1) % activeMediaList.length);
+      } else if (e.key === 'ArrowLeft' && activeMediaList.length > 1) {
+        setActiveImageIndex((prev) => (prev - 1 + activeMediaList.length) % activeMediaList.length);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose, activeMediaList.length]);
 
   // Determine if current image is a drawing or photo
   const isCurrentDrawing = project.drawings?.includes(currentImage);
@@ -69,6 +93,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       onClick={onClose}
     >
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={project.title[currentLang]}
         className="relative w-full max-w-[96vw] 2xl:max-w-[1720px] h-[94vh] max-h-[94vh] bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-2xl rounded-3xl overflow-hidden flex flex-col z-10"
         onClick={(e) => e.stopPropagation()}
       >
