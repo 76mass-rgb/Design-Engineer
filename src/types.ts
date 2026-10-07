@@ -33,9 +33,16 @@ export interface ProjectCaseStudy {
   result?: LocalizedString;
 }
 
+export interface ProjectMediaBlock {
+  id: string;
+  title: LocalizedString;
+  description?: LocalizedString;
+  images: string[];
+}
+
 export interface ProjectItem {
   id: string;
-  year: number;
+  year: number | string;
   title: LocalizedString;
   category: LocalizedString;
   categoryId: ProjectCategory;
@@ -50,6 +57,9 @@ export interface ProjectItem {
   photos: string[];
   drawings: string[];
   images: string[]; // Combined photos + drawings for backwards compatibility
+  drawingCaptions?: Record<string, LocalizedString>;
+  mediaBlocks?: ProjectMediaBlock[];
+  hideStageButtons?: boolean;
   gridSpan?: number; // 4, 5, 6, 7 for bento layout
   location?: LocalizedString;
   clientRole?: LocalizedString;

@@ -2,8 +2,7 @@ import React from 'react';
 import { Language } from '../types';
 import { UI_TRANSLATIONS, CONTACT_DATA } from '../data/portfolioData';
 import { ArrowRight, Sparkles, Layers, Box, CheckCircle2, FileText } from 'lucide-react';
-import portraitWebp from '../assets/images/vitaliy_engineer_petrochem_1799912340001.webp';
-import portraitJpg from '../assets/images/vitaliy_engineer_petrochem_1799912340001.jpg';
+import portraitHeroWebp from '../assets/images/vitaliy_engineer_petrochem_1799912340001.webp';
 import { BrandLogoBanner } from './BrandLogoBanner';
 
 interface HeroProps {
@@ -17,12 +16,12 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
     <div className={`relative bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-2.5 sm:p-3 backdrop-blur-xl shadow-2xl group overflow-hidden ${isMobile ? 'max-w-md mx-auto my-5' : ''}`}>
       <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[var(--bg-surface-2)]">
         <picture className="w-full h-full block">
-          <source srcSet={portraitWebp} type="image/webp" />
+          <source srcSet={portraitHeroWebp} type="image/webp" />
           <img
-            src={portraitJpg}
+            src={portraitHeroWebp}
             alt={currentLang === 'uk' ? 'Віталій Долінський' : 'Dolynskyi Vitalii'}
-            width={600}
-            height={750}
+            width={960}
+            height={1141}
             className="w-full h-full object-cover object-top filter grayscale-[8%] group-hover:grayscale-0 transition-[filter,transform] duration-700 group-hover:scale-105"
             loading="eager"
           />

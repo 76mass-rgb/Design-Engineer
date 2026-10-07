@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ProjectItem, Language } from '../types';
 import { UI_TRANSLATIONS } from '../data/portfolioData';
 import { getWebpUrl } from '../utils/imageOptimizer';
@@ -9,6 +9,7 @@ interface ProjectModalProps {
   currentLang: Language;
   onClose: () => void;
   onOpenBlueprintZoom?: (imageUrl: string, title: string) => void;
+  initialBlockId?: string | null;
 }
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({
@@ -16,16 +17,20 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   currentLang,
   onClose,
   onOpenBlueprintZoom,
+  initialBlockId,
 }) => {
   const [mediaTab, setMediaTab] = useState<'all' | 'drawings' | 'photos'>('all');
+  const [selectedBlockId, setSelectedBlockId] = useState<string | 'all'>(initialBlockId || 'all');
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
+  const viewerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setActiveImageIndex(0);
     setIsZoomed(false);
     setMediaTab('all');
-  }, [project]);
+    setSelectedBlockId(initialBlockId || 'all');
+  }, [project, initialBlockId]);
 
   // Lock background scroll when modal is open
   useEffect(() => {
@@ -38,19 +43,34 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
   if (!project) return null;
 
-  // Compute active media list based on tab
+  // Compute active media list based on block and tab
   const getActiveMediaList = () => {
+    let list = project.images;
+    if (selectedBlockId !== 'all' && project.mediaBlocks) {
+      const block = project.mediaBlocks.find((b) => b.id === selectedBlockId);
+      if (block && block.images.length > 0) {
+        list = block.images;
+      }
+    }
+
     if (mediaTab === 'drawings') {
-      return (project.drawings && project.drawings.length > 0) ? project.drawings : project.images;
+      const dwg = list.filter((img) => project.drawings?.includes(img));
+      return dwg.length > 0 ? dwg : list;
     }
     if (mediaTab === 'photos') {
-      return (project.photos && project.photos.length > 0) ? project.photos : project.images;
+      const pht = list.filter((img) => project.photos?.includes(img));
+      return pht.length > 0 ? pht : list;
     }
-    return project.images;
+    return list;
   };
 
   const activeMediaList = getActiveMediaList();
   const currentImage = activeMediaList[activeImageIndex] || activeMediaList[0] || project.coverImage;
+  const currentBlock = project.mediaBlocks?.find((b) => b.images.includes(currentImage));
+  const currentDrawingCaption = project.drawingCaptions?.[currentImage]?.[currentLang];
+  const fullZoomTitle = currentDrawingCaption 
+    ? `${project.title[currentLang]} — ${currentDrawingCaption}`
+    : project.title[currentLang];
 
   // Handle keyboard events: Escape to close, Left/Right arrows to navigate
   useEffect(() => {
@@ -123,8 +143,41 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         <div className="flex-1 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 gap-0">
           
           {/* Left Column: Visual / Media Viewer with Tabs */}
-          <div className="lg:col-span-7 xl:col-span-8 bg-[#060608] relative flex flex-col justify-between min-h-[420px] sm:min-h-[520px] p-4 group">
+          <div ref={viewerRef} className="lg:col-span-7 xl:col-span-8 bg-[#060608] relative flex flex-col justify-between min-h-[420px] sm:min-h-[520px] p-4 group">
             
+            {/* Media Stages Selector (if project has distinct process stages) */}
+            {project.mediaBlocks && project.mediaBlocks.length > 0 && (
+              <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-black/75 backdrop-blur-md rounded-xl border border-white/15 mb-2.5 z-10">
+                <span className="text-[10px] font-gost-mono uppercase tracking-wider text-amber-400/90 px-2 font-black">
+                  {currentLang === 'uk' ? 'СТАДІЇ ОБ\'ЄКТА:' : currentLang === 'sk' ? 'ETAPY PROJEKTU:' : 'PROCESS STAGES:'}
+                </span>
+                <button
+                  onClick={() => { setSelectedBlockId('all'); setActiveImageIndex(0); }}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-gost-mono font-bold transition-colors cursor-pointer ${
+                    selectedBlockId === 'all'
+                      ? 'bg-amber-600 text-white shadow-md'
+                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  {currentLang === 'uk' ? 'Всі стадії' : currentLang === 'sk' ? 'Všetky etapy' : 'All Stages'}
+                </button>
+                {project.mediaBlocks.map((block) => (
+                  <button
+                    key={block.id}
+                    onClick={() => { setSelectedBlockId(block.id); setActiveImageIndex(0); }}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-gost-mono font-bold transition-colors cursor-pointer flex items-center gap-1.5 ${
+                      selectedBlockId === block.id
+                        ? 'bg-amber-600 text-white shadow-md'
+                        : 'text-white/70 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    <span>{block.title[currentLang]}</span>
+                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px]">{block.images.length}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+
             {/* Media Category Toggle Tabs */}
             <div className="flex items-center justify-between gap-2 mb-3 z-10">
               <div className="flex items-center gap-1.5 p-1 bg-black/60 backdrop-blur-md rounded-xl border border-white/15">
@@ -173,13 +226,23 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               </div>
 
               {/* Badge indicating type of current image */}
-              <div className="flex items-center">
-                {isCurrentDrawing && (
+              <div className="flex items-center gap-2">
+                {currentBlock && (
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold font-gost-mono bg-amber-500/20 text-amber-300 border border-amber-400/30">
+                    {currentBlock.title[currentLang]}
+                  </span>
+                )}
+                {currentDrawingCaption ? (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold font-gost-mono bg-blue-500/25 text-blue-200 border border-blue-400/40 shadow-sm max-w-[260px] sm:max-w-md truncate" title={currentDrawingCaption}>
+                    <FileText className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                    <span className="truncate">{currentDrawingCaption}</span>
+                  </span>
+                ) : isCurrentDrawing ? (
                   <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold font-gost-mono bg-blue-500/20 text-blue-300 border border-blue-400/30">
                     <FileText className="w-3.5 h-3.5" />
                     {currentLang === 'uk' ? 'Технічне креслення' : currentLang === 'sk' ? 'Technický výkres' : 'Technical Drawing'}
                   </span>
-                )}
+                ) : null}
                 {isCurrentPhoto && (
                   <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold font-gost-mono bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
                     <Camera className="w-3.5 h-3.5" />
@@ -196,7 +259,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    onOpenBlueprintZoom(currentImage, project.title[currentLang]);
+                    onOpenBlueprintZoom(currentImage, fullZoomTitle);
                   }}
                   className="absolute top-3 right-3 z-20 px-3.5 py-1.5 bg-blue-600/90 hover:bg-blue-500 text-white border border-blue-400/50 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 backdrop-blur-md transition-[transform,background-color] shadow-lg hover:scale-105 cursor-pointer"
                   title={currentLang === 'uk' ? 'Змасштабувати на всю сторінку' : currentLang === 'sk' ? 'Na celú stranu' : 'Scale to Full Page'}
@@ -212,13 +275,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 )}
                 <img
                   src={currentImage}
-                  alt={project.title[currentLang]}
+                  alt={currentDrawingCaption || project.title[currentLang]}
                   width={1920}
                   height={1080}
                   className="max-h-[64vh] lg:max-h-[76vh] w-auto max-w-full object-contain transition-transform duration-300 rounded-xl cursor-zoom-in hover:brightness-105"
                   onClick={() => {
                     if (onOpenBlueprintZoom) {
-                      onOpenBlueprintZoom(currentImage, project.title[currentLang]);
+                      onOpenBlueprintZoom(currentImage, fullZoomTitle);
                     } else {
                       setIsZoomed(!isZoomed);
                     }
@@ -249,16 +312,23 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
             {/* Bottom Controls Bar */}
             <div className="mt-3 flex items-center justify-between text-sm font-mono text-white/90 bg-black/75 px-4 py-2 backdrop-blur-md rounded-full border border-white/20 shadow-md">
-              <span className="font-bold">
-                {activeImageIndex + 1} / {activeMediaList.length}
-              </span>
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="font-bold shrink-0">
+                  {activeImageIndex + 1} / {activeMediaList.length}
+                </span>
+                {currentDrawingCaption && (
+                  <span className="hidden sm:inline text-xs font-gost-mono text-blue-300 font-bold truncate max-w-xs md:max-w-md">
+                    • {currentDrawingCaption}
+                  </span>
+                )}
+              </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 shrink-0">
                 {onOpenBlueprintZoom && (
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      onOpenBlueprintZoom(currentImage, project.title[currentLang]);
+                      onOpenBlueprintZoom(currentImage, fullZoomTitle);
                     }}
                     className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white px-3.5 py-1.5 rounded-full transition-[transform,background-color] cursor-pointer font-bold text-xs sm:text-sm shadow-md hover:scale-105"
                     title={currentLang === 'uk' ? 'Змасштабувати на всю сторінку' : currentLang === 'sk' ? 'Na celú stranu' : 'Full Page'}
@@ -270,7 +340,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <button
                   onClick={() => {
                     if (onOpenBlueprintZoom) {
-                      onOpenBlueprintZoom(currentImage, project.title[currentLang]);
+                      onOpenBlueprintZoom(currentImage, fullZoomTitle);
                     } else {
                       setIsZoomed(!isZoomed);
                     }
@@ -288,10 +358,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               <div className="w-full flex gap-2 overflow-x-auto pt-3 px-1 scrollbar-thin">
                 {activeMediaList.map((imgUrl, idx) => {
                   const isDw = project.drawings?.includes(imgUrl);
+                  const thumbCaption = project.drawingCaptions?.[imgUrl]?.[currentLang];
                   return (
                     <button
                       key={idx}
                       onClick={() => setActiveImageIndex(idx)}
+                      title={thumbCaption || (isDw ? 'Drawing' : 'Photo')}
                       className={`relative w-16 h-12 flex-shrink-0 rounded-lg overflow-hidden transition-[transform,opacity] cursor-pointer ${
                         activeImageIndex === idx
                           ? 'ring-2 ring-[var(--accent-blue)] scale-105'
@@ -304,7 +376,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                         )}
                         <img
                           src={imgUrl}
-                          alt={`Thumbnail ${idx + 1}`}
+                          alt={thumbCaption || `Thumbnail ${idx + 1}`}
                           width={64}
                           height={48}
                           className="w-full h-full object-cover"
@@ -392,6 +464,51 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   </div>
                 )}
               </div>
+
+              {/* Media Stages Section in Right Sidebar */}
+              {project.mediaBlocks && project.mediaBlocks.length > 0 && (
+                <div className="mb-6 p-4 rounded-2xl bg-[var(--bg-surface-2)] border border-[var(--border-color)]">
+                  <div className="text-xs font-gost-mono uppercase tracking-wider text-amber-500 font-extrabold mb-3 flex items-center justify-between">
+                    <span>
+                      {currentLang === 'uk' ? 'Технологічні стадії реконструкції (3 стадії):' : currentLang === 'sk' ? 'Technologické etapy rekonštrukcie (3 etapy):' : 'Reconstruction Process Stages (3 Stages):'}
+                    </span>
+                    <span className="text-[10px] font-mono text-amber-400 font-bold px-2 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/30">
+                      {project.mediaBlocks.length} {currentLang === 'uk' ? 'стадії' : currentLang === 'sk' ? 'etapy' : 'stages'}
+                    </span>
+                  </div>
+                  <div className="space-y-2.5">
+                    {project.mediaBlocks.map((blk) => (
+                      <div
+                        key={blk.id}
+                        onClick={() => {
+                          setSelectedBlockId(blk.id);
+                          setActiveImageIndex(0);
+                          viewerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }}
+                        className={`p-3 rounded-xl border transition-all cursor-pointer ${
+                          selectedBlockId === blk.id
+                            ? 'bg-amber-500/15 border-amber-500 shadow-md ring-1 ring-amber-500/40'
+                            : 'bg-[var(--badge-bg)] border-[var(--border-color)] hover:border-amber-500/50'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <span className="font-gost text-xs sm:text-sm font-bold text-[var(--text-primary)]">
+                            {blk.title[currentLang]}
+                          </span>
+                          <span className="text-[10px] font-mono font-bold text-amber-400 px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 shrink-0">
+                            {blk.images.length} {currentLang === 'uk' ? 'файлів' : 'files'}
+                          </span>
+                        </div>
+                        {blk.description && (
+                          <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-medium">
+                            {blk.description[currentLang]}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Technical Specifications CAD Table */}
               {project.specs && (

@@ -2,8 +2,7 @@ import React from 'react';
 import { Language } from '../types';
 import { ABOUT_DATA, UI_TRANSLATIONS, CONTACT_DATA } from '../data/portfolioData';
 import { ShieldCheck, MapPin, Award, CheckCircle2, Send, FileText } from 'lucide-react';
-import portraitWebp from '../assets/images/vitaliy_engineer_petrochem_1799912340001.webp';
-import portraitJpg from '../assets/images/vitaliy_engineer_petrochem_1799912340001.jpg';
+import portraitJpg from '../assets/images/vitaliy_engineer.webp';
 
 interface AboutSectionProps {
   currentLang: Language;
@@ -41,12 +40,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
             <div className="relative bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-2.5 sm:p-3 backdrop-blur-xl shadow-xl">
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[var(--bg-surface-2)]">
                 <picture className="w-full h-full block">
-                  <source srcSet={portraitWebp} type="image/webp" />
                   <img
                     src={portraitJpg}
                     alt={currentLang === 'uk' ? 'Віталій Долінський' : 'Dolynskyi Vitalii'}
-                    width={600}
-                    height={750}
+                    width={896}
+                    height={1200}
                     className="w-full h-full object-cover object-top"
                     loading="lazy"
                   />

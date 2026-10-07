@@ -23,6 +23,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>('all');
   const [localSelectedProject, setLocalSelectedProject] = useState<ProjectItem | null>(null);
+  const [selectedStageId, setSelectedStageId] = useState<string | null>(null);
 
   // If parent passed selectedProjectId, find it
   const modalProject = selectedProjectId
@@ -44,7 +45,8 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
     ? PROJECTS_DATA
     : PROJECTS_DATA.filter((p) => p.categoryId === selectedCategory);
 
-  const handleProjectClick = (project: ProjectItem) => {
+  const handleProjectClick = (project: ProjectItem, stageId?: string | null) => {
+    setSelectedStageId(stageId || null);
     setLocalSelectedProject(project);
     if (onSelectProject) {
       onSelectProject(project.id);
@@ -53,6 +55,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
 
   const handleCloseModal = () => {
     setLocalSelectedProject(null);
+    setSelectedStageId(null);
     if (onSelectProject) {
       onSelectProject(null);
     }
@@ -148,30 +151,76 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
         </div>
 
         {/* Portfolio Bento Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 xl:gap-10 2xl:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 xl:gap-10 2xl:gap-12">
           {filteredProjects.map((project) => {
             const drawingsCount = project.drawings?.length || 0;
             const photosCount = project.photos?.length || 0;
 
+            const getGridSpanClass = (span?: number) => {
+              switch (span) {
+                case 4:
+                  return 'lg:col-span-4';
+                case 5:
+                  return 'lg:col-span-5';
+                case 6:
+                  return 'lg:col-span-6';
+                case 7:
+                  return 'lg:col-span-7';
+                case 8:
+                  return 'lg:col-span-8';
+                case 12:
+                  return 'lg:col-span-12';
+                default:
+                  return 'lg:col-span-6';
+              }
+            };
+
             // Collect all drawings and photos for expanded horizontal scrolling
-            const mediaItems: { url: string; isDrawing: boolean; index: number }[] = [];
-            (project.drawings || []).forEach((url, idx) => {
-              mediaItems.push({ url, isDrawing: true, index: idx + 1 });
-            });
-            (project.photos || []).forEach((url, idx) => {
-              mediaItems.push({ url, isDrawing: false, index: idx + 1 });
-            });
-            if (mediaItems.length === 0) {
-              const fallback = project.images && project.images.length > 0 ? project.images : [project.coverImage];
-              fallback.forEach((url, idx) => {
-                mediaItems.push({ url, isDrawing: false, index: idx + 1 });
+            const mediaItems: { url: string; isDrawing: boolean; index: number; blockName?: string; blockId?: string }[] = [];
+            if (project.mediaBlocks && project.mediaBlocks.length > 0) {
+              project.mediaBlocks.forEach((b) => {
+                b.images.forEach((url, uIdx) => {
+                  const isDwg = project.drawings?.includes(url) || false;
+                  mediaItems.push({
+                    url,
+                    isDrawing: isDwg,
+                    index: uIdx + 1,
+                    blockName: b.title[currentLang],
+                    blockId: b.id
+                  });
+                });
               });
+            } else {
+              if (project.coverImage) {
+                const isDwg = project.drawings?.includes(project.coverImage) || false;
+                mediaItems.push({
+                  url: project.coverImage,
+                  isDrawing: isDwg,
+                  index: 1,
+                });
+              }
+              (project.drawings || []).forEach((url, idx) => {
+                if (url !== project.coverImage) {
+                  mediaItems.push({ url, isDrawing: true, index: idx + 1 });
+                }
+              });
+              (project.photos || []).forEach((url, idx) => {
+                if (url !== project.coverImage) {
+                  mediaItems.push({ url, isDrawing: false, index: idx + 1 });
+                }
+              });
+              if (mediaItems.length === 0) {
+                const fallback = project.images && project.images.length > 0 ? project.images : (project.coverImage ? [project.coverImage] : []);
+                fallback.forEach((url, idx) => {
+                  mediaItems.push({ url, isDrawing: false, index: idx + 1 });
+                });
+              }
             }
 
             return (
               <article
                 key={project.id}
-                className="w-full bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl sm:rounded-3xl transition-[transform,border-color] duration-300 group flex flex-col justify-between overflow-hidden backdrop-blur-xl shadow-md hover:-translate-y-1"
+                className={`w-full col-span-12 ${getGridSpanClass(project.gridSpan)} bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl sm:rounded-3xl transition-[transform,border-color] duration-300 group flex flex-col justify-between overflow-hidden backdrop-blur-xl shadow-md hover:-translate-y-1`}
               >
                 {/* 1. TOP SECTION: Text info with badges aligned at top */}
                 <div 
@@ -185,7 +234,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                       {project.year}
                     </span>
 
-                    {/* Media Count Pills (1 DWG, 1 FOTO) in the top row */}
+                    {/* Media Count Pills in the top row */}
                     <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                       {drawingsCount > 0 && (
                         <span className="bg-blue-900/80 border border-blue-400/50 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-bold text-blue-200 flex items-center gap-1 shadow-sm">
@@ -218,56 +267,114 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                       {project.description[currentLang]}
                     </p>
                   )}
+
+                  {/* Process Stages Pills if available */}
+                  {!project.hideStageButtons && project.mediaBlocks && project.mediaBlocks.length > 0 && (
+                    <div className="flex flex-col gap-2.5 mt-3.5 pt-3 border-t border-[var(--border-color)]">
+                      {project.mediaBlocks.map((b) => (
+                        <button
+                          key={b.id}
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleProjectClick(project, b.id);
+                          }}
+                          className="group/stage text-left text-base sm:text-lg md:text-[19px] font-gost-mono font-bold leading-snug px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-amber-900/85 hover:bg-amber-800 border border-amber-400/60 hover:border-amber-300 text-amber-100 hover:text-white shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer block active:scale-[0.99]"
+                          title={
+                            currentLang === 'uk'
+                              ? `Натисніть для перегляду: ${b.title[currentLang]}`
+                              : currentLang === 'sk'
+                              ? `Kliknite pre zobrazenie: ${b.title[currentLang]}`
+                              : `Click to view: ${b.title[currentLang]}`
+                          }
+                        >
+                          {b.title[currentLang]}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* 2. VERTICAL LIST OF BLUEPRINTS AND PHOTOS (maximized width & height on mobile & tablet) */}
                 <div className="w-full flex flex-col gap-2.5 sm:gap-5 px-1.5 sm:px-4 md:px-6 pb-4 sm:pb-6">
-                  {mediaItems.map((media, idx) => (
-                    <div
-                      key={idx}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (media.isDrawing && onOpenBlueprintZoom) {
-                          onOpenBlueprintZoom(media.url, `${project.title[currentLang]} - DWG #${media.index}`);
-                        } else {
-                          handleProjectClick(project);
-                        }
-                      }}
-                      className="relative aspect-[4/3] sm:aspect-[16/10] w-full bg-[#0c1017] rounded-xl sm:rounded-2xl overflow-hidden border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-colors cursor-pointer group/item shadow-md"
-                      title={
-                        media.isDrawing
-                          ? (currentLang === 'uk' ? 'Натисніть для перегляду креслення' : currentLang === 'sk' ? 'Kliknite pre zobrazenie výkresu' : 'Click to view blueprint')
-                          : (currentLang === 'uk' ? 'Натисніть для перегляду фото' : currentLang === 'sk' ? 'Kliknite pre zobrazenie fotky' : 'Click to view photo')
-                      }
-                    >
-                      <picture className="w-full h-full block">
-                        {getWebpUrl(media.url) && (
-                          <source srcSet={getWebpUrl(media.url)} type="image/webp" />
-                        )}
-                        <img
-                          src={media.url}
-                          alt={`${project.title[currentLang]} - ${media.isDrawing ? 'DWG' : 'Photo'} ${media.index}`}
-                          width={1200}
-                          height={900}
-                          className="w-full h-full object-cover filter brightness-[0.94] group-hover/item:brightness-100 group-hover/item:scale-[1.02] transition-[filter,transform] duration-500"
-                          loading="lazy"
-                        />
-                      </picture>
+                  {mediaItems.map((media, idx) => {
+                    const isCover = media.url === project.coverImage && idx === 0;
+                    const caption = project.drawingCaptions?.[media.url]?.[currentLang];
+                    const zoomTitle = caption 
+                      ? `${project.title[currentLang]} — ${caption}` 
+                      : (media.isDrawing
+                          ? `${project.title[currentLang]} - DWG #${media.index}`
+                          : (isCover
+                              ? `${project.title[currentLang]} - Cover`
+                              : `${project.title[currentLang]} - Photo #${media.index}`
+                            )
+                        );
 
-                      {/* Clean hover overlay with Eye icon */}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/item:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                        <span className="bg-[var(--accent-blue)] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-4 py-2 rounded-full shadow-lg flex items-center gap-2 transform scale-95 group-hover/item:scale-100 transition-transform">
-                          <Eye className="w-4 h-4" />
-                          <span>
-                            {media.isDrawing 
-                              ? (currentLang === 'uk' ? 'Переглянути креслення' : currentLang === 'sk' ? 'Zobraziť výkres' : 'View Blueprint')
-                              : (currentLang === 'uk' ? 'Збільшити фото' : currentLang === 'sk' ? 'Zväčšiť foto' : 'Enlarge Photo')
-                            }
+                    return (
+                      <div
+                        key={idx}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (media.isDrawing && onOpenBlueprintZoom) {
+                            onOpenBlueprintZoom(media.url, zoomTitle);
+                          } else {
+                            handleProjectClick(project, media.blockId);
+                          }
+                        }}
+                        className="relative aspect-[4/3] sm:aspect-[16/10] w-full bg-[#0c1017] rounded-xl sm:rounded-2xl overflow-hidden border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-colors cursor-pointer group/item shadow-md"
+                        title={
+                          caption ||
+                          (isCover
+                            ? (currentLang === 'uk' ? 'Головна обкладинка проєкту' : currentLang === 'sk' ? 'Titulná fotografia' : 'Project Cover')
+                            : (media.isDrawing
+                              ? (currentLang === 'uk' ? 'Натисніть для перегляду креслення' : currentLang === 'sk' ? 'Kliknite pre zobrazenie výkresu' : 'Click to view blueprint')
+                              : (currentLang === 'uk' ? 'Натисніть для перегляду фото' : currentLang === 'sk' ? 'Kliknite pre zobrazenie fotky' : 'Click to view photo')))
+                        }
+                      >
+                        <picture className="w-full h-full block">
+                          {getWebpUrl(media.url) && (
+                            <source srcSet={getWebpUrl(media.url)} type="image/webp" />
+                          )}
+                          <img
+                            src={media.url}
+                            alt={caption 
+                              ? `${project.title[currentLang]} - ${caption}` 
+                              : `${project.title[currentLang]} - ${isCover ? 'Cover' : (media.isDrawing ? 'DWG' : 'Photo')} ${media.index}`}
+                            width={1200}
+                            height={900}
+                            className="w-full h-full object-cover filter brightness-[0.94] group-hover/item:brightness-100 group-hover/item:scale-[1.02] transition-[filter,transform] duration-500"
+                            loading="lazy"
+                          />
+                        </picture>
+
+                        {/* Drawing caption badge if available */}
+                        {caption && (
+                          <div className="absolute top-2.5 left-2.5 right-2.5 z-10 pointer-events-none">
+                            <span className="inline-flex items-center gap-1.5 bg-black/85 backdrop-blur-md text-blue-200 border border-blue-400/40 text-[11px] sm:text-xs font-gost-mono font-bold px-3 py-1.5 rounded-lg truncate max-w-full shadow-lg">
+                              <FileText className="w-3 h-3 text-blue-400 shrink-0" />
+                              <span className="truncate">{caption}</span>
+                            </span>
+                          </div>
+                        )}
+
+                        {/* Clean hover overlay with Eye icon */}
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/item:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                          <span className="bg-[var(--accent-blue)] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-4 py-2 rounded-full shadow-lg flex items-center gap-2 transform scale-95 group-hover/item:scale-100 transition-transform">
+                            <Eye className="w-4 h-4" />
+                            <span>
+                              {caption || (isCover
+                                ? (currentLang === 'uk' ? 'Переглянути обкладинку' : currentLang === 'sk' ? 'Zobraziť obálku' : 'View Cover')
+                                : (media.isDrawing 
+                                  ? (currentLang === 'uk' ? 'Переглянути креслення' : currentLang === 'sk' ? 'Zobraziť výkres' : 'View Blueprint')
+                                  : (currentLang === 'uk' ? 'Збільшити фото' : currentLang === 'sk' ? 'Zväčšiť фото' : 'Enlarge Photo')
+                                )
+                              )}
+                            </span>
                           </span>
-                        </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {/* 3. Bottom Button to Open Full Project */}
@@ -296,6 +403,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
             currentLang={currentLang}
             onClose={handleCloseModal}
             onOpenBlueprintZoom={onOpenBlueprintZoom}
+            initialBlockId={selectedStageId}
           />
         </Suspense>
       )}
