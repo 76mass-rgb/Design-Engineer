@@ -1,0 +1,436 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-size: 17px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  :root {
+    --font-gost: 'GOST Type A', 'GOST Type B', 'GOST_A', 'GOST_B', 'ISOCPEUR', 'ISOCTEUR', 'Osifont', 'Jura', 'Exo 2', 'PT Mono', monospace;
+    --font-gost-mono: 'GOST Type B', 'ISOCTEUR', 'PT Mono', 'Share Tech Mono', 'JetBrains Mono', monospace;
+    --font-mono: 'GOST Type B', 'ISOCTEUR', 'Share Tech Mono', 'JetBrains Mono', 'PT Mono', monospace;
+    --font-heading: 'Jura', 'GOST Type A', 'GOST Type B', 'ISOCPEUR', 'Exo 2', 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Plus Jakarta Sans', 'Jura', sans-serif;
+
+    /* Theme: Artistic Obsidian (Default) */
+    --bg-primary: #080808;
+    --bg-surface: #111115;
+    --bg-surface-2: #18181f;
+    --bg-surface-3: #22222d;
+    --border-color: rgba(255, 255, 255, 0.12);
+    --border-highlight: rgba(99, 102, 241, 0.45);
+    --text-primary: #ffffff;
+    --text-secondary: #e2e8f0;
+    --text-muted: #cbd5e1;
+    --accent-blue: #6366f1;
+    --accent-blue-hover: #818cf8;
+    --accent-deep: #4f46e5;
+    --accent-pink: #ec4899;
+    --accent-purple: #a855f7;
+    --accent-amber: #f59e0b;
+    --grid-line: rgba(99, 102, 241, 0.04);
+    --blueprint-grid: rgba(99, 102, 241, 0.06);
+    --badge-bg: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.08);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #f1f4f9;
+    --bg-surface: #ffffff;
+    --bg-surface-2: #e5ebf4;
+    --bg-surface-3: #d7e0ed;
+    --border-color: rgba(15, 23, 42, 0.18);
+    --border-highlight: rgba(55, 48, 163, 0.65);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --accent-blue: #3730a3;
+    --accent-blue-hover: #312e81;
+    --accent-deep: #1e1b4b;
+    --accent-pink: #be185d;
+    --accent-purple: #7e22ce;
+    --accent-amber: #b45309;
+    --grid-line: rgba(55, 48, 163, 0.06);
+    --blueprint-grid: rgba(55, 48, 163, 0.08);
+    --badge-bg: rgba(55, 48, 163, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.96);
+    --glass-border: rgba(15, 23, 42, 0.16);
+  }
+
+  html[data-theme="blueprint"] {
+    /* Vintage Aged Drafting Paper / Старий ватман */
+    --bg-primary: #efe2c8;
+    --bg-surface: #f7ecd4;
+    --bg-surface-2: #e5d5b7;
+    --bg-surface-3: #d7c3a0;
+    --border-color: rgba(92, 64, 37, 0.25);
+    --border-highlight: rgba(146, 64, 14, 0.7);
+    --text-primary: #23160a;
+    --text-secondary: #3d2a17;
+    --text-muted: #573e25;
+    --accent-blue: #8f460a;
+    --accent-blue-hover: #723405;
+    --accent-deep: #592503;
+    --accent-pink: #9a3412;
+    --accent-purple: #78350f;
+    --accent-amber: #b45309;
+    --grid-line: rgba(120, 80, 40, 0.12);
+    --blueprint-grid: rgba(120, 80, 40, 0.14);
+    --badge-bg: rgba(143, 70, 10, 0.12);
+    --glass-bg: rgba(247, 236, 212, 0.92);
+    --glass-border: rgba(92, 64, 37, 0.25);
+  }
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Artistic Text Stroke */
+.text-outline {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.45);
+  color: transparent;
+}
+
+html[data-theme="light"] .text-outline {
+  -webkit-text-stroke: 2px #090d16;
+  color: transparent;
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.25);
+}
+
+html[data-theme="blueprint"] .text-outline {
+  -webkit-text-stroke: 1.5px rgba(92, 64, 37, 0.6);
+  color: transparent;
+}
+
+html[data-theme="blueprint"] ::-webkit-scrollbar-thumb {
+  background: rgba(120, 80, 40, 0.3);
+}
+
+.text-outline-accent {
+  -webkit-text-stroke: 1.5px var(--accent-blue);
+  color: transparent;
+}
+
+/* Glass Panels */
+.glass-card {
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Ambient glow orbs */
+.glow-orb-indigo {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  border-radius: 9999px;
+}
+
+.glow-orb-pink {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, rgba(236, 72, 153, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  border-radius: 9999px;
+}
+
+@media (max-width: 768px) {
+  .glow-orb-indigo {
+    width: 240px;
+    height: 240px;
+    filter: blur(50px);
+    opacity: 0.07;
+  }
+  .glow-orb-pink {
+    width: 200px;
+    height: 200px;
+    filter: blur(50px);
+    opacity: 0.05;
+  }
+}
+
+/* Technical grid backgrounds */
+.bg-cad-grid {
+  background-image: 
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.bg-cad-dots {
+  background-image: radial-gradient(var(--grid-line) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+@media (max-width: 768px) {
+  .bg-cad-grid {
+    background-size: 32px 32px;
+  }
+  .bg-cad-dots {
+    background-size: 16px 16px;
+  }
+}
+
+/* Responsive Viewport & Safe Area Helpers */
+.h-dvh {
+  height: 100vh;
+  height: 100dvh;
+}
+
+.max-h-dvh {
+  max-height: 100vh;
+  max-height: 100dvh;
+}
+
+.safe-top {
+  padding-top: max(env(safe-area-inset-top, 0px), 0px);
+}
+
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 0px);
+}
+
+/* Fluid Typography Utilities using clamp() */
+.font-clamp-h1 {
+  font-size: clamp(2.2rem, 7vw, 4.5rem);
+  line-height: 1.1;
+}
+
+.font-clamp-h2 {
+  font-size: clamp(1.65rem, 4.5vw, 3.25rem);
+  line-height: 1.15;
+}
+
+.font-clamp-h3 {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  line-height: 1.25;
+}
+
+.font-clamp-body {
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  line-height: 1.6;
+}
+
+/* Accessible Touch Targets */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Respect User Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue);
+}
+
+/* GOST 2.304-81 Technical Drawing Fonts */
+.font-gost {
+  font-family: var(--font-gost);
+  letter-spacing: 0.03em;
+}
+
+.font-gost-italic {
+  font-family: var(--font-gost);
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+.font-gost-mono {
+  font-family: var(--font-gost-mono);
+  letter-spacing: 0.04em;
+}
+
+/* Engineering Drawing Stamp / Title Block Style */
+.cad-stamp-box {
+  font-family: var(--font-gost);
+  border: 1.5px solid var(--border-color);
+  position: relative;
+}
+
+.cad-stamp-box::before {
+  content: "ГОСТ 2.304 // ISO 3098";
+  position: absolute;
+  top: -9px;
+  right: 12px;
+  font-size: 9px;
+  font-family: var(--font-gost-mono);
+  background: var(--bg-surface);
+  padding: 0 6px;
+  color: var(--accent-blue);
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
+/* Print Optimization for Engineering CV */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  /* Hide background elements and navigation when printing */
+  header, nav, footer, main, section {
+    display: none !important;
+  }
+
+  /* When printing resume, ensure parent modal elements do not hide or clip it */
+  .resume-modal-overlay {
+    position: static !important;
+    display: block !important;
+    background: transparent !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    inset: auto !important;
+    z-index: auto !important;
+  }
+
+  .resume-modal-window {
+    position: static !important;
+    display: block !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    height: auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  .resume-modal-body {
+    padding: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  #printable-cv-document {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .avoid-break {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
+
+/* ==========================================================================
+   Brand Identity Logo: INZINIER - KONSTRUKTER / VITALII DOLYNSKYI
+   Typography & drafting styling from MD specification - Full width stretch
+   ========================================================================== */
+.dva-logo {
+  width: 100%;
+  text-align: center;
+  font-family: 'PT Sans Narrow', 'ISOCPEUR', sans-serif;
+  color: #3d4550;
+  padding: 0.5rem 0 0.85rem 0;
+}
+
+html[data-theme="dark"] .dva-logo {
+  color: #e2e8f0;
+}
+
+.dva-wrap {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.dva-sub {
+  font-size: clamp(15px, 2.6vw, 24px);
+  letter-spacing: clamp(0.32em, 1.1vw, 0.58em);
+  margin-right: -clamp(0.32em, 1.1vw, 0.58em);
+  font-weight: 700;
+  text-shadow: 2px 2px 0 #d9531e;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.dva-divider {
+  border: none;
+  border-top: 4px solid #d9531e;
+  width: 100%;
+  margin: 12px 0 14px 0;
+  display: block;
+}
+
+.dva-main {
+  font-size: clamp(32px, 5.4vw, 58px);
+  letter-spacing: clamp(0.06em, 0.3vw, 0.12em);
+  margin-right: -clamp(0.06em, 0.3vw, 0.12em);
+  font-weight: 700;
+  text-shadow: 3px 3px 0 #d9531e;
+  white-space: nowrap;
+  text-align: center;
+  margin-top: 3px;
+}
+
+.dva-accent {
+  color: #d9531e;
+  text-shadow: 3px 3px 0 #3d4550;
+}
+
+html[data-theme="dark"] .dva-accent {
+  text-shadow: 3px 3px 0 #0f172a;
+}
+
+
