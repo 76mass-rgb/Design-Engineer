@@ -55,7 +55,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
                     {currentLang === 'uk' ? 'Локація & Охоплення' : currentLang === 'sk' ? 'Lokalita & Pôsobenie' : 'Location & Mobility'}
                   </div>
                   <div className="text-xs sm:text-sm text-white font-semibold flex items-center gap-1.5 mt-1">
-                    <MapPin className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                    <MapPin className="w-4 h-4 text-[#16a34a] flex-shrink-0" />
                     <span>Čadca, Žilinský kraj, Slovakia / EU</span>
                   </div>
                 </div>
@@ -90,7 +90,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
                   className="p-3.5 sm:p-4 rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] flex items-start gap-3 backdrop-blur-xl hover:border-[var(--accent-blue)] transition-colors shadow-sm"
                 >
                   <div className="w-8 h-8 rounded-xl bg-[var(--badge-bg)] border border-[var(--border-color)] flex items-center justify-center text-[var(--accent-blue)] flex-shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                    <CheckCircle2 className="w-4 h-4 text-[#166534] dark:text-[#16a34a]" />
                   </div>
                   <div>
                     <h4 className="font-gost text-sm sm:text-base font-bold text-[var(--text-primary)] leading-snug">

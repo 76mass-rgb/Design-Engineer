@@ -68,7 +68,7 @@ export const ConceptToRealitySection: React.FC<ConceptToRealitySectionProps> = (
               <div className="pt-3 border-t border-[var(--border-color)] flex flex-col gap-1.5 sm:gap-2">
                 {step.highlights[currentLang].map((item, hIdx) => (
                   <div key={hIdx} className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[var(--text-primary)] font-semibold">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#166534] dark:text-[#16a34a] mt-0.5 flex-shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}

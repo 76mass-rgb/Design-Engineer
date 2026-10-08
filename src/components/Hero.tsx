@@ -14,23 +14,23 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
   // Industrial Domain Tags for immediate 5-second cognitive recognition
   const domainBadges = [
     {
-      icon: <Factory className="w-3.5 h-3.5 text-blue-400" />,
+      icon: <Factory className="w-3.5 h-3.5 text-[#0284c7]" />,
       label: currentLang === 'uk' ? 'Машинобудування' : currentLang === 'sk' ? 'Strojárstvo' : 'Machinery & Drives'
     },
     {
-      icon: <Flame className="w-3.5 h-3.5 text-amber-400" />,
+      icon: <Flame className="w-3.5 h-3.5 text-[#b45309] dark:text-[#d97706]" />,
       label: currentLang === 'uk' ? 'Нафтогаз & ЗВГ' : currentLang === 'sk' ? 'Plynárenstvo & LPG' : 'Oil, Gas & LPG'
     },
     {
-      icon: <Wrench className="w-3.5 h-3.5 text-cyan-400" />,
+      icon: <Wrench className="w-3.5 h-3.5 text-[#0284c7]" />,
       label: currentLang === 'uk' ? 'Трубопроводи & Насоси' : currentLang === 'sk' ? 'Potrubia & Čerpadlá' : 'Piping & Pumping'
     },
     {
-      icon: <Wheat className="w-3.5 h-3.5 text-emerald-400" />,
+      icon: <Wheat className="w-3.5 h-3.5 text-[#166534] dark:text-[#16a34a]" />,
       label: currentLang === 'uk' ? 'Елеватори & Агро' : currentLang === 'sk' ? 'Silá & Agro' : 'Grain Silos & Agro'
     },
     {
-      icon: <Cpu className="w-3.5 h-3.5 text-indigo-400" />,
+      icon: <Cpu className="w-3.5 h-3.5 text-[#6b21a8] dark:text-[#9333ea]" />,
       label: currentLang === 'uk' ? 'Нестандартне обладнання' : currentLang === 'sk' ? 'Zákazkové zariadenia' : 'Custom Process Units'
     }
   ];
@@ -134,7 +134,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume }) => {
 
             {/* 6. Operational Track Record Badge */}
             <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-2xl p-4 sm:p-5 backdrop-blur-xl mb-6 max-w-xl shadow-sm flex items-start gap-3 transition-colors hover:border-[var(--accent-blue)]">
-              <ShieldCheck className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+              <ShieldCheck className="w-5 h-5 text-[#166534] dark:text-[#16a34a] mt-0.5 flex-shrink-0" />
               <p className="text-xs sm:text-sm lg:text-base text-[var(--text-primary)] leading-relaxed font-semibold">
                 {UI_TRANSLATIONS.heroImpact[currentLang]}
               </p>

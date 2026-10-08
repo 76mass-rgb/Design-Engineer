@@ -237,14 +237,14 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                     {/* Media Count Pills in the top row */}
                     <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                       {drawingsCount > 0 && (
-                        <span className="bg-blue-900/80 border border-blue-400/50 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-bold text-blue-200 flex items-center gap-1 shadow-sm">
-                          <FileText className="w-3.5 h-3.5" />
+                        <span className="bg-[#0369a1]/20 border border-[#0284c7]/40 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-bold text-[#0369a1] dark:text-[#38bdf8] flex items-center gap-1 shadow-sm">
+                          <FileText className="w-3.5 h-3.5 text-[#0284c7]" />
                           <span>{drawingsCount} DWG</span>
                         </span>
                       )}
                       {photosCount > 0 && (
-                        <span className="bg-emerald-900/80 border border-emerald-400/50 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-bold text-emerald-200 flex items-center gap-1 shadow-sm">
-                          <Camera className="w-3.5 h-3.5" />
+                        <span className="bg-[#166534]/20 border border-[#166534]/40 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-bold text-[#166534] dark:text-[#4ade80] flex items-center gap-1 shadow-sm">
+                          <Camera className="w-3.5 h-3.5 text-[#166534] dark:text-[#4ade80]" />
                           <span>{photosCount} FOTO</span>
                         </span>
                       )}
@@ -279,25 +279,25 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                     {/* 2. My Role */}
                     {project.myRole && (
                       <div className="flex items-start gap-2 text-[var(--text-secondary)]">
-                        <Briefcase className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
+                        <Briefcase className="w-4 h-4 text-[#7e22ce] dark:text-[#9333ea] shrink-0 mt-0.5" />
                         <div className="leading-snug">
-                          <span className="font-gost-mono font-bold text-indigo-300 uppercase mr-1.5">
+                          <span className="font-gost-mono font-black text-[#6b21a8] dark:text-[#9333ea] uppercase mr-1.5 tracking-wide">
                             {currentLang === 'uk' ? 'Роль:' : currentLang === 'sk' ? 'Moja rola:' : 'My Role:'}
                           </span>
-                          <span className="text-[var(--text-primary)] font-medium">{project.myRole[currentLang]}</span>
+                          <span className="text-[var(--text-primary)] font-semibold">{project.myRole[currentLang]}</span>
                         </div>
                       </div>
                     )}
 
                     {/* 3. Engineering Problem */}
                     {(project.engineeringProblem || project.engineeringChallenge) && (
-                      <div className="flex items-start gap-2 text-amber-300/90 pt-1 border-t border-[var(--border-color)]/60">
-                        <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                      <div className="flex items-start gap-2 pt-1 border-t border-[var(--border-color)]/60">
+                        <AlertCircle className="w-4 h-4 text-[#b45309] dark:text-[#d97706] shrink-0 mt-0.5" />
                         <div className="leading-snug">
-                          <span className="font-gost-mono font-bold text-amber-400 uppercase mr-1.5">
+                          <span className="font-gost-mono font-black text-[#92400e] dark:text-[#d97706] uppercase mr-1.5 tracking-wide">
                             {currentLang === 'uk' ? 'Задача / Проблема:' : currentLang === 'sk' ? 'Problém:' : 'Problem:'}
                           </span>
-                          <span className="text-[var(--text-secondary)]">
+                          <span className="text-[var(--text-primary)] font-semibold">
                             {(project.engineeringProblem || project.engineeringChallenge)?.[currentLang]}
                           </span>
                         </div>
@@ -306,13 +306,13 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
 
                     {/* 4. What I Designed / Engineered */}
                     {(project.whatIDesigned || project.workPerformed) && (
-                      <div className="flex items-start gap-2 text-sky-300/90">
-                        <Wrench className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+                      <div className="flex items-start gap-2 pt-1 border-t border-[var(--border-color)]/60">
+                        <Wrench className="w-4 h-4 text-[#0369a1] dark:text-[#0284c7] shrink-0 mt-0.5" />
                         <div className="leading-snug">
-                          <span className="font-gost-mono font-bold text-sky-400 uppercase mr-1.5">
+                          <span className="font-gost-mono font-black text-[#075985] dark:text-[#0284c7] uppercase mr-1.5 tracking-wide">
                             {currentLang === 'uk' ? 'Спроєктовано:' : currentLang === 'sk' ? 'Navrhnuté:' : 'Engineered:'}
                           </span>
-                          <span className="text-[var(--text-primary)] font-medium">
+                          <span className="text-[var(--text-primary)] font-semibold">
                             {(project.whatIDesigned || project.workPerformed)?.[currentLang]}
                           </span>
                         </div>
@@ -321,13 +321,13 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
 
                     {/* 5. Result */}
                     {project.result && (
-                      <div className="flex items-start gap-2 text-emerald-400 pt-1 border-t border-[var(--border-color)]/60">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <div className="flex items-start gap-2 pt-1 border-t border-[var(--border-color)]/60">
+                        <CheckCircle2 className="w-4 h-4 text-[#15803d] dark:text-[#16a34a] shrink-0 mt-0.5" />
                         <div className="leading-snug">
-                          <span className="font-gost-mono font-bold text-emerald-400 uppercase mr-1.5">
+                          <span className="font-gost-mono font-black text-[#166534] dark:text-[#16a34a] uppercase mr-1.5 tracking-wide">
                             {currentLang === 'uk' ? 'Результат:' : currentLang === 'sk' ? 'Výsledok:' : 'Result:'}
                           </span>
-                          <span className="text-emerald-300 font-semibold">{project.result[currentLang]}</span>
+                          <span className="text-[#166534] dark:text-[#16a34a] font-bold">{project.result[currentLang]}</span>
                         </div>
                       </div>
                     )}

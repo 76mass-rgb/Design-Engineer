@@ -147,32 +147,32 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, onO
   // What you can send items
   const whatToSendList = [
     {
-      icon: <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-blue)]" />,
+      icon: <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-[#0284c7]" />,
       title: currentLang === 'uk' ? 'Опис проєкту' : currentLang === 'sk' ? 'Popis projektu' : 'Project Description',
       desc: UI_TRANSLATIONS.inquiryItemDesc[currentLang]
     },
     {
-      icon: <FileCode className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400" />,
+      icon: <FileCode className="w-4 h-4 sm:w-5 sm:h-5 text-[#6b21a8] dark:text-[#9333ea]" />,
       title: currentLang === 'uk' ? 'Креслення & Ескізи' : currentLang === 'sk' ? 'Výkresy & Náčrty' : 'Drawings & Sketches',
       desc: UI_TRANSLATIONS.inquiryItemDrawings[currentLang]
     },
     {
-      icon: <Ruler className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />,
+      icon: <Ruler className="w-4 h-4 sm:w-5 sm:h-5 text-[#b45309] dark:text-[#d97706]" />,
       title: currentLang === 'uk' ? 'Габаритні розміри' : currentLang === 'sk' ? 'Rozmery & Priestor' : 'Dimensions & Limits',
       desc: UI_TRANSLATIONS.inquiryItemDimensions[currentLang]
     },
     {
-      icon: <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />,
+      icon: <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-[#0284c7]" />,
       title: currentLang === 'uk' ? 'Технічні характеристики' : currentLang === 'sk' ? 'Špecifikácie' : 'Equipment Specs',
       desc: UI_TRANSLATIONS.inquiryItemSpecs[currentLang]
     },
     {
-      icon: <Camera className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />,
+      icon: <Camera className="w-4 h-4 sm:w-5 sm:h-5 text-[#166534] dark:text-[#16a34a]" />,
       title: currentLang === 'uk' ? 'Фотографії з об\'єкта' : currentLang === 'sk' ? 'Fotografie z prevádzky' : 'Photos & Site Pictures',
       desc: UI_TRANSLATIONS.inquiryItemPhotos[currentLang]
     },
     {
-      icon: <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" />,
+      icon: <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-[#6b21a8] dark:text-[#9333ea]" />,
       title: currentLang === 'uk' ? 'Наявна документація' : currentLang === 'sk' ? 'Existujúca dokumentácia' : 'Existing Documentation',
       desc: UI_TRANSLATIONS.inquiryItemDocs[currentLang]
     }
@@ -184,7 +184,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, onO
       step: '01',
       title: UI_TRANSLATIONS.inquiryStep1Title[currentLang],
       desc: UI_TRANSLATIONS.inquiryStep1Desc[currentLang],
-      badge: currentLang === 'uk' ? '≤ 24 години' : currentLang === 'sk' ? '≤ 24 hodín' : '≤ 24 hours'
+      badge: currentLang === 'uk' ? 'Первинний розгляд' : currentLang === 'sk' ? 'Prvotné posúdenie' : 'Initial Review'
     },
     {
       step: '02',
@@ -324,8 +324,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, onO
                 >
                   {isCopiedTemplate ? (
                     <>
-                      <Check className="w-4 h-4 text-emerald-500" />
-                      <span className="text-emerald-500 font-bold">{UI_TRANSLATIONS.inquiryBtnCopied[currentLang]}</span>
+                      <Check className="w-4 h-4 text-[#166534] dark:text-[#16a34a]" />
+                      <span className="text-[#166534] dark:text-[#16a34a] font-bold">{UI_TRANSLATIONS.inquiryBtnCopied[currentLang]}</span>
                     </>
                   ) : (
                     <>
@@ -339,7 +339,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, onO
                 <button
                   type="button"
                   onClick={handleWhatsAppInquiry}
-                  className="px-4 py-3.5 rounded-xl bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-500 border border-emerald-500/30 font-gost-mono font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  className="px-4 py-3.5 rounded-xl bg-emerald-600/15 hover:bg-emerald-600/25 text-[#166534] dark:text-[#16a34a] border border-[#166534]/30 font-gost-mono font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
                   title="WhatsApp"
                 >
                   <MessageSquare className="w-4 h-4" />
@@ -462,7 +462,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, onO
                   className="w-10 h-10 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--accent-blue)] text-[var(--text-secondary)] hover:text-white flex items-center justify-center transition-colors cursor-pointer shadow-sm flex-shrink-0"
                   title="Copy Phone Number"
                 >
-                  {copiedField === 'phone' ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                  {copiedField === 'phone' ? <Check className="w-4 h-4 text-[#166534] dark:text-[#16a34a]" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
 
@@ -489,7 +489,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, onO
                   className="w-10 h-10 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--accent-blue)] text-[var(--text-secondary)] hover:text-white flex items-center justify-center transition-colors cursor-pointer shadow-sm flex-shrink-0"
                   title="Copy Email Address"
                 >
-                  {copiedField === 'email' ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                  {copiedField === 'email' ? <Check className="w-4 h-4 text-[#166534] dark:text-[#16a34a]" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
 

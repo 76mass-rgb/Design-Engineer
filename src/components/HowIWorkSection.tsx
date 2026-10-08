@@ -71,7 +71,7 @@ export const HowIWorkSection: React.FC<HowIWorkSectionProps> = ({ currentLang })
                   <ul className="space-y-1.5 sm:space-y-2">
                     {step.deliverables[currentLang].map((del, dIdx) => (
                       <li key={dIdx} className="flex items-center gap-2 text-xs sm:text-sm lg:text-base text-[var(--text-primary)] font-semibold leading-snug">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                        <CheckCircle2 className="w-4 h-4 text-[#166534] dark:text-[#16a34a] flex-shrink-0" />
                         <span>{del}</span>
                       </li>
                     ))}

@@ -2,7 +2,7 @@ import React, { useState, lazy, Suspense } from 'react';
 import { ProjectItem, ProjectCategory, Language } from '../types';
 import { PROJECTS_DATA, UI_TRANSLATIONS } from '../data/portfolioData';
 import { getWebpUrl } from '../utils/imageOptimizer';
-import { Eye, Layers, FileText, Camera, ShieldCheck, ArrowUpRight } from 'lucide-react';
+import { Eye, Layers, FileText, Camera, ShieldCheck, ArrowUpRight, Building2, Briefcase, AlertCircle, Wrench, CheckCircle2, Award } from 'lucide-react';
 
 const ProjectModal = lazy(() =>
   import('./ProjectModal').then((m) => ({ default: m.ProjectModal }))
@@ -73,17 +73,17 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
           <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 sm:gap-6 mb-4 sm:mb-5">
             <div>
               <div className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[var(--accent-blue)] mb-2 font-gost-mono">
-                03 // {currentLang === 'uk' ? 'ВИБРАНІ ПРОЄКТИ ТА КРЕСЛЕННЯ' : currentLang === 'sk' ? 'VYBRANÉ PROJEKTY A VÝKRESY' : 'SELECTED WORKS & DRAWINGS'}
+                {UI_TRANSLATIONS.portfolioSecNum[currentLang]} // {currentLang === 'uk' ? 'FEATURED ENGINEERING CASES • ДОКАЗИ КОМПЕТЕНТНОСТІ' : currentLang === 'sk' ? 'FEATURED ENGINEERING CASES • DÔKAZY ODBORNOSTI' : 'FEATURED ENGINEERING CASES • PROVEN TRACK RECORD'}
               </div>
               <h2 className="font-gost text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[var(--text-primary)] mb-2">
-                {currentLang === 'uk' && 'Інженерний архів проєктів та креслень'}
-                {currentLang === 'sk' && 'Inžiniersky archív projektov a výkresov'}
-                {currentLang === 'en' && 'Engineering Portfolio & Technical Blueprints'}
+                {currentLang === 'uk' && 'Інженерні кейси та реалізовані рішення'}
+                {currentLang === 'sk' && 'Inžinierske prípady a overené riešenia'}
+                {currentLang === 'en' && 'Featured Engineering Cases & Implemented Solutions'}
               </h2>
-              <div className="text-lg sm:text-2xl font-gost font-bold text-[var(--accent-blue)]">
-                {currentLang === 'uk' && 'Спроєктоване обладнання в реальній експлуатації'}
-                {currentLang === 'sk' && 'Navrhnuté stroje a zariadenia v reálnej prevádzke'}
-                {currentLang === 'en' && 'Engineered Machinery & Plants in Active Operation'}
+              <div className="text-base sm:text-xl font-gost font-bold text-[var(--accent-blue)]">
+                {currentLang === 'uk' && 'Докази розв’язання інженерних задач: від розрахунків і креслень до працюючого обладнання'}
+                {currentLang === 'sk' && 'Dôkazy riešenia úloh: od výpočtov a výkresov po reálne fungujúce zariadenia'}
+                {currentLang === 'en' && 'Documented problem-solving: from FEA & CAD drawings to operating industrial equipment'}
               </div>
             </div>
 
@@ -92,26 +92,26 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                 className="text-xs sm:text-sm lg:text-base font-gost-mono text-emerald-100 bg-emerald-900/95 border border-emerald-400/60 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold shadow-md backdrop-blur-md flex items-center gap-2 transition-transform duration-300 hover:scale-105 cursor-pointer"
                 title={
                   currentLang === 'uk'
-                    ? '100% спроєктованих об\'єктів успішно змонтовано та введено в постійну експлуатацію'
+                    ? 'Спроєктоване обладнання успішно виготовлено, змонтовано та експлуатується в промислових умовах'
                     : currentLang === 'sk'
-                    ? '100% navrhnutých strojov a zariadení v trvalej prevádzke bez havárií'
-                    : '100% engineered machines & plants operating reliably with zero failures'
+                    ? 'Navrhnuté stroje a zariadenia úspešne vyrobené, zmontované a overené v prevádzke'
+                    : 'Engineering designs successfully fabricated, erected, and operating in industrial facilities'
                 }
               >
                 <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-300 flex-shrink-0" />
                 <span>
-                  {currentLang === 'uk' && '100% Безаварійна експлуатація'}
-                  {currentLang === 'sk' && '100% Prevádzková spoľahlivosť'}
-                  {currentLang === 'en' && '100% Operational Track Record'}
+                  {currentLang === 'uk' && 'Реалізовано в промисловості'}
+                  {currentLang === 'sk' && 'Overené v reálnej prevádzke'}
+                  {currentLang === 'en' && 'Implemented in Industrial Environments'}
                 </span>
               </div>
             </div>
           </div>
 
           <p className="text-sm sm:text-base lg:text-lg text-[var(--text-secondary)] max-w-4xl font-medium leading-relaxed">
-            {currentLang === 'uk' && 'Фотографії реалізованих промислових об\'єктів, діючих резервуарних парків, змонтованих нафтових та газових комплексів, трубопроводів та спеціального обладнання.'}
-            {currentLang === 'sk' && 'Fotografie zrealizovaných priemyselných objektov, zásobníkových parkov, zmontovaných ropných a plynových terminálov, potrubí a strojov.'}
-            {currentLang === 'en' && 'Photographs of commissioned industrial plants, operating bulk tank farms, rail & river gas/oil terminals, process piping manifolds, and custom machinery.'}
+            {currentLang === 'uk' && 'Виберіть категорію вашої задачі (машинобудування, трубопроводи, металоконструкції, резервуари або елеватори), щоб за 30 секунд переконатися в наявності релевантного досвіду та ознайомитися з реальними кресленнями і фотографіями об’єктів.'}
+            {currentLang === 'sk' && 'Zvoľte kategóriu vašej úlohy (strojárstvo, potrubia, oceľové konštrukcie, nádrže alebo silá) a behom 30 sekúnd overte skúsenosti s podobnými technickými výzvami prostredníctvom reálnych výkresov a fotodokumentácie.'}
+            {currentLang === 'en' && 'Filter by your domain (machinery, process piping, structural steel, tanks, or grain elevators) to quickly verify relevant track record against your technical problem via authentic CAD blueprints and field photos.'}
           </p>
         </div>
 
@@ -252,21 +252,86 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                   </div>
 
                   {/* Category Title */}
-                  <div className="text-xs sm:text-sm text-[var(--accent-blue)] font-gost-mono font-extrabold uppercase tracking-[0.2em] mb-2 sm:mb-2.5">
+                  <div className="text-xs sm:text-sm text-[var(--accent-blue)] font-gost-mono font-extrabold uppercase tracking-[0.2em] mb-1.5">
                     {project.category[currentLang]}
                   </div>
 
                   {/* Project Title */}
-                  <h3 className="font-gost text-xl sm:text-2xl xl:text-3xl font-black text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors leading-snug">
+                  <h3 className="font-gost text-xl sm:text-2xl xl:text-3xl font-black text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors leading-snug mb-3">
                     {project.title[currentLang]}
                   </h3>
 
-                  {/* Project Description */}
-                  {project.description && (
-                    <p className="text-sm sm:text-base text-[var(--text-secondary)] mt-2 sm:mt-2.5 line-clamp-3 leading-relaxed font-normal">
-                      {project.description[currentLang]}
-                    </p>
-                  )}
+                  {/* JTBD Structured Breakdown (Client Type -> Role -> Problem -> Engineered Solution -> Result) */}
+                  <div className="space-y-2 text-xs sm:text-sm bg-[var(--badge-bg)]/80 p-3.5 sm:p-4 rounded-xl border border-[var(--border-color)]">
+                    {/* 1. Client / Project Type */}
+                    {project.clientType && (
+                      <div className="flex items-start gap-2 text-[var(--text-secondary)]">
+                        <Building2 className="w-4 h-4 text-[var(--accent-blue)] shrink-0 mt-0.5" />
+                        <div className="leading-snug">
+                          <span className="font-gost-mono font-bold text-[var(--text-primary)] uppercase mr-1.5">
+                            {currentLang === 'uk' ? 'Тип об’єкта:' : currentLang === 'sk' ? 'Objekt / Klient:' : 'Facility / Client:'}
+                          </span>
+                          <span>{project.clientType[currentLang]}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 2. My Role */}
+                    {project.myRole && (
+                      <div className="flex items-start gap-2 text-[var(--text-secondary)]">
+                        <Briefcase className="w-4 h-4 text-[#7e22ce] dark:text-[#9333ea] shrink-0 mt-0.5" />
+                        <div className="leading-snug">
+                          <span className="font-gost-mono font-black text-[#6b21a8] dark:text-[#9333ea] uppercase mr-1.5 tracking-wide">
+                            {currentLang === 'uk' ? 'Роль:' : currentLang === 'sk' ? 'Moja rola:' : 'My Role:'}
+                          </span>
+                          <span className="text-[var(--text-primary)] font-semibold">{project.myRole[currentLang]}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 3. Engineering Problem */}
+                    {(project.engineeringProblem || project.engineeringChallenge) && (
+                      <div className="flex items-start gap-2 pt-1 border-t border-[var(--border-color)]/60">
+                        <AlertCircle className="w-4 h-4 text-[#b45309] dark:text-[#d97706] shrink-0 mt-0.5" />
+                        <div className="leading-snug">
+                          <span className="font-gost-mono font-black text-[#92400e] dark:text-[#d97706] uppercase mr-1.5 tracking-wide">
+                            {currentLang === 'uk' ? 'Задача / Проблема:' : currentLang === 'sk' ? 'Problém:' : 'Problem:'}
+                          </span>
+                          <span className="text-[var(--text-primary)] font-semibold">
+                            {(project.engineeringProblem || project.engineeringChallenge)?.[currentLang]}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 4. What I Designed / Engineered */}
+                    {(project.whatIDesigned || project.workPerformed) && (
+                      <div className="flex items-start gap-2 pt-1 border-t border-[var(--border-color)]/60">
+                        <Wrench className="w-4 h-4 text-[#0369a1] dark:text-[#0284c7] shrink-0 mt-0.5" />
+                        <div className="leading-snug">
+                          <span className="font-gost-mono font-black text-[#075985] dark:text-[#0284c7] uppercase mr-1.5 tracking-wide">
+                            {currentLang === 'uk' ? 'Спроєктовано:' : currentLang === 'sk' ? 'Navrhnuté:' : 'Engineered:'}
+                          </span>
+                          <span className="text-[var(--text-primary)] font-semibold">
+                            {(project.whatIDesigned || project.workPerformed)?.[currentLang]}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 5. Result */}
+                    {project.result && (
+                      <div className="flex items-start gap-2 pt-1 border-t border-[var(--border-color)]/60">
+                        <CheckCircle2 className="w-4 h-4 text-[#15803d] dark:text-[#16a34a] shrink-0 mt-0.5" />
+                        <div className="leading-snug">
+                          <span className="font-gost-mono font-black text-[#166534] dark:text-[#16a34a] uppercase mr-1.5 tracking-wide">
+                            {currentLang === 'uk' ? 'Результат:' : currentLang === 'sk' ? 'Výsledok:' : 'Result:'}
+                          </span>
+                          <span className="text-[#166534] dark:text-[#16a34a] font-bold">{project.result[currentLang]}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
                   {/* Process Stages Pills if available */}
                   {!project.hideStageButtons && project.mediaBlocks && project.mediaBlocks.length > 0 && (
@@ -338,8 +403,8 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                           <img
                             src={media.url}
                             alt={caption 
-                              ? `${project.title[currentLang]} - ${caption}` 
-                              : `${project.title[currentLang]} - ${isCover ? 'Cover' : (media.isDrawing ? 'DWG' : 'Photo')} ${media.index}`}
+                              ? `${project.title[currentLang]} — ${caption} (${media.isDrawing ? (currentLang === 'uk' ? 'креслення CAD' : currentLang === 'sk' ? 'výkres CAD' : 'CAD drawing') : (currentLang === 'uk' ? 'фото вузла' : currentLang === 'sk' ? 'foto z prevádzky' : 'operating unit photo')})` 
+                              : `${project.title[currentLang]} — ${isCover ? (currentLang === 'uk' ? 'загальний вигляд об’єкта' : currentLang === 'sk' ? 'celkový pohľad' : 'general assembly overview') : (media.isDrawing ? (currentLang === 'uk' ? `робоче креслення №${media.index}` : currentLang === 'sk' ? `výrobný výkres č.${media.index}` : `shop drawing #${media.index}`) : (currentLang === 'uk' ? `фотографія реалізації №${media.index}` : currentLang === 'sk' ? `fotodokumentácia č.${media.index}` : `operating installation photo #${media.index}`))}`}
                             width={1200}
                             height={900}
                             className="w-full h-full object-cover filter brightness-[0.94] group-hover/item:brightness-100 group-hover/item:scale-[1.02] transition-[filter,transform] duration-500"
@@ -378,15 +443,22 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                 </div>
 
                 {/* 3. Bottom Button to Open Full Project */}
-                <div className="px-3 sm:px-7 pb-5 sm:pb-7">
+                <div className="px-3 sm:px-7 pb-5 sm:pb-7 flex flex-col sm:flex-row gap-2">
                   <button
                     onClick={() => handleProjectClick(project)}
-                    className="w-full py-3 sm:py-3.5 px-4 rounded-xl sm:rounded-2xl bg-[var(--bg-surface-2)] hover:bg-[var(--accent-blue)] text-[var(--text-primary)] hover:text-white border border-[var(--border-color)] hover:border-[var(--accent-blue)] font-gost-mono text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-[transform,background-color,border-color,color] cursor-pointer shadow-sm active:scale-[0.99]"
+                    className="flex-1 py-3 sm:py-3.5 px-4 rounded-xl sm:rounded-2xl bg-[var(--bg-surface-2)] hover:bg-[var(--accent-blue)] text-[var(--text-primary)] hover:text-white border border-[var(--border-color)] hover:border-[var(--accent-blue)] font-gost-mono text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-[transform,background-color,border-color,color] cursor-pointer shadow-sm active:scale-[0.99]"
                   >
                     <Eye className="w-4 h-4" />
-                    <span>{currentLang === 'uk' ? 'Відкрити проєкт повністю' : currentLang === 'sk' ? 'Otvoriť celý projekt' : 'Open Full Project'}</span>
+                    <span>{currentLang === 'uk' ? 'Переглянути кейс і креслення' : currentLang === 'sk' ? 'Otvoriť prípad a výkresy' : 'View Case Study & Blueprints'}</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </button>
+                  <a
+                    href="#contact"
+                    className="py-3 sm:py-3.5 px-4 rounded-xl sm:rounded-2xl bg-[var(--badge-bg)] hover:bg-[var(--bg-surface-3)] text-[var(--accent-blue)] border border-[var(--accent-blue)]/30 font-gost-mono text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer text-center"
+                    title={currentLang === 'uk' ? 'Обговорити схожу задачу' : currentLang === 'sk' ? 'Konzultovať podobnú úlohu' : 'Discuss similar challenge'}
+                  >
+                    <span>{currentLang === 'uk' ? 'Схожа задача' : currentLang === 'sk' ? 'Podobná úloha' : 'Similar Task'}</span>
+                  </a>
                 </div>
               </article>
             );

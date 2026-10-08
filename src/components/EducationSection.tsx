@@ -51,14 +51,27 @@ export const EducationSection: React.FC<EducationSectionProps> = ({ currentLang 
                     <span className="text-xs sm:text-sm font-gost-mono text-[var(--accent-blue)] font-black bg-[var(--badge-bg)] border border-[var(--border-color)] px-3 sm:px-3.5 py-1 rounded-full">
                       {item.year}
                     </span>
-                    <span className="text-[11px] sm:text-xs lg:text-sm font-gost-mono uppercase tracking-wider text-[var(--text-secondary)] px-2.5 sm:px-3 py-1 bg-[var(--bg-surface-2)] rounded-full border border-[var(--border-color)] font-bold">
-                      {index === 1 ? 'R&D Level' : 'Specialist / MSc'}
+                    <span className={`text-[11px] sm:text-xs lg:text-sm font-gost-mono uppercase tracking-wider px-2.5 sm:px-3 py-1 rounded-full border font-bold ${
+                      index === 1 
+                        ? 'text-[var(--accent-blue)] bg-[var(--badge-bg)] border-[var(--accent-blue)]/40 shadow-sm' 
+                        : 'text-[var(--text-secondary)] bg-[var(--bg-surface-2)] border-[var(--border-color)]'
+                    }`}>
+                      {index === 1 
+                        ? (currentLang === 'uk' ? 'Аспірантура R&D' : currentLang === 'sk' ? 'Doktorandské štúdium R&D' : 'Postgraduate R&D')
+                        : (currentLang === 'uk' ? 'Спеціаліст / MSc' : currentLang === 'sk' ? 'Inžinier / MSc' : 'Specialist / MSc')}
                     </span>
                   </div>
 
                   <h3 className="font-gost text-lg sm:text-xl lg:text-2xl font-black text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors mb-2 leading-snug">
                     {item.school[currentLang]}
                   </h3>
+
+                  {item.degreeType && (
+                    <div className="text-xs sm:text-sm font-bold text-[var(--text-secondary)] mb-2.5 flex items-center gap-1.5 font-gost">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-blue)] shrink-0"></span>
+                      <span>{item.degreeType[currentLang]}</span>
+                    </div>
+                  )}
 
                   <div className="text-xs sm:text-sm lg:text-base font-bold text-[var(--accent-blue)] mb-3 leading-snug">
                     {item.spec[currentLang]}

@@ -228,23 +228,23 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               {/* Badge indicating type of current image */}
               <div className="flex items-center gap-2">
                 {currentBlock && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold font-gost-mono bg-amber-500/20 text-amber-300 border border-amber-400/30">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold font-gost-mono bg-amber-500/15 text-[#92400e] dark:text-[#d97706] border border-amber-500/30">
                     {currentBlock.title[currentLang]}
                   </span>
                 )}
                 {currentDrawingCaption ? (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold font-gost-mono bg-blue-500/25 text-blue-200 border border-blue-400/40 shadow-sm max-w-[260px] sm:max-w-md truncate" title={currentDrawingCaption}>
-                    <FileText className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold font-gost-mono bg-blue-500/15 text-[#0369a1] dark:text-[#0284c7] border border-blue-500/30 shadow-sm max-w-[260px] sm:max-w-md truncate" title={currentDrawingCaption}>
+                    <FileText className="w-3.5 h-3.5 text-[#0284c7] shrink-0" />
                     <span className="truncate">{currentDrawingCaption}</span>
                   </span>
                 ) : isCurrentDrawing ? (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold font-gost-mono bg-blue-500/20 text-blue-300 border border-blue-400/30">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold font-gost-mono bg-blue-500/15 text-[#0369a1] dark:text-[#0284c7] border border-blue-500/30">
                     <FileText className="w-3.5 h-3.5" />
                     {currentLang === 'uk' ? 'Технічне креслення' : currentLang === 'sk' ? 'Technický výkres' : 'Technical Drawing'}
                   </span>
                 ) : null}
                 {isCurrentPhoto && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold font-gost-mono bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold font-gost-mono bg-emerald-500/15 text-[#166534] dark:text-[#16a34a] border border-emerald-500/30">
                     <Camera className="w-3.5 h-3.5" />
                     {currentLang === 'uk' ? 'Реальне фото об\'єкта' : currentLang === 'sk' ? 'Reálna fotografia' : 'Operating Photo'}
                   </span>
@@ -434,8 +434,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {/* 2. ENGINEERING PROBLEM */}
                 {(project.engineeringProblem || project.engineeringChallenge) && (
                   <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30">
-                    <div className="flex items-center gap-2 font-gost-mono uppercase text-amber-400 font-bold text-xs mb-1.5">
-                      <AlertCircle className="w-4 h-4 text-amber-400" />
+                    <div className="flex items-center gap-2 font-gost-mono uppercase text-[#92400e] dark:text-[#d97706] font-extrabold text-xs mb-1.5">
+                      <AlertCircle className="w-4 h-4 text-[#b45309] dark:text-[#d97706]" />
                       <span>{currentLang === 'uk' ? '2. Інженерна задача / Проблема (Engineering Problem):' : currentLang === 'sk' ? '2. Inžinierska úloha / Problém:' : '2. Engineering Problem:'}</span>
                     </div>
                     <div className="text-sm sm:text-base text-[var(--text-primary)] font-medium leading-relaxed">
@@ -447,8 +447,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {/* 3. MY ROLE */}
                 {project.myRole && (
                   <div className="p-4 rounded-xl bg-[var(--badge-bg)] border border-[var(--border-color)]">
-                    <div className="flex items-center gap-2 font-gost-mono uppercase text-indigo-400 font-bold text-xs mb-1.5">
-                      <Briefcase className="w-4 h-4 text-indigo-400" />
+                    <div className="flex items-center gap-2 font-gost-mono uppercase text-[#6b21a8] dark:text-[#9333ea] font-extrabold text-xs mb-1.5">
+                      <Briefcase className="w-4 h-4 text-[#7e22ce] dark:text-[#9333ea]" />
                       <span>{currentLang === 'uk' ? '3. Моя роль у проєкті (My Role):' : currentLang === 'sk' ? '3. Moja inžinierska rola:' : '3. My Engineering Role:'}</span>
                     </div>
                     <div className="text-sm sm:text-base text-[var(--text-primary)] font-medium leading-relaxed">
@@ -460,8 +460,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {/* 4. WHAT I DESIGNED / ENGINEERED */}
                 {(project.whatIDesigned || project.workPerformed) && (
                   <div className="p-4 rounded-xl bg-[var(--badge-bg)] border border-[var(--border-color)]">
-                    <div className="flex items-center gap-2 font-gost-mono uppercase text-sky-400 font-bold text-xs mb-1.5">
-                      <FileText className="w-4 h-4 text-sky-400" />
+                    <div className="flex items-center gap-2 font-gost-mono uppercase text-[#075985] dark:text-[#0284c7] font-extrabold text-xs mb-1.5">
+                      <FileText className="w-4 h-4 text-[#0369a1] dark:text-[#0284c7]" />
                       <span>{currentLang === 'uk' ? '4. Що спроєктовано / Розраховано (What I Designed):' : currentLang === 'sk' ? '4. Čo bolo navrhnuté a vypočítané:' : '4. What I Designed / Engineered:'}</span>
                     </div>
                     <div className="text-sm sm:text-base text-[var(--text-primary)] font-medium leading-relaxed">
@@ -473,8 +473,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {/* 5. IMPLEMENTATION */}
                 {project.implementation && (
                   <div className="p-4 rounded-xl bg-[var(--badge-bg)] border border-[var(--border-color)]">
-                    <div className="flex items-center gap-2 font-gost-mono uppercase text-amber-500 font-bold text-xs mb-1.5">
-                      <Wrench className="w-4 h-4 text-amber-500" />
+                    <div className="flex items-center gap-2 font-gost-mono uppercase text-[#92400e] dark:text-[#d97706] font-extrabold text-xs mb-1.5">
+                      <Wrench className="w-4 h-4 text-[#b45309] dark:text-[#d97706]" />
                       <span>{currentLang === 'uk' ? '5. Виготовлення & Монтаж (Implementation):' : currentLang === 'sk' ? '5. Výroba & Montáž:' : '5. Implementation & Erection:'}</span>
                     </div>
                     <div className="text-sm sm:text-base text-[var(--text-primary)] font-medium leading-relaxed">
@@ -486,8 +486,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {/* 6. RESULT */}
                 {project.result && (
                   <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
-                    <div className="flex items-center gap-2 font-gost-mono uppercase text-emerald-400 font-bold text-xs mb-1.5">
-                      <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                    <div className="flex items-center gap-2 font-gost-mono uppercase text-[#166534] dark:text-[#16a34a] font-extrabold text-xs mb-1.5">
+                      <ShieldCheck className="w-4 h-4 text-[#15803d] dark:text-[#16a34a]" />
                       <span>{currentLang === 'uk' ? '6. Реальний результат в експлуатації (Result):' : currentLang === 'sk' ? '6. Reálny výsledok v prevádzke:' : '6. Measurable Result:'}</span>
                     </div>
                     <div className="text-sm sm:text-base text-[var(--text-primary)] font-medium leading-relaxed">
@@ -500,11 +500,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               {/* Media Stages Section in Right Sidebar */}
               {project.mediaBlocks && project.mediaBlocks.length > 0 && (
                 <div className="mb-6 p-4 rounded-2xl bg-[var(--bg-surface-2)] border border-[var(--border-color)]">
-                  <div className="text-xs font-gost-mono uppercase tracking-wider text-amber-500 font-extrabold mb-3 flex items-center justify-between">
+                  <div className="text-xs font-gost-mono uppercase tracking-wider text-[#92400e] dark:text-[#d97706] font-extrabold mb-3 flex items-center justify-between">
                     <span>
                       {currentLang === 'uk' ? 'Технологічні стадії реконструкції (3 стадії):' : currentLang === 'sk' ? 'Technologické etapy rekonštrukcie (3 etapy):' : 'Reconstruction Process Stages (3 Stages):'}
                     </span>
-                    <span className="text-[10px] font-mono text-amber-400 font-bold px-2 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/30">
+                    <span className="text-[10px] font-mono text-[#92400e] dark:text-[#d97706] font-bold px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30">
                       {project.mediaBlocks.length} {currentLang === 'uk' ? 'стадії' : currentLang === 'sk' ? 'etapy' : 'stages'}
                     </span>
                   </div>
@@ -519,15 +519,15 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                         }}
                         className={`p-3 rounded-xl border transition-all cursor-pointer ${
                           selectedBlockId === blk.id
-                            ? 'bg-amber-500/15 border-amber-500 shadow-md ring-1 ring-amber-500/40'
-                            : 'bg-[var(--badge-bg)] border-[var(--border-color)] hover:border-amber-500/50'
+                            ? 'bg-amber-500/15 border-amber-600 shadow-md ring-1 ring-amber-600/40'
+                            : 'bg-[var(--badge-bg)] border-[var(--border-color)] hover:border-amber-600/50'
                         }`}
                       >
                         <div className="flex items-center justify-between gap-2 mb-1">
                           <span className="font-gost text-xs sm:text-sm font-bold text-[var(--text-primary)]">
                             {blk.title[currentLang]}
                           </span>
-                          <span className="text-[10px] font-mono font-bold text-amber-400 px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 shrink-0">
+                          <span className="text-[10px] font-mono font-bold text-[#92400e] dark:text-[#d97706] px-1.5 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 shrink-0">
                             {blk.images.length} {currentLang === 'uk' ? 'файлів' : 'files'}
                           </span>
                         </div>
@@ -552,7 +552,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   <ul className="space-y-2.5">
                     {project.specs[currentLang].map((spec, sIdx) => (
                       <li key={sIdx} className="flex items-start gap-2.5 text-sm sm:text-base text-[var(--text-primary)] font-gost font-medium">
-                        <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-[#166534] dark:text-[#16a34a] flex-shrink-0 mt-0.5" />
                         <span>{spec}</span>
                       </li>
                     ))}

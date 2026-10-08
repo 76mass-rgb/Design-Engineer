@@ -357,9 +357,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'What happens after your inquiry:'
   },
   inquiryStep1Title: {
-    uk: '1. Аналіз завдання (до 24 год)',
-    sk: '1. Analýza zadania (do 24 hod.)',
-    en: '1. Initial Review (within 24h)'
+    uk: '1. Аналіз завдання',
+    sk: '1. Analýza zadania',
+    en: '1. Initial Review'
   },
   inquiryStep1Desc: {
     uk: 'Оцінка технічної здійсненності, складності та вибір базової концепції.',
@@ -1097,14 +1097,14 @@ export const EDUCATION_DATA: EducationItem[] = [
       en: 'Chemical Plant Machinery, Pressure Vessels & Materials Science'
     },
     degreeType: {
-      uk: 'Аспірантура (Постдипломна науково-дослідна інженерна діяльність / R&D)',
-      sk: 'Postgraduálne vedecko-výskumné štúdium (R&D)',
-      en: 'Postgraduate Academic Research Fellowship (R&D)'
+      uk: 'Аспірантура R&D (Постдипломна науково-дослідна інженерна діяльність)',
+      sk: 'Postgraduálne štúdium R&D (Vedecko-výskumná činnosť)',
+      en: 'Postgraduate R&D Fellowship (Doctoral Engineering Research)'
     },
     details: {
-      uk: 'Поглиблена наукова робота в галузі динаміки роторних машин, контактної напруги зубчастих передач, втомної міцності сталей та розрахунку посудин під тиском.',
-      sk: 'Vedecký výskum v oblasti dynamiky točivých strojov, napätia ozubených prevodov, únavovej pevnosti ocelí a tlakových nádob.',
-      en: 'Scientific research in rotor machine dynamics, gear contact stress, fatigue strength of structural alloys, and high-pressure vessel design.'
+      uk: 'Поглиблена наукова робота в галузі динаміки переміщення сипучих матеріалів шнековими машинами з пружинними шнеками, їхньої втомної міцності та розрахунку довготривалої ефективної роботи.',
+      sk: 'Vedecko-výskumná činnosť v oblasti dynamiky dopravy sypkých hmôt závitovkovými dopravníkmi s pružnými/pružinovými skrutkovicami, ich únavovej pevnosti a dimenzovania dlhodobej prevádzkovej účinnosti.',
+      en: 'Advanced scientific research in bulk material transport dynamics via flexible spring-screw conveyors, spiral fatigue strength, and continuous operational efficiency calculations.'
     }
   },
   {

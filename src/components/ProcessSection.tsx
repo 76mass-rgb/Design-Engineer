@@ -124,7 +124,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ currentLang }) =
                         {currentLang === 'sk' && 'Výstupy etapy (Deliverables):'}
                         {currentLang === 'en' && 'Stage Deliverables:'}
                       </span>
-                      <FileCheck className="w-4 h-4 text-emerald-400" />
+                      <FileCheck className="w-4 h-4 text-[#166534] dark:text-[#16a34a]" />
                     </div>
 
                     <ul className="space-y-2">
@@ -133,7 +133,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ currentLang }) =
                           key={dIdx}
                           className="flex items-start gap-2 text-xs sm:text-sm font-gost font-medium text-[var(--text-primary)]"
                         >
-                          <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-4 h-4 text-[#166534] dark:text-[#16a34a] flex-shrink-0 mt-0.5" />
                           <span className="leading-snug">{item}</span>
                         </li>
                       ))}
@@ -149,7 +149,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ currentLang }) =
         {/* Engineering Reliability Guarantee Banner */}
         <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-6 sm:p-8 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 flex-shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-600/15 border border-[#166534]/30 flex items-center justify-center text-[#166534] dark:text-[#16a34a] flex-shrink-0">
               <Shield className="w-6 h-6" />
             </div>
             <div>
