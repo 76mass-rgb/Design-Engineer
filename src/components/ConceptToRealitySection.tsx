@@ -29,8 +29,8 @@ export const ConceptToRealitySection: React.FC<ConceptToRealitySectionProps> = (
             </h2>
           </div>
           <p className="text-sm sm:text-base md:text-lg text-[var(--text-secondary)] max-w-lg font-medium leading-relaxed mt-2 sm:mt-0">
-            {currentLang === 'uk' && 'Повний життєвий цикл інженерного проєкту: від першого ескізу до 100% працюючого обладнання.'}
-            {currentLang === 'sk' && 'Kompletný životný cyklus inžinierskeho projektu: od prvej skice až po 100 % funkčné zariadenie.'}
+            {currentLang === 'uk' && 'Повний життєвий цикл інженерного проєкту: від першого ескізу до введення обладнання в експлуатацію.'}
+            {currentLang === 'sk' && 'Kompletný životný cyklus inžinierskeho projektu: od prvej skice až po uvedenie zariadenia do prevádzky.'}
             {currentLang === 'en' && 'Complete lifecycle of engineering delivery: from initial concept and CAD to physical commissioning.'}
           </p>
         </div>

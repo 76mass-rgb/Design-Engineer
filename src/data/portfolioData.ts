@@ -32,19 +32,19 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Expertise'
   },
   navSkills: {
-    uk: 'Компетенції',
-    sk: 'Zručnosti',
-    en: 'Skills'
+    uk: 'Послуги & Напрямки',
+    sk: 'Služby & Oblasti',
+    en: 'Services & Domains'
   },
   navProjects: {
-    uk: 'Проєкти',
-    sk: 'Projekty',
-    en: 'Projects'
+    uk: 'Проєкти & Кейси',
+    sk: 'Projekty & Štúdie',
+    en: 'Projects & Cases'
   },
   navProcess: {
-    uk: 'Концепт → Реальність',
-    sk: 'Koncept → Realita',
-    en: 'Concept to Reality'
+    uk: 'Процес & Стандарти',
+    sk: 'Proces & Štandardy',
+    en: 'Workflow & Standards'
   },
   navProof: {
     uk: 'Результати',
@@ -67,9 +67,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Credentials'
   },
   navContact: {
-    uk: 'Контакти',
-    sk: 'Kontakt',
-    en: 'Contact'
+    uk: 'Контакти & ТЗ',
+    sk: 'Kontakt & Zadanie',
+    en: 'Contact & RFQ'
   },
   navResume: {
     uk: 'Резюме / CV',
@@ -117,34 +117,34 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Design Engineer'
   },
   heroSubtitle: {
-    uk: 'Машинобудування, промислове обладнання та CAD рішення',
-    sk: 'Strojný dizajn, priemyselné zariadenia a CAD riešenia',
-    en: 'Machine design, industrial equipment & CAD solutions'
+    uk: 'Проєктування машин, промислового обладнання, технологічних трубопроводів та металоконструкцій',
+    sk: 'Konštrukcia strojov, priemyselných zariadení, potrubných trás a oceľových konštrukcií',
+    en: 'Mechanical Machine Design, Industrial Equipment, Process Piping & Structural Steel'
   },
   heroCoreMessage: {
-    uk: 'Від інженерного задуму та 3D CAD до готової виробничої конструкції.',
-    sk: 'Od inžinierskeho konceptu a 3D CAD po výrobnú dokumentáciu pripravenú na realizáciu.',
-    en: 'From engineering concept and 3D CAD to manufacturing-ready design.'
+    uk: 'Розробка робочої конструкторської документації (КД / КМД) та розрахунки під реальне виробництво.',
+    sk: 'Vývoj výrobnej konštrukčnej dokumentácie a pevnostné výpočty pre reálnu dielenskú realizáciu.',
+    en: 'Manufacturing-ready mechanical design packages (CAD / BOM / FEA) engineered for physical production.'
   },
   heroDesc: {
-    uk: 'Не просто створюю 3D CAD моделі. Я розробляю практичні машинобудівні та промислові рішення, механізми й вузли, які можуть бути реально виготовлені, змонтовані та надійно працювати роками.',
-    sk: 'Nevytváram iba 3D CAD modely. Vyvíjam praktické strojné a priemyselné riešenia, mechanizmy a zostavy, ktoré sa dajú reálne vyrobiť, zmontovať a dlhodobo spoľahlivo prevádzkovať.',
-    en: "I don't just create CAD models. I develop practical mechanical and industrial solutions, mechanisms, and assemblies that can be manufactured, installed, and reliably operated in the real world."
+    uk: 'Розв\'язую задачі розробки нестандартного обладнання, модернізації виробничих ліній, розрахунку навантажень та випуску креслень за стандартами ISO / DIN / ДСТУ для машинобудування, нафтогазової, аграрної та харчової промисловості.',
+    sk: 'Riešim vývoj zákazkových strojov a mechanizmov, modernizáciu prevádzok, pevnostné dimenzovanie a kompletnú výkresovú dokumentáciu (ISO / DIN / STN) pre strojárstvo, plynárenstvo, poľnohospodárstvo a potravinárstvo.',
+    en: 'Engineering custom machinery, process piping skids, industrial storage, and fabrication-ready 2D/3D CAD packages (ISO / DIN standards) for manufacturing, oil & gas, agro-bulk, and food processing plants.'
   },
   heroImpact: {
-    uk: '27+ років практичного досвіду. Головний доказ: всі об\'єкти та обладнання, змонтовані за моїми кресленнями, безперебійно працюють до сьогоднішнього дня.',
-    sk: '27+ rokov inžinierskej praxe. Kľúčový dôkaz: všetky projekty a zariadenia nainštalované podľa mojich výkresov dodnes spoľahlivo fungujú v prevádzke.',
-    en: '27+ years of hands-on engineering experience. Key proof: All projects and equipment installed according to my designs remain operational to this day.'
+    uk: '27+ років стажу інженера-конструктора. 26+ реалізованих промислових об\'єктів, що надійно працюють в експлуатації.',
+    sk: '27+ rokov praxe konštruktéra. 26+ priemyselných realizácií overených v reálnej dlhodobej prevádzke.',
+    en: '27+ years of engineering practice. 26+ field-commissioned industrial projects operating in real production environments.'
   },
   btnViewProjects: {
-    uk: 'Переглянути проєкти',
-    sk: 'Zobraziť projekty',
-    en: 'View Projects'
+    uk: 'Переглянути інженерні кейси',
+    sk: 'Zobraziť inžinierske prípady',
+    en: 'Featured Engineering Cases'
   },
   btnContact: {
-    uk: 'Зв\'язатися з інженером',
-    sk: 'Kontaktovať inžiniera',
-    en: 'Contact Engineer'
+    uk: 'Обговорити технічне завдання',
+    sk: 'Konzultovať technické zadanie',
+    en: 'Submit Technical Inquiry'
   },
   statProjects: {
     uk: 'Реалізовані об\'єкти',
@@ -152,9 +152,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Completed Projects'
   },
   statProjectsSubtitle: {
-    uk: '100% діючі та надійні',
-    sk: '100% v prevádzke',
-    en: '100% built & operating'
+    uk: 'Промислове впровадження',
+    sk: 'Priemyselná realizácia',
+    en: 'Field-implemented'
   },
   statExp: {
     uk: 'Років досвіду',
@@ -192,44 +192,39 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: '01'
   },
   skillsTitle: {
-    uk: 'Чим я можу допомогти',
-    sk: 'V čom vám môžem pomôcť',
-    en: 'What I Can Help You With'
+    uk: 'Інженерні послуги & Напрямки експертизи',
+    sk: 'Inžinierske služby & Oblasti expertízy',
+    en: 'Engineering Design Services & Expertise'
   },
   skillsSubtitle: {
-    uk: '6 ключових напрямків інженерної експертизи: від розробки нових машин до модифікації існуючого обладнання',
-    sk: '6 kľúčových oblastí inžinierskej odbornosti: od vývoja nových strojov po úpravu existujúcich zariadení',
-    en: '6 core engineering expertise areas: from custom machine development to modification and CAD manufacturing packages'
+    uk: '6 ключових напрямків машинобудування, проєктування промислового обладнання, 3D CAD моделювання та модернізації вузлів.',
+    sk: '6 kľúčových oblastí konštrukcie strojov, priemyselných zariadení, 3D CAD modelovania a modernizácie prevádzok.',
+    en: '6 core domains of machine design, industrial equipment, 3D CAD modeling, and mechanical equipment modification.'
   },
-  processSecNum: {
+  portfolioSecNum: {
     uk: '02',
     sk: '02',
     en: '02'
-  },
-  portfolioSecNum: {
-    uk: '03',
-    sk: '03',
-    en: '03'
   },
   portfolioTitle: {
     uk: 'Інженерні кейси (Case Studies)',
     sk: 'Inžinierske prípadové štúdie',
     en: 'Engineering Case Studies'
   },
-  workflowSecNum: {
+  processSecNum: {
+    uk: '03',
+    sk: '03',
+    en: '03'
+  },
+  aboutSecNum: {
     uk: '04',
     sk: '04',
     en: '04'
   },
-  aboutSecNum: {
+  educationSecNum: {
     uk: '05',
     sk: '05',
     en: '05'
-  },
-  educationSecNum: {
-    uk: '06',
-    sk: '06',
-    en: '06'
   },
   educationTitle: {
     uk: 'Освіта та кваліфікація',
@@ -237,9 +232,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Education & Qualifications'
   },
   contactSecNum: {
-    uk: '07',
-    sk: '07',
-    en: '07'
+    uk: '06',
+    sk: '06',
+    en: '06'
   },
   contactTitle: {
     uk: 'Зв\'язок та технічні запити',
@@ -287,14 +282,149 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Description of problem, equipment, or technical requirements'
   },
   formSubmit: {
-    uk: 'Надіслати технічне завдання',
-    sk: 'Odoslať technické zadanie',
+    uk: 'Надіслати технічний запит',
+    sk: 'Odoslať technický dopyt',
     en: 'Send Technical Inquiry'
   },
   formSuccess: {
     uk: 'Дякую! Запит сформовано. Відкриваю поштовий клієнт...',
     sk: 'Ďakujem! Dopyt bol pripravený. Otváram emailového klienta...',
     en: 'Thank you! Technical inquiry prepared. Opening email client...'
+  },
+  inquirySecBadge: {
+    uk: 'ТЕХНІЧНИЙ ЗАПИТ ТА ПЕРВИННИЙ КОНТАКТ',
+    sk: 'TECHNICKÝ DOPYT A PRVÝ KONTAKT',
+    en: 'TECHNICAL INQUIRY & INITIAL CONTACT'
+  },
+  inquiryTitle: {
+    uk: 'Обговоримо вашу інженерну задачу',
+    sk: 'Preberme vaše inžinierske zadanie',
+    en: 'Discuss Your Engineering Challenge'
+  },
+  inquirySubtitle: {
+    uk: 'Для первинної оцінки не потрібне ідеальне технічне завдання. Достатньо короткого опису, ескізу або фотографії вузла — технічні деталі та граничні умови сформулюємо разом.',
+    sk: 'Na prvotné posúdenie nepotrebujete dokonalé zadanie. Postačí stručný popis, skica alebo fotografia zostavy — technické špecifikácie zadefinujeme spoločne.',
+    en: "You don't need a complete specification to start. A brief summary, rough sketch, or shop-floor photo is enough — we will clarify operating conditions and requirements together."
+  },
+  inquiryWhatToSendHeading: {
+    uk: 'Що можна надати для оцінки задачі:',
+    sk: 'Čo môžete poslať na posúdenie:',
+    en: 'You can send:'
+  },
+  inquiryWhatToSendSub: {
+    uk: 'Підійде будь-яка наявна інформація в будь-якому форматі:',
+    sk: 'Vhodné sú akékoľvek dostupné informácie v ľubovoľnom formáte:',
+    en: 'Any available information in whatever format you have:'
+  },
+  inquiryItemDesc: {
+    uk: 'Опис проєкту (у вільній формі: мета, призначення, що має робити вузол)',
+    sk: 'Popis projektu (voľnou formou: účel, prevádzkové prostredie, funkcia)',
+    en: 'Project description (free-form: intended function, operating environment)'
+  },
+  inquiryItemDrawings: {
+    uk: 'Креслення (PDF, DWG, DXF, ескізи від руки або скани)',
+    sk: 'Výkresy (PDF, DWG, DXF, náčrty rukou alebo skeny)',
+    en: 'Drawings (PDF, DWG, DXF, hand sketches, or scanned paper prints)'
+  },
+  inquiryItemDimensions: {
+    uk: 'Габаритні розміри (монтажний простір, висоти, фланцеві прив\'язки)',
+    sk: 'Rozmery & priestor (zástavbový priestor, výšky, pripojovacie rozmery)',
+    en: 'Dimensions & constraints (available space, envelope limits, flange interfaces)'
+  },
+  inquiryItemSpecs: {
+    uk: 'Технічні характеристики (потужність, робочий тиск, витрата, матеріал)',
+    sk: 'Špecifikácie zariadenia (výkon, prevádzkový tlak, prietok, materiál)',
+    en: 'Equipment specifications (capacity, operating pressure, flow rate, material)'
+  },
+  inquiryItemPhotos: {
+    uk: 'Фотографії (наявний цех, місце монтажу, зношений або пошкоджений вузол)',
+    sk: 'Fotografie (reálny stav z prevádzky, montážny priestor, opotrebovaný diel)',
+    en: 'Photos (site photos from the shop floor, current assembly, worn/broken parts)'
+  },
+  inquiryItemDocs: {
+    uk: 'Наявна документація (паспорти обладнання, каталоги, 3D STEP/IGES)',
+    sk: 'Existujúca dokumentácia (pasporty zariadení, katalógy dielov, 3D STEP/IGES)',
+    en: 'Existing documentation (equipment manuals, component datasheets, 3D STEP)'
+  },
+  inquiryNoDetailsNote: {
+    uk: 'Не знаєте всіх точних параметрів? Це нормальна інженерна практика. Більшість успішних проєктів починаються з фотографії вузла або кількох речень опису. Усі критичні навантаження та вимоги ми узгодимо на первинній консультації.',
+    sk: 'Neviete všetky presné parametre? To je bežná inžinierska prax. Väčšina úspešných projektov začína fotografiou z prevádzky alebo pár vetami popisu. Všetky kritické zaťaženia a požiadavky zosúladíme pri úvodnej konzultácii.',
+    en: 'Not sure about all technical details yet? That is standard engineering practice. Most successful projects start with a photo or a two-sentence summary. We will clarify operating loads and boundary conditions during the initial review.'
+  },
+  inquiryNextStepsHeading: {
+    uk: 'Що відбудеться після вашого звернення:',
+    sk: 'Čo nasleduje po odoslaní dopytu:',
+    en: 'What happens after your inquiry:'
+  },
+  inquiryStep1Title: {
+    uk: '1. Аналіз завдання (до 24 год)',
+    sk: '1. Analýza zadania (do 24 hod.)',
+    en: '1. Initial Review (within 24h)'
+  },
+  inquiryStep1Desc: {
+    uk: 'Оцінка технічної здійсненності, складності та вибір базової концепції.',
+    sk: 'Posúdenie realizovateľnosti, náročnosti a voľba základnej koncepcie.',
+    en: 'Feasibility check, engineering complexity assessment, and concept screening.'
+  },
+  inquiryStep2Title: {
+    uk: '2. Технічне уточнення',
+    sk: '2. Technické upresnenie',
+    en: '2. Technical Clarification'
+  },
+  inquiryStep2Desc: {
+    uk: 'Прямий контакт (телефон, email, WhatsApp) для узгодження граничних умов та норм.',
+    sk: 'Priamy kontakt (telefón, email, WhatsApp) na zosúladenie okrajových podmienok.',
+    en: 'Direct discussion (phone, email, WhatsApp) to clarify loads, codes, and constraints.'
+  },
+  inquiryStep3Title: {
+    uk: '3. План, строки та кошторис',
+    sk: '3. Plán, termíny a rozpočet',
+    en: '3. Execution Plan & Scope'
+  },
+  inquiryStep3Desc: {
+    uk: 'Конкретний графік: етапи 3D CAD, склад креслень, терміни та прозорий кошторис.',
+    sk: 'Konkrétny harmonogram: etapy 3D CAD, zoznam výkresov, termíny a fixný rozpočet.',
+    en: 'Clear execution plan: 3D CAD milestones, drawing deliverables, delivery dates, and fixed quote.'
+  },
+  inquiryBtnSend: {
+    uk: 'Надіслати технічний запит',
+    sk: 'Odoslať technický dopyt',
+    en: 'Send Technical Inquiry'
+  },
+  inquiryBtnCopy: {
+    uk: 'Скопіювати шаблон запиту',
+    sk: 'Kopírovať šablónu dopytu',
+    en: 'Copy Inquiry Template'
+  },
+  inquiryBtnCopied: {
+    uk: 'Шаблон скопійовано у буфер!',
+    sk: 'Šablóna skopírovaná do schránky!',
+    en: 'Template Copied to Clipboard!'
+  },
+  inquiryBtnWhatsApp: {
+    uk: 'Швидке повідомлення у WhatsApp',
+    sk: 'Rýchla správa cez WhatsApp',
+    en: 'Quick WhatsApp Message'
+  },
+  inquiryFieldCategory: {
+    uk: 'Напрямок / Тип інженерної задачі:',
+    sk: 'Oblasť / Typ inžinierskej úlohy:',
+    en: 'Engineering Domain / Task Type:'
+  },
+  inquiryFieldMessage: {
+    uk: 'Короткий опис завдання або наявних даних (за бажанням):',
+    sk: 'Stručný popis úlohy alebo vstupných údajov (voliteľné):',
+    en: 'Brief task summary or known constraints (optional):'
+  },
+  inquiryFieldContact: {
+    uk: 'Ваш контакт (email або телефон для відповіді):',
+    sk: 'Váš kontakt (email alebo telefón pre odpoveď):',
+    en: 'Your contact (email or phone for reply):'
+  },
+  inquiryPlaceholderMessage: {
+    uk: 'Наприклад: Необхідно спроєктувати насосний вузол / раму / трубопровідну лінію. Габарити орієнтовно 2х1.5м. Є фотографії поточного майданчика та ескіз від руки...',
+    sk: 'Napríklad: Potrebujeme navrhnúť čerpací agregát / rám / potrubnú trasu. Rozmery orientačne 2x1.5m. Máme fotky prevádzky a náčrt rukou...',
+    en: 'E.g.: Need to design a pump skid / mounting frame / piping run. Space envelope ~2x1.5m. We have shop-floor photos and a hand sketch...'
   },
   allFilter: {
     uk: 'Всі проєкти',
@@ -507,8 +637,8 @@ export const ABOUT_DATA = {
   ],
   pillars: [
     {
-      title: { uk: '100% Реалізованість', sk: '100 % Realizovateľnosť', en: '100% Real-World Proven' },
-      desc: { uk: 'Всі створені проекти успішно виготовлені та експлуатуються.', sk: 'Všetky navrhnuté zariadenia boli vyrobené a fungujú.', en: 'Every design has been physically manufactured and commissioned.' }
+      title: { uk: 'Практична реалізованість (DFMA)', sk: 'Praktická realizovateľnosť (DFMA)', en: 'Industrial Viability (DFMA)' },
+      desc: { uk: 'Проєкти розробляються з урахуванням технологій виготовлення та монтажу.', sk: 'Návrhy rešpektujú skutočné výrobné a montážne technológie.', en: 'Every design is engineered specifically for physical manufacturing and field assembly.' }
     },
     {
       title: { uk: 'Виробнича логіка (DFMA)', sk: 'Výrobná logika (DFMA)', en: 'Design for Manufacturing' },
@@ -733,9 +863,9 @@ export const CONCEPT_TO_REALITY_STEPS = [
       en: 'Installation & Commissioning'
     },
     subtitle: {
-      uk: '100% працюючий промисловий об’єкт',
-      sk: '100 % funkčné priemyselné dielo',
-      en: 'Operational industrial handover'
+      uk: 'Введення в експлуатацію та As-Built',
+      sk: 'Uvedenie do prevádzky a As-Built',
+      en: 'Commissioning & As-Built handover'
     },
     description: {
       uk: 'Шеф-монтаж на об’єкті замовника, центрування агрегатів, пусконалагоджувальні роботи під навантаженням та передача в експлуатацію.',

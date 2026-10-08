@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ProjectItem, Language } from '../types';
 import { UI_TRANSLATIONS } from '../data/portfolioData';
 import { getWebpUrl } from '../utils/imageOptimizer';
-import { X, ChevronLeft, ChevronRight, Maximize2, CheckCircle, ZoomIn, FileText, Camera, Layers, Wrench, ShieldCheck, HelpCircle } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Maximize2, CheckCircle, ZoomIn, FileText, Camera, Layers, Wrench, ShieldCheck, HelpCircle, Building2, Briefcase, AlertCircle } from 'lucide-react';
 
 interface ProjectModalProps {
   project: ProjectItem | null;
@@ -275,7 +275,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 )}
                 <img
                   src={currentImage}
-                  alt={currentDrawingCaption || project.title[currentLang]}
+                  alt={currentDrawingCaption 
+                    ? `${project.title[currentLang]} — ${currentDrawingCaption}` 
+                    : `${project.title[currentLang]} — ${isCurrentDrawing ? (currentLang === 'uk' ? 'креслення' : currentLang === 'sk' ? 'výkres' : 'drawing') : (currentLang === 'uk' ? 'фото' : currentLang === 'sk' ? 'foto' : 'photo')}`}
                   width={1920}
                   height={1080}
                   className="max-h-[64vh] lg:max-h-[76vh] w-auto max-w-full object-contain transition-transform duration-300 rounded-xl cursor-zoom-in hover:brightness-105"
@@ -414,37 +416,66 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 </p>
               )}
 
-              {/* Engineering Workflow (Problem -> Solution -> Implementation -> Result) */}
+              {/* JTBD Complete Engineering Architecture (Client -> Problem -> Role -> Engineered Solution -> Implementation -> Result -> Proofs) */}
               <div className="mb-6 space-y-3">
-                {project.engineeringChallenge && (
+                {/* 1. CLIENT / PROJECT TYPE */}
+                {project.clientType && (
                   <div className="p-4 rounded-xl bg-[var(--badge-bg)] border border-[var(--border-color)]">
                     <div className="flex items-center gap-2 font-gost-mono uppercase text-[var(--accent-blue)] font-bold text-xs mb-1.5">
-                      <HelpCircle className="w-4 h-4" />
-                      <span>{currentLang === 'uk' ? '1. Інженерне завдання (Challenge):' : currentLang === 'sk' ? '1. Inžinierska úloha (Zadanie):' : '1. Engineering Challenge:'}</span>
+                      <Building2 className="w-4 h-4 text-[var(--accent-blue)]" />
+                      <span>{currentLang === 'uk' ? '1. Замовник / Тип об’єкта (Client & Facility):' : currentLang === 'sk' ? '1. Klient / Typ prevádzky:' : '1. Client & Facility Type:'}</span>
                     </div>
-                    <div className="text-sm sm:text-base text-[var(--text-primary)] font-medium leading-relaxed">
-                      {project.engineeringChallenge[currentLang]}
+                    <div className="text-sm sm:text-base text-[var(--text-primary)] font-semibold leading-relaxed">
+                      {project.clientType[currentLang]}
                     </div>
                   </div>
                 )}
 
-                {project.workPerformed && (
+                {/* 2. ENGINEERING PROBLEM */}
+                {(project.engineeringProblem || project.engineeringChallenge) && (
+                  <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30">
+                    <div className="flex items-center gap-2 font-gost-mono uppercase text-amber-400 font-bold text-xs mb-1.5">
+                      <AlertCircle className="w-4 h-4 text-amber-400" />
+                      <span>{currentLang === 'uk' ? '2. Інженерна задача / Проблема (Engineering Problem):' : currentLang === 'sk' ? '2. Inžinierska úloha / Problém:' : '2. Engineering Problem:'}</span>
+                    </div>
+                    <div className="text-sm sm:text-base text-[var(--text-primary)] font-medium leading-relaxed">
+                      {(project.engineeringProblem || project.engineeringChallenge)?.[currentLang]}
+                    </div>
+                  </div>
+                )}
+
+                {/* 3. MY ROLE */}
+                {project.myRole && (
                   <div className="p-4 rounded-xl bg-[var(--badge-bg)] border border-[var(--border-color)]">
                     <div className="flex items-center gap-2 font-gost-mono uppercase text-indigo-400 font-bold text-xs mb-1.5">
-                      <FileText className="w-4 h-4" />
-                      <span>{currentLang === 'uk' ? '2. Проєктування & Креслення (CAD & Design):' : currentLang === 'sk' ? '2. Projektovanie & Výkresy (CAD):' : '2. Design & Blueprints:'}</span>
+                      <Briefcase className="w-4 h-4 text-indigo-400" />
+                      <span>{currentLang === 'uk' ? '3. Моя роль у проєкті (My Role):' : currentLang === 'sk' ? '3. Moja inžinierska rola:' : '3. My Engineering Role:'}</span>
                     </div>
                     <div className="text-sm sm:text-base text-[var(--text-primary)] font-medium leading-relaxed">
-                      {project.workPerformed[currentLang]}
+                      {project.myRole[currentLang]}
                     </div>
                   </div>
                 )}
 
+                {/* 4. WHAT I DESIGNED / ENGINEERED */}
+                {(project.whatIDesigned || project.workPerformed) && (
+                  <div className="p-4 rounded-xl bg-[var(--badge-bg)] border border-[var(--border-color)]">
+                    <div className="flex items-center gap-2 font-gost-mono uppercase text-sky-400 font-bold text-xs mb-1.5">
+                      <FileText className="w-4 h-4 text-sky-400" />
+                      <span>{currentLang === 'uk' ? '4. Що спроєктовано / Розраховано (What I Designed):' : currentLang === 'sk' ? '4. Čo bolo navrhnuté a vypočítané:' : '4. What I Designed / Engineered:'}</span>
+                    </div>
+                    <div className="text-sm sm:text-base text-[var(--text-primary)] font-medium leading-relaxed">
+                      {(project.whatIDesigned || project.workPerformed)?.[currentLang]}
+                    </div>
+                  </div>
+                )}
+
+                {/* 5. IMPLEMENTATION */}
                 {project.implementation && (
                   <div className="p-4 rounded-xl bg-[var(--badge-bg)] border border-[var(--border-color)]">
                     <div className="flex items-center gap-2 font-gost-mono uppercase text-amber-500 font-bold text-xs mb-1.5">
-                      <Wrench className="w-4 h-4" />
-                      <span>{currentLang === 'uk' ? '3. Виготовлення & Монтаж (Fabrication & Assembly):' : currentLang === 'sk' ? '3. Výroba & Montáž:' : '3. Fabrication & Assembly:'}</span>
+                      <Wrench className="w-4 h-4 text-amber-500" />
+                      <span>{currentLang === 'uk' ? '5. Виготовлення & Монтаж (Implementation):' : currentLang === 'sk' ? '5. Výroba & Montáž:' : '5. Implementation & Erection:'}</span>
                     </div>
                     <div className="text-sm sm:text-base text-[var(--text-primary)] font-medium leading-relaxed">
                       {project.implementation[currentLang]}
@@ -452,11 +483,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   </div>
                 )}
 
+                {/* 6. RESULT */}
                 {project.result && (
                   <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
-                    <div className="flex items-center gap-2 font-gost-mono uppercase text-emerald-500 font-bold text-xs mb-1.5">
-                      <ShieldCheck className="w-4 h-4" />
-                      <span>{currentLang === 'uk' ? '4. Результат експлуатації (Operation Result):' : currentLang === 'sk' ? '4. Výsledok v prevádzke:' : '4. Operational Result:'}</span>
+                    <div className="flex items-center gap-2 font-gost-mono uppercase text-emerald-400 font-bold text-xs mb-1.5">
+                      <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                      <span>{currentLang === 'uk' ? '6. Реальний результат в експлуатації (Result):' : currentLang === 'sk' ? '6. Reálny výsledok v prevádzke:' : '6. Measurable Result:'}</span>
                     </div>
                     <div className="text-sm sm:text-base text-[var(--text-primary)] font-medium leading-relaxed">
                       {project.result[currentLang]}

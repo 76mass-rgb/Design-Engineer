@@ -51,7 +51,7 @@ export const CV_TRANSLATIONS: Record<Language, CVData> = {
     experienceYears: 27,
     completedProjects: '300+',
     drivingLicense: 'Категорії «A», «B», «C» (наявний власний автомобіль, висока мобільність)',
-    summary: 'Провідний інженер-конструктор з 27+ роками практичного досвіду та 300+ реалізованими промисловими об\'єктами в нафтохімічній, газовій, аграрній та важкій промисловості. Головне професійне досягнення: 100% розроблених проектів успішно побудовані, введені в експлуатацію і надійно працюють до сьогоднішнього дня. Досвідчений керівник проектних груп. Повний інженерний цикл: від передпроектних замірів та ТКП до стадій «ЕП», «П», «РП», «Р», розробки ППР, випуску деталізованих креслень у цех (розділи КМ, КЖ, ВК, ТХ за ГОСТ / ISO / ASME / Eurocodes) та безпосереднього авторського нагляду і керівництва будівельно-монтажними роботами на об\'єктах.',
+    summary: 'Провідний інженер-конструктор з 27+ роками практичного досвіду та 300+ реалізованими промисловими об\'єктами в нафтохімічній, газовій, аграрній та важкій промисловості. Практичний підхід: проєктування технологічних систем та обладнання, оптимізованих для реального виробництва, швидкого монтажу та тривалої надійної експлуатації. Досвідчений керівник проектних груп. Повний інженерний цикл: від передпроектних замірів та ТКП до стадій «ЕП», «П», «РП», «Р», розробки ППР, випуску деталізованих креслень у цех (розділи КМ, КЖ, ВК, ТХ за ГОСТ / ISO / ASME / Eurocodes) та безпосереднього авторського нагляду і керівництва будівельно-монтажними роботами на об\'єктах.',
     specializations: [
       'Технологічні трубопроводи високого та низького тиску (газ, нафта, хімія, пара)',
       'Розробка схем P&ID, Flow Sheets та монтажних ізометрій (ISO 10628, EN 13480)',
@@ -239,7 +239,7 @@ export const CV_TRANSLATIONS: Record<Language, CVData> = {
     experienceYears: 27,
     completedProjects: '300+',
     drivingLicense: 'Vodičské oprávnenie «A», «B», «C» (vlastné vozidlo, vysoká mobilita)',
-    summary: 'Projektový inžinier s viac ako 27 rokmi praxe a 300+ úspešne realizovanými priemyselnými objektmi v petrochémii, plynárenstve, poľnohospodárstve a ťažkom priemysle. Kľúčový profesionálny úspech: 100 % navrhnutých projektov bolo úspešne postavených, spustených a spoľahlivo fungujú dodnes. Komplexný životný cyklus projektovania: od tvorby P&ID procesných schém a hydraulických výpočtov až po 3D modelovanie, izometrické výkresy (EN / ASME / ISO) a autorský dozor na stavbách.',
+    summary: 'Projektový inžinier s viac ako 27 rokmi praxe a 300+ úspešne realizovanými priemyselnými objektmi v petrochémii, plynárenstve, poľnohospodárstve a ťažkom priemysle. Dôraz na prax: návrh funkčných a technologicky overených riešení pripravených na výrobu a dlhodobú prevádzku. Komplexný životný cyklus projektovania: od tvorby P&ID procesných schém a hydraulických výpočtov až po 3D modelovanie, izometrické výkresy (EN / ASME / ISO) a autorský dozor na stavbách.',
     specializations: [
       'Technologické potrubné rozvody vysokého a nízkeho tlaku',
       'Tvorba procesných schém P&ID a Flow Sheets (ISO 10628)',
@@ -426,7 +426,7 @@ export const CV_TRANSLATIONS: Record<Language, CVData> = {
     experienceYears: 27,
     completedProjects: '300+',
     drivingLicense: 'Driving License Categories «A», «B», «C» (own vehicle, high mobility)',
-    summary: 'Lead Industrial Design Engineer with over 27 years of hands-on expertise and 300+ completed projects across petrochemical, gas, agricultural, and heavy industrial domains. Core Engineering Milestone: 100% of designed facilities have been successfully constructed, commissioned, and continue to operate reliably to this day. Full project lifecycle execution: from preliminary site surveys and concept FEED studies to detailed shop drawings (structural steel, reinforced concrete, piping TX per ISO / ASME / Eurocodes), heavy lifting plans (PPR), field supervision, and turnkey commissioning.',
+    summary: 'Lead Industrial Design Engineer with over 27 years of hands-on expertise and 300+ completed projects across petrochemical, gas, agricultural, and heavy industrial domains. Core Engineering Focus: practical, manufacturable solutions engineered specifically for physical installation and long-term industrial duty. Full project lifecycle execution: from preliminary site surveys and concept FEED studies to detailed shop drawings (structural steel, reinforced concrete, piping TX per ISO / ASME / Eurocodes), heavy lifting plans (PPR), field supervision, and turnkey commissioning.',
     specializations: [
       'High and low pressure process piping systems (hydrocarbons, steam, chemicals)',
       'P&ID diagrams, flow sheets, and 3D piping isometrics (ISO 10628, EN 13480)',

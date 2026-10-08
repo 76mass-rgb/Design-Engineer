@@ -23,9 +23,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ currentLang }) => 
             </h2>
           </div>
           <p className="text-sm sm:text-base lg:text-lg text-[var(--text-secondary)] max-w-lg font-medium leading-relaxed">
-            {currentLang === 'uk' && '6 ключових напрямків машинобудування, проектування промислового обладнання та спеціальних механізмів.'}
-            {currentLang === 'sk' && '6 kľúčových oblastí konštrukcie strojov, priemyselných zariadení a jednoúčelových mechanizmov.'}
-            {currentLang === 'en' && '6 core domains of machine design, industrial equipment, mechanical systems, and manufacturing engineering.'}
+            {UI_TRANSLATIONS.skillsSubtitle[currentLang]}
           </p>
         </div>
 

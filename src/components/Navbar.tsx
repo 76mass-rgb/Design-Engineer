@@ -58,9 +58,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navItems = [
     { id: 'skills', label: UI_TRANSLATIONS.navSkills[currentLang], href: '#skills' },
-    { id: 'process', label: UI_TRANSLATIONS.navProcess[currentLang], href: '#process' },
     { id: 'portfolio', label: UI_TRANSLATIONS.navProjects[currentLang], href: '#portfolio' },
-    { id: 'workflow', label: UI_TRANSLATIONS.navHowIWork[currentLang], href: '#workflow' },
+    { id: 'process', label: UI_TRANSLATIONS.navProcess[currentLang], href: '#process' },
     { id: 'about', label: UI_TRANSLATIONS.navAbout[currentLang], href: '#about' },
     { id: 'education', label: UI_TRANSLATIONS.navEducation[currentLang], href: '#education' },
     { id: 'contact', label: UI_TRANSLATIONS.navContact[currentLang], href: '#contact' },

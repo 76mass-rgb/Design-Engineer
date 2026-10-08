@@ -18,7 +18,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16">
           <div>
             <div className="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[var(--accent-blue)] mb-2 font-gost-mono">
-              05 // {currentLang === 'uk' ? 'ПРОФЕСІЙНИЙ ДОСВІД' : currentLang === 'sk' ? 'PROFESIONÁLNY PROFIL' : 'PROFESSIONAL BACKGROUND'}
+              {UI_TRANSLATIONS.aboutSecNum[currentLang]} // {currentLang === 'uk' ? 'ПРОФЕСІЙНИЙ ДОСВІД' : currentLang === 'sk' ? 'PROFESIONÁLNY PROFIL' : 'PROFESSIONAL BACKGROUND'}
             </div>
             <h2 className="font-gost text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[var(--text-primary)]">
               {currentLang === 'uk' && 'Про інженера'}
