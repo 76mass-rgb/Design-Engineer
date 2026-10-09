@@ -177,42 +177,50 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
 
             // Collect all drawings and photos for expanded horizontal scrolling
             const mediaItems: { url: string; isDrawing: boolean; index: number; blockName?: string; blockId?: string }[] = [];
+            
+            // Always ensure the project cover image is present first
+            if (project.coverImage) {
+              const isDwg = project.drawings?.includes(project.coverImage) || false;
+              mediaItems.push({
+                url: project.coverImage,
+                isDrawing: isDwg,
+                index: 1,
+                blockName: currentLang === 'uk' ? 'Обкладинка проєкту' : currentLang === 'sk' ? 'Titulný výkres' : 'Project Cover',
+                blockId: project.mediaBlocks?.[0]?.id || 'cover'
+              });
+            }
+
             if (project.mediaBlocks && project.mediaBlocks.length > 0) {
               project.mediaBlocks.forEach((b) => {
                 b.images.forEach((url, uIdx) => {
+                  if (url === project.coverImage) return; // avoid duplicate
                   const isDwg = project.drawings?.includes(url) || false;
                   mediaItems.push({
                     url,
                     isDrawing: isDwg,
-                    index: uIdx + 1,
+                    index: mediaItems.length + 1,
                     blockName: b.title[currentLang],
                     blockId: b.id
                   });
                 });
               });
             } else {
-              if (project.coverImage) {
-                const isDwg = project.drawings?.includes(project.coverImage) || false;
-                mediaItems.push({
-                  url: project.coverImage,
-                  isDrawing: isDwg,
-                  index: 1,
-                });
-              }
-              (project.drawings || []).forEach((url, idx) => {
+              (project.drawings || []).forEach((url) => {
                 if (url !== project.coverImage) {
-                  mediaItems.push({ url, isDrawing: true, index: idx + 1 });
+                  mediaItems.push({ url, isDrawing: true, index: mediaItems.length + 1 });
                 }
               });
-              (project.photos || []).forEach((url, idx) => {
+              (project.photos || []).forEach((url) => {
                 if (url !== project.coverImage) {
-                  mediaItems.push({ url, isDrawing: false, index: idx + 1 });
+                  mediaItems.push({ url, isDrawing: false, index: mediaItems.length + 1 });
                 }
               });
               if (mediaItems.length === 0) {
                 const fallback = project.images && project.images.length > 0 ? project.images : (project.coverImage ? [project.coverImage] : []);
-                fallback.forEach((url, idx) => {
-                  mediaItems.push({ url, isDrawing: false, index: idx + 1 });
+                fallback.forEach((url) => {
+                  if (url !== project.coverImage) {
+                    mediaItems.push({ url, isDrawing: false, index: mediaItems.length + 1 });
+                  }
                 });
               }
             }
@@ -412,28 +420,15 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                           />
                         </picture>
 
-                        {/* Drawing caption badge if available */}
-                        {caption && (
-                          <div className="absolute top-2.5 left-2.5 right-2.5 z-10 pointer-events-none">
-                            <span className="inline-flex items-center gap-1.5 bg-black/85 backdrop-blur-md text-blue-200 border border-blue-400/40 text-[11px] sm:text-xs font-gost-mono font-bold px-3 py-1.5 rounded-lg truncate max-w-full shadow-lg">
-                              <FileText className="w-3 h-3 text-blue-400 shrink-0" />
-                              <span className="truncate">{caption}</span>
-                            </span>
-                          </div>
-                        )}
-
                         {/* Clean hover overlay with Eye icon */}
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/item:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                           <span className="bg-[var(--accent-blue)] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-4 py-2 rounded-full shadow-lg flex items-center gap-2 transform scale-95 group-hover/item:scale-100 transition-transform">
                             <Eye className="w-4 h-4" />
                             <span>
-                              {caption || (isCover
-                                ? (currentLang === 'uk' ? 'Переглянути обкладинку' : currentLang === 'sk' ? 'Zobraziť obálku' : 'View Cover')
-                                : (media.isDrawing 
-                                  ? (currentLang === 'uk' ? 'Переглянути креслення' : currentLang === 'sk' ? 'Zobraziť výkres' : 'View Blueprint')
-                                  : (currentLang === 'uk' ? 'Збільшити фото' : currentLang === 'sk' ? 'Zväčšiť фото' : 'Enlarge Photo')
-                                )
-                              )}
+                              {media.isDrawing 
+                                ? (currentLang === 'uk' ? 'Переглянути креслення' : currentLang === 'sk' ? 'Zobraziť výkres' : 'View Blueprint')
+                                : (currentLang === 'uk' ? 'Збільшити фото' : currentLang === 'sk' ? 'Zväčšiť fotku' : 'Enlarge Photo')
+                              }
                             </span>
                           </span>
                         </div>

@@ -275,6 +275,70 @@ const beerAllImagesList = [
   ...beerPhotosList
 ].filter((url, idx, self) => Boolean(url) && self.indexOf(url) === idx);
 
+// 2007-2012 Special Projects: Method Statements & Erection Plans (CPP)
+import coverImage_CPP from '../assets/images/projects/coverImage CPP.webp';
+import drawings_CPP from '../assets/images/projects/drawings CPP.webp';
+import drawings_CPP1 from '../assets/images/projects/drawings CPP1.webp';
+import drawings_CPP2 from '../assets/images/projects/drawings CPP2.webp';
+import drawings_CPP3 from '../assets/images/projects/drawings CPP3.webp';
+import drawings_CPP4 from '../assets/images/projects/drawings CPP4.webp';
+import drawings_CPP5 from '../assets/images/projects/drawings CPP5.webp';
+import drawings_CPP6 from '../assets/images/projects/drawings CPP6.webp';
+import drawings_CPP7 from '../assets/images/projects/drawings CPP7.webp';
+import photos_CPP from '../assets/images/projects/photos CPP.webp';
+import photos_CPP1 from '../assets/images/projects/photos CPP1.webp';
+import photos_CPP2 from '../assets/images/projects/photos CPP2.webp';
+
+const cppBlock1Images = [
+  coverImage_CPP,
+  drawings_CPP,
+  drawings_CPP1,
+  photos_CPP,
+  photos_CPP1,
+  photos_CPP2
+];
+
+const cppBlock2Images = [
+  drawings_CPP2,
+  drawings_CPP3
+];
+
+const cppBlock3Images = [
+  drawings_CPP4,
+  drawings_CPP5
+];
+
+const cppBlock4Images = [
+  drawings_CPP6,
+  drawings_CPP7
+];
+
+const cppDrawingsList = [
+  drawings_CPP,
+  drawings_CPP1,
+  drawings_CPP2,
+  drawings_CPP3,
+  drawings_CPP4,
+  drawings_CPP5,
+  drawings_CPP6,
+  drawings_CPP7
+];
+
+const cppPhotosList = [
+  coverImage_CPP,
+  photos_CPP,
+  photos_CPP1,
+  photos_CPP2
+];
+
+const cppAllImagesList = [
+  coverImage_CPP,
+  ...cppBlock1Images,
+  ...cppBlock2Images,
+  ...cppBlock3Images,
+  ...cppBlock4Images
+].filter((url, idx, self) => Boolean(url) && self.indexOf(url) === idx);
+
 export const PROJECTS_DATA: ProjectItem[] = [
   // 01. LUKOIL Replacement of the feed pump, 2003
   {
@@ -2820,5 +2884,169 @@ export const PROJECTS_DATA: ProjectItem[] = [
     drawings: beerDrawingsList,
     photos: beerPhotosList,
     images: beerAllImagesList
+  },
+  // Special Projects: Method Statements & Erection Plans (CPP / PPR), 2007-2012
+  {
+    id: 'method-statements-erection-cpp',
+    year: '2007-2012',
+    title: {
+      uk: 'Проєкти виконання робіт (ПВР)',
+      sk: 'Projekty realizácie prác (PPR)',
+      en: 'Method Statements & Erection Plans (PPR)'
+    },
+    category: {
+      uk: 'Спеціальні проекти',
+      sk: 'Špeciálne projekty',
+      en: 'Special Projects'
+    },
+    categoryId: 'special',
+    gridSpan: 6,
+    clientType: {
+      uk: 'ПАТ «ЛУКОЙЛ-Одеський НПЗ», ВАТ «Одеснафтопродукт», ТОВ «ЮСТ-СП»',
+      sk: 'LUKOIL-Odessa Refinery, OAO Odesanefteprodukt, UST-SP',
+      en: 'Lukoil Odessa Refinery, Odesnefteprodukt, UST-SP'
+    },
+    myRole: {
+      uk: 'Головний інженер-розробник ПВР, інженер-конструктор (ТОВ «ЮСТ-СП»)',
+      sk: 'Hlavný inžinier pre vypracovanie PPR, konštruktér (UST-SP)',
+      en: 'Lead Method Statement & Rigging Engineer, Structural Specialist'
+    },
+    whatIDesigned: {
+      uk: 'Комплексні альбоми ПВР: будівельні генплани, схеми стропування та переміщення автокранами (КС-7471 63т, КС-4561 16т), розрахунок та технологічні карти підйому резервуарів РВС домкратами 25т, схеми монтажу на котках, трасування технологічних трубопроводів (Ду-325, Ду-150, Ду-50) та регламенти безпеки праці.',
+      sk: 'Kompletné zväzky PPR: stavebné generálne plány, viazacie a manipulačné schémy žeriavmi (KS-7471 63t, KS-4561 16t), statické výpočty a technologické karty zdvihu nádrží RVS hydraulickými zdvihákmi 25t, posun po valčekoch, trasovanie potrubí (DN300, DN150, DN50) a bezpečnostné postupy.',
+      en: 'Comprehensive erection engineering packages: site layout plans, rigging and lifting plans for mobile cranes (63t KS-7471, 16t KS-4561), tank jacking schemes using 25t hydraulic jacks, heavy skidding on I-beam rollers, process piping manifolds (DN300, DN150, DN50), and HSE protocols.'
+    },
+    engineeringProblem: {
+      uk: 'Розробка технологій виконання робіт підвищеної небезпеки в умовах діючих вибухопожежонебезпечних виробництв: монтаж масивного водневого компресора у стисненому просторі цеху, підйом корпусів резервуарів РВС для повної заміни днищ без порушення геометрії стінки, перенесення 7 резервуарів V=3000 м³ та ремонт плаваючих понтонів сировинного парку.',
+      sk: 'Vývoj postupov realizácie rizikových prác v podmienkach nepretržitej prevádzky s rizikom výbuchu: montáž masívneho vodíkového kompresora v stiesnených priestoroch, zdvíhanie nádrží RVS pre výmenu dna bez deformácie plášťa, preloženie 7 nádrží V=3000 m³ a oprava plávajúcich pontónov.',
+      en: 'Developing high-risk execution engineering within live, hazardous petrochemical plants: rigging massive hydrogen compressor into tight compressor halls, hydraulic lifting of vertical tanks for full bottom replacement without shell distortion, seven 3,000 m³ tank relocations, and pontoon floating roof overhauls.'
+    },
+    engineeringChallenge: {
+      uk: 'Вимоги безаварійності на діючих технологічних установках нафтопереробного заводу, обмежені габарити монтажних отворів, суворе дотримання допусків співвісності та безпеки вогневих робіт.',
+      sk: 'Požiadavky na bezhavarijnosť v nepretržitej rafinérskej prevádzke, stiesnené stavebné otvory, prísne tolerancie súosovosti a striktné predpisy pre práce s otvoreným ohňom.',
+      en: 'Zero-downtime safety constraints in live refineries, tight spatial clearances for crane booms and skidding routes, rigorous shaft alignment tolerances, and explosive atmosphere safety protocols.'
+    },
+    workPerformed: {
+      uk: 'Розробка графічної частини та текстових технологічних регламентів ПВР, узгодження з головними інженерами, механіками та інспекціями ОП і ПБ, авторський нагляд за виконанням монтажних та такелажних робіт на об\'єктах.',
+      sk: 'Vypracovanie grafickej časti a technologických predpisov PPR, schválenie hlavnými inžiniermi, mechanikmi a inšpekciou BOZP, autorský dozor počas montážnych a manipulačných prác priamo na stavbe.',
+      en: 'Detailed technical drawing production and textual method statements, regulatory approvals with Chief Engineers, Chief Mechanics, and safety inspectorates, followed by on-site rigging supervision.'
+    },
+    description: {
+      uk: 'Інженерні проєкти виконання робіт (ПВР) для нафтохімічних та промислових об\'єктів: 1) Монтаж водневого компресора на установці ЛГ Одеського НПЗ; 2) Ремонт та підйом резервуарів РВС-400 / РВС-1000 гідродомкратами; 3) Перенесення сьоми резервуарів V=3000 м³ ВАТ «Одеснафтопродукт»; 4) Ремонт понтона в резервуарі V=5000 м³ сировинного парку.',
+      sk: 'Inžinierske projekty realizácie prác (PPR) pre petrochemické a priemyselné objekty: 1) Montáž vodíkového kompresora na jednotke LG Odeskej rafinérie; 2) Oprava a zdvíhanie nádrží RVS-400 / RVS-1000 hydraulickými zdvihákmi; 3) Premiestnenie siedmich nádrží V=3000 m³ OAO Odesanefteprodukt; 4) Oprava pontónu v nádrži V=5000 m³ surovinného parku.',
+      en: 'Series of industrial method statements and erection plans (PPR) for high-hazard petrochemical infrastructure: 1) Hydrogen compressor installation at Odessa Refinery LG unit; 2) Hydraulic jacking and overhaul of RVS-400 & RVS-1000 storage tanks; 3) Relocation of seven 3,000 m³ tanks at Odesnefteprodukt; 4) Pontoon floating roof overhaul in 5,000 m³ crude tank.'
+    },
+    implementation: {
+      uk: 'Виконання всіх етапів переміщення важкого обладнання (крани 63т, гідродомкрати 25т, талі, котки) у діючих цехах із забезпеченням безперебійної роботи сусідніх технологічних блоків.',
+      sk: 'Realizácia všetkých manipulačných etáp ťažkých zariadení (žeriavy 63t, zdviháky 25t, kladkostroje, valčeky) v prevádzkovaných halách so zachovaním chodu susedných technologických blokov.',
+      en: 'Execution of all heavy rigging phases (63-ton mobile crane, 25-ton hydraulic jacks, hoists, skidding rollers) inside operating refinery plants while keeping adjacent process streams online.'
+    },
+    result: {
+      uk: 'Успішне, своєчасне та на 100% безаварійне виконання робіт на всіх об\'єктах, підтверджене актами приймання та багаторічною безаварійною експлуатацією обладнання.',
+      sk: 'Úspešné, včasné a 100 % bezhavarijné dokončenie všetkých prác na objektoch, potvrdené preberacími protokolmi a dlhodobou spoľahlivou prevádzkou.',
+      en: 'Flawless, on-time, and 100% accident-free completion across all four projects, formally signed off by refinery management and proven by years of reliable service.'
+    },
+    proofBadges: {
+      uk: ['4 комплексні блоки ПВР', 'Кран 63т / Домкрати 25т', '7 РВС-3000м³ / РВС-5000м³', '100% безаварійно'],
+      sk: ['4 ucelené bloky PPR', 'Žeriav 63t / Zdviháky 25t', '7 RVS-3000m³ / RVS-5000m³', '100 % bezpečne'],
+      en: ['4 Method Statement Blocks', '63t Crane / 25t Jacks', '7 RVS-3000m³ / RVS-5000m³', 'Zero Accidents']
+    },
+    specs: {
+      uk: [
+        'Замовники: ВАТ «ЛУКОЙЛ-Одеський НПЗ», ВАТ «Одеснафтопродукт», ТОВ «ЮСТ-СП»',
+        'Період реалізації: 2007–2012 роки',
+        'Категорія: Спеціальні проекти / Проєкти виконання робіт (ПВР)',
+        'Блок 1: Монтаж водневого компресора на установці ЛГ (drawings CPP, CPP1, photos CPP, CPP1, CPP2)',
+        'Блок 2: Ремонт та підйом резервуарів РВС-400 / РВС-1000 домкратами (drawings CPP2, CPP3)',
+        'Блок 3: Перенесення сьоми резервуарів V=3000м3 ВАТ "Одеснафтопродукт" (drawings CPP4, CPP5)',
+        'Блок 4: Ремонт понтона в резервуарі V=5000 м³ товарно-сировинного парку (drawings CPP6, CPP7)',
+        'Обкладинка: Альбом ПВР та генеральний план (coverImage CPP.webp)',
+        'Результат: Успішна безаварійна реалізація умов підвищеної небезпеки'
+      ],
+      sk: [
+        'Objednávatelia: LUKOIL-Odessa Refinery, OAO Odesanefteprodukt, UST-SP',
+        'Obdobie realizácie: 2007–2012',
+        'Kategória: Špeciálne projekty / Projekty realizácie prác (PPR)',
+        'Blok 1: Montáž vodíkového kompresora na jednotke LG (drawings CPP, CPP1, photos CPP, CPP1, CPP2)',
+        'Blok 2: Oprava a zdvih nádrží RVS-400 / RVS-1000 hydraulickými zdvihákmi (drawings CPP2, CPP3)',
+        'Blok 3: Premiestnenie siedmich nádrží V=3000 m³ OAO Odesanefteprodukt (drawings CPP4, CPP5)',
+        'Blok 4: Oprava pontónu v nádrži č. 51 V=5000 m³ (drawings CPP6, CPP7)',
+        'Titulná strana: Titulný list a situácia stavby (coverImage CPP.webp)',
+        'Výsledok: 100 % bezhavarijná realizácia v rizikových prevádzkach'
+      ],
+      en: [
+        'Clients: Lukoil Odessa Oil Refinery, OAO Odesnefteprodukt, UST-SP',
+        'Implementation period: 2007–2012',
+        'Category: Special Projects / Method Statements & Erection Plans (PPR)',
+        'Block 1: Hydrogen compressor rigging & installation at LG unit (drawings CPP, CPP1, photos CPP, CPP1, CPP2)',
+        'Block 2: Hydraulic jacking overhaul of RVS-400 / RVS-1000 tanks (drawings CPP2, CPP3)',
+        'Block 3: Relocation of Seven V=3000 m³ Tanks at Odesnefteprodukt (drawings CPP4, CPP5)',
+        'Block 4: Internal floating roof (pontoon) repair in 5,000 m³ tank (drawings CPP6, CPP7)',
+        'Cover: Title sheet and general erection layout (coverImage CPP.webp)',
+        'Result: 100% accident-free execution in high-hazard live refineries'
+      ]
+    },
+    mediaBlocks: [
+      {
+        id: 'cpp-block-1-compressor',
+        title: {
+          uk: 'Блок 1: Монтаж водневого компресора на установці ЛГ (ПАТ «ЛУКОЙЛ-Одеський НПЗ»)',
+          sk: 'Blok 1: Montáž vodíkového kompresora na jednotke LG (LUKOIL rafinéria)',
+          en: 'Block 1: Hydrogen Compressor Rigging at LG Unit (Lukoil Odessa Refinery)'
+        },
+        description: {
+          uk: 'Технологічні карти та схема монтажу водневого компресора у газовій компресорній: перевантаження важким автокраном КС-7471 (63т), затягування через стіновий проріз на котках та напрямних двотаврах №40, опускання чотирма домкратами 20т на проектний фундамент, підливка рами бетоном.',
+          sk: 'Technologické karty a montážny postup vodíkového kompresora: manipulácia žeriavom KS-7471 (63t), zasunutie cez montážny otvor na valčekoch a nosníkoch IPE40, usadenie štyrmi zdvihákmi 20t na základ a podliatie rámu betónom.',
+          en: 'Rigging plan and sequence for hydrogen compressor installation: tandem pick by 63-ton crane, rolling skids through wall opening on heavy I-beams, 4x 20t hydraulic jack lowering to foundation, and high-strength grout pouring.'
+        },
+        images: cppBlock1Images
+      },
+      {
+        id: 'cpp-block-2-tanks-lifting',
+        title: {
+          uk: 'Блок 2: Ремонт та підйом резервуарів РВС-400 / РВС-1000 гідродомкратами',
+          sk: 'Blok 2: Oprava a zdvíhanie nádrží RVS-400 / RVS-1000 hydraulickými zdvihákmi',
+          en: 'Block 2: RVS-400 / RVS-1000 Tanks Hydraulic Jacking & Structural Overhaul'
+        },
+        description: {
+          uk: 'Технологія виконання ремонтних робіт на резервуарах РВС-400 та РВС-1000: розрахунок та монтаж каркаса жорсткості, підйом корпусу 5 гідравлічними домкратами Q=25т, влаштування нових фундаментів, заміна днищ і нижніх поясів.',
+          sk: 'Technológia opravy nádrží RVS-400 a RVS-1000: návrh výstužného rámu, synchrónny zdvih 5 hydraulickými zdvihákmi Q=25t, rekonštrukcia základov a kompletná výmena dna i plášťových pásov.',
+          en: 'Method statement for vertical storage tank repair: structural stiffening cage design, synchronous lifting using 5x 25-ton hydraulic jacks, new foundation pad construction, and bottom/shell plate renewal.'
+        },
+        images: cppBlock2Images
+      },
+      {
+        id: 'cpp-block-3-odesnefteprodukt',
+        title: {
+          uk: 'Блок 3: Перенесення сьоми резервуарів V=3000м3 ВАТ "Одеснафтопродукт"',
+          sk: 'Blok 3: Premiestnenie siedmich nádrží V=3000 m³ OAO Odesanefteprodukt',
+          en: 'Block 3: Relocation of Seven V=3000 m³ Tanks (Odesnefteprodukt)'
+        },
+        description: {
+          uk: 'Будівельний генеральний план майданчика Цеху №3 та план прокладання технологічних трубопроводів нафтопродуктів (Ду-325, Ду-150, Ду-50) і промзливової каналізації: перенесення сьоми резервуарів V=3000 м³, прив\'язка розташування цих РВС на майданчику, влаштування ґрунтових подушок, глиняного замка обвалування та доріжок обслуговування.',
+          sk: 'Stavebný generálny plán areálu cechu č. 3 a plán technologických produktovodov (DN300, DN150, DN50) i priemyselnej dažďovej kanalizácie: premiestnenie 7 nádrží V=3000 m³, vytýčenie polohy týchto nádrží, zemné ochranné hrádze s ílovým tesnením a obslužné chodníky.',
+          en: 'Site layout and manifold piping routing plan (DN300, DN150, DN50) and drainage network: relocation of seven 3,000 m³ storage tanks, layout positioning of these tanks, engineered foundation pads, clay core bund walls, and access walkways.'
+        },
+        images: cppBlock3Images
+      },
+      {
+        id: 'cpp-block-4-ponton-5000',
+        title: {
+          uk: 'Блок 4: Ремонт понтона в резервуарі №51 V=5000 м³ (Одеський НПЗ)',
+          sk: 'Blok 4: Oprava pontónu v nádrži č. 51 V=5000 m³ (Odeská rafinéria)',
+          en: 'Block 4: Floating Roof (Pontoon) Overhaul in 5,000 m³ Tank (Odessa Refinery)'
+        },
+        description: {
+          uk: 'Схеми демонтажу та монтажу металоконструкцій понтона резервуара №51 товарно-сировинного парку: використання крана КС-4561 (16т, виліт стріли до 30м), ручних талей 3т, вентиляція та продувка систем, суворе дотримання вимог пожежовибухобезпеки.',
+          sk: 'Schémy demontáže a montáže oceľových konštrukcií plávajúceho pontónu nádrže č. 51 surovinného parku: nasadenie žeriava KS-4561 (16t, rameno 30m), kladkostrojov 3t, odplynenie nádrže a bezpečnostné postupy požiarnej ochrany.',
+          en: 'Demolition and re-assembly rigging schemes for internal floating roof (pontoon) in 5,000 m³ crude tank: KS-4561 16-ton crane operations with 30m boom, 3-ton manual hoists, tank degassing, and high-risk hot-work safety procedures.'
+        },
+        images: cppBlock4Images
+      }
+    ],
+    coverImage: coverImage_CPP,
+    drawings: cppDrawingsList,
+    photos: cppPhotosList,
+    images: cppAllImagesList
   }
 ];

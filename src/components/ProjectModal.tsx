@@ -502,7 +502,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <div className="mb-6 p-4 rounded-2xl bg-[var(--bg-surface-2)] border border-[var(--border-color)]">
                   <div className="text-xs font-gost-mono uppercase tracking-wider text-[#92400e] dark:text-[#d97706] font-extrabold mb-3 flex items-center justify-between">
                     <span>
-                      {currentLang === 'uk' ? 'Технологічні стадії реконструкції (3 стадії):' : currentLang === 'sk' ? 'Technologické etapy rekonštrukcie (3 etapy):' : 'Reconstruction Process Stages (3 Stages):'}
+                      {currentLang === 'uk'
+                        ? `Технологічні блоки / стадії проєкту (${project.mediaBlocks.length}):`
+                        : currentLang === 'sk'
+                        ? `Technologické bloky / etapy projektu (${project.mediaBlocks.length}):`
+                        : `Project Sections / Stages (${project.mediaBlocks.length}):`}
                     </span>
                     <span className="text-[10px] font-mono text-[#92400e] dark:text-[#d97706] font-bold px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30">
                       {project.mediaBlocks.length} {currentLang === 'uk' ? 'стадії' : currentLang === 'sk' ? 'etapy' : 'stages'}
