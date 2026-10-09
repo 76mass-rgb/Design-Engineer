@@ -45,8 +45,15 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
     ? PROJECTS_DATA
     : PROJECTS_DATA.filter((p) => p.categoryId === selectedCategory);
 
-  const handleProjectClick = (project: ProjectItem, stageId?: string | null) => {
+  const [selectedMediaTab, setSelectedMediaTab] = useState<'all' | 'drawings' | 'photos'>('all');
+
+  const handleProjectClick = (
+    project: ProjectItem,
+    stageId?: string | null,
+    mediaTab: 'all' | 'drawings' | 'photos' = 'all'
+  ) => {
     setSelectedStageId(stageId || null);
+    setSelectedMediaTab(mediaTab);
     setLocalSelectedProject(project);
     if (onSelectProject) {
       onSelectProject(project.id);
@@ -56,6 +63,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
   const handleCloseModal = () => {
     setLocalSelectedProject(null);
     setSelectedStageId(null);
+    setSelectedMediaTab('all');
     if (onSelectProject) {
       onSelectProject(null);
     }
@@ -245,16 +253,44 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                     {/* Media Count Pills in the top row */}
                     <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                       {drawingsCount > 0 && (
-                        <span className="bg-[#0369a1]/20 border border-[#0284c7]/40 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-bold text-[#0369a1] dark:text-[#38bdf8] flex items-center gap-1 shadow-sm">
-                          <FileText className="w-3.5 h-3.5 text-[#0284c7]" />
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleProjectClick(project, null, 'drawings');
+                          }}
+                          className="bg-[#0284c7] hover:bg-[#0369a1] active:scale-95 border border-[#38bdf8]/40 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-black text-white flex items-center gap-1.5 shadow-sm hover:shadow transition-all cursor-pointer select-none"
+                          title={
+                            currentLang === 'uk'
+                              ? `Переглянути креслення (${drawingsCount} DWG)`
+                              : currentLang === 'sk'
+                              ? `Zobraziť výkresy (${drawingsCount} DWG)`
+                              : `View Blueprints (${drawingsCount} DWG)`
+                          }
+                        >
+                          <FileText className="w-3.5 h-3.5 text-white shrink-0" />
                           <span>{drawingsCount} DWG</span>
-                        </span>
+                        </button>
                       )}
                       {photosCount > 0 && (
-                        <span className="bg-[#166534]/20 border border-[#166534]/40 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-bold text-[#166534] dark:text-[#4ade80] flex items-center gap-1 shadow-sm">
-                          <Camera className="w-3.5 h-3.5 text-[#166534] dark:text-[#4ade80]" />
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleProjectClick(project, null, 'photos');
+                          }}
+                          className="bg-[#16a34a] hover:bg-[#15803d] active:scale-95 border border-[#4ade80]/40 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-black text-white flex items-center gap-1.5 shadow-sm hover:shadow transition-all cursor-pointer select-none"
+                          title={
+                            currentLang === 'uk'
+                              ? `Переглянути фотографії (${photosCount} FOTO)`
+                              : currentLang === 'sk'
+                              ? `Zobraziť fotografie (${photosCount} FOTO)`
+                              : `View Photos (${photosCount} FOTO)`
+                          }
+                        >
+                          <Camera className="w-3.5 h-3.5 text-white shrink-0" />
                           <span>{photosCount} FOTO</span>
-                        </span>
+                        </button>
                       )}
                     </div>
                   </div>
@@ -471,6 +507,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
             onClose={handleCloseModal}
             onOpenBlueprintZoom={onOpenBlueprintZoom}
             initialBlockId={selectedStageId}
+            initialMediaTab={selectedMediaTab}
           />
         </Suspense>
       )}

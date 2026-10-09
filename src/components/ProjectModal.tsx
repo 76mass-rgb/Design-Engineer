@@ -10,6 +10,7 @@ interface ProjectModalProps {
   onClose: () => void;
   onOpenBlueprintZoom?: (imageUrl: string, title: string) => void;
   initialBlockId?: string | null;
+  initialMediaTab?: 'all' | 'drawings' | 'photos';
 }
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({
@@ -18,8 +19,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   onClose,
   onOpenBlueprintZoom,
   initialBlockId,
+  initialMediaTab = 'all',
 }) => {
-  const [mediaTab, setMediaTab] = useState<'all' | 'drawings' | 'photos'>('all');
+  const [mediaTab, setMediaTab] = useState<'all' | 'drawings' | 'photos'>(initialMediaTab || 'all');
   const [selectedBlockId, setSelectedBlockId] = useState<string | 'all'>(initialBlockId || 'all');
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -28,9 +30,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   useEffect(() => {
     setActiveImageIndex(0);
     setIsZoomed(false);
-    setMediaTab('all');
+    setMediaTab(initialMediaTab || 'all');
     setSelectedBlockId(initialBlockId || 'all');
-  }, [project, initialBlockId]);
+  }, [project, initialBlockId, initialMediaTab]);
 
   // Lock background scroll when modal is open
   useEffect(() => {

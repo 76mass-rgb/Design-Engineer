@@ -2682,24 +2682,24 @@ export const PROJECTS_DATA: ProjectItem[] = [
       en: 'University of Latvia • Department of Applied Physics & Materials Science'
     },
     myRole: {
-      uk: 'Провідний інженер-конструктор прецизійного механічного обладнання',
-      sk: 'Vedúci konštruktér presných laboratórnych mechanizmov a prípravkov',
-      en: 'Lead Mechanical Design Engineer for Precision Laboratory Fixtures'
+      uk: 'Провідний інженер-конструктор хімічного обладнання.',
+      sk: 'Vedúci konštruktér chemického a procesného zariadenia.',
+      en: 'Lead Mechanical & Chemical Equipment Design Engineer.'
     },
     engineeringProblem: {
-      uk: 'Забезпечення надвисокої жорсткості несівної рами з повним демпфуванням вібрацій та мікронною точністю позиціонування сенсорних датчиків для наукових тестів.',
-      sk: 'Zabezpečenie vysokej tuhosti nosného rámu s tlmením mikrovibrácií a mikrometrickou presnosťou polohovania snímačov.',
-      en: 'Engineering exceptional dynamic rigidity and sub-micron positioning repeatability while isolating external environmental vibrations during optical tests.'
+      uk: 'Забезпечення процесу вивчення переміщення різними типами насосів густих рідин (пульпи) на матеріал транспортних трубопроводів.',
+      sk: 'Zabezpečenie procesu skúmania vplyvu čerpania hustých kvapalín (suspenzií / kalov) rôznymi typmi čerpadiel na materiál prepravných potrubí.',
+      en: 'Facilitating the experimental investigation of slurry and viscous fluid transport across various pump types and their abrasive effect on piping materials.'
     },
     whatIDesigned: {
-      uk: 'Робочі креслення зварної станини високої жорсткості (формати 8, 3-10, 3-20, lab/lab1), прецизійні каретки з мікрометричним різьбовим ходом, віброізольовані опори, фотореалістичний 3D рендер.',
-      sk: 'Výrobné výkresy tuhého rámu (formáty 8, 3-10, 3-20, lab/lab1), presné suporty s mikrometrickým posuvom a tlmiace podložky.',
-      en: 'Full fabrication package for rigid vibration-isolated test rig (drawings 8, 3-10, 3-20, lab/lab1), precision micrometer lead screws, sensor mounts, and 3D CAD visualization.'
+      uk: 'Розроблена технологічна схема лабораторного стенду. Робочі креслення ергономічного розташування обладнання в морському контейнері 40ft, 3D рендер.',
+      sk: 'Vypracovaná technologická schéma laboratórneho stendu. Výrobné výkresy ergonomického rozmiestnenia zariadení v 40ft námornom kontajneri, 3D render.',
+      en: 'Developed process flow diagram for the lab test loop. Detailed blueprints for ergonomic equipment layout inside a 40ft shipping container, 3D render.'
     },
     description: {
-      uk: 'Прецизійний науково-випробувальний експериментальний стенд для дослідницької лабораторії: рама високої жорсткості, мікрометричні переміщення та сенсорні датчики.',
-      sk: 'Presný výskumný testovací stojan pre laboratórne experimenty: tuhý rám, mikrometrické polohovanie a integrácia meracích senzorov.',
-      en: 'Precision academic research test bench developed for the University of Latvia: rigid vibration-damped frame, micro-positioning drives, and sensors.'
+      uk: 'Лабораторний стенд для Латвійського університету: технологічна схема вивчення переміщення густих рідин (пульпи) різними типами насосів, ергономічне компонування обладнання в морському контейнері 40ft, 3D рендер.',
+      sk: 'Laboratórny výskumný stend pre Lotyšskú univerzitu: technologická schéma testovania čerpania hustých suspenzií, ergonomické usporiadanie v 40ft námornom kontajneri, 3D vizualizácia.',
+      en: 'Research laboratory test stand for the University of Latvia: process flow loop for testing slurry pumping, ergonomic 40ft shipping container layout, and 3D render.'
     },
     coverImage: img_8_1256x781_jpeg,
     drawings: [
