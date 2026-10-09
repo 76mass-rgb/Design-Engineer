@@ -132,9 +132,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Engineering custom machinery, process piping skids, industrial storage, and fabrication-ready 2D/3D CAD packages (ISO / DIN standards) for manufacturing, oil & gas, agro-bulk, and food processing plants.'
   },
   heroImpact: {
-    uk: '27+ років стажу інженера-конструктора. 26+ реалізованих промислових об\'єктів, що надійно працюють в експлуатації.',
-    sk: '27+ rokov praxe konštruktéra. 26+ priemyselných realizácií overených v reálnej dlhodobej prevádzke.',
-    en: '27+ years of engineering practice. 26+ field-commissioned industrial projects operating in real production environments.'
+    uk: '27+ років стажу інженера-конструктора. Реалізовані промислові об\'єкти, які надійно працюють в експлуатації.',
+    sk: '27+ rokov praxe konštruktéra. Realizované priemyselné objekty, ktoré spoľahlivo fungujú v prevádzke.',
+    en: '27+ years of engineering practice. Completed industrial projects operating reliably in real production.'
   },
   btnViewProjects: {
     uk: 'Переглянути інженерні кейси',
