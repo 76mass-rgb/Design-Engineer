@@ -32,14 +32,14 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Expertise'
   },
   navSkills: {
-    uk: 'Послуги & Напрямки',
-    sk: 'Služby & Oblasti',
-    en: 'Services & Domains'
+    uk: 'Ключова експертиза',
+    sk: 'Kľúčová expertíza',
+    en: 'Core Expertise'
   },
   navProjects: {
-    uk: 'Проєкти & Кейси',
-    sk: 'Projekty & Štúdie',
-    en: 'Projects & Cases'
+    uk: 'Докази компетентності',
+    sk: 'Dôkazy odbornosti',
+    en: 'Proven Competence'
   },
   navProcess: {
     uk: 'Процес & Стандарти',
@@ -57,19 +57,19 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'How I Work'
   },
   navAbout: {
-    uk: 'Про інженера',
-    sk: 'O inžinierovi',
-    en: 'About'
+    uk: 'Професійний досвід',
+    sk: 'Profesionálna prax',
+    en: 'Professional Experience'
   },
   navEducation: {
-    uk: 'Кваліфікація',
-    sk: 'Kvalifikácia',
-    en: 'Credentials'
+    uk: 'Академічна освіта',
+    sk: 'Akademické vzdelanie',
+    en: 'Academic Credentials'
   },
   navContact: {
-    uk: 'Контакти & ТЗ',
-    sk: 'Kontakt & Zadanie',
-    en: 'Contact & RFQ'
+    uk: 'Технічний запит & Контакт',
+    sk: 'Technický dopyt & Kontakt',
+    en: 'Technical Inquiry & Contact'
   },
   navResume: {
     uk: 'Резюме / CV',
@@ -132,9 +132,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Engineering custom machinery, process piping skids, industrial storage, and fabrication-ready 2D/3D CAD packages (ISO / DIN standards) for manufacturing, oil & gas, agro-bulk, and food processing plants.'
   },
   heroImpact: {
-    uk: '27+ років стажу інженера-конструктора. 26+ реалізованих промислових об\'єктів, що надійно працюють в експлуатації.',
-    sk: '27+ rokov praxe konštruktéra. 26+ priemyselných realizácií overených v reálnej dlhodobej prevádzke.',
-    en: '27+ years of engineering practice. 26+ field-commissioned industrial projects operating in real production environments.'
+    uk: "Більше двадцяти років стажу інженера-конструктора. Реалізовані промислові об'єкти безаварійно експлуатуються по сьогоднішній день.",
+    sk: 'Viac ako dvadsať rokov praxe inžiniera-konštruktéra. Realizované priemyselné objekty bezporuchovo fungujú v prevádzke dodnes.',
+    en: 'Over twenty years of design engineering experience. Implemented industrial facilities operate reliably and accident-free to this day.'
   },
   btnViewProjects: {
     uk: 'Переглянути інженерні кейси',
@@ -192,9 +192,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: '01'
   },
   skillsTitle: {
-    uk: 'Інженерні послуги & Напрямки експертизи',
-    sk: 'Inžinierske služby & Oblasti expertízy',
-    en: 'Engineering Design Services & Expertise'
+    uk: 'Ключова інженерна експертиза',
+    sk: 'Kľúčová inžinierska expertíza',
+    en: 'Core Engineering Expertise'
   },
   skillsSubtitle: {
     uk: '6 ключових напрямків машинобудування, проєктування промислового обладнання, 3D CAD моделювання та модернізації вузлів.',
@@ -207,9 +207,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: '02'
   },
   portfolioTitle: {
-    uk: 'Інженерні кейси (Case Studies)',
-    sk: 'Inžinierske prípadové štúdie',
-    en: 'Engineering Case Studies'
+    uk: 'Докази компетентності: Реалізовані інженерні кейси',
+    sk: 'Dôkazy odbornosti: Realizované inžinierske projekty',
+    en: 'Proven Competence: Implemented Engineering Cases'
   },
   processSecNum: {
     uk: '03',
@@ -217,14 +217,14 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: '03'
   },
   aboutSecNum: {
+    uk: '03',
+    sk: '03',
+    en: '03'
+  },
+  educationSecNum: {
     uk: '04',
     sk: '04',
     en: '04'
-  },
-  educationSecNum: {
-    uk: '05',
-    sk: '05',
-    en: '05'
   },
   educationTitle: {
     uk: 'Освіта та кваліфікація',
@@ -232,9 +232,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Education & Qualifications'
   },
   contactSecNum: {
-    uk: '06',
-    sk: '06',
-    en: '06'
+    uk: '05',
+    sk: '05',
+    en: '05'
   },
   contactTitle: {
     uk: 'Зв\'язок та технічні запити',
@@ -357,9 +357,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'What happens after your inquiry:'
   },
   inquiryStep1Title: {
-    uk: '1. Аналіз завдання (до 24 год)',
-    sk: '1. Analýza zadania (do 24 hod.)',
-    en: '1. Initial Review (within 24h)'
+    uk: '1. Аналіз завдання',
+    sk: '1. Analýza zadania',
+    en: '1. Initial Review'
   },
   inquiryStep1Desc: {
     uk: 'Оцінка технічної здійсненності, складності та вибір базової концепції.',
@@ -482,9 +482,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Engineering Tools'
   },
   cadIsometrics: {
-    uk: '«Софт — це лише інструмент, а не кінцевий продукт»',
-    sk: '«Softvér je len nástroj, nie finálny produkt»',
-    en: '«Software is a tool, not the product»'
+    uk: '«Софт — це середовище яке розширює можливості фахівця»',
+    sk: '«Softvér je prostredie, ktoré rozširuje možnosti špecialistu»',
+    en: '«Software is an environment that expands an expert\'s capabilities»'
   },
   copyright: {
     uk: 'Всі права захищені · Mechanical & Industrial Design Engineer',
@@ -653,9 +653,9 @@ export const ABOUT_DATA = {
 
 export const ENGINEERING_TOOLS_DATA = {
   statement: {
-    uk: '«Програмне забезпечення — це лише інструмент, а не кінцевий продукт. Справжня цінність полягає в інженерних знаннях, фізичній логіці конструкції та вмінні знайти практичне рішення.»',
-    sk: '«Softvér je len nástroj, nie finálny produkt. Skutočná hodnota spočíva v inžinierskych znalostiach, fyzikálnej logike konštrukcie a schopnosti nájsť praktické riešenie.»',
-    en: '«Software is a tool, not the product. The true engineering value lies in physical principles, structural logic, and delivering practical, manufacturing-ready solutions.»'
+    uk: '«Софт — це середовище, яке розширює можливості фахівця. Справжня цінність полягає в інженерних знаннях, фізичній логіці конструкції та вмінні знайти практичне рішення.»',
+    sk: '«Softvér je prostredie, ktoré rozširuje možnosti špecialistu. Skutočná hodnota spočíva v inžinierskych znalostiach a praktických riešeniach.»',
+    en: '«Software is an environment that expands an expert’s capabilities. The true engineering value lies in physical principles and manufacturing-ready solutions.»'
   },
   tools: [
     { 
@@ -698,24 +698,6 @@ export const ENGINEERING_TOOLS_DATA = {
       }
     },
     { 
-      name: 'Mathcad & Calculations', 
-      nameLocalized: {
-        uk: 'Mathcad & Розрахунки',
-        sk: 'Mathcad & Výpočty',
-        en: 'Mathcad & Calculations'
-      },
-      category: {
-        uk: 'Інженерні розрахунки',
-        sk: 'Inžinierske výpočty',
-        en: 'Engineering Sizing'
-      }, 
-      desc: {
-        uk: 'Гідравлічні розрахунки, теплове розширення, крутні моменти валів, навантаження балок',
-        sk: 'Hydraulické dimenzovanie, teplotná rozťažnosť, krútiace momenty hriadeľov a nosníky',
-        en: 'Hydraulic sizing, thermal expansion, shaft torque, beam load calculations'
-      }
-    },
-    { 
       name: 'GD&T / ISO Tolerancing', 
       nameLocalized: {
         uk: 'GD&T / Допуски та посадки',
@@ -731,24 +713,6 @@ export const ENGINEERING_TOOLS_DATA = {
         uk: 'Геометричні допуски форми та розташування (H7/g6), позначення зварних швів за ISO/ГОСТ',
         sk: 'Geometrické tolerovanie tvaru a polohy (H7/g6), zvarové značky podľa noriem ISO/EN',
         en: 'Geometric dimensioning, fits & clearances (H7/g6), weld symbols per ISO'
-      }
-    },
-    { 
-      name: 'FEA / Structural Stress', 
-      nameLocalized: {
-        uk: 'FEA / Міцнісний аналіз',
-        sk: 'FEA / Pevnostná analýza',
-        en: 'FEA / Structural Stress'
-      },
-      category: {
-        uk: 'Метод скінченних елементів',
-        sk: 'Metóda konečných prvkov',
-        en: 'Finite Element Analysis'
-      }, 
-      desc: {
-        uk: 'Перевірка концентрації напружень, деформацій та коефіцієнтів запасу міцності',
-        sk: 'Kontrola koncentrácie napätia, deformácií a overenie bezpečnostných faktorov',
-        en: 'Stress concentration checks, displacement analysis, factor of safety verification'
       }
     }
   ]
@@ -777,9 +741,9 @@ export const CONCEPT_TO_REALITY_STEPS = [
       en: 'Thorough evaluation of process parameters, site constraints, working media, temperatures, and operating pressures.'
     },
     highlights: {
-      uk: ['Виїзд на заміри та 3D сканування майданчика', 'Розрахунок міцності та навантажень', 'Узгодження ТЗ за ISO / ДСТУ / DIN'],
-      sk: ['Zameranie priestoru a overenie kolízií', 'Pevnostné a zaťažovacie výpočty', 'Dohodnutie zadania podľa ISO / DIN'],
-      en: ['Site surveying & collision checks', 'Structural & load calculations', 'Requirements spec to ISO / DIN standards']
+      uk: ['Виїзд до майданчика на заміри', 'Узгодження ТЗ за ISO / ДСТУ / DIN'],
+      sk: ['Výjazd do prevádzky na zameranie', 'Dohodnutie zadania podľa ISO / DIN'],
+      en: ['On-site visit & measurements', 'Requirements spec to ISO / DIN standards']
     }
   },
   {
@@ -801,9 +765,9 @@ export const CONCEPT_TO_REALITY_STEPS = [
       en: 'Development of detailed 3D digital prototypes in SolidWorks/AutoCAD with interference and kinematics checks.'
     },
     highlights: {
-      uk: ['Параметричне моделювання вузлів', 'Перевірка збирання та доступу для ТО', 'Підбір стандартних покупних виробів'],
-      sk: ['Parametrické modelovanie uzlov', 'Overenie prístupu pre údržbu', 'Výber normalizovaných dielov'],
-      en: ['Parametric assembly design', 'Maintenance ergonomics & clearance check', 'Selection of standard catalog components']
+      uk: ['Моделювання вузлів', 'Перевірка збирання та доступу для ТО', 'Підбір стандартних покупних виробів'],
+      sk: ['Modelovanie uzlov', 'Overenie prístupu pre údržbu', 'Výber normalizovaných dielov'],
+      en: ['Assembly modeling', 'Maintenance ergonomics & clearance check', 'Selection of standard catalog components']
     }
   },
   {

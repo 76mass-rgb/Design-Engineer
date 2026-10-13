@@ -20,12 +20,17 @@ export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>(() => {
     if (typeof window !== 'undefined') {
       try {
-        const saved = localStorage.getItem('app_lang') as Language | null;
-        if (saved === 'en' || saved === 'sk' || saved === 'uk') {
-          return saved;
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlLang = urlParams.get('lang') as Language | null;
+        if (urlLang === 'en' || urlLang === 'sk' || urlLang === 'uk') {
+          return urlLang;
+        }
+        const sessionLang = sessionStorage.getItem('app_lang') as Language | null;
+        if (sessionLang === 'en' || sessionLang === 'sk' || sessionLang === 'uk') {
+          return sessionLang;
         }
       } catch {
-        // Ignore localStorage access issues
+        // Ignore storage access issues
       }
     }
     return 'en';
@@ -34,21 +39,27 @@ export default function App() {
   const handleLanguageChange = (lang: Language) => {
     setCurrentLang(lang);
     try {
+      sessionStorage.setItem('app_lang', lang);
       localStorage.setItem('app_lang', lang);
     } catch {
-      // Ignore localStorage access issues
+      // Ignore storage access issues
     }
   };
 
   const [currentTheme, setCurrentTheme] = useState<ThemeMode>(() => {
     if (typeof window !== 'undefined') {
       try {
-        const saved = localStorage.getItem('app_theme') as ThemeMode | null;
-        if (saved === 'navy' || saved === 'dark' || saved === 'light' || saved === 'blueprint') {
-          return saved;
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlTheme = urlParams.get('theme') as ThemeMode | null;
+        if (urlTheme === 'navy' || urlTheme === 'dark' || urlTheme === 'light' || urlTheme === 'blueprint') {
+          return urlTheme;
+        }
+        const sessionTheme = sessionStorage.getItem('app_theme') as ThemeMode | null;
+        if (sessionTheme === 'navy' || sessionTheme === 'dark' || sessionTheme === 'light' || sessionTheme === 'blueprint') {
+          return sessionTheme;
         }
       } catch {
-        // Ignore localStorage access issues
+        // Ignore storage access issues
       }
     }
     return 'navy';
@@ -57,9 +68,10 @@ export default function App() {
   const handleThemeChange = (theme: ThemeMode) => {
     setCurrentTheme(theme);
     try {
+      sessionStorage.setItem('app_theme', theme);
       localStorage.setItem('app_theme', theme);
     } catch {
-      // Ignore localStorage access issues
+      // Ignore storage access issues
     }
   };
 

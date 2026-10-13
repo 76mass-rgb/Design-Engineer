@@ -511,7 +511,6 @@ html[data-theme="dark"] .dva-accent {
 /* SVG Logo Presentation Classes across Safari and all mobile browsers */
 .dva-svg-text {
   font-family: 'PT Sans Narrow', 'ISOCPEUR', sans-serif;
-  font-weight: 700;
 }
 
 .dva-svg-sub {
@@ -524,6 +523,13 @@ html[data-theme="dark"] .dva-accent {
 
 .dva-svg-base {
   fill: var(--text-primary);
+  font-weight: normal;
+}
+
+#engineer-brand-identity svg text.dva-svg-base,
+#engineer-brand-identity svg text:nth-of-type(2),
+#engineer-brand-identity svg text:nth-of-type(4) {
+  font-weight: normal;
 }
 
 .dva-svg-accent {
@@ -532,10 +538,22 @@ html[data-theme="dark"] .dva-accent {
 
 .dva-svg-shadow {
   fill: var(--accent-blue);
+  font-weight: 700;
+}
+
+#engineer-brand-identity svg text.dva-svg-shadow,
+#engineer-brand-identity svg text:nth-of-type(1),
+#engineer-brand-identity svg text:nth-of-type(3) {
+  font-weight: 700;
 }
 
 .dva-svg-accent-shadow {
   fill: var(--bg-primary);
+}
+
+/* Header Navigation Links Exact Font Size */
+header nav a {
+  font-size: 16.4px;
 }
 
 /* ==========================================================================

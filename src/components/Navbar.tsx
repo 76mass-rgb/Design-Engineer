@@ -200,7 +200,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               key={item.id}
               href={item.href}
               onClick={(e) => handleNavClick(e, item.id)}
-              className={`font-gost text-[0.72rem] min-[1700px]:text-[0.8rem] font-bold uppercase tracking-wide min-[1700px]:tracking-wider px-1.5 xl:px-2 min-[1700px]:px-3 py-2 rounded-full transition-colors relative whitespace-nowrap ${
+              style={{ fontSize: '16.4px' }}
+              className={`font-gost text-[16.4px] font-bold uppercase tracking-wide min-[1700px]:tracking-wider px-1.5 xl:px-2 min-[1700px]:px-3 py-2 rounded-full transition-colors relative whitespace-nowrap ${
                 activeSection === item.id
                   ? 'text-[var(--accent-blue)] bg-[var(--bg-surface-2)]'
                   : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)]/60'

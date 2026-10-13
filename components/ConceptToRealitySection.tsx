@@ -29,8 +29,8 @@ export const ConceptToRealitySection: React.FC<ConceptToRealitySectionProps> = (
             </h2>
           </div>
           <p className="text-sm sm:text-base md:text-lg text-[var(--text-secondary)] max-w-lg font-medium leading-relaxed mt-2 sm:mt-0">
-            {currentLang === 'uk' && 'Повний життєвий цикл інженерного проєкту: від першого ескізу до 100% працюючого обладнання.'}
-            {currentLang === 'sk' && 'Kompletný životný cyklus inžinierskeho projektu: od prvej skice až po 100 % funkčné zariadenie.'}
+            {currentLang === 'uk' && 'Повний життєвий цикл інженерного проєкту: від першого ескізу до введення обладнання в експлуатацію.'}
+            {currentLang === 'sk' && 'Kompletný životný cyklus inžinierskeho projektu: od prvej skice až po uvedenie zariadenia do prevádzky.'}
             {currentLang === 'en' && 'Complete lifecycle of engineering delivery: from initial concept and CAD to physical commissioning.'}
           </p>
         </div>
@@ -68,7 +68,7 @@ export const ConceptToRealitySection: React.FC<ConceptToRealitySectionProps> = (
               <div className="pt-3 border-t border-[var(--border-color)] flex flex-col gap-1.5 sm:gap-2">
                 {step.highlights[currentLang].map((item, hIdx) => (
                   <div key={hIdx} className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[var(--text-primary)] font-semibold">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#166534] dark:text-[#16a34a] mt-0.5 flex-shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}

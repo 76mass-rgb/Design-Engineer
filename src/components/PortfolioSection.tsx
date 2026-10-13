@@ -190,31 +190,12 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
           </button>
         </div>
 
-        {/* Portfolio Bento Grid - Rendered when isGridExpanded */}
+        {/* Portfolio Grid - Evenly Distributed Columns */}
         {isGridExpanded && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 xl:gap-10 2xl:gap-12 animate-fadeIn">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 xl:gap-8 2xl:gap-10 animate-fadeIn">
             {filteredProjects.map((project) => {
             const drawingsCount = project.drawings?.length || 0;
             const photosCount = project.photos?.length || 0;
-
-            const getGridSpanClass = (span?: number) => {
-              switch (span) {
-                case 4:
-                  return 'lg:col-span-4';
-                case 5:
-                  return 'lg:col-span-5';
-                case 6:
-                  return 'lg:col-span-6';
-                case 7:
-                  return 'lg:col-span-7';
-                case 8:
-                  return 'lg:col-span-8';
-                case 12:
-                  return 'lg:col-span-12';
-                default:
-                  return 'lg:col-span-6';
-              }
-            };
 
             // Collect all drawings and photos for expanded horizontal scrolling
             const mediaItems: { url: string; isDrawing: boolean; index: number; blockName?: string; blockId?: string }[] = [];
@@ -269,7 +250,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
             return (
               <article
                 key={project.id}
-                className={`w-full col-span-12 ${getGridSpanClass(project.gridSpan)} bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl sm:rounded-3xl transition-[transform,border-color] duration-300 group flex flex-col justify-between overflow-hidden backdrop-blur-xl shadow-md hover:-translate-y-1`}
+                className="w-full bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl sm:rounded-3xl transition-[transform,border-color] duration-300 group flex flex-col justify-between overflow-hidden backdrop-blur-xl shadow-md hover:-translate-y-1"
               >
                 {/* 1. TOP SECTION: Text info with badges aligned at top */}
                 <div 

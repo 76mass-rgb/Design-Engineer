@@ -26,6 +26,7 @@ export const BrandLogoBanner: React.FC<BrandLogoBannerProps> = ({ className = ''
             textLength="1000"
             lengthAdjust="spacingAndGlyphs"
             className="dva-svg-text dva-svg-sub dva-svg-shadow"
+            fontWeight="bold"
           >
             INZINIER · KONSTRUKTER
           </text>
@@ -36,6 +37,8 @@ export const BrandLogoBanner: React.FC<BrandLogoBannerProps> = ({ className = ''
             textLength="1000"
             lengthAdjust="spacingAndGlyphs"
             className="dva-svg-text dva-svg-sub dva-svg-base"
+            fontWeight="normal"
+            style={{ fontWeight: 'normal' }}
           >
             INZINIER · KONSTRUKTER
           </text>
@@ -51,6 +54,7 @@ export const BrandLogoBanner: React.FC<BrandLogoBannerProps> = ({ className = ''
             textLength="1000"
             lengthAdjust="spacingAndGlyphs"
             className="dva-svg-text dva-svg-main dva-svg-shadow"
+            fontWeight="bold"
           >
             VITALII <tspan className="dva-svg-accent-shadow">D</tspan>OLYNSKYI
           </text>
@@ -61,6 +65,8 @@ export const BrandLogoBanner: React.FC<BrandLogoBannerProps> = ({ className = ''
             textLength="1000"
             lengthAdjust="spacingAndGlyphs"
             className="dva-svg-text dva-svg-main dva-svg-base"
+            fontWeight="normal"
+            style={{ fontWeight: 'normal' }}
           >
             VITALII <tspan className="dva-svg-accent">D</tspan>OLYNSKYI
           </text>

@@ -2,7 +2,7 @@ import React, { useState, lazy, Suspense } from 'react';
 import { ProjectItem, ProjectCategory, Language } from '../types';
 import { PROJECTS_DATA, UI_TRANSLATIONS } from '../data/portfolioData';
 import { getWebpUrl } from '../utils/imageOptimizer';
-import { Eye, Layers, FileText, Camera, ShieldCheck, ArrowUpRight, Building2, Briefcase, AlertCircle, Wrench, CheckCircle2, Award } from 'lucide-react';
+import { Eye, Layers, FileText, Camera, ShieldCheck, ArrowUpRight, Building2, Briefcase, AlertCircle, Wrench, CheckCircle2, Award, ChevronDown, ChevronUp } from 'lucide-react';
 
 const ProjectModal = lazy(() =>
   import('./ProjectModal').then((m) => ({ default: m.ProjectModal }))
@@ -24,6 +24,8 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>('all');
   const [localSelectedProject, setLocalSelectedProject] = useState<ProjectItem | null>(null);
   const [selectedStageId, setSelectedStageId] = useState<string | null>(null);
+  const [selectedMediaTab, setSelectedMediaTab] = useState<'all' | 'drawings' | 'photos'>('all');
+  const [isGridExpanded, setIsGridExpanded] = useState<boolean>(Boolean(selectedProjectId));
 
   // If parent passed selectedProjectId, find it
   const modalProject = selectedProjectId
@@ -45,8 +47,13 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
     ? PROJECTS_DATA
     : PROJECTS_DATA.filter((p) => p.categoryId === selectedCategory);
 
-  const handleProjectClick = (project: ProjectItem, stageId?: string | null) => {
+  const handleProjectClick = (
+    project: ProjectItem,
+    stageId?: string | null,
+    mediaTab: 'all' | 'drawings' | 'photos' = 'all'
+  ) => {
     setSelectedStageId(stageId || null);
+    setSelectedMediaTab(mediaTab);
     setLocalSelectedProject(project);
     if (onSelectProject) {
       onSelectProject(project.id);
@@ -56,13 +63,14 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
   const handleCloseModal = () => {
     setLocalSelectedProject(null);
     setSelectedStageId(null);
+    setSelectedMediaTab('all');
     if (onSelectProject) {
       onSelectProject(null);
     }
   };
 
   return (
-    <section id="portfolio" className="py-16 sm:py-24 md:py-32 relative border-t border-[var(--border-color)] bg-[var(--bg-primary)]">
+    <section className="pt-2 sm:pt-4 pb-12 sm:pb-16 relative bg-[var(--bg-primary)]">
       {/* Background ambient subtle glow */}
       <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-[var(--accent-blue)] opacity-10 blur-[130px] rounded-full pointer-events-none" />
 
@@ -73,12 +81,12 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
           <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 sm:gap-6 mb-4 sm:mb-5">
             <div>
               <div className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[var(--accent-blue)] mb-2 font-gost-mono">
-                {UI_TRANSLATIONS.portfolioSecNum[currentLang]} // {currentLang === 'uk' ? 'FEATURED ENGINEERING CASES • ДОКАЗИ КОМПЕТЕНТНОСТІ' : currentLang === 'sk' ? 'FEATURED ENGINEERING CASES • DÔKAZY ODBORNOSTI' : 'FEATURED ENGINEERING CASES • PROVEN TRACK RECORD'}
+                {UI_TRANSLATIONS.portfolioSecNum[currentLang]} // {currentLang === 'uk' ? 'ДОКАЗИ КОМПЕТЕНТНОСТІ' : currentLang === 'sk' ? 'DÔKAZY ODBORNOSTI' : 'PROVEN COMPETENCE'}
               </div>
               <h2 className="font-gost text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[var(--text-primary)] mb-2">
-                {currentLang === 'uk' && 'Інженерні кейси та реалізовані рішення'}
-                {currentLang === 'sk' && 'Inžinierske prípady a overené riešenia'}
-                {currentLang === 'en' && 'Featured Engineering Cases & Implemented Solutions'}
+                {currentLang === 'uk' && 'Докази компетентності: Реалізовані інженерні кейси'}
+                {currentLang === 'sk' && 'Dôkazy odbornosti: Realizované inžinierske projekty'}
+                {currentLang === 'en' && 'Proven Competence: Implemented Engineering Cases'}
               </h2>
               <div className="text-base sm:text-xl font-gost font-bold text-[var(--accent-blue)]">
                 {currentLang === 'uk' && 'Докази розв’язання інженерних задач: від розрахунків і креслень до працюючого обладнання'}
@@ -108,7 +116,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
             </div>
           </div>
 
-          <p className="text-sm sm:text-base lg:text-lg text-[var(--text-secondary)] max-w-4xl font-medium leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-[var(--text-secondary)] max-w-[70ch] font-medium leading-relaxed">
             {currentLang === 'uk' && 'Виберіть категорію вашої задачі (машинобудування, трубопроводи, металоконструкції, резервуари або елеватори), щоб за 30 секунд переконатися в наявності релевантного досвіду та ознайомитися з реальними кресленнями і фотографіями об’єктів.'}
             {currentLang === 'sk' && 'Zvoľte kategóriu vašej úlohy (strojárstvo, potrubia, oceľové konštrukcie, nádrže alebo silá) a behom 30 sekúnd overte skúsenosti s podobnými technickými výzvami prostredníctvom reálnych výkresov a fotodokumentácie.'}
             {currentLang === 'en' && 'Filter by your domain (machinery, process piping, structural steel, tanks, or grain elevators) to quickly verify relevant track record against your technical problem via authentic CAD blueprints and field photos.'}
@@ -116,7 +124,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
         </div>
 
         {/* Filter Category Tabs (Pills) - Responsive wrap on mobile/tablet, fully readable & easy to tap */}
-        <div className="flex flex-wrap gap-2 sm:gap-2.5 mb-8 sm:mb-12 items-center" role="tablist" aria-label="Project categories">
+        <div className="flex flex-wrap gap-2 sm:gap-2.5 mb-6 sm:mb-8 items-center" role="tablist" aria-label="Project categories">
           {categories.map((cat) => {
             const count = cat.id === 'all'
               ? PROJECTS_DATA.length
@@ -128,7 +136,10 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                 key={cat.id}
                 role="tab"
                 aria-selected={isSelected}
-                onClick={() => setSelectedCategory(cat.id)}
+                onClick={() => {
+                  setSelectedCategory(cat.id);
+                  setIsGridExpanded(true);
+                }}
                 className={`font-gost text-xs sm:text-sm font-bold uppercase tracking-wider px-3.5 sm:px-4.5 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-[transform,background-color,border-color,color] duration-200 cursor-pointer shrink-0 flex items-center gap-2 touch-target select-none ${
                   isSelected
                     ? 'bg-[var(--accent-blue)] text-white shadow-md shadow-[var(--accent-blue)]/25 scale-[1.02] border border-[var(--accent-blue)] ring-2 ring-[var(--accent-blue)]/30'
@@ -137,7 +148,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
               >
                 <span>{cat.label}</span>
                 <span
-                  className={`text-[10px] sm:text-xs font-mono font-black px-2 py-0.5 rounded-full transition-colors ${
+                  className={`text-xs sm:text-xs font-mono font-black px-2 py-0.5 rounded-full transition-colors ${
                     isSelected
                       ? 'bg-white/20 text-white'
                       : 'bg-[var(--bg-surface-3)] text-[var(--text-muted)]'
@@ -150,69 +161,88 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
           })}
         </div>
 
-        {/* Portfolio Bento Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 xl:gap-10 2xl:gap-12">
-          {filteredProjects.map((project) => {
+        {/* Squeeze Toggle Bar (Screenshot 1: Grid hidden until activated) */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-[var(--bg-surface-2)] border border-[var(--border-color)] mb-8 shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-[var(--badge-bg)] text-[var(--accent-blue)] flex items-center justify-center font-gost-mono font-black text-sm shrink-0 border border-[var(--border-color)]">
+              {filteredProjects.length}
+            </div>
+            <div>
+              <div className="font-gost text-sm sm:text-base font-bold text-[var(--text-primary)] leading-snug">
+                {currentLang === 'uk' ? `Кейси у категорії: ${categories.find(c => c.id === selectedCategory)?.label || ''}` : currentLang === 'sk' ? `Projekty v kategórii: ${categories.find(c => c.id === selectedCategory)?.label || ''}` : `Cases in: ${categories.find(c => c.id === selectedCategory)?.label || ''}`}
+              </div>
+              <div className="text-xs text-[var(--text-secondary)] mt-0.5 font-medium">
+                {isGridExpanded
+                  ? (currentLang === 'uk' ? 'Всі деталізовані кейси, креслення та фотографії розгорнуті нижче' : currentLang === 'sk' ? 'Všetky výkresy a fotodokumentácia sú zobrazené nižšie' : 'All blueprints, 3D CAD details and site photos are expanded below')
+                  : (currentLang === 'uk' ? 'Оберіть категорію вище або натисніть кнопку праворуч, щоб переглянути кейси' : currentLang === 'sk' ? 'Zvoľte kategóriu alebo kliknite na tlačidlo pre zobrazenie projektov' : 'Choose a category above or click the button to reveal case studies')}
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={() => setIsGridExpanded(!isGridExpanded)}
+            className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-[var(--btn-primary-text)] font-gost-mono font-black text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md transition-transform hover:scale-105 shrink-0"
+          >
+            <span>
+              {isGridExpanded
+                ? (currentLang === 'uk' ? 'Сховати кейси ▲' : currentLang === 'sk' ? 'Skryť projekty ▲' : 'Collapse Cases ▲')
+                : (currentLang === 'uk' ? `Показати кейси (${filteredProjects.length}) ▼` : currentLang === 'sk' ? `Zobraziť projekty (${filteredProjects.length}) ▼` : `Show Cases (${filteredProjects.length}) ▼`)}
+            </span>
+          </button>
+        </div>
+
+        {/* Portfolio Grid - Evenly Distributed Columns */}
+        {isGridExpanded && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 xl:gap-8 2xl:gap-10 animate-fadeIn">
+            {filteredProjects.map((project) => {
             const drawingsCount = project.drawings?.length || 0;
             const photosCount = project.photos?.length || 0;
 
-            const getGridSpanClass = (span?: number) => {
-              switch (span) {
-                case 4:
-                  return 'lg:col-span-4';
-                case 5:
-                  return 'lg:col-span-5';
-                case 6:
-                  return 'lg:col-span-6';
-                case 7:
-                  return 'lg:col-span-7';
-                case 8:
-                  return 'lg:col-span-8';
-                case 12:
-                  return 'lg:col-span-12';
-                default:
-                  return 'lg:col-span-6';
-              }
-            };
-
             // Collect all drawings and photos for expanded horizontal scrolling
             const mediaItems: { url: string; isDrawing: boolean; index: number; blockName?: string; blockId?: string }[] = [];
+            
+            // Always ensure the project cover image is present first
+            if (project.coverImage) {
+              const isDwg = project.drawings?.includes(project.coverImage) || false;
+              mediaItems.push({
+                url: project.coverImage,
+                isDrawing: isDwg,
+                index: 1,
+                blockName: currentLang === 'uk' ? 'Обкладинка проєкту' : currentLang === 'sk' ? 'Titulný výkres' : 'Project Cover',
+                blockId: project.mediaBlocks?.[0]?.id || 'cover'
+              });
+            }
+
             if (project.mediaBlocks && project.mediaBlocks.length > 0) {
               project.mediaBlocks.forEach((b) => {
                 b.images.forEach((url, uIdx) => {
+                  if (url === project.coverImage) return; // avoid duplicate
                   const isDwg = project.drawings?.includes(url) || false;
                   mediaItems.push({
                     url,
                     isDrawing: isDwg,
-                    index: uIdx + 1,
+                    index: mediaItems.length + 1,
                     blockName: b.title[currentLang],
                     blockId: b.id
                   });
                 });
               });
             } else {
-              if (project.coverImage) {
-                const isDwg = project.drawings?.includes(project.coverImage) || false;
-                mediaItems.push({
-                  url: project.coverImage,
-                  isDrawing: isDwg,
-                  index: 1,
-                });
-              }
-              (project.drawings || []).forEach((url, idx) => {
+              (project.drawings || []).forEach((url) => {
                 if (url !== project.coverImage) {
-                  mediaItems.push({ url, isDrawing: true, index: idx + 1 });
+                  mediaItems.push({ url, isDrawing: true, index: mediaItems.length + 1 });
                 }
               });
-              (project.photos || []).forEach((url, idx) => {
+              (project.photos || []).forEach((url) => {
                 if (url !== project.coverImage) {
-                  mediaItems.push({ url, isDrawing: false, index: idx + 1 });
+                  mediaItems.push({ url, isDrawing: false, index: mediaItems.length + 1 });
                 }
               });
               if (mediaItems.length === 0) {
                 const fallback = project.images && project.images.length > 0 ? project.images : (project.coverImage ? [project.coverImage] : []);
-                fallback.forEach((url, idx) => {
-                  mediaItems.push({ url, isDrawing: false, index: idx + 1 });
+                fallback.forEach((url) => {
+                  if (url !== project.coverImage) {
+                    mediaItems.push({ url, isDrawing: false, index: mediaItems.length + 1 });
+                  }
                 });
               }
             }
@@ -220,7 +250,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
             return (
               <article
                 key={project.id}
-                className={`w-full col-span-12 ${getGridSpanClass(project.gridSpan)} bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl sm:rounded-3xl transition-[transform,border-color] duration-300 group flex flex-col justify-between overflow-hidden backdrop-blur-xl shadow-md hover:-translate-y-1`}
+                className="w-full bg-[var(--glass-bg)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-2xl sm:rounded-3xl transition-[transform,border-color] duration-300 group flex flex-col justify-between overflow-hidden backdrop-blur-xl shadow-md hover:-translate-y-1"
               >
                 {/* 1. TOP SECTION: Text info with badges aligned at top */}
                 <div 
@@ -237,16 +267,44 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                     {/* Media Count Pills in the top row */}
                     <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                       {drawingsCount > 0 && (
-                        <span className="bg-blue-900/80 border border-blue-400/50 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-bold text-blue-200 flex items-center gap-1 shadow-sm">
-                          <FileText className="w-3.5 h-3.5" />
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleProjectClick(project, null, 'drawings');
+                          }}
+                          className="bg-[#0284c7] hover:bg-[#0369a1] active:scale-95 border border-[#38bdf8]/40 px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-xs font-mono font-black text-white flex items-center gap-1.5 shadow-sm hover:shadow transition-all cursor-pointer select-none"
+                          title={
+                            currentLang === 'uk'
+                              ? `Переглянути креслення (${drawingsCount} DWG)`
+                              : currentLang === 'sk'
+                              ? `Zobraziť výkresy (${drawingsCount} DWG)`
+                              : `View Blueprints (${drawingsCount} DWG)`
+                          }
+                        >
+                          <FileText className="w-3.5 h-3.5 text-white shrink-0" />
                           <span>{drawingsCount} DWG</span>
-                        </span>
+                        </button>
                       )}
                       {photosCount > 0 && (
-                        <span className="bg-emerald-900/80 border border-emerald-400/50 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono font-bold text-emerald-200 flex items-center gap-1 shadow-sm">
-                          <Camera className="w-3.5 h-3.5" />
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleProjectClick(project, null, 'photos');
+                          }}
+                          className="bg-[#16a34a] hover:bg-[#15803d] active:scale-95 border border-[#4ade80]/40 px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-xs font-mono font-black text-white flex items-center gap-1.5 shadow-sm hover:shadow transition-all cursor-pointer select-none"
+                          title={
+                            currentLang === 'uk'
+                              ? `Переглянути фотографії (${photosCount} FOTO)`
+                              : currentLang === 'sk'
+                              ? `Zobraziť fotografie (${photosCount} FOTO)`
+                              : `View Photos (${photosCount} FOTO)`
+                          }
+                        >
+                          <Camera className="w-3.5 h-3.5 text-white shrink-0" />
                           <span>{photosCount} FOTO</span>
-                        </span>
+                        </button>
                       )}
                     </div>
                   </div>
@@ -412,28 +470,15 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                           />
                         </picture>
 
-                        {/* Drawing caption badge if available */}
-                        {caption && (
-                          <div className="absolute top-2.5 left-2.5 right-2.5 z-10 pointer-events-none">
-                            <span className="inline-flex items-center gap-1.5 bg-black/85 backdrop-blur-md text-blue-200 border border-blue-400/40 text-[11px] sm:text-xs font-gost-mono font-bold px-3 py-1.5 rounded-lg truncate max-w-full shadow-lg">
-                              <FileText className="w-3 h-3 text-blue-400 shrink-0" />
-                              <span className="truncate">{caption}</span>
-                            </span>
-                          </div>
-                        )}
-
                         {/* Clean hover overlay with Eye icon */}
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/item:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                           <span className="bg-[var(--accent-blue)] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-4 py-2 rounded-full shadow-lg flex items-center gap-2 transform scale-95 group-hover/item:scale-100 transition-transform">
                             <Eye className="w-4 h-4" />
                             <span>
-                              {caption || (isCover
-                                ? (currentLang === 'uk' ? 'Переглянути обкладинку' : currentLang === 'sk' ? 'Zobraziť obálku' : 'View Cover')
-                                : (media.isDrawing 
-                                  ? (currentLang === 'uk' ? 'Переглянути креслення' : currentLang === 'sk' ? 'Zobraziť výkres' : 'View Blueprint')
-                                  : (currentLang === 'uk' ? 'Збільшити фото' : currentLang === 'sk' ? 'Zväčšiť фото' : 'Enlarge Photo')
-                                )
-                              )}
+                              {media.isDrawing 
+                                ? (currentLang === 'uk' ? 'Переглянути креслення' : currentLang === 'sk' ? 'Zobraziť výkres' : 'View Blueprint')
+                                : (currentLang === 'uk' ? 'Збільшити фото' : currentLang === 'sk' ? 'Zväčšiť fotku' : 'Enlarge Photo')
+                              }
                             </span>
                           </span>
                         </div>
@@ -464,6 +509,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
             );
           })}
         </div>
+        )}
 
       </div>
 
@@ -476,6 +522,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
             onClose={handleCloseModal}
             onOpenBlueprintZoom={onOpenBlueprintZoom}
             initialBlockId={selectedStageId}
+            initialMediaTab={selectedMediaTab}
           />
         </Suspense>
       )}

@@ -16,14 +16,14 @@ export const EngineeringTrustStats: React.FC<EngineeringTrustStatsProps> = ({ cu
         en: '300+'
       },
       label: {
-        uk: 'Реалізованих об\'єктів (100% діючі)',
-        sk: 'Realizovaných projektov (100% v prevádzke)',
-        en: 'Completed Facilities (100% Operational)'
+        uk: 'Реалізованих об\'єктів',
+        sk: 'Realizovaných projektov',
+        en: 'Completed Industrial Facilities'
       },
       desc: {
-        uk: '100% проєктів успішно побудовані та надійно працюють до сьогоднішнього дня',
-        sk: '100 % projektov bolo úspešne postavených a spoľahlivo fungujú dodnes',
-        en: '100% of projects were successfully built and operate reliably to this day'
+        uk: 'Спроєктовані комплекси, установки та обладнання, втілені у фізичному виробництві',
+        sk: 'Komplexné technologické celky a zariadenia úspešne zrealizované vo výrobe',
+        en: 'Turnkey facilities and machinery designed for real-world industrial operation'
       }
     },
     {

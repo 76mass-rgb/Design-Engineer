@@ -34,12 +34,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
           </p>
         </div>
 
-        {/* 2. Detailed Biography, Photo & DFMA Pillars */}
-        <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 xl:gap-12 items-start mb-12 sm:mb-16">
+        {/* 2. Detailed Biography & Photo */}
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 xl:gap-12 items-start mb-8 sm:mb-10">
 
-          {/* Left Column (xl+): Portrait + 3 engineering pillars. On phones/tablets the order stays: photo, text, pillars, buttons */}
-          <div className="contents xl:flex xl:col-span-5 xl:flex-col xl:gap-8">
-            <div className="order-1 w-full max-w-md mx-auto xl:max-w-none">
+          {/* Left Column (xl+): Portrait */}
+          <div className="w-full max-w-md mx-auto xl:max-w-none xl:col-span-5">
             <div className="relative bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-2.5 sm:p-3 backdrop-blur-xl shadow-xl">
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[var(--bg-surface-2)]">
                 <picture className="w-full h-full block">
@@ -64,35 +63,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
                 </div>
               </div>
             </div>
-            </div>
-            <div className="order-3">
-            {/* 3 Core Engineering Pillars */}
-            <div className="space-y-2.5 sm:space-y-3">
-              {ABOUT_DATA.pillars.map((pillar, pIdx) => (
-                <div
-                  key={pIdx}
-                  className="p-3.5 sm:p-4 rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] flex items-start gap-3 backdrop-blur-xl hover:border-[var(--accent-blue)] transition-colors shadow-sm"
-                >
-                  <div className="w-8 h-8 rounded-xl bg-[var(--badge-bg)] border border-[var(--border-color)] flex items-center justify-center text-[var(--accent-blue)] flex-shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#166534] dark:text-[#16a34a]" />
-                  </div>
-                  <div>
-                    <h4 className="font-gost text-sm sm:text-base font-bold text-[var(--text-primary)] leading-snug">
-                      {pillar.title[currentLang]}
-                    </h4>
-                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] mt-0.5 font-normal leading-relaxed">
-                      {pillar.desc[currentLang]}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            </div>
           </div>
 
           {/* Right Column (xl+): Quote, biography, action buttons */}
-          <div className="contents xl:flex xl:col-span-7 xl:flex-col">
-            <div className="order-2">
+          <div className="xl:col-span-7 flex flex-col">
             {/* Engineer's Creed / Quote Card */}
             <div className="p-5 sm:p-8 rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-xl shadow-sm mb-6 sm:mb-8">
               <p className="font-gost text-base sm:text-xl font-bold text-[var(--text-primary)] leading-relaxed italic">
@@ -108,8 +82,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
                 </p>
               ))}
             </div>
-            </div>
-            <div className="order-4">
+
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-[var(--border-color)]">
               <a
@@ -128,9 +101,30 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
                 <span>{UI_TRANSLATIONS.btnDownloadCV[currentLang]}</span>
               </button>
             </div>
-            </div>
           </div>
 
+        </div>
+
+        {/* 3 Core Engineering Pillars - Arranged Horizontally in One Row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">
+          {ABOUT_DATA.pillars.map((pillar, pIdx) => (
+            <div
+              key={pIdx}
+              className="p-4 sm:p-5 rounded-2xl bg-[var(--glass-bg)] border border-[var(--border-color)] flex items-start gap-3.5 backdrop-blur-xl hover:border-[var(--accent-blue)] transition-colors shadow-sm"
+            >
+              <div className="w-9 h-9 rounded-xl bg-[var(--badge-bg)] border border-[var(--border-color)] flex items-center justify-center text-[var(--accent-blue)] flex-shrink-0 mt-0.5">
+                <CheckCircle2 className="w-4 h-4 text-[#166534] dark:text-[#16a34a]" />
+              </div>
+              <div>
+                <h4 className="font-gost text-sm sm:text-base font-bold text-[var(--text-primary)] leading-snug">
+                  {pillar.title[currentLang]}
+                </h4>
+                <p className="text-xs sm:text-sm text-[var(--text-secondary)] mt-1 font-normal leading-relaxed">
+                  {pillar.desc[currentLang]}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Verified Industrial Track Record & Scale — moved below the biography / photo / buttons */}

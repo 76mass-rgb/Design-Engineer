@@ -80,7 +80,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ currentLang }) =
                       </span>
                     </div>
                     <div>
-                      <span className="text-xs sm:text-xs font-mono font-bold tracking-widest text-[var(--text-secondary)] uppercase block">
+                      <span className="text-[11px] sm:text-xs font-mono font-bold tracking-widest text-[var(--text-secondary)] uppercase block">
                         {step.phase[currentLang]}
                       </span>
                       {step.subtitle && (

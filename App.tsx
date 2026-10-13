@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Language, ThemeMode } from './types';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { EngineeringTrustStats } from './components/EngineeringTrustStats';
 import { SkillsSection } from './components/SkillsSection';
-import { ConceptToRealitySection } from './components/ConceptToRealitySection';
 import { PortfolioSection } from './components/PortfolioSection';
-import { HowIWorkSection } from './components/HowIWorkSection';
 import { AboutSection } from './components/AboutSection';
 import { EducationSection } from './components/EducationSection';
 import { ContactSection } from './components/ContactSection';
@@ -23,12 +20,17 @@ export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>(() => {
     if (typeof window !== 'undefined') {
       try {
-        const saved = localStorage.getItem('app_lang') as Language | null;
-        if (saved === 'en' || saved === 'sk' || saved === 'uk') {
-          return saved;
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlLang = urlParams.get('lang') as Language | null;
+        if (urlLang === 'en' || urlLang === 'sk' || urlLang === 'uk') {
+          return urlLang;
+        }
+        const sessionLang = sessionStorage.getItem('app_lang') as Language | null;
+        if (sessionLang === 'en' || sessionLang === 'sk' || sessionLang === 'uk') {
+          return sessionLang;
         }
       } catch {
-        // Ignore localStorage access issues
+        // Ignore storage access issues
       }
     }
     return 'en';
@@ -37,46 +39,85 @@ export default function App() {
   const handleLanguageChange = (lang: Language) => {
     setCurrentLang(lang);
     try {
+      sessionStorage.setItem('app_lang', lang);
       localStorage.setItem('app_lang', lang);
     } catch {
-      // Ignore localStorage access issues
+      // Ignore storage access issues
     }
   };
 
   const [currentTheme, setCurrentTheme] = useState<ThemeMode>(() => {
     if (typeof window !== 'undefined') {
       try {
-        const saved = localStorage.getItem('app_theme') as ThemeMode | null;
-        if (saved === 'dark' || saved === 'light' || saved === 'blueprint') {
-          return saved;
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlTheme = urlParams.get('theme') as ThemeMode | null;
+        if (urlTheme === 'navy' || urlTheme === 'dark' || urlTheme === 'light' || urlTheme === 'blueprint') {
+          return urlTheme;
+        }
+        const sessionTheme = sessionStorage.getItem('app_theme') as ThemeMode | null;
+        if (sessionTheme === 'navy' || sessionTheme === 'dark' || sessionTheme === 'light' || sessionTheme === 'blueprint') {
+          return sessionTheme;
         }
       } catch {
-        // Ignore localStorage access issues
+        // Ignore storage access issues
       }
     }
-    return 'blueprint';
+    return 'navy';
   });
 
   const handleThemeChange = (theme: ThemeMode) => {
     setCurrentTheme(theme);
     try {
+      sessionStorage.setItem('app_theme', theme);
       localStorage.setItem('app_theme', theme);
     } catch {
-      // Ignore localStorage access issues
+      // Ignore storage access issues
     }
   };
 
-  const [activeSection, setActiveSection] = useState<string>('hero');
   const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+
+  // Squeeze-page navigation: sections 01–05 are collapsed; the header menu expands one at a time
+  const [openSection, setOpenSection] = useState<string | null>(null);
+
+  const scrollToSection = (sectionId: string) => {
+    setTimeout(() => {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 120);
+  };
+
+  const handleNavigate = (sectionId: string) => {
+    if (openSection === sectionId) {
+      setOpenSection(null); // second click collapses
+    } else {
+      setOpenSection(sectionId);
+      scrollToSection(sectionId);
+    }
+  };
+
+  // In-page links like href="#contact" (buttons inside sections / modals) open the collapsed section first
+  useEffect(() => {
+    const SECTION_IDS = ['skills', 'portfolio', 'about', 'education', 'contact'];
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement | null)?.closest?.('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!a || e.defaultPrevented || a.closest('header')) return; // header menu has its own toggle logic
+      const id = (a.getAttribute('href') || '').slice(1);
+      if (!SECTION_IDS.includes(id)) return;
+      e.preventDefault();
+      setOpenSection(id);
+      scrollToSection(id);
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
 
   const handleSelectProject = (projectId: string | null) => {
     setSelectedProjectId(projectId);
     if (projectId) {
-      const el = document.getElementById('portfolio');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
+      setOpenSection('portfolio');
+      scrollToSection('portfolio');
     }
   };
   
@@ -106,95 +147,149 @@ export default function App() {
   // Handle theme changes
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', currentTheme);
+    const colorScheme = currentTheme === 'light' || currentTheme === 'blueprint' ? 'light' : 'dark';
+    document.documentElement.style.colorScheme = colorScheme;
+
+    const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
+    if (metaColorScheme) {
+      metaColorScheme.setAttribute('content', colorScheme);
+    }
+
+    const themeColors: Record<ThemeMode, string> = {
+      navy: '#0d1117',
+      dark: '#080808',
+      light: '#f1f4f9',
+      blueprint: '#efe2c8'
+    };
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', themeColors[currentTheme] || '#0d1117');
+    }
   }, [currentTheme]);
 
-  // Handle language tag on html root
+  // Handle language tag on html root & dynamic SEO document title / meta description
   useEffect(() => {
     document.documentElement.lang = currentLang;
     document.documentElement.setAttribute('lang', currentLang);
-  }, [currentLang]);
 
-  // IntersectionObserver for active section highlight in navbar
-  useEffect(() => {
-    const sectionIds = ['skills', 'process', 'portfolio', 'workflow', 'about', 'education', 'contact'];
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + 200;
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(id);
-            return;
-          }
-        }
-      }
-      if (window.scrollY < 300) {
-        setActiveSection('hero');
+    const seoMetadata: Record<Language, { title: string; description: string }> = {
+      en: {
+        title: 'Vitalii Dolynskyi — Mechanical & Industrial Design Engineer | 3D CAD & Machinery',
+        description: 'Mechanical & industrial design engineer with 27+ years experience. Custom machine design, process piping, structural steel, 3D CAD modeling, and manufacturing drawings.'
+      },
+      sk: {
+        title: 'Vitalii Dolynskyi — Strojný & Priemyselný Inžinier Konštruktér | 3D CAD Slovensko',
+        description: 'Strojný a priemyselný inžinier-konštruktér s 27+ rokmi praxe. Konštrukcia strojov, potrubné rozvody, oceľové konštrukcie, 3D CAD a výrobná dokumentácia.'
+      },
+      uk: {
+        title: 'Віталій Долінський — Механічний & Промисловий Інженер-Конструктор | 3D CAD & КД',
+        description: 'Інженер-конструктор з 27+ роками досвіду. Проєктування машин, промислового обладнання, технологічних трубопроводів, 3D CAD моделювання та випуск робочих креслень.'
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const currentSeo = seoMetadata[currentLang] || seoMetadata.en;
+    document.title = currentSeo.title;
+
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', currentSeo.description);
+    }
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute('content', currentSeo.title);
+    }
+
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) {
+      ogDesc.setAttribute('content', currentSeo.description);
+    }
+
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitle) {
+      twitterTitle.setAttribute('content', currentSeo.title);
+    }
+
+    const twitterDesc = document.querySelector('meta[name="twitter:description"]');
+    if (twitterDesc) {
+      twitterDesc.setAttribute('content', currentSeo.description);
+    }
+  }, [currentLang]);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-secondary)] transition-colors duration-300 flex flex-col selection:bg-[var(--accent-blue)] selection:text-[#0e1118]">
+    <div className={`min-h-screen bg-[var(--bg-primary)] text-[var(--text-secondary)] transition-colors duration-300 flex flex-col overflow-x-clip selection:bg-[var(--accent-blue)] selection:text-[#0e1118] ${openSection ? '' : 'lg:h-dvh lg:min-h-0 lg:overflow-y-auto'}`}>
       {/* Top Fixed Header */}
       <Navbar
         currentLang={currentLang}
         onLanguageChange={handleLanguageChange}
         currentTheme={currentTheme}
         onThemeChange={handleThemeChange}
-        activeSection={activeSection}
+        activeSection={openSection ?? 'hero'}
         onOpenResume={() => setIsResumeOpen(true)}
+        onNavigate={handleNavigate}
       />
 
-      {/* Main Content Area */}
-      <main className="flex-grow">
-        {/* 1. Hero: Positioning & Immediate CTA */}
+      {/* Main Content Area: Squeeze Page Architecture */}
+      <main className="flex-grow flex flex-col lg:min-h-0">
+        {/* 1. Hero: Positioning, CTAs & Swapped Portrait */}
         <Hero 
+          fitScreen={!openSection}
           currentLang={currentLang} 
           onOpenResume={() => setIsResumeOpen(true)}
-        />
-        
-        {/* Verified Scale & Enterprise Track Record Bar */}
-        <EngineeringTrustStats currentLang={currentLang} />
-
-        {/* 2. Core Engineering Expertise (6 Domains & Software Logic) */}
-        <SkillsSection currentLang={currentLang} />
-
-        {/* 3. Methodology & Engineering Standards (5-Phase Lifecycle) */}
-        <ConceptToRealitySection 
-          currentLang={currentLang} 
+          onNavigate={handleNavigate}
         />
 
-        {/* 4. Portfolio & Engineering Case Studies */}
-        <PortfolioSection 
-          currentLang={currentLang} 
-          onOpenBlueprintZoom={handleOpenBlueprintZoom}
-          selectedProjectId={selectedProjectId}
-          onSelectProject={setSelectedProjectId}
-        />
+        {/* Sections 01–05: collapsed by default, expanded from the header menu (one at a time) */}
+        {openSection && (
+          <div key={openSection} className="w-full animate-slideUp border-t border-[var(--border-color)]">
+            {openSection === 'skills' && (
+              <div id="skills" className="scroll-mt-28">
+                <SkillsSection currentLang={currentLang} />
+              </div>
+            )}
+            {openSection === 'portfolio' && (
+              <div id="portfolio" className="scroll-mt-28">
+                <PortfolioSection
+                  currentLang={currentLang}
+                  onOpenBlueprintZoom={handleOpenBlueprintZoom}
+                  selectedProjectId={selectedProjectId}
+                  onSelectProject={handleSelectProject}
+                />
+              </div>
+            )}
+            {openSection === 'about' && (
+              <div id="about" className="scroll-mt-28">
+                <AboutSection
+                  currentLang={currentLang}
+                  onOpenResume={() => setIsResumeOpen(true)}
+                />
+              </div>
+            )}
+            {openSection === 'education' && (
+              <div id="education" className="scroll-mt-28">
+                <EducationSection currentLang={currentLang} />
+              </div>
+            )}
+            {openSection === 'contact' && (
+              <div id="contact" className="scroll-mt-28">
+                <ContactSection
+                  currentLang={currentLang}
+                  onOpenResume={() => setIsResumeOpen(true)}
+                />
+              </div>
+            )}
 
-        {/* 5. How I Work (5 Phases & Structured Deliverables) */}
-        <HowIWorkSection currentLang={currentLang} />
-
-        {/* 6. About the Engineer (Philosophy, Experience & Pillars) */}
-        <AboutSection 
-          currentLang={currentLang} 
-          onOpenResume={() => setIsResumeOpen(true)}
-        />
-
-        {/* 7. Academic Degrees & Higher Education Credentials */}
-        <EducationSection currentLang={currentLang} />
-
-        {/* 8. Direct Contact & Engineering Inquiry */}
-        <ContactSection 
-          currentLang={currentLang} 
-          onOpenResume={() => setIsResumeOpen(true)}
-        />
+            {/* Collapse bar */}
+            <div className="w-full px-4 py-5 flex justify-center bg-[var(--bg-surface-2)]/60 border-t border-[var(--border-color)]">
+              <button
+                onClick={() => setOpenSection(null)}
+                className="px-5 py-2 rounded-full text-xs sm:text-sm font-gost-mono font-bold uppercase tracking-wider bg-[var(--badge-bg)] text-[var(--accent-blue)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-colors cursor-pointer"
+              >
+                {currentLang === 'uk' ? 'Згорнути розділ ▲' : currentLang === 'sk' ? 'Zbaliť sekciu ▲' : 'Collapse section ▲'}
+              </button>
+            </div>
+          </div>
+        )}
       </main>
 
       {/* Technical Engineering Footer */}

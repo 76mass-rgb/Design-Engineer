@@ -105,7 +105,7 @@ export const SqueezeNavigator: React.FC<SqueezeNavigatorProps> = ({
             <div className="flex items-center gap-2.5">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-sm shadow-emerald-400/50" />
               <div className="flex items-center gap-2">
-                <span className="text-xs sm:text-xs font-black font-gost-mono uppercase tracking-[0.25em] text-[var(--accent-blue)]">
+                <span className="text-[11px] sm:text-xs font-black font-gost-mono uppercase tracking-[0.25em] text-[var(--accent-blue)]">
                   {currentLang === 'uk' ? 'НАВІГАТОР РОЗДІЛІВ' : currentLang === 'sk' ? 'NAVIGÁTOR SEKCIE' : 'PORTFOLIO NAVIGATOR'}
                 </span>
                 <span className="text-xs text-[var(--text-muted)] font-mono hidden md:inline">
@@ -195,7 +195,7 @@ export const SqueezeNavigator: React.FC<SqueezeNavigatorProps> = ({
                   </div>
 
                   {/* Subtitle / Stat Badge */}
-                  <div className={`text-xs sm:text-xs font-medium line-clamp-1 ${
+                  <div className={`text-[10px] sm:text-[11px] font-medium line-clamp-1 ${
                     isActive ? 'text-[var(--btn-primary-text)]/85' : 'text-[var(--text-secondary)]'
                   }`}>
                     {sec.subtitle}

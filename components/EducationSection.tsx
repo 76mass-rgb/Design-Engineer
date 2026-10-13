@@ -9,7 +9,7 @@ interface EducationSectionProps {
 
 export const EducationSection: React.FC<EducationSectionProps> = ({ currentLang }) => {
   return (
-    <section id="education" className="py-16 sm:py-24 md:py-32 relative border-t border-[var(--border-color)] bg-[var(--bg-primary)]">
+    <section className="pt-2 sm:pt-4 pb-12 sm:pb-16 relative bg-[var(--bg-primary)]">
       <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 relative z-10">
         
         {/* Section Header */}
@@ -24,7 +24,7 @@ export const EducationSection: React.FC<EducationSectionProps> = ({ currentLang 
           </div>
           <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
             <div className="text-xs sm:text-sm lg:text-base font-gost-mono text-[var(--text-secondary)] bg-[var(--bg-surface-2)] border border-[var(--border-color)] px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold shadow-sm">
-              {currentLang === 'uk' ? '3 Інженерні дипломи · Аспірантура R&D' : currentLang === 'sk' ? '3 inžinierske tituly · Postgraduálny výskum' : '3 Engineering Degrees · Postgraduate R&D'}
+              {currentLang === 'uk' ? 'Два інженерні дипломи · Аспірантура R&D' : currentLang === 'sk' ? '2 inžinierske diplomy · Postgraduálny výskum R&D' : '2 Engineering Degrees · Postgraduate R&D'}
             </div>
             <div className="text-xs sm:text-sm lg:text-base font-gost-mono text-[var(--accent-blue)] bg-[var(--badge-bg)] border border-[var(--border-color)] px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold shadow-sm flex items-center gap-2">
               <ShieldCheck className="w-4 sm:w-4.5 h-4 sm:h-4.5" />

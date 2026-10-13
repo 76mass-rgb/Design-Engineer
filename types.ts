@@ -1,5 +1,5 @@
 export type Language = 'en' | 'sk' | 'uk';
-export type ThemeMode = 'dark' | 'light' | 'blueprint';
+export type ThemeMode = 'navy' | 'dark' | 'light' | 'blueprint';
 
 export type ProjectCategory = 
   | 'all'
@@ -46,11 +46,17 @@ export interface ProjectItem {
   title: LocalizedString;
   category: LocalizedString;
   categoryId: ProjectCategory;
+  // JTBD Architecture Fields
+  clientType?: LocalizedString; // CLIENT / PROJECT TYPE
+  engineeringProblem?: LocalizedString; // ENGINEERING PROBLEM
+  myRole?: LocalizedString; // MY ROLE
+  whatIDesigned?: LocalizedString; // WHAT I DESIGNED / ENGINEERED
   description?: LocalizedString;
-  engineeringChallenge?: LocalizedString;
-  workPerformed?: LocalizedString;
-  implementation?: LocalizedString;
-  result?: LocalizedString;
+  engineeringChallenge?: LocalizedString; // Compatible with engineeringProblem
+  workPerformed?: LocalizedString; // Compatible with whatIDesigned
+  implementation?: LocalizedString; // IMPLEMENTATION
+  result?: LocalizedString; // RESULT
+  proofBadges?: LocalizedArray;
   caseStudy?: ProjectCaseStudy;
   specs?: LocalizedArray;
   coverImage: string;
