@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Language, ThemeMode } from './types';
+import { Language, ThemeMode, BlueprintMediaItem } from './types';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { SkillsSection } from './components/SkillsSection';
@@ -126,17 +126,29 @@ export default function App() {
     isOpen: boolean;
     imageUrl: string;
     title: string;
+    mediaList?: BlueprintMediaItem[];
+    initialIndex?: number;
+    projectTitle?: string;
   }>({
     isOpen: false,
     imageUrl: '',
     title: ''
   });
 
-  const handleOpenBlueprintZoom = (imageUrl: string, title: string) => {
+  const handleOpenBlueprintZoom = (
+    imageUrl: string, 
+    title: string,
+    mediaList?: BlueprintMediaItem[],
+    initialIndex?: number,
+    projectTitle?: string
+  ) => {
     setBlueprintModal({
       isOpen: true,
       imageUrl,
-      title
+      title,
+      mediaList,
+      initialIndex,
+      projectTitle
     });
   };
 
@@ -313,6 +325,9 @@ export default function App() {
             imageUrl={blueprintModal.imageUrl}
             title={blueprintModal.title}
             currentLang={currentLang}
+            mediaList={blueprintModal.mediaList}
+            initialIndex={blueprintModal.initialIndex}
+            projectTitle={blueprintModal.projectTitle}
           />
         )}
       </React.Suspense>

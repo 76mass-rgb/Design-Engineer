@@ -123,3 +123,10 @@ export interface RealResultImage {
   imageUrl: string;
   description: LocalizedString;
 }
+
+export interface BlueprintMediaItem {
+  url: string;
+  title?: string;
+  isDrawing?: boolean;
+  caption?: string;
+}

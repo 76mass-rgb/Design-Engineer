@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ProjectItem, Language } from '../types';
+import { ProjectItem, Language, BlueprintMediaItem } from '../types';
 import { UI_TRANSLATIONS } from '../data/portfolioData';
 import { getWebpUrl } from '../utils/imageOptimizer';
 import { X, ChevronLeft, ChevronRight, Maximize2, CheckCircle, ZoomIn, FileText, Camera, Layers, Wrench, ShieldCheck, HelpCircle, Building2, Briefcase, AlertCircle } from 'lucide-react';
@@ -8,7 +8,13 @@ interface ProjectModalProps {
   project: ProjectItem | null;
   currentLang: Language;
   onClose: () => void;
-  onOpenBlueprintZoom?: (imageUrl: string, title: string) => void;
+  onOpenBlueprintZoom?: (
+    imageUrl: string, 
+    title: string,
+    mediaList?: BlueprintMediaItem[],
+    initialIndex?: number,
+    projectTitle?: string
+  ) => void;
   initialBlockId?: string | null;
   initialMediaTab?: 'all' | 'drawings' | 'photos';
 }
@@ -73,6 +79,22 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const fullZoomTitle = currentDrawingCaption 
     ? `${project.title[currentLang]} — ${currentDrawingCaption}`
     : project.title[currentLang];
+
+  // Prepare full playlist for BlueprintViewerModal
+  const modalMediaList: BlueprintMediaItem[] = activeMediaList.map((url, idx) => {
+    const isDw = project.drawings?.includes(url);
+    const cap = project.drawingCaptions?.[url]?.[currentLang];
+    return {
+      url,
+      title: cap 
+        ? `${project.title[currentLang]} — ${cap}` 
+        : (isDw 
+            ? `${project.title[currentLang]} — DWG #${idx + 1}` 
+            : `${project.title[currentLang]} — Photo #${idx + 1}`),
+      isDrawing: isDw,
+      caption: cap
+    };
+  });
 
   // Handle keyboard events: Escape to close, Left/Right arrows to navigate
   useEffect(() => {
@@ -261,7 +283,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    onOpenBlueprintZoom(currentImage, fullZoomTitle);
+                    onOpenBlueprintZoom(
+                      currentImage, 
+                      fullZoomTitle, 
+                      modalMediaList, 
+                      activeImageIndex, 
+                      project.title[currentLang]
+                    );
                   }}
                   className="absolute top-3 right-3 z-20 px-3.5 py-1.5 bg-blue-600/90 hover:bg-blue-500 text-white border border-blue-400/50 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 backdrop-blur-md transition-[transform,background-color] shadow-lg hover:scale-105 cursor-pointer"
                   title={currentLang === 'uk' ? 'Змасштабувати на всю сторінку' : currentLang === 'sk' ? 'Na celú stranu' : 'Scale to Full Page'}
@@ -285,7 +313,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   className="max-h-[64vh] lg:max-h-[76vh] w-auto max-w-full object-contain transition-transform duration-300 rounded-xl cursor-zoom-in hover:brightness-105"
                   onClick={() => {
                     if (onOpenBlueprintZoom) {
-                      onOpenBlueprintZoom(currentImage, fullZoomTitle);
+                      onOpenBlueprintZoom(
+                        currentImage, 
+                        fullZoomTitle, 
+                        modalMediaList, 
+                        activeImageIndex, 
+                        project.title[currentLang]
+                      );
                     } else {
                       setIsZoomed(!isZoomed);
                     }
@@ -332,7 +366,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      onOpenBlueprintZoom(currentImage, fullZoomTitle);
+                      onOpenBlueprintZoom(
+                        currentImage, 
+                        fullZoomTitle, 
+                        modalMediaList, 
+                        activeImageIndex, 
+                        project.title[currentLang]
+                      );
                     }}
                     className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white px-3.5 py-1.5 rounded-full transition-[transform,background-color] cursor-pointer font-bold text-xs sm:text-sm shadow-md hover:scale-105"
                     title={currentLang === 'uk' ? 'Змасштабувати на всю сторінку' : currentLang === 'sk' ? 'Na celú stranu' : 'Full Page'}
@@ -344,7 +384,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <button
                   onClick={() => {
                     if (onOpenBlueprintZoom) {
-                      onOpenBlueprintZoom(currentImage, fullZoomTitle);
+                      onOpenBlueprintZoom(
+                        currentImage, 
+                        fullZoomTitle, 
+                        modalMediaList, 
+                        activeImageIndex, 
+                        project.title[currentLang]
+                      );
                     } else {
                       setIsZoomed(!isZoomed);
                     }

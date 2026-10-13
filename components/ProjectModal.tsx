@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ProjectItem, Language } from '../types';
+import { ProjectItem, Language, BlueprintMediaItem } from '../types';
 import { UI_TRANSLATIONS } from '../data/portfolioData';
 import { getWebpUrl } from '../utils/imageOptimizer';
 import { X, ChevronLeft, ChevronRight, Maximize2, CheckCircle, ZoomIn, FileText, Camera, Layers, Wrench, ShieldCheck, HelpCircle, Building2, Briefcase, AlertCircle } from 'lucide-react';
@@ -8,7 +8,13 @@ interface ProjectModalProps {
   project: ProjectItem | null;
   currentLang: Language;
   onClose: () => void;
-  onOpenBlueprintZoom?: (imageUrl: string, title: string) => void;
+  onOpenBlueprintZoom?: (
+    imageUrl: string, 
+    title: string,
+    mediaList?: BlueprintMediaItem[],
+    initialIndex?: number,
+    projectTitle?: string
+  ) => void;
   initialBlockId?: string | null;
   initialMediaTab?: 'all' | 'drawings' | 'photos';
 }
@@ -73,6 +79,22 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const fullZoomTitle = currentDrawingCaption 
     ? `${project.title[currentLang]} — ${currentDrawingCaption}`
     : project.title[currentLang];
+
+  // Prepare full playlist for BlueprintViewerModal
+  const modalMediaList: BlueprintMediaItem[] = activeMediaList.map((url, idx) => {
+    const isDw = project.drawings?.includes(url);
+    const cap = project.drawingCaptions?.[url]?.[currentLang];
+    return {
+      url,
+      title: cap 
+        ? `${project.title[currentLang]} — ${cap}` 
+        : (isDw 
+            ? `${project.title[currentLang]} — DWG #${idx + 1}` 
+            : `${project.title[currentLang]} — Photo #${idx + 1}`),
+      isDrawing: isDw,
+      caption: cap
+    };
+  });
 
   // Handle keyboard events: Escape to close, Left/Right arrows to navigate
   useEffect(() => {
@@ -150,7 +172,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             {/* Media Stages Selector (if project has distinct process stages) */}
             {project.mediaBlocks && project.mediaBlocks.length > 0 && (
               <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-black/75 backdrop-blur-md rounded-xl border border-white/15 mb-2.5 z-10">
-                <span className="text-[10px] font-gost-mono uppercase tracking-wider text-amber-400/90 px-2 font-black">
+                <span className="text-xs font-gost-mono uppercase tracking-wider text-amber-400/90 px-2 font-black">
                   {currentLang === 'uk' ? 'СТАДІЇ ОБ\'ЄКТА:' : currentLang === 'sk' ? 'ETAPY PROJEKTU:' : 'PROCESS STAGES:'}
                 </span>
                 <button
@@ -174,7 +196,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                     }`}
                   >
                     <span>{block.title[currentLang]}</span>
-                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px]">{block.images.length}</span>
+                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-xs">{block.images.length}</span>
                   </button>
                 ))}
               </div>
@@ -193,7 +215,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 >
                   <Layers className="w-3.5 h-3.5" />
                   <span>{currentLang === 'uk' ? 'Всі матеріали' : currentLang === 'sk' ? 'Všetko' : 'All Media'}</span>
-                  <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px]">{project.images.length}</span>
+                  <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-xs">{project.images.length}</span>
                 </button>
 
                 {project.drawings && project.drawings.length > 0 && (
@@ -207,7 +229,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   >
                     <FileText className="w-3.5 h-3.5" />
                     <span>{currentLang === 'uk' ? 'Креслення / CAD' : currentLang === 'sk' ? 'Výkresy' : 'Drawings & CAD'}</span>
-                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px]">{project.drawings.length}</span>
+                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-xs">{project.drawings.length}</span>
                   </button>
                 )}
 
@@ -222,7 +244,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   >
                     <Camera className="w-3.5 h-3.5" />
                     <span>{currentLang === 'uk' ? 'Фото об\'єкта' : currentLang === 'sk' ? 'Fotografie' : 'Site Photos'}</span>
-                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px]">{project.photos.length}</span>
+                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-xs">{project.photos.length}</span>
                   </button>
                 )}
               </div>
@@ -261,7 +283,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    onOpenBlueprintZoom(currentImage, fullZoomTitle);
+                    onOpenBlueprintZoom(
+                      currentImage, 
+                      fullZoomTitle, 
+                      modalMediaList, 
+                      activeImageIndex, 
+                      project.title[currentLang]
+                    );
                   }}
                   className="absolute top-3 right-3 z-20 px-3.5 py-1.5 bg-blue-600/90 hover:bg-blue-500 text-white border border-blue-400/50 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 backdrop-blur-md transition-[transform,background-color] shadow-lg hover:scale-105 cursor-pointer"
                   title={currentLang === 'uk' ? 'Змасштабувати на всю сторінку' : currentLang === 'sk' ? 'Na celú stranu' : 'Scale to Full Page'}
@@ -285,7 +313,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   className="max-h-[64vh] lg:max-h-[76vh] w-auto max-w-full object-contain transition-transform duration-300 rounded-xl cursor-zoom-in hover:brightness-105"
                   onClick={() => {
                     if (onOpenBlueprintZoom) {
-                      onOpenBlueprintZoom(currentImage, fullZoomTitle);
+                      onOpenBlueprintZoom(
+                        currentImage, 
+                        fullZoomTitle, 
+                        modalMediaList, 
+                        activeImageIndex, 
+                        project.title[currentLang]
+                      );
                     } else {
                       setIsZoomed(!isZoomed);
                     }
@@ -332,7 +366,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      onOpenBlueprintZoom(currentImage, fullZoomTitle);
+                      onOpenBlueprintZoom(
+                        currentImage, 
+                        fullZoomTitle, 
+                        modalMediaList, 
+                        activeImageIndex, 
+                        project.title[currentLang]
+                      );
                     }}
                     className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white px-3.5 py-1.5 rounded-full transition-[transform,background-color] cursor-pointer font-bold text-xs sm:text-sm shadow-md hover:scale-105"
                     title={currentLang === 'uk' ? 'Змасштабувати на всю сторінку' : currentLang === 'sk' ? 'Na celú stranu' : 'Full Page'}
@@ -344,7 +384,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <button
                   onClick={() => {
                     if (onOpenBlueprintZoom) {
-                      onOpenBlueprintZoom(currentImage, fullZoomTitle);
+                      onOpenBlueprintZoom(
+                        currentImage, 
+                        fullZoomTitle, 
+                        modalMediaList, 
+                        activeImageIndex, 
+                        project.title[currentLang]
+                      );
                     } else {
                       setIsZoomed(!isZoomed);
                     }
@@ -386,7 +432,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                           className="w-full h-full object-cover"
                         />
                       </picture>
-                      <span className="absolute bottom-0.5 right-0.5 text-[8px] font-mono px-1 rounded bg-black/80 text-white font-bold">
+                      <span className="absolute bottom-0.5 right-0.5 text-xs font-mono px-1 rounded bg-black/80 text-white font-bold">
                         {isDw ? 'DWG' : 'FOTO'}
                       </span>
                     </button>
@@ -510,7 +556,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                         ? `Technologické bloky / etapy projektu (${project.mediaBlocks.length}):`
                         : `Project Sections / Stages (${project.mediaBlocks.length}):`}
                     </span>
-                    <span className="text-[10px] font-mono text-[#92400e] dark:text-[#d97706] font-bold px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30">
+                    <span className="text-xs font-mono text-[#92400e] dark:text-[#d97706] font-bold px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30">
                       {project.mediaBlocks.length} {currentLang === 'uk' ? 'стадії' : currentLang === 'sk' ? 'etapy' : 'stages'}
                     </span>
                   </div>
@@ -533,7 +579,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                           <span className="font-gost text-xs sm:text-sm font-bold text-[var(--text-primary)]">
                             {blk.title[currentLang]}
                           </span>
-                          <span className="text-[10px] font-mono font-bold text-[#92400e] dark:text-[#d97706] px-1.5 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 shrink-0">
+                          <span className="text-xs font-mono font-bold text-[#92400e] dark:text-[#d97706] px-1.5 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 shrink-0">
                             {blk.images.length} {currentLang === 'uk' ? 'файлів' : 'files'}
                           </span>
                         </div>
@@ -553,7 +599,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <div className="mb-6 p-5 rounded-2xl bg-[var(--bg-surface-2)] border border-[var(--border-color)]">
                   <div className="text-xs font-gost-mono uppercase tracking-wider text-[var(--accent-blue)] font-extrabold mb-3 flex items-center justify-between">
                     <span>{currentLang === 'uk' ? 'Технічні характеристики (CAD Specifications):' : currentLang === 'sk' ? 'Technické parametre:' : 'Technical Specifications:'}</span>
-                    <span className="text-[var(--text-secondary)] text-[10px] font-black">ISO SPEC</span>
+                    <span className="text-[var(--text-secondary)] text-xs font-black">ISO SPEC</span>
                   </div>
                   <ul className="space-y-2.5">
                     {project.specs[currentLang].map((spec, sIdx) => (

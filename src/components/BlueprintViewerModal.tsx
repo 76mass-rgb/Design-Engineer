@@ -1,19 +1,23 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Language } from '../types';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { Language, BlueprintMediaItem } from '../types';
 import { getWebpUrl } from '../utils/imageOptimizer';
 import { 
   X, 
   FileText,
-  Layers,
-  Sparkles
+  Camera,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 
-interface BlueprintViewerModalProps {
+export interface BlueprintViewerModalProps {
   isOpen: boolean;
   onClose: () => void;
   imageUrl: string;
   title: string;
   currentLang: Language;
+  mediaList?: BlueprintMediaItem[];
+  initialIndex?: number;
+  projectTitle?: string;
 }
 
 export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
@@ -21,41 +25,97 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
   onClose,
   imageUrl,
   title,
-  currentLang
+  currentLang,
+  mediaList = [],
+  initialIndex = 0,
+  projectTitle
 }) => {
+  // Build a normalized list of media items
+  const fullList: BlueprintMediaItem[] = useMemo(() => {
+    if (mediaList && mediaList.length > 0) {
+      return mediaList;
+    }
+    return [{
+      url: imageUrl,
+      title: title,
+      isDrawing: true
+    }];
+  }, [mediaList, imageUrl, title]);
+
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  // Sync initial index
+  useEffect(() => {
+    if (isOpen) {
+      const targetIdx = initialIndex >= 0 && initialIndex < fullList.length ? initialIndex : 0;
+      setCurrentIndex(targetIdx);
+      setScale(1);
+      setPosition({ x: 0, y: 0 });
+    }
+  }, [isOpen, initialIndex, fullList]);
+
+  const currentMedia = fullList[currentIndex] || fullList[0] || {
+    url: imageUrl,
+    title: title,
+    isDrawing: true
+  };
+
   const [scale, setScale] = useState<number>(1);
   const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [dragStart, setDragStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
-  const [viewMode, setViewMode] = useState<'blueprint' | 'normal'>('normal');
 
   const [touchStartDist, setTouchStartDist] = useState<number | null>(null);
   const [initialTouchScale, setInitialTouchScale] = useState<number>(1);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const thumbsContainerRef = useRef<HTMLDivElement>(null);
 
-  // Reset viewport when opened with new image
+  // Reset scale and position when changing image
   useEffect(() => {
-    if (isOpen) {
-      setScale(1);
-      setPosition({ x: 0, y: 0 });
-    }
-  }, [isOpen, imageUrl]);
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  }, [currentMedia.url]);
 
-  // Handle ESC key
+  // Scroll active thumbnail into view
+  useEffect(() => {
+    if (thumbsContainerRef.current) {
+      const activeBtn = thumbsContainerRef.current.children[currentIndex] as HTMLElement | undefined;
+      if (activeBtn) {
+        activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  }, [currentIndex]);
+
+  const handleNext = () => {
+    if (fullList.length <= 1) return;
+    setCurrentIndex((prev) => (prev + 1) % fullList.length);
+  };
+
+  const handlePrev = () => {
+    if (fullList.length <= 1) return;
+    setCurrentIndex((prev) => (prev - 1 + fullList.length) % fullList.length);
+  };
+
+  // Keyboard navigation: Escape to close, Left/Right arrows to navigate
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isOpen) return;
       if (e.key === 'Escape') {
         onClose();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        handleNext();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        handlePrev();
       }
     };
-    if (isOpen) {
-      window.addEventListener('keydown', handleKeyDown);
-    }
+    window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, fullList.length]);
 
   // Lock background scroll when modal is open
   useEffect(() => {
@@ -69,11 +129,11 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
   }, [isOpen]);
 
   const handleZoomIn = () => {
-    setScale(prev => Math.min(prev + 0.35, 4));
+    setScale((prev) => Math.min(prev + 0.35, 4));
   };
 
   const handleZoomOut = () => {
-    setScale(prev => {
+    setScale((prev) => {
       const newScale = Math.max(prev - 0.35, 0.6);
       if (newScale <= 1) {
         setPosition({ x: 0, y: 0 });
@@ -90,7 +150,13 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault();
     const delta = e.deltaY > 0 ? -0.2 : 0.2;
-    setScale(prev => Math.min(Math.max(prev + delta, 0.6), 4));
+    setScale((prev) => {
+      const nextScale = Math.min(Math.max(prev + delta, 0.6), 4);
+      if (nextScale <= 1) {
+        setPosition({ x: 0, y: 0 });
+      }
+      return nextScale;
+    });
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -148,18 +214,11 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
     setTouchStartDist(null);
   };
 
-  const toggleFullscreen = () => {
-    if (!containerRef.current) return;
-    if (!document.fullscreenElement) {
-      containerRef.current.requestFullscreen?.();
-      setIsFullscreen(true);
-    } else {
-      document.exitFullscreen?.();
-      setIsFullscreen(false);
-    }
-  };
-
   if (!isOpen) return null;
+
+  const currentItemTitle = currentMedia.title || title;
+  const displayHeading = projectTitle ? `${projectTitle} // ${currentItemTitle}` : currentItemTitle;
+  const isDwg = currentMedia.isDrawing !== false;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-0 sm:p-2 animate-fade-in select-none h-[100dvh] w-full">
@@ -167,30 +226,57 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
         ref={containerRef}
         role="dialog"
         aria-modal="true"
-        aria-label={title}
-        className="relative w-full h-full max-w-[100vw] sm:max-w-[99vw] bg-[#0d131f] border-0 sm:border border-blue-500/30 rounded-none sm:rounded-2xl overflow-hidden flex flex-col shadow-2xl"
+        aria-label={displayHeading}
+        className="relative w-full h-full max-w-[100vw] sm:max-w-[99vw] bg-[#090d16] border-0 sm:border border-blue-500/30 rounded-none sm:rounded-2xl overflow-hidden flex flex-col shadow-2xl"
       >
-        {/* Top Control Bar with CAD Stamp aesthetics */}
-        <div className="flex items-center justify-between px-3 sm:px-6 py-2.5 sm:py-3.5 bg-[#080d16] border-b border-blue-500/20 text-white z-20 gap-2">
+        {/* Top Header & Engineering Control Bar */}
+        <div className="flex flex-wrap items-center justify-between px-3 sm:px-6 py-2.5 sm:py-3 bg-[#060a12] border-b border-blue-500/20 text-white z-20 gap-2 sm:gap-4">
+          
+          {/* Left Side: CAD Stamp + Title + Media Counter */}
           <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-1">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 flex-shrink-0">
-              <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
+            <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 border ${
+              isDwg 
+                ? 'bg-blue-600/20 border-blue-500/40 text-blue-400' 
+                : 'bg-emerald-600/20 border-emerald-500/40 text-emerald-400'
+            }`}>
+              {isDwg ? <FileText className="w-4 h-4 sm:w-5 sm:h-5" /> : <Camera className="w-4 h-4 sm:w-5 sm:h-5" />}
             </div>
-            <div className="min-w-0">
-              <div className="font-gost-mono text-xs sm:text-xs text-blue-400 uppercase tracking-widest font-black truncate">
-                {currentLang === 'uk' ? 'Інженерне креслення' : currentLang === 'sk' ? 'Inžiniersky výkres' : 'Blueprint'} // {Math.round(scale * 100)}%
+            
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className={`font-gost-mono text-[11px] sm:text-xs uppercase tracking-widest font-black px-2 py-0.5 rounded-md border ${
+                  isDwg 
+                    ? 'bg-blue-500/15 text-blue-300 border-blue-500/30' 
+                    : 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30'
+                }`}>
+                  {isDwg 
+                    ? (currentLang === 'uk' ? 'Креслення DWG' : currentLang === 'sk' ? 'Výkres DWG' : 'CAD Blueprint')
+                    : (currentLang === 'uk' ? 'Фото об’єкта' : currentLang === 'sk' ? 'Fotografia' : 'Field Photo')
+                  }
+                </span>
+
+                {fullList.length > 1 && (
+                  <span className="font-gost-mono text-xs sm:text-xs text-slate-400 font-bold">
+                    [{currentIndex + 1} / {fullList.length}]
+                  </span>
+                )}
+                
+                <span className="font-gost-mono text-xs text-blue-400/80 hidden md:inline">
+                  // {Math.round(scale * 100)}%
+                </span>
               </div>
-              <div className="font-gost text-sm sm:text-base lg:text-lg font-black text-slate-100 truncate">
-                {title}
+
+              <div className="font-gost text-sm sm:text-base lg:text-lg font-black text-slate-100 truncate mt-0.5" title={displayHeading}>
+                {displayHeading}
               </div>
             </div>
           </div>
 
-          {/* Close button only (zoom / reset / fullscreen / HD controls removed) */}
-          <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
+          {/* Right Side: Only the Close Button (Zoom, Fullscreen, HD and filter buttons removed per user screenshot) */}
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
             <button
               onClick={onClose}
-              className="w-9 h-9 sm:w-auto sm:h-auto p-2 sm:p-2.5 bg-red-500/20 hover:bg-red-500/40 border border-red-500/40 text-red-300 hover:text-white rounded-xl transition-colors cursor-pointer flex items-center justify-center"
+              className="p-2 sm:p-2.5 bg-red-500/20 hover:bg-red-500/40 border border-red-500/40 text-red-300 hover:text-white rounded-xl transition-colors cursor-pointer flex items-center justify-center"
               title="Close (Esc)"
             >
               <X className="w-5 h-5" />
@@ -213,12 +299,42 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
           }`}
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgba(59, 130, 246, 0.07) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(59, 130, 246, 0.07) 1px, transparent 1px)
+              linear-gradient(to right, rgba(59, 130, 246, 0.08) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(59, 130, 246, 0.08) 1px, transparent 1px)
             `,
             backgroundSize: '24px 24px'
           }}
         >
+          {/* Left Arrow Button for Previous Media Item */}
+          {fullList.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrev();
+              }}
+              className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/80 hover:bg-blue-600 border border-blue-500/40 hover:border-blue-400 text-white flex items-center justify-center backdrop-blur-md transition-[transform,background-color] shadow-2xl hover:scale-110 active:scale-95 cursor-pointer"
+              title={currentLang === 'uk' ? 'Попереднє креслення/фото (←)' : currentLang === 'sk' ? 'Predchádzajúci súbor (←)' : 'Previous Media File (←)'}
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
+            </button>
+          )}
+
+          {/* Right Arrow Button for Next Media Item */}
+          {fullList.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNext();
+              }}
+              className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/80 hover:bg-blue-600 border border-blue-500/40 hover:border-blue-400 text-white flex items-center justify-center backdrop-blur-md transition-[transform,background-color] shadow-2xl hover:scale-110 active:scale-95 cursor-pointer"
+              title={currentLang === 'uk' ? 'Наступне креслення/фото (→)' : currentLang === 'sk' ? 'Ďalší súbor (→)' : 'Next Media File (→)'}
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" />
+            </button>
+          )}
+
           {/* Transforming Image Container */}
           <div
             style={{
@@ -226,24 +342,66 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
               transformOrigin: 'center center',
               transition: isDragging ? 'none' : 'transform 0.15s ease-out'
             }}
-            className="flex items-center justify-center w-full h-full p-2"
+            className="flex items-center justify-center w-full h-full p-2 sm:p-4"
           >
             <picture className="flex items-center justify-center max-w-full max-h-full">
-              {getWebpUrl(imageUrl) && (
-                <source srcSet={getWebpUrl(imageUrl)} type="image/webp" />
+              {getWebpUrl(currentMedia.url) && (
+                <source srcSet={getWebpUrl(currentMedia.url)} type="image/webp" />
               )}
               <img
                 ref={imageRef}
-                src={imageUrl}
-                alt={title}
+                src={currentMedia.url}
+                alt={currentItemTitle}
                 width={1920}
                 height={1080}
-                className="max-h-[85vh] sm:max-h-[88vh] max-w-[98vw] sm:max-w-[96vw] w-auto h-auto object-contain rounded-lg shadow-2xl border border-blue-500/20 bg-white"
+                className="max-h-[72vh] sm:max-h-[78vh] max-w-[96vw] sm:max-w-[92vw] w-auto h-auto object-contain rounded-lg shadow-2xl border border-blue-500/30 bg-[#060a12]"
                 draggable={false}
               />
             </picture>
           </div>
         </div>
+
+        {/* Bottom Interactive Thumbnail Strip */}
+        {fullList.length > 1 && (
+          <div className="px-3 sm:px-6 py-2 sm:py-2.5 bg-[#060a12] border-t border-blue-500/20 z-20 flex items-center gap-2 overflow-x-auto scrollbar-thin">
+            <div ref={thumbsContainerRef} className="flex items-center gap-2 sm:gap-2.5 mx-auto">
+              {fullList.map((media, idx) => {
+                const isActive = idx === currentIndex;
+                const isThumbDwg = media.isDrawing !== false;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentIndex(idx)}
+                    className={`relative w-14 h-10 sm:w-18 sm:h-12 flex-shrink-0 rounded-lg overflow-hidden transition-all duration-200 cursor-pointer border ${
+                      isActive
+                        ? 'ring-2 ring-blue-400 border-blue-300 scale-105 shadow-lg shadow-blue-500/30'
+                        : 'border-white/15 opacity-60 hover:opacity-100 hover:border-blue-400/60'
+                    }`}
+                    title={media.title || (isThumbDwg ? `Blueprint #${idx + 1}` : `Photo #${idx + 1}`)}
+                  >
+                    <picture className="w-full h-full block">
+                      {getWebpUrl(media.url) && (
+                        <source srcSet={getWebpUrl(media.url)} type="image/webp" />
+                      )}
+                      <img
+                        src={media.url}
+                        alt={`Thumb ${idx + 1}`}
+                        width={72}
+                        height={48}
+                        className="w-full h-full object-cover bg-[#070b12]"
+                      />
+                    </picture>
+                    <span className={`absolute bottom-0.5 right-0.5 text-[9px] font-mono font-bold px-1 rounded shadow ${
+                      isThumbDwg ? 'bg-blue-600 text-white' : 'bg-emerald-600 text-white'
+                    }`}>
+                      {isThumbDwg ? 'DWG' : 'FOTO'}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
       </div>
     </div>
