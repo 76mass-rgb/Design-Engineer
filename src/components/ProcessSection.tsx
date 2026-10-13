@@ -80,7 +80,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ currentLang }) =
                       </span>
                     </div>
                     <div>
-                      <span className="text-[11px] sm:text-xs font-mono font-bold tracking-widest text-[var(--text-secondary)] uppercase block">
+                      <span className="text-xs sm:text-xs font-mono font-bold tracking-widest text-[var(--text-secondary)] uppercase block">
                         {step.phase[currentLang]}
                       </span>
                       {step.subtitle && (
@@ -144,37 +144,6 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ currentLang }) =
               </div>
             );
           })}
-        </div>
-
-        {/* Engineering Reliability Guarantee Banner */}
-        <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-3xl p-6 sm:p-8 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-600/15 border border-[#166534]/30 flex items-center justify-center text-[#166534] dark:text-[#16a34a] flex-shrink-0">
-              <Shield className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="font-gost text-lg sm:text-xl font-bold text-[var(--text-primary)] leading-snug">
-                {currentLang === 'uk' && 'Гарантія збирання без переробок на майданчику'}
-                {currentLang === 'sk' && 'Záruka montovateľnosti bez úprav na stavbe'}
-                {currentLang === 'en' && 'First-Time Assembly Guarantee on Site'}
-              </h4>
-              <p className="text-xs sm:text-sm text-[var(--text-secondary)] mt-1 max-w-2xl font-normal leading-relaxed">
-                {currentLang === 'uk' && 'Кожен вузол проходить цифрову перевірку на просторові колізії (Zero Clash), а креслення містять повні геометричні допуски GD&T за ISO.'}
-                {currentLang === 'sk' && 'Každý diel prechádza digitálnou kontrolou kolízií (Zero Clash) a výkresy rešpektujú výrobné tolerancie GD&T podľa ISO.'}
-                {currentLang === 'en' && 'Every assembly undergoes 3D digital clash detection (Zero Clash), with full GD&T tolerances specified to ISO standards.'}
-              </p>
-            </div>
-          </div>
-
-          <a
-            href="#contact"
-            className="w-full md:w-auto px-6 py-3.5 rounded-full bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-white font-gost font-bold text-xs sm:text-sm uppercase tracking-wider text-center shrink-0 transition-transform hover:scale-105 shadow-md flex items-center justify-center gap-2 cursor-pointer"
-          >
-            <span>
-              {currentLang === 'uk' ? 'Обговорити етапи проєкту' : currentLang === 'sk' ? 'Konzultovať etapy projektu' : 'Discuss Project Milestones'}
-            </span>
-            <ChevronRight className="w-4 h-4" />
-          </a>
         </div>
 
       </div>

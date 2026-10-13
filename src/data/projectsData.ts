@@ -1647,8 +1647,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
       photos_Borivage1,
       photos_Borivage2,
       photos_Borivage3,
-      photos_Borivage4,
-      photos_Borivage5
+      photos_Borivage4
     ],
     images: [
       coverImage_bunker_Borivage,
@@ -1659,8 +1658,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
       photos_Borivage1,
       photos_Borivage2,
       photos_Borivage3,
-      photos_Borivage4,
-      photos_Borivage5
+      photos_Borivage4
     ]
   },
 

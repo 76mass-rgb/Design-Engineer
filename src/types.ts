@@ -1,5 +1,5 @@
 export type Language = 'en' | 'sk' | 'uk';
-export type ThemeMode = 'dark' | 'light' | 'blueprint';
+export type ThemeMode = 'navy' | 'dark' | 'light' | 'blueprint';
 
 export type ProjectCategory = 
   | 'all'

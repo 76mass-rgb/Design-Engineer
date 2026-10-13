@@ -19,7 +19,7 @@ export const ConceptToRealitySection: React.FC<ConceptToRealitySectionProps> = (
         {/* Section Header: Methodology & Quality Standards */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-8 sm:mb-12 md:mb-16">
           <div>
-            <div className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[var(--accent-blue)] mb-2 font-gost-mono">
+            <div className="text-xs sm:text-xs font-bold uppercase tracking-[0.25em] text-[var(--accent-blue)] mb-2 font-gost-mono">
               02 // {currentLang === 'uk' ? 'МЕТОДОЛОГІЯ ТА СТАНДАРТИ ЯКОСТІ' : currentLang === 'sk' ? 'METODOLÓGIA A ŠTANDARDY KVALITY' : 'METHODOLOGY & QUALITY STANDARDS'}
             </div>
             <h2 className="font-gost text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[var(--text-primary)]">
@@ -56,7 +56,7 @@ export const ConceptToRealitySection: React.FC<ConceptToRealitySectionProps> = (
                   {step.title[currentLang]}
                 </h3>
 
-                <div className="text-[11px] sm:text-xs font-gost-mono text-[var(--accent-blue)] font-bold mb-2 sm:mb-3">
+                <div className="text-xs sm:text-xs font-gost-mono text-[var(--accent-blue)] font-bold mb-2 sm:mb-3">
                   {step.subtitle[currentLang]}
                 </div>
 
@@ -67,7 +67,7 @@ export const ConceptToRealitySection: React.FC<ConceptToRealitySectionProps> = (
 
               <div className="pt-3 border-t border-[var(--border-color)] flex flex-col gap-1.5 sm:gap-2">
                 {step.highlights[currentLang].map((item, hIdx) => (
-                  <div key={hIdx} className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[var(--text-primary)] font-semibold">
+                  <div key={hIdx} className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-xs text-[var(--text-primary)] font-semibold">
                     <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#166534] dark:text-[#16a34a] mt-0.5 flex-shrink-0" />
                     <span>{item}</span>
                   </div>

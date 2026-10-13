@@ -150,7 +150,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             {/* Media Stages Selector (if project has distinct process stages) */}
             {project.mediaBlocks && project.mediaBlocks.length > 0 && (
               <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-black/75 backdrop-blur-md rounded-xl border border-white/15 mb-2.5 z-10">
-                <span className="text-[10px] font-gost-mono uppercase tracking-wider text-amber-400/90 px-2 font-black">
+                <span className="text-xs font-gost-mono uppercase tracking-wider text-amber-400/90 px-2 font-black">
                   {currentLang === 'uk' ? 'СТАДІЇ ОБ\'ЄКТА:' : currentLang === 'sk' ? 'ETAPY PROJEKTU:' : 'PROCESS STAGES:'}
                 </span>
                 <button
@@ -174,7 +174,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                     }`}
                   >
                     <span>{block.title[currentLang]}</span>
-                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px]">{block.images.length}</span>
+                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-xs">{block.images.length}</span>
                   </button>
                 ))}
               </div>
@@ -193,7 +193,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 >
                   <Layers className="w-3.5 h-3.5" />
                   <span>{currentLang === 'uk' ? 'Всі матеріали' : currentLang === 'sk' ? 'Všetko' : 'All Media'}</span>
-                  <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px]">{project.images.length}</span>
+                  <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-xs">{project.images.length}</span>
                 </button>
 
                 {project.drawings && project.drawings.length > 0 && (
@@ -207,7 +207,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   >
                     <FileText className="w-3.5 h-3.5" />
                     <span>{currentLang === 'uk' ? 'Креслення / CAD' : currentLang === 'sk' ? 'Výkresy' : 'Drawings & CAD'}</span>
-                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px]">{project.drawings.length}</span>
+                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-xs">{project.drawings.length}</span>
                   </button>
                 )}
 
@@ -222,7 +222,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   >
                     <Camera className="w-3.5 h-3.5" />
                     <span>{currentLang === 'uk' ? 'Фото об\'єкта' : currentLang === 'sk' ? 'Fotografie' : 'Site Photos'}</span>
-                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-[10px]">{project.photos.length}</span>
+                    <span className="px-1.5 py-0.2 rounded-full bg-black/40 text-xs">{project.photos.length}</span>
                   </button>
                 )}
               </div>
@@ -386,7 +386,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                           className="w-full h-full object-cover"
                         />
                       </picture>
-                      <span className="absolute bottom-0.5 right-0.5 text-[8px] font-mono px-1 rounded bg-black/80 text-white font-bold">
+                      <span className="absolute bottom-0.5 right-0.5 text-xs font-mono px-1 rounded bg-black/80 text-white font-bold">
                         {isDw ? 'DWG' : 'FOTO'}
                       </span>
                     </button>
@@ -510,7 +510,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                         ? `Technologické bloky / etapy projektu (${project.mediaBlocks.length}):`
                         : `Project Sections / Stages (${project.mediaBlocks.length}):`}
                     </span>
-                    <span className="text-[10px] font-mono text-[#92400e] dark:text-[#d97706] font-bold px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30">
+                    <span className="text-xs font-mono text-[#92400e] dark:text-[#d97706] font-bold px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30">
                       {project.mediaBlocks.length} {currentLang === 'uk' ? 'стадії' : currentLang === 'sk' ? 'etapy' : 'stages'}
                     </span>
                   </div>
@@ -533,7 +533,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                           <span className="font-gost text-xs sm:text-sm font-bold text-[var(--text-primary)]">
                             {blk.title[currentLang]}
                           </span>
-                          <span className="text-[10px] font-mono font-bold text-[#92400e] dark:text-[#d97706] px-1.5 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 shrink-0">
+                          <span className="text-xs font-mono font-bold text-[#92400e] dark:text-[#d97706] px-1.5 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 shrink-0">
                             {blk.images.length} {currentLang === 'uk' ? 'файлів' : 'files'}
                           </span>
                         </div>
@@ -553,7 +553,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <div className="mb-6 p-5 rounded-2xl bg-[var(--bg-surface-2)] border border-[var(--border-color)]">
                   <div className="text-xs font-gost-mono uppercase tracking-wider text-[var(--accent-blue)] font-extrabold mb-3 flex items-center justify-between">
                     <span>{currentLang === 'uk' ? 'Технічні характеристики (CAD Specifications):' : currentLang === 'sk' ? 'Technické parametre:' : 'Technical Specifications:'}</span>
-                    <span className="text-[var(--text-secondary)] text-[10px] font-black">ISO SPEC</span>
+                    <span className="text-[var(--text-secondary)] text-xs font-black">ISO SPEC</span>
                   </div>
                   <ul className="space-y-2.5">
                     {project.specs[currentLang].map((spec, sIdx) => (

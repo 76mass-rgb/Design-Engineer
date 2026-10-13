@@ -107,7 +107,7 @@ export const EngineeringTrustStats: React.FC<EngineeringTrustStatsProps> = ({ cu
 
   return (
     <section className="py-12 sm:py-16 bg-[var(--bg-primary)] border-t border-[var(--border-color)]">
-      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
+      <div className="w-full">
         
         {/* Metric Grid Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -151,7 +151,7 @@ export const EngineeringTrustStats: React.FC<EngineeringTrustStatsProps> = ({ cu
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-3 sm:gap-4">
             {clientFacilities.map((client, idx) => (
               <div key={idx} className="p-3.5 sm:p-4 bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-blue)] rounded-xl transition-[transform,border-color] duration-300 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:z-20 relative cursor-pointer">
                 <div className="font-gost font-bold text-sm sm:text-base text-[var(--text-primary)] break-words leading-snug">
