@@ -327,19 +327,19 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 />
               </picture>
 
-              {/* Prev / Next navigation arrows */}
+              {/* Prev / Next navigation arrows (desktop: side overlay, mobile: below image) */}
               {activeMediaList.length > 1 && (
                 <>
                   <button
                     onClick={handlePrev}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/75 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md flex items-center justify-center transition-colors cursor-pointer shadow-lg z-10"
+                    className="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/75 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md items-center justify-center transition-colors cursor-pointer shadow-lg z-10"
                     aria-label="Previous image"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button
                     onClick={handleNext}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/75 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md flex items-center justify-center transition-colors cursor-pointer shadow-lg z-10"
+                    className="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/75 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md items-center justify-center transition-colors cursor-pointer shadow-lg z-10"
                     aria-label="Next image"
                   >
                     <ChevronRight className="w-5 h-5" />
@@ -347,6 +347,33 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 </>
               )}
             </div>
+
+            {/* Mobile Navigation arrows under image (sm:hidden) */}
+            {activeMediaList.length > 1 && (
+              <div className="flex sm:hidden items-center justify-between gap-2 mt-2 px-1">
+                <button
+                  onClick={handlePrev}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/80 hover:bg-blue-600 border border-white/20 text-white font-mono text-xs font-bold active:scale-95 transition-all shadow cursor-pointer"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  <span>{currentLang === 'uk' ? 'Назад' : currentLang === 'sk' ? 'Dozadu' : 'Prev'}</span>
+                </button>
+
+                <span className="font-mono text-xs font-bold text-white/90 bg-black/60 px-3 py-1.5 rounded-lg border border-white/10">
+                  {activeImageIndex + 1} / {activeMediaList.length}
+                </span>
+
+                <button
+                  onClick={handleNext}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/80 hover:bg-blue-600 border border-white/20 text-white font-mono text-xs font-bold active:scale-95 transition-all shadow cursor-pointer"
+                  aria-label="Next image"
+                >
+                  <span>{currentLang === 'uk' ? 'Вперед' : currentLang === 'sk' ? 'Dopredu' : 'Next'}</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            )}
 
             {/* Bottom Controls Bar */}
             <div className="mt-3 flex items-center justify-between text-sm font-mono text-white/90 bg-black/75 px-4 py-2 backdrop-blur-md rounded-full border border-white/20 shadow-md">

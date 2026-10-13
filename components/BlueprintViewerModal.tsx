@@ -305,14 +305,14 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
             backgroundSize: '24px 24px'
           }}
         >
-          {/* Left Arrow Button for Previous Media Item */}
+          {/* Left Arrow Button for Previous Media Item (Desktop side position) */}
           {fullList.length > 1 && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 handlePrev();
               }}
-              className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/80 hover:bg-blue-600 border border-blue-500/40 hover:border-blue-400 text-white flex items-center justify-center backdrop-blur-md transition-[transform,background-color] shadow-2xl hover:scale-110 active:scale-95 cursor-pointer"
+              className="hidden sm:flex absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/80 hover:bg-blue-600 border border-blue-500/40 hover:border-blue-400 text-white items-center justify-center backdrop-blur-md transition-[transform,background-color] shadow-2xl hover:scale-110 active:scale-95 cursor-pointer"
               title={currentLang === 'uk' ? 'Попереднє креслення/фото (←)' : currentLang === 'sk' ? 'Predchádzajúci súbor (←)' : 'Previous Media File (←)'}
               aria-label="Previous image"
             >
@@ -320,14 +320,14 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
             </button>
           )}
 
-          {/* Right Arrow Button for Next Media Item */}
+          {/* Right Arrow Button for Next Media Item (Desktop side position) */}
           {fullList.length > 1 && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 handleNext();
               }}
-              className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/80 hover:bg-blue-600 border border-blue-500/40 hover:border-blue-400 text-white flex items-center justify-center backdrop-blur-md transition-[transform,background-color] shadow-2xl hover:scale-110 active:scale-95 cursor-pointer"
+              className="hidden sm:flex absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/80 hover:bg-blue-600 border border-blue-500/40 hover:border-blue-400 text-white items-center justify-center backdrop-blur-md transition-[transform,background-color] shadow-2xl hover:scale-110 active:scale-95 cursor-pointer"
               title={currentLang === 'uk' ? 'Наступне креслення/фото (→)' : currentLang === 'sk' ? 'Ďalší súbor (→)' : 'Next Media File (→)'}
               aria-label="Next image"
             >
@@ -360,6 +360,41 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
             </picture>
           </div>
         </div>
+
+        {/* Mobile Navigation bar under the image (sm:hidden) */}
+        {fullList.length > 1 && (
+          <div className="flex sm:hidden items-center justify-between px-4 py-2 bg-[#060a12] border-t border-blue-500/20 z-20 shadow-md">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrev();
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-950/80 hover:bg-blue-600 border border-blue-500/40 text-white font-gost-mono text-xs font-bold active:scale-95 transition-all shadow cursor-pointer"
+              title={currentLang === 'uk' ? 'Попереднє креслення/фото' : currentLang === 'sk' ? 'Predchádzajúci súbor' : 'Previous file'}
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span>{currentLang === 'uk' ? 'Назад' : currentLang === 'sk' ? 'Dozadu' : 'Prev'}</span>
+            </button>
+
+            <span className="font-gost-mono text-xs text-slate-200 font-bold px-2.5 py-1 rounded bg-black/60 border border-blue-500/30">
+              {currentIndex + 1} / {fullList.length}
+            </span>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNext();
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-950/80 hover:bg-blue-600 border border-blue-500/40 text-white font-gost-mono text-xs font-bold active:scale-95 transition-all shadow cursor-pointer"
+              title={currentLang === 'uk' ? 'Наступне креслення/фото' : currentLang === 'sk' ? 'Ďalší súbor' : 'Next file'}
+              aria-label="Next image"
+            >
+              <span>{currentLang === 'uk' ? 'Вперед' : currentLang === 'sk' ? 'Dopredu' : 'Next'}</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
 
         {/* Bottom Interactive Thumbnail Strip */}
         {fullList.length > 1 && (
