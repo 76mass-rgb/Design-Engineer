@@ -146,7 +146,7 @@ export const EngineeringTrustStats: React.FC<EngineeringTrustStatsProps> = ({ cu
                 {currentLang === 'uk' ? 'Підтверджений виробничий досвід на ключових підприємствах' : currentLang === 'sk' ? 'Overená inžinierska prax na významných podnikoch' : 'Proven Track Record Across Key Industrial Enterprises'}
               </span>
             </div>
-            <div className="font-gost-mono text-xs sm:text-sm text-[var(--accent-blue)] font-extrabold whitespace-nowrap">
+            <div className="font-gost-mono text-xs sm:text-sm text-[var(--accent-blue)] font-extrabold sm:whitespace-nowrap">
               ISO 9001 · EN 13480 · ASME B31.3 · API 650
             </div>
           </div>

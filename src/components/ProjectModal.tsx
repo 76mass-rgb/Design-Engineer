@@ -203,11 +203,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             )}
 
             {/* Media Category Toggle Tabs */}
-            <div className="flex items-center justify-between gap-2 mb-3 z-10">
-              <div className="flex items-center gap-1.5 p-1 bg-black/60 backdrop-blur-md rounded-xl border border-white/15">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 z-10">
+              <div className="flex items-center gap-1.5 p-1 bg-black/60 backdrop-blur-md rounded-xl border border-white/15 overflow-x-auto max-w-full scrollbar-none">
                 <button
                   onClick={() => handleTabChange('all')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-gost-mono font-bold uppercase transition-colors flex items-center gap-1.5 cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-gost-mono font-bold uppercase transition-colors flex items-center gap-1.5 cursor-pointer shrink-0 ${
                     mediaTab === 'all'
                       ? 'bg-[var(--accent-blue)] text-white shadow-md'
                       : 'text-white/70 hover:text-white hover:bg-white/10'
@@ -221,7 +221,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {project.drawings && project.drawings.length > 0 && (
                   <button
                     onClick={() => handleTabChange('drawings')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-gost-mono font-bold uppercase transition-colors flex items-center gap-1.5 cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-gost-mono font-bold uppercase transition-colors flex items-center gap-1.5 cursor-pointer shrink-0 ${
                       mediaTab === 'drawings'
                         ? 'bg-[var(--accent-blue)] text-white shadow-md'
                         : 'text-white/70 hover:text-white hover:bg-white/10'
@@ -236,7 +236,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {project.photos && project.photos.length > 0 && (
                   <button
                     onClick={() => handleTabChange('photos')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-gost-mono font-bold uppercase transition-colors flex items-center gap-1.5 cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-gost-mono font-bold uppercase transition-colors flex items-center gap-1.5 cursor-pointer shrink-0 ${
                       mediaTab === 'photos'
                         ? 'bg-emerald-600 text-white shadow-md'
                         : 'text-white/70 hover:text-white hover:bg-white/10'

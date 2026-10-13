@@ -284,7 +284,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                   className="p-4 sm:p-7 xl:p-8 cursor-pointer transition-colors"
                 >
                   {/* Top Bar: Year (dark red) on left, Media Count Pills moved up to the right as indicated by arrows */}
-                  <div className="flex items-center justify-between gap-2.5 mb-2.5 sm:mb-3">
+                  <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 mb-2.5 sm:mb-3">
                     {/* Dark Red Year Badge */}
                     <span className="bg-[#851d1d] hover:bg-[#991b1b] border border-red-500/40 text-white font-mono text-xs sm:text-sm font-black px-3 sm:px-3.5 py-1 rounded-full shadow-sm shrink-0">
                       {project.year}

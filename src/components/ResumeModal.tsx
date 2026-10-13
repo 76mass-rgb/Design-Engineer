@@ -365,7 +365,7 @@ ${cv.languages.map(l => `• ${l.lang}: ${l.level}`).join('\n')}
             <span>Format: ISO A4 Print / High-DPI PDF Ready (B&amp;W Clean)</span>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3 flex-wrap w-full sm:w-auto justify-end">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap w-full sm:w-auto justify-between sm:justify-end">
             <button
               onClick={handleCopyText}
               className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-full bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] text-[var(--text-primary)] border border-[var(--border-color)] transition-colors cursor-pointer font-bold text-xs sm:text-sm shadow-sm min-h-[40px]"

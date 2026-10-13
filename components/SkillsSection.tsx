@@ -98,7 +98,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ currentLang }) => 
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          <div className="grid grid-cols-1 min-[420px]:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
             {ENGINEERING_TOOLS_DATA.tools.map((tool, index) => {
               const toolName = 'nameLocalized' in tool && tool.nameLocalized 
                 ? (tool.nameLocalized as Record<Language, string>)[currentLang] 
