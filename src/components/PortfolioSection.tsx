@@ -129,42 +129,44 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
           </p>
         </div>
 
-        {/* Filter Category Tabs (Pills) - Responsive wrap on mobile/tablet, fully readable & easy to tap */}
-        <div className="flex flex-wrap gap-2 sm:gap-2.5 mb-6 sm:mb-8 items-center" role="tablist" aria-label="Project categories">
-          {categories.map((cat) => {
-            const count = cat.id === 'all'
-              ? PROJECTS_DATA.length
-              : PROJECTS_DATA.filter((p) => p.categoryId === cat.id).length;
-            const isSelected = selectedCategory === cat.id;
+        {/* Pinned Filter Category Toolbar (sticky on mobile, tablet & desktop so it doesn't run away when scrolling) */}
+        <div className="sticky top-[58px] sm:top-[68px] z-30 bg-[var(--bg-primary)]/95 backdrop-blur-md -mx-2 sm:-mx-6 md:-mx-8 lg:-mx-12 xl:-mx-16 2xl:-mx-20 px-2 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 py-2.5 sm:py-3 border-b border-[var(--border-color)]/80 mb-6 sm:mb-8 shadow-sm transition-all">
+          <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto scrollbar-none flex-nowrap lg:flex-wrap" role="tablist" aria-label="Project categories">
+            {categories.map((cat) => {
+              const count = cat.id === 'all'
+                ? PROJECTS_DATA.length
+                : PROJECTS_DATA.filter((p) => p.categoryId === cat.id).length;
+              const isSelected = selectedCategory === cat.id;
 
-            return (
-              <button
-                key={cat.id}
-                role="tab"
-                aria-selected={isSelected}
-                onClick={() => {
-                  setSelectedCategory(cat.id);
-                  setIsGridExpanded(true);
-                }}
-                className={`font-gost text-xs sm:text-sm font-bold uppercase tracking-wider px-3.5 sm:px-4.5 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-[transform,background-color,border-color,color] duration-200 cursor-pointer shrink-0 flex items-center gap-2 touch-target select-none ${
-                  isSelected
-                    ? 'bg-[var(--accent-blue)] text-white shadow-md shadow-[var(--accent-blue)]/25 scale-[1.02] border border-[var(--accent-blue)] ring-2 ring-[var(--accent-blue)]/30'
-                    : 'bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] text-[var(--text-primary)] hover:border-[var(--accent-blue)] border border-[var(--border-color)] active:scale-95'
-                }`}
-              >
-                <span>{cat.label}</span>
-                <span
-                  className={`text-xs sm:text-xs font-mono font-black px-2 py-0.5 rounded-full transition-colors ${
+              return (
+                <button
+                  key={cat.id}
+                  role="tab"
+                  aria-selected={isSelected}
+                  onClick={() => {
+                    setSelectedCategory(cat.id);
+                    setIsGridExpanded(true);
+                  }}
+                  className={`font-gost text-xs sm:text-sm font-bold uppercase tracking-wider px-3.5 sm:px-4.5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl transition-[transform,background-color,border-color,color] duration-200 cursor-pointer shrink-0 flex items-center gap-2 touch-target select-none ${
                     isSelected
-                      ? 'bg-white/20 text-white'
-                      : 'bg-[var(--bg-surface-3)] text-[var(--text-muted)]'
+                      ? 'bg-[var(--accent-blue)] text-white shadow-md shadow-[var(--accent-blue)]/25 scale-[1.02] border border-[var(--accent-blue)] ring-2 ring-[var(--accent-blue)]/30'
+                      : 'bg-[var(--bg-surface-2)] hover:bg-[var(--bg-surface-3)] text-[var(--text-primary)] hover:border-[var(--accent-blue)] border border-[var(--border-color)] active:scale-95'
                   }`}
                 >
-                  {count}
-                </span>
-              </button>
-            );
-          })}
+                  <span>{cat.label}</span>
+                  <span
+                    className={`text-xs sm:text-xs font-mono font-black px-2 py-0.5 rounded-full transition-colors ${
+                      isSelected
+                        ? 'bg-white/20 text-white'
+                        : 'bg-[var(--bg-surface-3)] text-[var(--text-muted)]'
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Squeeze Toggle Bar (Screenshot 1: Grid hidden until activated) */}

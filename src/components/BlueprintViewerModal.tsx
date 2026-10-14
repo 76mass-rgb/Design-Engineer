@@ -305,14 +305,14 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
             backgroundSize: '24px 24px'
           }}
         >
-          {/* Left Arrow Button for Previous Media Item (Desktop side position) */}
+          {/* Left Arrow Button for Previous Media Item (Desktop side position, hidden on mobile & tablet) */}
           {fullList.length > 1 && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 handlePrev();
               }}
-              className="hidden sm:flex absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/80 hover:bg-blue-600 border border-blue-500/40 hover:border-blue-400 text-white items-center justify-center backdrop-blur-md transition-[transform,background-color] shadow-2xl hover:scale-110 active:scale-95 cursor-pointer"
+              className="hidden lg:flex absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/80 hover:bg-blue-600 border border-blue-500/40 hover:border-blue-400 text-white items-center justify-center backdrop-blur-md transition-[transform,background-color] shadow-2xl hover:scale-110 active:scale-95 cursor-pointer"
               title={currentLang === 'uk' ? 'Попереднє креслення/фото (←)' : currentLang === 'sk' ? 'Predchádzajúci súbor (←)' : 'Previous Media File (←)'}
               aria-label="Previous image"
             >
@@ -320,14 +320,14 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
             </button>
           )}
 
-          {/* Right Arrow Button for Next Media Item (Desktop side position) */}
+          {/* Right Arrow Button for Next Media Item (Desktop side position, hidden on mobile & tablet) */}
           {fullList.length > 1 && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 handleNext();
               }}
-              className="hidden sm:flex absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/80 hover:bg-blue-600 border border-blue-500/40 hover:border-blue-400 text-white items-center justify-center backdrop-blur-md transition-[transform,background-color] shadow-2xl hover:scale-110 active:scale-95 cursor-pointer"
+              className="hidden lg:flex absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/80 hover:bg-blue-600 border border-blue-500/40 hover:border-blue-400 text-white items-center justify-center backdrop-blur-md transition-[transform,background-color] shadow-2xl hover:scale-110 active:scale-95 cursor-pointer"
               title={currentLang === 'uk' ? 'Наступне креслення/фото (→)' : currentLang === 'sk' ? 'Ďalší súbor (→)' : 'Next Media File (→)'}
               aria-label="Next image"
             >
@@ -361,9 +361,9 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
           </div>
         </div>
 
-        {/* Mobile Navigation bar under the image (sm:hidden) */}
+        {/* Pinned Navigation Toolbar under the image on Mobile & Tablet (lg:hidden) */}
         {fullList.length > 1 && (
-          <div className="flex sm:hidden items-center justify-between px-4 py-2 bg-[#060a12] border-t border-blue-500/20 z-20 shadow-md">
+          <div className="flex lg:hidden items-center justify-between px-4 py-2.5 bg-[#060a12] border-t border-blue-500/20 z-30 shadow-md flex-shrink-0 sticky bottom-0">
             <button
               onClick={(e) => {
                 e.stopPropagation();
