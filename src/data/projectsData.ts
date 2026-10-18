@@ -10,7 +10,7 @@ import img_image___1447_jpg from '../assets/images/projects/image.-.jpg-1679x144
 import img_0_1679x682_jpg from '../assets/images/projects/0.jpg-1679x682.webp';
 import img_image_1545x984_jpg from '../assets/images/projects/image.jpg-1545x984.webp';
 import img_image_1679x1167_jpg from '../assets/images/projects/image.jpg-1679x1167.webp';
-import img_dsc01837_jpg from '../assets/images/projects/dsc01837.webp';
+import img_dsc01837_jpg from '../assets/images/projects/dsc01837-img.webp';
 import img_image_1679x862_jpg from '../assets/images/projects/image.jpg-1679x862.webp';
 import img_dsc01026_jpg from '../assets/images/projects/dsc01026.jpg-1280x960.webp';
 import img_dsc01031_jpg from '../assets/images/projects/dsc01031.jpg-1280x960.webp';
@@ -100,12 +100,12 @@ import photos_Borivage4 from '../assets/images/projects/photos-borivage4.webp';
 import photos_Borivage5 from '../assets/images/projects/photos-borivage5.webp';
 
 // 2017 UAM Tank Project Media: Saddle support drawing A3
-import img_A3_jpg from '../assets/images/projects/a3.webp';
+import img_A3_jpg from '../assets/images/projects/a3-img.webp';
 
 // 2004 Cooling Tower Project Media
 import dolinskiy_drawing_12 from '../assets/images/projects/dolinskiy-page-12.webp';
-import img_DSC01837_jpg from '../assets/images/projects/dsc01837.webp';
-import img_DSC01835_jpg from '../assets/images/projects/dsc01835.webp';
+import img_DSC01837_jpg from '../assets/images/projects/dsc01837-img.webp';
+import img_DSC01835_jpg from '../assets/images/projects/dsc01835-img.webp';
 
 // 2016 Water Platform (10t) Project Media
 import coverImage_CDP_1 from '../assets/images/projects/cover-image-cdp-1.webp';
@@ -144,7 +144,7 @@ import photos_s from '../assets/images/projects/photos-s.webp';
 import drawings_45 from '../assets/images/projects/drawings-45.webp';
 import drawings_46 from '../assets/images/projects/drawings-46.webp';
 import drawings_47 from '../assets/images/projects/drawings-47.webp';
-import photo_Odessnefteprodukt from '../assets/images/projects/odessnefteprodukt.webp';
+import photo_Odessnefteprodukt from '../assets/images/projects/odessnefteprodukt-img.webp';
 
 // 2019 Propane-Butane (LPG) 4-Dispenser Autogas Station (EUROTANK, Odesa)
 import coverImage_LPG from '../assets/images/projects/cover-image-lpg.webp';
