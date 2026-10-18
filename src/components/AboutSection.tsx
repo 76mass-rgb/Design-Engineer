@@ -49,6 +49,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang, onOpenR
                     height={1141}
                     className="w-full h-full object-cover object-top"
                     loading="lazy"
+                    decoding="async"
                   />
                 </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />

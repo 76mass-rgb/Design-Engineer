@@ -423,6 +423,8 @@ export const BlueprintViewerModal: React.FC<BlueprintViewerModalProps> = ({
                         alt={`Thumb ${idx + 1}`}
                         width={72}
                         height={48}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover bg-[#070b12]"
                       />
                     </picture>

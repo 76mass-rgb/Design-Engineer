@@ -20,6 +20,11 @@
     -webkit-text-size-adjust: 100%;
   }
 
+  /* User-selectable text size (rem-based, so everything scales together; browser zoom is never blocked) */
+  html[data-text-size="compact"] { font-size: 100%; }     /* 16px */
+  html[data-text-size="comfortable"] { font-size: 112.5%; } /* 18px (default) */
+  html[data-text-size="large"] { font-size: 125%; }       /* 20px */
+
   /* Default Theme: Deep Industrial Navy & Amber Gold (1Vitaliy_Portfolio_Mobirise_Ready.html) */
   :root, html[data-theme="navy"] {
     color-scheme: dark;

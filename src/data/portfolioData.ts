@@ -608,7 +608,6 @@ export const SKILLS_DATA: SkillItem[] = [
 ];
 
 
-export { PROJECTS_DATA } from './projectsData';
 
 export const REAL_RESULTS_GALLERY: RealResultImage[] = [];
 

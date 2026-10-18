@@ -10,7 +10,7 @@ import img_image___1447_jpg from '../assets/images/projects/image.-.jpg-1679x144
 import img_0_1679x682_jpg from '../assets/images/projects/0.jpg-1679x682.webp';
 import img_image_1545x984_jpg from '../assets/images/projects/image.jpg-1545x984.webp';
 import img_image_1679x1167_jpg from '../assets/images/projects/image.jpg-1679x1167.webp';
-import img_dsc01837_jpg from '../assets/images/projects/DSC01837.webp';
+import img_dsc01837_jpg from '../assets/images/projects/dsc01837.webp';
 import img_image_1679x862_jpg from '../assets/images/projects/image.jpg-1679x862.webp';
 import img_dsc01026_jpg from '../assets/images/projects/dsc01026.jpg-1280x960.webp';
 import img_dsc01031_jpg from '../assets/images/projects/dsc01031.jpg-1280x960.webp';
@@ -76,90 +76,90 @@ import img_3_20_png from '../assets/images/projects/3-20.png-1-1256x887.webp';
 import img_img_20210916_135709_jpg from '../assets/images/projects/img-20210916-135709.jpg-1256x942.webp';
 
 // 2021 University of Latvia Lab Stand Media
-import drawings_lab from '../assets/images/projects/drawings lab.webp';
-import drawings_lab1 from '../assets/images/projects/drawings lab1.webp';
-import photos_lab from '../assets/images/projects/photos lab.webp';
-import photos_lab1 from '../assets/images/projects/photos lab1.webp';
+import drawings_lab from '../assets/images/projects/drawings-lab.webp';
+import drawings_lab1 from '../assets/images/projects/drawings-lab1.webp';
+import photos_lab from '../assets/images/projects/photos-lab.webp';
+import photos_lab1 from '../assets/images/projects/photos-lab1.webp';
 
 // 2019 Odesa Office Building Media
-import coverImage_ofis from '../assets/images/projects/coverImage ofis.webp';
-import photos1_OFIS from '../assets/images/projects/photos1 OFIS.webp';
-import photos2_OFIS from '../assets/images/projects/photos2 OFIS.webp';
-import photos3_OFIS from '../assets/images/projects/photos3 OFIS.webp';
+import coverImage_ofis from '../assets/images/projects/cover-image-ofis.webp';
+import photos1_OFIS from '../assets/images/projects/photos1-ofis.webp';
+import photos2_OFIS from '../assets/images/projects/photos2-ofis.webp';
+import photos3_OFIS from '../assets/images/projects/photos3-ofis.webp';
 
 // 2016 Borivage Grain Bunker Project Media (original format preserved: jpg, jpeg, png)
-import coverImage_bunker_Borivage from '../assets/images/projects/coverImage bunker Borivage.webp';
-import drawings_Borivage from '../assets/images/projects/drawings Borivage.webp';
-import drawings_Borivage1 from '../assets/images/projects/drawings Borivage1.webp';
-import drawings_Borivage2 from '../assets/images/projects/drawings Borivage2.webp';
-import drawings_Borivage3 from '../assets/images/projects/drawings Borivage3.webp';
-import photos_Borivage1 from '../assets/images/projects/photos Borivage1.webp';
-import photos_Borivage2 from '../assets/images/projects/photos Borivage2.webp';
-import photos_Borivage3 from '../assets/images/projects/photos Borivage3.webp';
-import photos_Borivage4 from '../assets/images/projects/photos Borivage4.webp';
-import photos_Borivage5 from '../assets/images/projects/photos Borivage5.webp';
+import coverImage_bunker_Borivage from '../assets/images/projects/cover-image-bunker-borivage.webp';
+import drawings_Borivage from '../assets/images/projects/drawings-borivage.webp';
+import drawings_Borivage1 from '../assets/images/projects/drawings-borivage1.webp';
+import drawings_Borivage2 from '../assets/images/projects/drawings-borivage2.webp';
+import drawings_Borivage3 from '../assets/images/projects/drawings-borivage3.webp';
+import photos_Borivage1 from '../assets/images/projects/photos-borivage1.webp';
+import photos_Borivage2 from '../assets/images/projects/photos-borivage2.webp';
+import photos_Borivage3 from '../assets/images/projects/photos-borivage3.webp';
+import photos_Borivage4 from '../assets/images/projects/photos-borivage4.webp';
+import photos_Borivage5 from '../assets/images/projects/photos-borivage5.webp';
 
 // 2017 UAM Tank Project Media: Saddle support drawing A3
-import img_A3_jpg from '../assets/images/projects/A3.webp';
+import img_A3_jpg from '../assets/images/projects/a3.webp';
 
 // 2004 Cooling Tower Project Media
-import dolinskiy_drawing_12 from '../assets/images/projects/Dolinskiy Страница_12.webp';
-import img_DSC01837_jpg from '../assets/images/projects/DSC01837.webp';
-import img_DSC01835_jpg from '../assets/images/projects/DSC01835.webp';
+import dolinskiy_drawing_12 from '../assets/images/projects/dolinskiy-page-12.webp';
+import img_DSC01837_jpg from '../assets/images/projects/dsc01837.webp';
+import img_DSC01835_jpg from '../assets/images/projects/dsc01835.webp';
 
 // 2016 Water Platform (10t) Project Media
-import coverImage_CDP_1 from '../assets/images/projects/coverImage CDP-№1.webp';
-import drawings_CDP1 from '../assets/images/projects/drawings CDP1.webp';
-import drawings_CDP2 from '../assets/images/projects/drawings CDP2.webp';
-import drawings_CDP3 from '../assets/images/projects/drawings CDP3.webp';
-import photos_CDP from '../assets/images/projects/photos CDP.webp';
-import photos_CDP1 from '../assets/images/projects/photos CDP1.webp';
-import photos_CDP3 from '../assets/images/projects/photos CDP3.webp';
-import photos_CDP4 from '../assets/images/projects/photos CDP4.webp';
+import coverImage_CDP_1 from '../assets/images/projects/cover-image-cdp-1.webp';
+import drawings_CDP1 from '../assets/images/projects/drawings-cdp1.webp';
+import drawings_CDP2 from '../assets/images/projects/drawings-cdp2.webp';
+import drawings_CDP3 from '../assets/images/projects/drawings-cdp3.webp';
+import photos_CDP from '../assets/images/projects/photos-cdp.webp';
+import photos_CDP1 from '../assets/images/projects/photos-cdp1.webp';
+import photos_CDP3 from '../assets/images/projects/photos-cdp3.webp';
+import photos_CDP4 from '../assets/images/projects/photos-cdp4.webp';
 
 // 2016 Oil & Diesel Storage Reconstruction (United Technologic, Odesa)
-import coverImage_OIL from '../assets/images/projects/coverImage OIL.webp';
-import drawings_OIL2 from '../assets/images/projects/drawings OIL2.webp';
-import drawings_OIL3 from '../assets/images/projects/drawings OIL3.webp';
-import photos_OIL4 from '../assets/images/projects/photos OIL4.webp';
-import photos_OIL5 from '../assets/images/projects/photos OIL5.webp';
-import photos_OIL6 from '../assets/images/projects/photos OIL6.webp';
-import photos_OIL7 from '../assets/images/projects/photos OIL7.webp';
-import photos_OIL8 from '../assets/images/projects/photos OIL8.webp';
-import drawings_Diz from '../assets/images/projects/drawings Diz.webp';
-import photos_Diz1 from '../assets/images/projects/photos Diz1.webp';
-import photos_Diz3 from '../assets/images/projects/photos Diz3.webp';
-import photos_Diz4 from '../assets/images/projects/photos Diz4.webp';
+import coverImage_OIL from '../assets/images/projects/cover-image-oil.webp';
+import drawings_OIL2 from '../assets/images/projects/drawings-oil2.webp';
+import drawings_OIL3 from '../assets/images/projects/drawings-oil3.webp';
+import photos_OIL4 from '../assets/images/projects/photos-oil4.webp';
+import photos_OIL5 from '../assets/images/projects/photos-oil5.webp';
+import photos_OIL6 from '../assets/images/projects/photos-oil6.webp';
+import photos_OIL7 from '../assets/images/projects/photos-oil7.webp';
+import photos_OIL8 from '../assets/images/projects/photos-oil8.webp';
+import drawings_Diz from '../assets/images/projects/drawings-diz.webp';
+import photos_Diz1 from '../assets/images/projects/photos-diz1.webp';
+import photos_Diz3 from '../assets/images/projects/photos-diz3.webp';
+import photos_Diz4 from '../assets/images/projects/photos-diz4.webp';
 
 // 2013-2014 Delta Wilmar Logistics Reconstruction Media
-import coverImage_n1 from '../assets/images/projects/coverImage n1.webp';
-import photos_n2 from '../assets/images/projects/photos n2.webp';
-import photos_n3 from '../assets/images/projects/photos n3.webp';
-import drawings_s from '../assets/images/projects/drawings s.webp';
-import drawings_s1 from '../assets/images/projects/drawings s1.webp';
-import drawings_s2 from '../assets/images/projects/drawings s2.webp';
-import photos_s from '../assets/images/projects/photos s.webp';
+import coverImage_n1 from '../assets/images/projects/cover-image-n1.webp';
+import photos_n2 from '../assets/images/projects/photos-n2.webp';
+import photos_n3 from '../assets/images/projects/photos-n3.webp';
+import drawings_s from '../assets/images/projects/drawings-s.webp';
+import drawings_s1 from '../assets/images/projects/drawings-s1.webp';
+import drawings_s2 from '../assets/images/projects/drawings-s2.webp';
+import photos_s from '../assets/images/projects/photos-s.webp';
 
 // 2009 Tank Farm 42,000 m³ "Odesnefteprodukt" Drawings & Photos
-import drawings_45 from '../assets/images/projects/drawings 45.webp';
-import drawings_46 from '../assets/images/projects/drawings 46.webp';
-import drawings_47 from '../assets/images/projects/drawings 47.webp';
-import photo_Odessnefteprodukt from '../assets/images/projects/Odessnefteprodukt.webp';
+import drawings_45 from '../assets/images/projects/drawings-45.webp';
+import drawings_46 from '../assets/images/projects/drawings-46.webp';
+import drawings_47 from '../assets/images/projects/drawings-47.webp';
+import photo_Odessnefteprodukt from '../assets/images/projects/odessnefteprodukt.webp';
 
 // 2019 Propane-Butane (LPG) 4-Dispenser Autogas Station (EUROTANK, Odesa)
-import coverImage_LPG from '../assets/images/projects/coverImage LPG .webp';
-import drawings_LPG from '../assets/images/projects/drawings LPG.webp';
-import photos_LPG from '../assets/images/projects/photos LPG.webp';
-import drawings_LPG1 from '../assets/images/projects/drawings LPG1.webp';
-import drawings_LPG2 from '../assets/images/projects/drawings LPG2.webp';
-import drawings_LPG3 from '../assets/images/projects/drawings LPG3.jpg.webp';
-import photos_LPG1 from '../assets/images/projects/photos LPG1.webp';
-import photos_LPG2 from '../assets/images/projects/photos LPG2.webp';
-import photos_LPG3 from '../assets/images/projects/photos LPG3.webp';
+import coverImage_LPG from '../assets/images/projects/cover-image-lpg.webp';
+import drawings_LPG from '../assets/images/projects/drawings-lpg.webp';
+import photos_LPG from '../assets/images/projects/photos-lpg.webp';
+import drawings_LPG1 from '../assets/images/projects/drawings-lpg1.webp';
+import drawings_LPG2 from '../assets/images/projects/drawings-lpg2.webp';
+import drawings_LPG3 from '../assets/images/projects/drawings-lpg3.webp';
+import photos_LPG1 from '../assets/images/projects/photos-lpg1.webp';
+import photos_LPG2 from '../assets/images/projects/photos-lpg2.webp';
+import photos_LPG3 from '../assets/images/projects/photos-lpg3.webp';
 
 // 2018 Grain Terminal 36,000 t (Railway & River Fronts) Media
-import coverImage_Grain from '../assets/images/projects/coverImage Grain.webp';
-import drawings_Grain from '../assets/images/projects/drawings Grain.webp';
+import coverImage_Grain from '../assets/images/projects/cover-image-grain.webp';
+import drawings_Grain from '../assets/images/projects/drawings-grain.webp';
 
 // 2018 LPG Transshipment Complex 600 m³ (EUROTANK, Odesa) Media
 const projectAssetsGlob = import.meta.glob<string>('../assets/images/projects/*', {
@@ -276,18 +276,18 @@ const beerAllImagesList = [
 ].filter((url, idx, self) => Boolean(url) && self.indexOf(url) === idx);
 
 // 2007-2012 Special Projects: Method Statements & Erection Plans (CPP)
-import coverImage_CPP from '../assets/images/projects/coverImage CPP.webp';
-import drawings_CPP from '../assets/images/projects/drawings CPP.webp';
-import drawings_CPP1 from '../assets/images/projects/drawings CPP1.webp';
-import drawings_CPP2 from '../assets/images/projects/drawings CPP2.webp';
-import drawings_CPP3 from '../assets/images/projects/drawings CPP3.webp';
-import drawings_CPP4 from '../assets/images/projects/drawings CPP4.webp';
-import drawings_CPP5 from '../assets/images/projects/drawings CPP5.webp';
-import drawings_CPP6 from '../assets/images/projects/drawings CPP6.webp';
-import drawings_CPP7 from '../assets/images/projects/drawings CPP7.webp';
-import photos_CPP from '../assets/images/projects/photos CPP.webp';
-import photos_CPP1 from '../assets/images/projects/photos CPP1.webp';
-import photos_CPP2 from '../assets/images/projects/photos CPP2.webp';
+import coverImage_CPP from '../assets/images/projects/cover-image-cpp.webp';
+import drawings_CPP from '../assets/images/projects/drawings-cpp.webp';
+import drawings_CPP1 from '../assets/images/projects/drawings-cpp1.webp';
+import drawings_CPP2 from '../assets/images/projects/drawings-cpp2.webp';
+import drawings_CPP3 from '../assets/images/projects/drawings-cpp3.webp';
+import drawings_CPP4 from '../assets/images/projects/drawings-cpp4.webp';
+import drawings_CPP5 from '../assets/images/projects/drawings-cpp5.webp';
+import drawings_CPP6 from '../assets/images/projects/drawings-cpp6.webp';
+import drawings_CPP7 from '../assets/images/projects/drawings-cpp7.webp';
+import photos_CPP from '../assets/images/projects/photos-cpp.webp';
+import photos_CPP1 from '../assets/images/projects/photos-cpp1.webp';
+import photos_CPP2 from '../assets/images/projects/photos-cpp2.webp';
 
 const cppBlock1Images = [
   coverImage_CPP,

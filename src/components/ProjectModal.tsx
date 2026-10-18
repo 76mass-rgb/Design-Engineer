@@ -456,6 +456,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                           alt={thumbCaption || `Thumbnail ${idx + 1}`}
                           width={64}
                           height={48}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover"
                         />
                       </picture>

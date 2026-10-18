@@ -1,6 +1,7 @@
 import React, { useState, lazy, Suspense } from 'react';
 import { ProjectItem, ProjectCategory, Language, BlueprintMediaItem } from '../types';
-import { PROJECTS_DATA, UI_TRANSLATIONS } from '../data/portfolioData';
+import { UI_TRANSLATIONS } from '../data/portfolioData';
+import { PROJECTS_DATA } from '../data/projectsData';
 import { getWebpUrl } from '../utils/imageOptimizer';
 import { Eye, Layers, FileText, Camera, ShieldCheck, ArrowUpRight, Building2, Briefcase, AlertCircle, Wrench, CheckCircle2, Award, ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -539,6 +540,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                             height={900}
                             className={`w-full h-full ${media.isDrawing ? 'object-contain p-1.5 sm:p-2 bg-[#060a12]' : 'object-cover'} filter brightness-[0.96] group-hover/item:brightness-100 group-hover/item:scale-[1.02] transition-[filter,transform] duration-500`}
                             loading="lazy"
+                            decoding="async"
                           />
                         </picture>
 

@@ -20,8 +20,6 @@ import {
   Loader2,
   Award
 } from 'lucide-react';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -81,6 +79,11 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
       // Temporarily ensure background styling for canvas capture
       const element = cvPrintRef.current;
       
+      const [{ default: html2canvas }, { default: jsPDF }] = await Promise.all([
+        import('html2canvas'),
+        import('jspdf'),
+      ]);
+
       const canvas = await html2canvas(element, {
         scale: 2, // High resolution for crisp printing & text
         useCORS: true,

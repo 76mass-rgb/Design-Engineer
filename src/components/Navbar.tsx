@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Language, ThemeMode } from '../types';
+import { Language, ThemeMode, TextSize } from '../types';
+import { TextSizePopover, TextSizeSegmented } from './TextSizeControl';
 import { UI_TRANSLATIONS, CONTACT_DATA } from '../data/portfolioData';
 import { Menu, X, Sun, Moon, Compass, Phone, FileText, ArrowUpRight, Mail, ChevronDown } from 'lucide-react';
 
@@ -8,6 +9,8 @@ interface NavbarProps {
   onLanguageChange: (lang: Language) => void;
   currentTheme: ThemeMode;
   onThemeChange: (theme: ThemeMode) => void;
+  currentTextSize: TextSize;
+  onTextSizeChange: (size: TextSize) => void;
   activeSection: string;
   onOpenResume: () => void;
   onNavigate?: (sectionId: string) => void;
@@ -19,6 +22,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onLanguageChange,
   currentTheme,
   onThemeChange,
+  currentTextSize,
+  onTextSizeChange,
   activeSection,
   onOpenResume,
   onNavigate,
@@ -188,6 +193,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               {currentTheme === 'navy' ? 'Navy' : currentTheme === 'dark' ? 'Dark' : currentTheme === 'blueprint' ? 'CAD' : 'Light'}
             </span>
           </button>
+
+          {/* Text size (desktop header; on phones it lives in the menu drawer) */}
+          <div className="hidden min-[1200px]:block">
+            <TextSizePopover currentLang={currentLang} value={currentTextSize} onChange={onTextSizeChange} />
+          </div>
         </div>
 
         {/* Center: Desktop Navigation Bar (Visible on large desktop) */}
@@ -307,6 +317,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </button>
                   ))}
                 </div>
+              </div>
+
+              {/* Text size selector */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between sm:justify-end gap-2 sm:gap-1">
+                <span className="font-gost-mono text-xs uppercase font-extrabold text-[var(--text-secondary)] sm:mr-2">
+                  {currentLang === 'uk' ? 'Розмір тексту:' : currentLang === 'sk' ? 'Veľkosť textu:' : 'Text size:'}
+                </span>
+                <TextSizeSegmented currentLang={currentLang} value={currentTextSize} onChange={onTextSizeChange} />
               </div>
             </div>
 

@@ -1,13 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { Language, ThemeMode, BlueprintMediaItem } from './types';
+import { Language, ThemeMode, TextSize, BlueprintMediaItem } from './types';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { SkillsSection } from './components/SkillsSection';
-import { PortfolioSection } from './components/PortfolioSection';
-import { AboutSection } from './components/AboutSection';
-import { EducationSection } from './components/EducationSection';
-import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
+
+// Sections 01-05 are collapsed on first load, so they are loaded on demand
+const SkillsSection = React.lazy(() =>
+  import('./components/SkillsSection').then((m) => ({ default: m.SkillsSection }))
+);
+const PortfolioSection = React.lazy(() =>
+  import('./components/PortfolioSection').then((m) => ({ default: m.PortfolioSection }))
+);
+const AboutSection = React.lazy(() =>
+  import('./components/AboutSection').then((m) => ({ default: m.AboutSection }))
+);
+const EducationSection = React.lazy(() =>
+  import('./components/EducationSection').then((m) => ({ default: m.EducationSection }))
+);
+const ContactSection = React.lazy(() =>
+  import('./components/ContactSection').then((m) => ({ default: m.ContactSection }))
+);
+
+const SectionFallback = () => (
+  <div
+    role="status"
+    aria-live="polite"
+    className="w-full py-16 flex justify-center font-gost-mono text-sm uppercase tracking-widest text-[var(--text-secondary)]"
+  >
+    Loading…
+  </div>
+);
 
 const ResumeModal = React.lazy(() =>
   import('./components/ResumeModal').then((m) => ({ default: m.ResumeModal }))
@@ -70,6 +92,24 @@ export default function App() {
     try {
       sessionStorage.setItem('app_theme', theme);
       localStorage.setItem('app_theme', theme);
+    } catch {
+      // Ignore storage access issues
+    }
+  };
+
+  const [textSize, setTextSize] = useState<TextSize>(() => {
+    if (typeof document !== 'undefined') {
+      const attr = document.documentElement.getAttribute('data-text-size');
+      if (attr === 'compact' || attr === 'comfortable' || attr === 'large') return attr;
+    }
+    return 'comfortable';
+  });
+
+  const handleTextSizeChange = (size: TextSize) => {
+    setTextSize(size);
+    document.documentElement.setAttribute('data-text-size', size);
+    try {
+      localStorage.setItem('app_text_size', size);
     } catch {
       // Ignore storage access issues
     }
@@ -236,6 +276,8 @@ export default function App() {
         onLanguageChange={handleLanguageChange}
         currentTheme={currentTheme}
         onThemeChange={handleThemeChange}
+        currentTextSize={textSize}
+        onTextSizeChange={handleTextSizeChange}
         activeSection={openSection ?? 'hero'}
         onOpenResume={() => setIsResumeOpen(true)}
         onNavigate={handleNavigate}
@@ -254,6 +296,7 @@ export default function App() {
         {/* Sections 01–05: collapsed by default, expanded from the header menu (one at a time) */}
         {openSection && (
           <div key={openSection} className="w-full animate-slideUp border-t border-[var(--border-color)]">
+            <React.Suspense fallback={<SectionFallback />}>
             {openSection === 'skills' && (
               <div id="skills" className="scroll-mt-28">
                 <SkillsSection currentLang={currentLang} />
@@ -290,6 +333,8 @@ export default function App() {
                 />
               </div>
             )}
+
+            </React.Suspense>
 
             {/* Collapse bar */}
             <div className="w-full px-4 py-5 flex justify-center bg-[var(--bg-surface-2)]/60 border-t border-[var(--border-color)]">

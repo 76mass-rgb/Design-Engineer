@@ -1,20 +1,59 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Vitalii Dolynskyi — Mechanical & Industrial Design Engineer Portfolio
 
-# Run and deploy your AI Studio app
+Production portfolio website for Vitalii Dolynskyi, mechanical and industrial design engineer with 27+ years of experience across machine design, industrial equipment, custom machinery, process piping, storage tanks, and manufacturing documentation.
 
-This contains everything you need to run your app locally.
+Built with **React 19**, **Vite 6**, **Tailwind CSS 4**, and **TypeScript**.
 
-View your app in AI Studio: https://ai.studio/apps/db4657de-0264-4f7c-b6f4-38990f8bb7b8
+## Tech Stack & Architecture
 
-## Run Locally
+- **Framework:** React 19 SPA with TypeScript (ES2022)
+- **Bundler:** Vite 6 with `@tailwindcss/vite`
+- **Styling:** Tailwind CSS 4 with CSS variables and custom CAD blueprint themes
+- **Icons:** Lucide React
+- **Documents:** jsPDF & html2canvas for resume generation
 
-**Prerequisites:**  Node.js
+## Getting Started
 
+### Prerequisites
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- Node.js 20+
+- npm 10+
+
+### Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+The app will run at `http://localhost:3000`.
+
+### Production Build & Linting
+
+```bash
+# Type check without emitting
+npm run lint
+
+# Build production bundle
+npm run build
+
+# Preview production build locally
+npm run preview
+```
+
+## Deployment
+
+The application is deployed to GitHub Pages and served under a custom domain (`https://dolynskyi.engineering/`):
+- Deployment runs automatically on push to `main`/`master` via `.github/workflows/deploy.yml`.
+- Build output is generated to `dist/` with relative asset paths (`base: './'`).
+
+## Architecture & UX Highlights
+
+- **Interactive Engineering Showcase:** 10 verified industrial projects with authenticated CAD blueprints, shop drawings, 3D models, and operating field photographs.
+- **Blueprint Viewer Modal:** Dedicated high-resolution CAD viewer with pan, zoom, touch pinch-zoom, and responsive pinned navigation toolbar across mobile, tablet, and desktop.
+- **Squeeze-Page Flow:** Collapsible section architecture where the top navigation expands sections smoothly, with deep-linking support (`#contact`, etc.).
+- **Low-Vision & High-Contrast Typography:** Root font scaling at 112.5% (18px), strict minimum 16px typography, max 70ch line lengths, and high-contrast color tokens.
+- **Multilingual Support:** Native three-language localization (English, Slovak, Ukrainian) with browser URL and storage state persistence.

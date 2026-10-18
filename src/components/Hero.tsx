@@ -60,12 +60,12 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenResume, onNavigat
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
 
         {/* Bottom Spec Caption inside image */}
-        <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 bg-black/85 backdrop-blur-md p-3.5 sm:p-4 rounded-xl border border-white/25 flex items-center justify-between shadow-lg">
+        <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 bg-black/70 sm:bg-black/85 backdrop-blur-md px-2.5 py-1.5 sm:p-4 rounded-lg sm:rounded-xl border border-white/20 sm:border-white/25 flex items-center justify-between shadow-lg">
           <div>
-            <div className="text-xs sm:text-xs uppercase tracking-widest text-[var(--accent-blue)] font-extrabold font-gost-mono">
+            <div className="hidden sm:block text-xs uppercase tracking-widest text-[var(--accent-blue)] font-extrabold font-gost-mono">
               {currentLang === 'uk' ? 'Кваліфікація & Нормативи' : currentLang === 'sk' ? 'Kvalifikácia & Normy' : 'Standards & CAD'}
             </div>
-            <div className="text-sm sm:text-base text-white font-bold mt-0.5 leading-snug">
+            <div className="text-[12px] sm:text-base text-white font-bold sm:mt-0.5 leading-snug">
               AutoCAD · SolidWorks · ISO / DIN / ДСТУ
             </div>
           </div>
