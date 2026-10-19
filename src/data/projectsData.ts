@@ -167,17 +167,24 @@ const projectAssetsGlob = import.meta.glob<string>('../assets/images/projects/*'
   import: 'default',
 });
 
+// Name-tolerant lookup: "drawings EGAZ1.webp", "drawings-egaz1.webp" and "Drawings_EGAZ1.png" are the same asset.
+const normalizeAssetName = (name: string): string =>
+  (name.split('/').pop() || '')
+    .replace(/\.[a-z0-9]+$/i, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '');
+
+const projectAssetIndex: Record<string, string> = {};
+for (const [key, url] of Object.entries(projectAssetsGlob)) {
+  projectAssetIndex[normalizeAssetName(key)] = url;
+}
+
+function resolveProjectAsset(filename: string): string | null {
+  return projectAssetIndex[normalizeAssetName(filename)] ?? null;
+}
+
 function resolveEgazAsset(filename: string): string | null {
-  const dotIdx = filename.lastIndexOf('.');
-  const stem = dotIdx !== -1 ? filename.substring(0, dotIdx) : filename;
-
-  const webpKey = `../assets/images/projects/${stem}.webp`;
-  if (projectAssetsGlob[webpKey]) return projectAssetsGlob[webpKey];
-
-  const baseKey = `../assets/images/projects/${filename}`;
-  if (projectAssetsGlob[baseKey]) return projectAssetsGlob[baseKey];
-
-  return null;
+  return resolveProjectAsset(filename);
 }
 
 const egazDrawingsList = [
@@ -208,26 +215,7 @@ const coverImage_EGAZ = resolveEgazAsset('coverImage EGAZ.webp') || egazPhotosLi
 
 // 2017 Brewing & Distilling Equipment Media
 function resolveBeerAsset(filename: string): string | null {
-  const dotIdx = filename.lastIndexOf('.');
-  const stem = dotIdx !== -1 ? filename.substring(0, dotIdx) : filename;
-  const trimmedStem = stem.trim();
-
-  const webpKey = `../assets/images/projects/${trimmedStem}.webp`;
-  if (projectAssetsGlob[webpKey]) return projectAssetsGlob[webpKey];
-
-  const noSpaceStem = trimmedStem.replace(/\s+/g, '').toLowerCase();
-  for (const [key, val] of Object.entries(projectAssetsGlob)) {
-    const fn = key.split('/').pop() || '';
-    const fnNoExt = fn.substring(0, fn.lastIndexOf('.')).trim();
-    if (fnNoExt.replace(/\s+/g, '').toLowerCase() === noSpaceStem) {
-      return val;
-    }
-  }
-
-  const baseKey = `../assets/images/projects/${filename}`;
-  if (projectAssetsGlob[baseKey]) return projectAssetsGlob[baseKey];
-
-  return null;
+  return resolveProjectAsset(filename);
 }
 
 const beerBlock1Images = [
