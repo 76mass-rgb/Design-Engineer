@@ -37,9 +37,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: 'Core Expertise'
   },
   navProjects: {
-    uk: 'Докази компетентності',
-    sk: 'Dôkazy odbornosti',
-    en: 'Proven Competence'
+    uk: 'Реалізовані кейси',
+    sk: 'Realizované projekty',
+    en: 'Implemented Cases'
   },
   navProcess: {
     uk: 'Процес & Стандарти',
@@ -207,9 +207,9 @@ export const UI_TRANSLATIONS: Record<string, LocalizedString> = {
     en: '02'
   },
   portfolioTitle: {
-    uk: 'Докази компетентності: Реалізовані інженерні кейси',
-    sk: 'Dôkazy odbornosti: Realizované inžinierske projekty',
-    en: 'Proven Competence: Implemented Engineering Cases'
+    uk: 'Реалізовані інженерні кейси',
+    sk: 'Realizované inžinierske projekty',
+    en: 'Implemented Engineering Cases'
   },
   processSecNum: {
     uk: '03',

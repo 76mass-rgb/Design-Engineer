@@ -88,16 +88,16 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
           <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 sm:gap-6 mb-4 sm:mb-5">
             <div>
               <div className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[var(--accent-blue)] mb-2 font-gost-mono">
-                {UI_TRANSLATIONS.portfolioSecNum[currentLang]} // {currentLang === 'uk' ? 'ДОКАЗИ КОМПЕТЕНТНОСТІ' : currentLang === 'sk' ? 'DÔKAZY ODBORNOSTI' : 'PROVEN COMPETENCE'}
+                {UI_TRANSLATIONS.portfolioSecNum[currentLang]} // {currentLang === 'uk' ? 'РЕАЛІЗОВАНІ КЕЙСИ' : currentLang === 'sk' ? 'REALIZOVANÉ PROJEKTY' : 'IMPLEMENTED CASES'}
               </div>
               <h2 className="font-gost text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[var(--text-primary)] mb-2">
-                {currentLang === 'uk' && 'Докази компетентності: Реалізовані інженерні кейси'}
-                {currentLang === 'sk' && 'Dôkazy odbornosti: Realizované inžinierske projekty'}
-                {currentLang === 'en' && 'Proven Competence: Implemented Engineering Cases'}
+                {currentLang === 'uk' && 'Реалізовані інженерні кейси'}
+                {currentLang === 'sk' && 'Realizované inžinierske projekty'}
+                {currentLang === 'en' && 'Implemented Engineering Cases'}
               </h2>
               <div className="text-base sm:text-xl font-gost font-bold text-[var(--accent-blue)]">
-                {currentLang === 'uk' && 'Докази розв’язання інженерних задач: від розрахунків і креслень до працюючого обладнання'}
-                {currentLang === 'sk' && 'Dôkazy riešenia úloh: od výpočtov a výkresov po reálne fungujúce zariadenia'}
+                {currentLang === 'uk' && 'Розв’язання інженерних задач: від розрахунків і креслень до працюючого обладнання'}
+                {currentLang === 'sk' && 'Riešenie inžinierskych úloh: od výpočtov a výkresov po reálne fungujúce zariadenia'}
                 {currentLang === 'en' && 'Documented problem-solving: from FEA & CAD drawings to operating industrial equipment'}
               </div>
             </div>
